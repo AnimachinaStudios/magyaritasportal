@@ -117,6 +117,10 @@ function showDetails(chapter) {
     setTimeout(() => {
         detailCard.classList.add("show");
     }, 50);
+    
+    setTimeout(() => {
+        document.addEventListener("click", closeOnOutsideClick);
+    }, 100);
 }
 
 function hideDetails() {
@@ -128,6 +132,8 @@ function hideDetails() {
     detailCard.classList.remove("show");
     detailCard.classList.add("hide");
     content.classList.remove("blur");
+
+    document.removeEventListener("click", closeOnOutsideClick);
 
     setTimeout(() => {
         detailCard.style.display = "none";
@@ -143,3 +149,9 @@ function toggleMenu() {
     menuToggle.classList.toggle("active");
 }
 
+function closeOnOutsideClick(event) {
+    const detailCard = document.getElementById("detail-card");
+    if (!detailCard.contains(event.target)) {
+        hideDetails();
+    }
+}
