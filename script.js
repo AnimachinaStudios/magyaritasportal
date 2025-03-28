@@ -34,7 +34,7 @@ const chapters = {
             <p>⚠️ A szinkron jelenleg BÉTA verzióban van, így előfordulhatnak kisebb hibák!</p>
         `,
         trailer: "https://www.youtube.com/embed/Wwbr-eFIKRw?si=Qxrgd2rDeKUIh1ls",
-        download: "chapter1-hu.zip"
+        download: "https://kokonoshy-studio.itch.io/poppy-playtime-magyar"
     },
     2: {
         title: "Poppy Playtime - Chapter 2",
@@ -52,7 +52,7 @@ const chapters = {
             </ul>
         `,
         trailer: "https://www.youtube.com/embed/yn_Ht3N80X0?si=PsX7Y0POZ9fOeAyU",
-        download: "chapter2-hu.zip"
+        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-2-magyar"
     },
     3: {
         title: "Poppy Playtime - Chapter 3",
@@ -73,7 +73,7 @@ const chapters = {
             <p>👾 Jó játékot, és ne hagyd, hogy CatNap elkapjon! 👀💀</p>
         `,
         trailer: "https://www.youtube.com/embed/wEyyL5YFQuM?si=lmbDm6KbA7cJaM0H",
-        download: "chapter3-hu.zip"
+        download: "https://kokonoshy-studio.itch.io/ppch3-magyar"
     },
     4: {
         title: "Poppy Playtime - Chapter 4",
@@ -95,7 +95,7 @@ const chapters = {
             <p>Töltsd le most, és éld át a Poppy Playtime: Chapter 4 rémisztő pillanatait magyarul! 🎃👻</p>
         `,
         trailer: "https://www.youtube.com/embed/bXMfqsuUqNo?si=3hj6c_fOpf2pPcYW",
-        download: "chapter4-hu.zip"
+        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-4-magyar"
     }
 };
 
