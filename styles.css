@@ -181,25 +181,30 @@ nav ul li a:hover {
     color: #ff99ff;
 }
 
-
 .cards {
     display: flex;
-    justify-content: center;
-    gap: 25px;
-    padding: 30px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
 
 .card {
     background: linear-gradient(135deg, #2a2a2a, #444);
     padding: 20px;
     border-radius: 15px;
-    width: 280px;
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0px 5px 15px rgba(255, 0, 255, 0.2);
+    width: 280px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .card:hover {
@@ -209,35 +214,40 @@ nav ul li a:hover {
 
 .card img {
     width: 100%;
-    height: 160px;
+    height: 180px;
     object-fit: cover;
     border-radius: 12px;
-    margin-bottom: 15px;
 }
 
 .card h2 {
-    font-size: 22px;
+    font-size: 20px;
     color: #ff66ff;
+    margin-top: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #ddd;
+    flex-grow: 1;
+    padding: 0 10px;
 }
 
 .card button {
     background: linear-gradient(90deg, #ff00ff, #a200ff);
     color: white;
     border: none;
-    padding: 12px 18px;
-    margin-top: 12px;
+    padding: 10px 16px;
+    margin-top: 10px;
     cursor: pointer;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    position: relative;
-    z-index: 1;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .card button:hover {
     background: linear-gradient(90deg, #ff33ff, #a266ff);
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* FOOTER */
@@ -282,12 +292,15 @@ footer p {
     padding: 25px;
     border-radius: 15px;
     text-align: center;
-    width: 420px;
+    width: 90%;
+    max-width: 420px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
     box-shadow: 0px 4px 15px rgba(255, 0, 255, 0.3);
     z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 #detail-card.visible {
@@ -357,4 +370,49 @@ footer p {
 
 .close-btn:hover {
     color: #ff99ff;
+}
+
+@media screen and (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .card {
+        max-width: 90%;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 13px;
+    }
+
+    .card button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #detail-card {
+        width: 95%;
+        padding: 15px;
+    }
+
+    #detail-video {
+        height: 180px;
+    }
+
+    #detail-description {
+        font-size: 14px;
+        max-height: 150px;
+    }
+
+    #download-link {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
