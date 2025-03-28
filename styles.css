@@ -18,6 +18,16 @@ header img {
     border-radius: 30px;
 }
 
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: -1;
+}
+
 /* HAMBURGER ICON */
 .menu-toggle {
     display: none;
@@ -134,6 +144,7 @@ nav ul li a:hover {
 .blur {
     filter: blur(10px);
     pointer-events: none;
+    transition: filter 0.3s ease;
 }
 
 .welcome {
@@ -219,6 +230,8 @@ nav ul li a:hover {
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
+    position: relative;
+    z-index: 1;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -272,13 +285,12 @@ footer p {
     width: 420px;
     opacity: 0;
     visibility: hidden;
-    display: none;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: all 0.3s ease;
     box-shadow: 0px 4px 15px rgba(255, 0, 255, 0.3);
+    z-index: 1000;
 }
 
-#detail-card.show {
-    display: block;
+#detail-card.visible {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);

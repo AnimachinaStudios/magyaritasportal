@@ -34,7 +34,7 @@ const chapters = {
             <p>⚠️ A szinkron jelenleg BÉTA verzióban van, így előfordulhatnak kisebb hibák!</p>
         `,
         trailer: "https://www.youtube.com/embed/Wwbr-eFIKRw?si=Qxrgd2rDeKUIh1ls",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-magyar"
+        download: "chapter1-hu.zip"
     },
     2: {
         title: "Poppy Playtime - Chapter 2",
@@ -52,7 +52,7 @@ const chapters = {
             </ul>
         `,
         trailer: "https://www.youtube.com/embed/yn_Ht3N80X0?si=PsX7Y0POZ9fOeAyU",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-2-magyar"
+        download: "chapter2-hu.zip"
     },
     3: {
         title: "Poppy Playtime - Chapter 3",
@@ -73,7 +73,7 @@ const chapters = {
             <p>👾 Jó játékot, és ne hagyd, hogy CatNap elkapjon! 👀💀</p>
         `,
         trailer: "https://www.youtube.com/embed/wEyyL5YFQuM?si=lmbDm6KbA7cJaM0H",
-        download: "https://kokonoshy-studio.itch.io/ppch3-magyar"
+        download: "chapter3-hu.zip"
     },
     4: {
         title: "Poppy Playtime - Chapter 4",
@@ -95,11 +95,17 @@ const chapters = {
             <p>Töltsd le most, és éld át a Poppy Playtime: Chapter 4 rémisztő pillanatait magyarul! 🎃👻</p>
         `,
         trailer: "https://www.youtube.com/embed/bXMfqsuUqNo?si=3hj6c_fOpf2pPcYW",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-4-magyar"
+        download: "chapter4-hu.zip"
     }
 };
 
+let isDetailsVisible = false;
+let isAnimating = false;
+
 function showDetails(chapter) {
+    if (isDetailsVisible || isAnimating) return;
+    
+    isAnimating = true;
     const detailCard = document.getElementById("detail-card");
     const content = document.getElementById("content");
 
@@ -107,39 +113,42 @@ function showDetails(chapter) {
     document.getElementById("detail-image").src = chapters[chapter].image;
     document.getElementById("detail-description").innerHTML = chapters[chapter].description;
     document.getElementById("download-link").href = chapters[chapter].download;
-
     document.getElementById("detail-video").src = chapters[chapter].trailer;
 
-    content.classList.add("blur");
-
     detailCard.style.display = "block";
+    content.classList.add("blur");
+    
+    void detailCard.offsetWidth;
+    
+    detailCard.classList.add("visible");
     
     setTimeout(() => {
-        detailCard.classList.add("show");
-    }, 50);
-    
-    setTimeout(() => {
+        isDetailsVisible = true;
+        isAnimating = false;
         document.addEventListener("click", closeOnOutsideClick);
-    }, 100);
+    }, 300);
 }
 
 function hideDetails() {
+    if (!isDetailsVisible || isAnimating) return;
+    
+    isAnimating = true;
     const detailCard = document.getElementById("detail-card");
     const content = document.getElementById("content");
 
-    document.getElementById("detail-video").src = "";
-
-    detailCard.classList.remove("show");
-    detailCard.classList.add("hide");
+    detailCard.classList.remove("visible");
     content.classList.remove("blur");
-
-    document.removeEventListener("click", closeOnOutsideClick);
-
+    
+    document.getElementById("detail-video").src = "";
+    
     setTimeout(() => {
         detailCard.style.display = "none";
-        detailCard.classList.remove("hide");
-    }, 500);
+        isDetailsVisible = false;
+        isAnimating = false;
+        document.removeEventListener("click", closeOnOutsideClick);
+    }, 300);
 }
+
 
 function toggleMenu() {
     const menu = document.querySelector("nav");
@@ -151,7 +160,10 @@ function toggleMenu() {
 
 function closeOnOutsideClick(event) {
     const detailCard = document.getElementById("detail-card");
-    if (!detailCard.contains(event.target)) {
-        hideDetails();
-    }
+    const clickedElement = event.target;
+    
+    if (detailCard.contains(clickedElement)) return;
+    if (clickedElement.closest('.card button')) return;
+    
+    hideDetails();
 }

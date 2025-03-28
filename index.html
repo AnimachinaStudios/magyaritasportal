@@ -9,6 +9,9 @@
     <link rel="icon" type="image/png" href="images/icon.jpg">
 </head>
 <body>
+
+    <canvas id="star-canvas"></canvas>
+
     <header>
         <img src="images/header-image.png" alt="Poppy Playtime Header">
     </header>
@@ -23,7 +26,7 @@
         <ul id="nav-menu">
             <li><a href="#"><i class="fas fa-home"></i> Főoldal</a></li>
             <li><a href="#fejezetek"><i class="fas fa-download"></i> Magyarítások</a></li>
-            <li><a href="https://buymeacoffee.com/animachinastudios" target="_blank"><i class="fas fa-envelope"></i> Projekt Támogatása</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> Projekt Támogatása</a></li>
         </ul>
     </nav>
     
@@ -37,29 +40,29 @@
         </section>
 
         <div class="cards" id="fejezetek">
-            <div class="card" onclick="showDetails(1)">
+            <div class="card">
                 <img src="images/chapter1.png" alt="Chapter 1">
                 <h2>Chapter 1</h2>
                 <p>Poppy Playtime Első Fejezetének Teljes Magyarítása!</p>
-                <button>Részletek</button>
+                <button onclick="showDetails(1)">Részletek</button>
             </div>
-            <div class="card" onclick="showDetails(2)">
+            <div class="card">
                 <img src="images/chapter2.png" alt="Chapter 2">
                 <h2>Chapter 2</h2>
                 <p>Poppy Playtime Második Fejezetének Teljes Magyarítása!</p>
-                <button>Részletek</button>
+                <button onclick="showDetails(2)">Részletek</button>
             </div>
-            <div class="card" onclick="showDetails(3)">
+            <div class="card">
                 <img src="images/chapter3.png" alt="Chapter 3">
                 <h2>Chapter 3</h2>
                 <p>Poppy Playtime Harmadik Fejezetének Teljes Magyarítása!</p>
-                <button>Részletek</button>
+                <button onclick="showDetails(3)">Részletek</button>
             </div>
-            <div class="card" onclick="showDetails(4)">
+            <div class="card">
                 <img src="images/chapter4.png" alt="Chapter 4">
                 <h2>Chapter 4</h2>
                 <p>Poppy Playtime Negyedik Fejezetének Teljes Magyarítása!</p>
-                <button>Részletek</button>
+                <button onclick="showDetails(4)">Részletek</button>
             </div>
         </div>
     </main>
@@ -84,5 +87,6 @@
     
 
     <script src="script.js"></script>
+    <script src="stars.js"></script>
 </body>
 </html>
