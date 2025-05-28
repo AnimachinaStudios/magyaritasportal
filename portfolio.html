@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kondix | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/png" href="images/icon.jpg">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background: #0c0c0c;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: linear-gradient(90deg, #8000ff, #ff00aa);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 36px;
+      color: #fff;
+      text-shadow: 2px 2px 10px #ff00ff;
+    }
+
+    .skills {
+      margin: 40px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1000px;
+      padding: 0 20px;
+    }
+
+    .skill {
+      background: linear-gradient(135deg, #222, #333);
+      border: 2px solid #ff00ff;
+      border-radius: 12px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffccff;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+    }
+
+    .contact {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .contact a {
+      background: linear-gradient(90deg, #ff00ff, #a200ff);
+      padding: 14px 28px;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .contact a:hover {
+      background: linear-gradient(90deg, #ff33ff, #c266ff);
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .skill {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    .skill-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .skill-buttons button {
+      background: linear-gradient(90deg, #ff00ff, #a200ff);
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 0, 255, 0.2);
+    }
+
+    .skill-buttons button:hover {
+      background: linear-gradient(90deg, #ff33ff, #bb66ff);
+      transform: scale(1.05);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+        position: relative; /* ez az új sor */
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 8px 20px rgba(255, 0, 255, 0.4);
+        animation: slideInRight 0.4s ease-out;
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #ff99ff;
+    }
+  </style>
+</head>
+<body>
+
+  <header data-aos="fade-down">
+    <img src="images/kondix.jpg" alt="Kondix" class="profile-pic" />
+    <h1>Kondix</h1>
+  </header>
+
+  <div class="skills-section">
+    <h2 class="section-title">Képességek</h2>
+    <div class="skill-buttons">
+      <button onclick="showSkillInfo('unity')" data-aos="fade-left">Unity Modolás</button>
+      <button onclick="showSkillInfo('unreal')" data-aos="fade-left">Unreal Engine modolás</button>
+      <button onclick="showSkillInfo('web')" data-aos="fade-left">Webprogramozás</button>
+      <button onclick="showSkillInfo('csharp')" data-aos="fade-left">C# (WPF, Console)</button>
+      <button onclick="showSkillInfo('unrealgame')" data-aos="fade-left">Unreal Engine játékfejlesztés</button>
+    </div>
+  </div>
+
+  <div id="skill-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="hideModal()">&times;</span>
+      <h3 id="skill-title"></h3>
+      <p id="skill-description"></p>
+    </div>
+  </div>
+
+  <section class="contact" data-aos="zoom-in">
+    <h2>Lépj kapcsolatba velem:</h2>
+    <p>
+      <a href="mailto:kondix.dev@gmail.com">
+        <i class="fas fa-envelope"></i> kondix.dev@gmail.com
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 Kondix | Minden jog fenntartva</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true });
+
+    const skillData = {
+        unity: {
+            title: "Unity Modolás",
+            description: "Unity-ben játékok fájljainak módosítása, beleértve feliratok, textúrák, hangok és UI elemek szerkesztését. Jártas vagy a .assets fájlformátum kezelésében, valamint modding eszközök használatában, mint az AssetBundleExtractor és más közösségi megoldások."
+        },
+        unreal: {
+            title: "Unreal Engine modolás",
+            description: "Unreal Engine alapú játékok moddolása, különféle fájlformátumok (pl. .pak) kicsomagolása, szerkesztése és újracsomagolása. Feliratok, textúrák és hangeffektek testreszabása, valamint a modding workflow és fájlstruktúra alapos ismerete."
+        },
+        web: {
+            title: "Webprogramozás",
+            description: "Teljes stack webfejlesztési tapasztalat: Frontend technológiák (HTML, CSS, JavaScript, React) és Backend megoldások (Node.js, Express). Reszponzív weboldalak, RESTful API-k létrehozása, modern felhasználói élmény biztosítása animált UI komponensekkel és interaktív elemekkel."
+        },
+        csharp: {
+            title: "C# (WPF, Console)",
+            description: "C# nyelv használata komplex desktop alkalmazások fejlesztésére WPF keretrendszerben, MVVM architektúrával. Robusztus konzolos eszközök készítése, hibakezelés, adatbázis-kezelés, valamint strukturált kódbázis és újrafelhasználható komponensek kialakítása."
+        },
+        unrealgame: {
+            title: "Unreal Engine játékfejlesztés",
+            description: "Teljes értékű játékfejlesztés Unreal Engine-ben, C++ és Blueprint rendszerek kombinált használatával. Interaktív UI rendszer, komplex játékmenet logika, mesterséges intelligencia, karaktervezérlés, valamint pályák és szintek tervezése, optimalizálása."
+        }
+    };
+
+
+    function showSkillInfo(key) {
+      const modal = document.getElementById("skill-modal");
+      const content = document.querySelector(".modal-content");
+      const title = document.getElementById("skill-title");
+      const desc = document.getElementById("skill-description");
+
+      title.textContent = skillData[key].title;
+      desc.textContent = skillData[key].description;
+
+      content.style.animation = "none";
+      content.offsetHeight;
+      content.style.animation = "slideInRight 0.4s ease-out";
+
+      modal.style.display = "flex";
+    }
+
+    function hideModal() {
+        const modal = document.getElementById("skill-modal");
+        const content = document.querySelector(".modal-content");
+
+        content.style.animation = "slideOutRight 0.3s ease-out";
+
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 200);
+        }
+
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("skill-modal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>
