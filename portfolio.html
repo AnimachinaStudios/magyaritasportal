@@ -9,195 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="icon" type="image/png" href="images/icon.jpg">
-  <style>
-    body {
-      font-family: 'Orbitron', sans-serif;
-      margin: 0;
-      background: #0c0c0c;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 30px;
-      background: linear-gradient(90deg, #8000ff, #ff00aa);
-      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    }
-
-    .profile-pic {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      object-fit: cover;
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-    }
-
-    h1 {
-      margin-top: 20px;
-      font-size: 36px;
-      color: #fff;
-      text-shadow: 2px 2px 10px #ff00ff;
-    }
-
-    .skills {
-      margin: 40px auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 1000px;
-      padding: 0 20px;
-    }
-
-    .skill {
-      background: linear-gradient(135deg, #222, #333);
-      border: 2px solid #ff00ff;
-      border-radius: 12px;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ffccff;
-      box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .skill:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
-    }
-
-    .contact {
-      margin-top: 60px;
-      text-align: center;
-    }
-
-    .contact a {
-      background: linear-gradient(90deg, #ff00ff, #a200ff);
-      padding: 14px 28px;
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .contact a:hover {
-      background: linear-gradient(90deg, #ff33ff, #c266ff);
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
-    }
-
-    footer {
-      margin-top: 80px;
-      padding: 20px;
-      background: #1a1a1a;
-      color: #ccc;
-      font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-      .skill {
-        padding: 12px 20px;
-        font-size: 16px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-    }
-
-    .skill-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .skill-buttons button {
-      background: linear-gradient(90deg, #ff00ff, #a200ff);
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 10px rgba(255, 0, 255, 0.2);
-    }
-
-    .skill-buttons button:hover {
-      background: linear-gradient(90deg, #ff33ff, #bb66ff);
-      transform: scale(1.05);
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(8px);
-      background-color: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-        position: relative; /* ez az új sor */
-        background: #1a1a1a;
-        padding: 30px;
-        border-radius: 15px;
-        max-width: 500px;
-        width: 90%;
-        text-align: center;
-        color: white;
-        box-shadow: 0px 8px 20px rgba(255, 0, 255, 0.4);
-        animation: slideInRight 0.4s ease-out;
-        }
-
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100px);
-                opacity: 0;
-            }
-            }
-
-    @keyframes slideInRight {
-      from {
-        transform: translateX(100px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .close-btn:hover {
-      color: #ff99ff;
-    }
-  </style>
+  <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
 
@@ -234,6 +46,46 @@
     </p>
   </section>
 
+  <section class="projects" data-aos="fade-up">
+  <h2 class="section-title">Projektek</h2>
+  <div class="project-list">
+    <div class="project">
+      <h3>Weboldal</h3>
+      <p>Lásd a jelenlegi weboldalt :). Nagyon más webes projektben még nem szerepeltem. Csak a vizsgaremekemnél.</p>
+      <a href="https://www.youtube.com/@KondixOfficial" target="_blank">SABLONOK - HAMAROSAN</a>
+    </div>
+    <div class="project">
+      <h3>Unreal Engine 2D-s Játék</h3>
+      <p>Saját fejlesztésű UE5 action platformer játék, AI ellenséggel és történetvezérelt játékmenettel. OwnMcKendrynek készül jelenleg is!</p>
+      <a href="https://www.youtube.com/@KondixOfficial target="_blank">Demo Videó - HAMAROSAN!</a>
+    </div>
+    <div class="project">
+      <h3>Unity Mod Toolkit</h3>
+      <p>Egy komplett csomag amiben minden olyan eszköz megtalálható amivel Unity-s játékot tudunk modolni! Az unity modolós videóm után lesz elérhető!</p>
+      <a href="https://www.youtube.com/watch?v=naTHhrpX9rc" target="_blank">Trailer Videó</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" data-aos="fade-up">
+  <h2 class="section-title">Rólam</h2>
+  <p class="about-text">
+    Szenvedélyem a játékfejlesztés, modding és a webtechnológiák. Több éves tapasztalattal rendelkezem Unreal Engine és Unity moddolásban, valamint modern webalkalmazások fejlesztésében. Célom, hogy technológiával élményt nyújtsak – akár egy játékban, akár egy letisztult webes felületen. Valamint szenvedélyem a játék fejlesztés!
+  </p>
+</section>
+
+<section class="highlights" data-aos="fade-up">
+  <h2 class="section-title">Eredményeim</h2>
+  <ul class="stats">
+    <li>🎮 5+ játékmod készült</li>
+    <li>📦 5.000+ letöltés az itch.io platformon</li>
+    <li>👨‍💻 10+ projektekben vettem részt</li>
+    <li>⭐ 8 év programozási tapasztalat</li>
+  </ul>
+  <a href="https://kokonoshy-studio.itch.io/" target="_blank" class="itch">Itch.Io oldalam</a>
+</section>
+
+
   <footer>
     <p>© 2025 Kondix | Minden jog fenntartva</p>
   </footer>
@@ -245,7 +97,7 @@
     const skillData = {
         unity: {
             title: "Unity Modolás",
-            description: "Unity-ben játékok fájljainak módosítása, beleértve feliratok, textúrák, hangok és UI elemek szerkesztését. Jártas vagyok a .assets fájlformátum kezelésében, valamint modding eszközök használatában, mint az AssetBundleExtractor és más saját eszközök."
+            description: "Unity-ben játékok fájljainak módosítása, beleértve feliratok, textúrák, hangok és UI elemek szerkesztését. Jártas vagyok a .assets fájlformátum kezelésében, valamint modding eszközök használatában, mint az AssetBundleExtractor és saját eszközök/programok használatával."
         },
         unreal: {
             title: "Unreal Engine modolás",
