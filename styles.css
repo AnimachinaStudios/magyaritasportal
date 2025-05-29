@@ -28,6 +28,13 @@ canvas {
     z-index: -1;
 }
 
+.title h2 {
+    font-size: 40px;
+    color: #ff00ff;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(255, 0, 255, 0.5);
+}
+
 /* HAMBURGER ICON */
 .menu-toggle {
     display: none;

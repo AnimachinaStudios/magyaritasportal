@@ -96,6 +96,22 @@ const chapters = {
         `,
         trailer: "https://www.youtube.com/embed/bXMfqsuUqNo?si=3hj6c_fOpf2pPcYW",
         download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-4-magyar"
+    },
+    5: {
+        title: "Bendy és a Tintagép",
+        image: "images/bendy.png",
+        description: `
+            <h3>A MAGYARÍTÁS FEJLESZTÉS ALATT!</h3>
+            <p>Szeretnéd magyarul játszani a Bendy és a Tintagépet? Akkor ez a mod neked készült! A magyarítás segítségével teljes mértékben élvezheted a játék történetét, ijesztő pillanatait és rejtélyeit, immár anyanyelveden.</p>
+            
+            <ul>
+                <li>🔹 Magyar Textúrák, Szinkron és Dokumentációk</li>
+                <li>🔹 Egyszerű telepítés</li>
+                <li>🔹 Eredeti játékélmény, magyar nyelven</li>
+            </ul>
+        `,
+        trailer: "https://www.youtube.com/embed/UzrQUXOJWt8?si=gwxmipiQ2BSPzfWp",
+        download: "https://kokonoshy-studio.itch.io/"
     }
 };
 
