@@ -112,6 +112,22 @@ const chapters = {
         `,
         trailer: "https://www.youtube.com/embed/UzrQUXOJWt8?si=gwxmipiQ2BSPzfWp",
         download: "https://kokonoshy-studio.itch.io/"
+    },
+    6: {
+        title: "Granny Chapter 1",
+        image: "images/granny.png",
+        description: `
+            <h3>A MAGYARÍTÁS FEJLESZTÉS ALATT!</h3>
+            <p>Szeretnéd magyarul játszani a Granny-t? Akkor ez a mod neked készült! A magyarítás segítségével teljes mértékben élvezheted a játék történetét, ijesztő pillanatait és rejtélyeit, immár anyanyelveden.</p>
+            
+            <ul>
+                <li>🔹 Magyar Textúrák, Szinkron és Dokumentációk</li>
+                <li>🔹 Egyszerű telepítés</li>
+                <li>🔹 Eredeti játékélmény, magyar nyelven</li>
+            </ul>
+        `,
+        trailer: "https://www.youtube.com/embed/ZGHvGk2Q5ew?si=qZgElkFq0-CVxRnU",
+        download: "https://kokonoshy-studio.itch.io/granny-magyar/"
     }
 };
 

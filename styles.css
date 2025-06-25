@@ -35,6 +35,317 @@ canvas {
     text-shadow: 2px 2px 5px rgba(255, 0, 255, 0.5);
 }
 
+/* Team Section */
+
+.team-section {
+    padding: 50px 20px;
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(130, 0, 255, 0.1));
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    box-shadow: 0px 4px 12px rgba(255, 0, 255, 0.15);
+}
+
+.team-section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #ff00ff;
+    text-shadow: 1px 1px 5px rgba(255, 0, 255, 0.3);
+}
+
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.team-card {
+    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    border-radius: 15px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(255, 0, 255, 0.2);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 8px 20px rgba(255, 0, 255, 0.3);
+}
+
+.team-card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ff66ff;
+}
+
+/* Arynox Card */
+
+.team-card .arynox {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #d61233;
+}
+
+.team-card .arynoxp {
+    color: #ad0000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .arynoxh3 {
+    color: #ad0000;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Trafn Card */
+
+.team-card .trafn {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ad0000;
+}
+
+.team-card .trafn-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: url("images/szinkronok/trafn1.gif");
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #ad0000;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.team-card:hover .trafn-img {
+  background-image: url("images/szinkronok/trafn.gif");
+}
+
+.team-card .trafnp {
+    color: #ad0000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .trafnh3 {
+    color: #ad0000;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Chosomoso Card */
+
+.team-card .choso {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #bb3abb;
+}
+
+.team-card .chosop {
+    color: #bb3abb;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .chosoh3 {
+    color: #bb3abb;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* ThauXeon Card */
+
+.team-card .thauxeon {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ad0000;
+}
+
+.team-card .thaup {
+    color: #ad0000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .thauh3 {
+    color: #ad0000;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Sun Card */
+
+.team-card .sun {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #69AEB4;
+}
+
+.team-card .sunp {
+    color: #69AEB4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .sunh3 {
+    color: #69AEB4;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Niki Card */
+
+.team-card .niki {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #0003ad;
+}
+
+.team-card .nikip {
+    color: #0068ad;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .nikih3 {
+    color: #0068ad;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Mango Card */
+
+.team-card .mango {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #434344;
+}
+
+.team-card .mangop {
+    color: #616163;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card .mangoh3 {
+    color: #616163;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+
+.team-card h3 {
+    color: #ffccff;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.team-card p a {
+    color: #ff99ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.team-card p a:hover {
+    color: #ffffff;
+}
+
+/* Reszponzív */
+@media screen and (max-width: 600px) {
+    .team-card {
+        width: 90%;
+    }
+}
+
+hr {
+    color: #ff00ff;
+    width: 30%;
+    height: 30%;
+    border-radius: 10px;
+}
+
+/* Csaláfa struktúra */
+.team-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.tree-line {
+    width: 2px;
+    height: 40px;
+    background-color: #ff00ff;
+}
+
+.tree-branches {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.team-subgroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    max-width: 700px;
+}
+
+/* Mobilnézethez */
+@media screen and (max-width: 768px) {
+    .tree-branches {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.link {
+    color: #ff00ff;
+}
+
 /* HAMBURGER ICON */
 .menu-toggle {
     display: none;
@@ -163,6 +474,8 @@ nav ul li a:hover {
     text-align: center;
     box-shadow: 0px 4px 10px rgba(255, 0, 255, 0.2);
     transition: transform 0.3s ease-in-out;
+    font-family: "Michroma", sans-serif;
+    font-size: 100px;
 }
 
 .welcome:hover {
