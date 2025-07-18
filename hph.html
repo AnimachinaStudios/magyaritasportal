@@ -1,164 +1,104 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hungarian Patch Hub</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hungarian Patch Hub – játékok magyarítása egyetlen kattintással. Támogatott játékok: FNaF, Poppy Playtime, Bendy és mások.">
+  <title>Hungarian Patch Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+    }
 
-        header {
-            background: linear-gradient(90deg, #ff003c, #00c853, #2196f3);
-            padding: 20px;
-            text-align: center;
-        }
+    header {
+      background: linear-gradient(90deg, #ff003c, #00c853, #2196f3);
+      padding: 20px;
+      text-align: center;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
 
-        nav {
-            background-color: #1e1e1e;
-            padding: 10px;
-            text-align: center;
-        }
+    nav {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 10px;
+    }
 
-        nav a {
-            color: #ffffff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        section {
-            max-width: 960px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+    section {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 20px;
+    }
 
-        h2 {
-            border-bottom: 2px solid #00c853;
-            padding-bottom: 5px;
-        }
+    .download-button {
+      background: #00c853;
+      color: black;
+      padding: 12px 24px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 20px;
+    }
 
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .feature {
-            flex: 1 1 280px;
-            background-color: #1f1f1f;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .feature h3 {
-            margin-bottom: 10px;
-            color: #00e676;
-        }
-
-        .screenshots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .screenshots img {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-
-        .download-button {
-            display: inline-block;
-            margin-top: 20px;
-            background-color: #00c853;
-            color: black;
-            font-weight: bold;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .download-button:hover {
-            background-color: #00e676;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1e1e1e;
-            font-size: 0.9em;
-            color: #aaa;
-        }
-
-        @media(max-width: 600px) {
-            header h1 {
-                font-size: 2em;
-            }
-        }
-    </style>
+    footer {
+      background-color: #1e1e1e;
+      padding: 20px;
+      text-align: center;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>Hungarian Patch Hub</h1>
-    <p>Játék magyarítás egyszerűen – letöltés, telepítés, élmény!</p>
+  <h1>Hungarian Patch Hub</h1>
+  <p>Magyarítsd kedvenc játékaid egyetlen kattintással!</p>
 </header>
 
 <nav>
-    <a href="#funkciok">Funkciók</a>
-    <a href="#kepernyokepek">Képernyőképek</a>
-    <a href="#letoltes">Letöltés</a>
+  <a href="#about">Rólunk</a>
+  <a href="#privacy">Adatvédelem</a>
+  <a href="#download">Letöltés</a>
 </nav>
 
-<section id="funkciok">
-    <h2>Fő funkciók</h2>
-    <div class="features">
-        <div class="feature">
-            <h3>Magyarítás egy kattintással</h3>
-            <p>Automatikus letöltés és telepítés Steam játékokhoz.</p>
-        </div>
-        <div class="feature">
-            <h3>Több játék támogatása</h3>
-            <p>Pl.: Poppy Playtime, Bendy – folyamatosan bővül.</p>
-        </div>
-        <div class="feature">
-            <h3>Fejlett UI</h3>
-            <p>Modern, lépésenkénti telepítő animációkkal és ellenőrzéssel.</p>
-        </div>
-    </div>
+<section id="about">
+  <h2>Mi az a Hungarian Patch Hub?</h2>
+  <p>
+    A Hungarian Patch Hub egy Windows-alapú eszköz, amely egyszerűen telepíti a magyar fordítást különféle népszerű játékokhoz, mint például a Poppy Playtime, Bendy and the Ink Machine és sok más.
+  </p>
+  <p>
+    Az alkalmazás Google-bejelentkezést használ kizárólag az Ön e-mail címének azonosítására, hogy menteni tudjuk, melyik játékot magyarítottad. Az adatokat nem tároljuk hosszú távon, és semmilyen harmadik félnek nem adjuk át.
+  </p>
 </section>
 
-<section id="kepernyokepek">
-    <h2>Képernyőképek</h2>
-    <div class="screenshots">
-        <img src="screenshots/installer1.png" alt="Telepítő 1">
-        <img src="screenshots/installer2.png" alt="Telepítő 2">
-        <img src="screenshots/cardview.png" alt="Játék választó">
-    </div>
+<section id="privacy">
+  <h2>Adatvédelmi szabályzat</h2>
+  <p>Az alkalmazás csak a minimálisan szükséges adatokat kéri el (e-mail cím), kizárólag az alkalmazáson belüli működéshez.</p>
+  <p><a href="privacy-policy.html" style="color:#00e676;">→ Teljes adatvédelmi szabályzat megtekintése</a></p>
 </section>
 
-<section id="letoltes">
-    <h2>Letöltés</h2>
-    <p>A Hungarian Patch Hub Windows 10 és újabb verziókon működik.</p>
-    <a class="download-button" href="https://animachina-studios.itch.io/hungarian-patch-hub" target="_blank">Letöltés most</a>
+<section id="download">
+  <h2>Letöltés</h2>
+  <p>A Hungarian Patch Hub Windows 10/11 rendszerre érhető el.</p>
+  <a class="download-button" href="https://animachina-studios.itch.io/hungarian-patch-hub" target="_blank">Letöltés most</a>
 </section>
 
 <footer>
-    &copy; 2025 Animachina Studio. Minden jog fenntartva. | <a href="privacy_policy.html" style="color:#ccc;">Adatvédelem</a> | <a href="tos.html" style="color:#ccc;">Feltételek</a>
+  &copy; 2025 Animachina Studio. Minden jog fenntartva. | <a href="tos.html" style="color:#ccc;">Szolgáltatási feltételek</a>
 </footer>
 
 </body>
