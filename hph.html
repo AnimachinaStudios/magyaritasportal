@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hungarian Patch Hub</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff003c, #00c853, #2196f3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            background-color: #1e1e1e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #00c853;
+            padding-bottom: 5px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature {
+            flex: 1 1 280px;
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #00e676;
+        }
+
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .screenshots img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .download-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #00c853;
+            color: black;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .download-button:hover {
+            background-color: #00e676;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e1e1e;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        @media(max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hungarian Patch Hub</h1>
+    <p>Játék magyarítás egyszerűen – letöltés, telepítés, élmény!</p>
+</header>
+
+<nav>
+    <a href="#funkciok">Funkciók</a>
+    <a href="#kepernyokepek">Képernyőképek</a>
+    <a href="#letoltes">Letöltés</a>
+</nav>
+
+<section id="funkciok">
+    <h2>Fő funkciók</h2>
+    <div class="features">
+        <div class="feature">
+            <h3>Magyarítás egy kattintással</h3>
+            <p>Automatikus letöltés és telepítés Steam játékokhoz.</p>
+        </div>
+        <div class="feature">
+            <h3>Több játék támogatása</h3>
+            <p>Pl.: Poppy Playtime, Bendy – folyamatosan bővül.</p>
+        </div>
+        <div class="feature">
+            <h3>Fejlett UI</h3>
+            <p>Modern, lépésenkénti telepítő animációkkal és ellenőrzéssel.</p>
+        </div>
+    </div>
+</section>
+
+<section id="kepernyokepek">
+    <h2>Képernyőképek</h2>
+    <div class="screenshots">
+        <img src="screenshots/installer1.png" alt="Telepítő 1">
+        <img src="screenshots/installer2.png" alt="Telepítő 2">
+        <img src="screenshots/cardview.png" alt="Játék választó">
+    </div>
+</section>
+
+<section id="letoltes">
+    <h2>Letöltés</h2>
+    <p>A Hungarian Patch Hub Windows 10 és újabb verziókon működik.</p>
+    <a class="download-button" href="https://animachina-studios.itch.io/hungarian-patch-hub" target="_blank">Letöltés most</a>
+</section>
+
+<footer>
+    &copy; 2025 Animachina Studio. Minden jog fenntartva. | <a href="privacy_policy.html" style="color:#ccc;">Adatvédelem</a> | <a href="tos.html" style="color:#ccc;">Feltételek</a>
+</footer>
+
+</body>
+</html>
