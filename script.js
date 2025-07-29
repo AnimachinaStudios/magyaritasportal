@@ -21,7 +21,7 @@ const chapters = {
 
             <h3>🎤 Szinkronszínészek (BÉTA verzió)</h3>
             <ul>
-                <li>🎙️ Elliot Ludwig – @Trashy</li>
+                <li>🎙️ Elliot Ludwig – @Fox</li>
                 <li>🎙️ Leith Pierre – @ThauXeon</li>
                 <li>🎙️ Rich – @SansTheSkeleton</li>
                 <li>🎙️ Avery – @Trafn</li>
@@ -31,27 +31,28 @@ const chapters = {
                 <li>🎙️ Interjúztató – @Trashy</li>
             </ul>
 
-            <p>⚠️ A szinkron jelenleg BÉTA verzióban van, így előfordulhatnak kisebb hibák!</p>
+            <p>⚠️ Néhány helyen előfordulhatnak kisebb hibák!</p>
         `,
-        trailer: "https://www.youtube.com/embed/Wwbr-eFIKRw?si=Qxrgd2rDeKUIh1ls",
+        trailer: "https://www.youtube.com/embed/AJnGRhAuWZk?si=c3kAC53GR-G5vks0",
         download: "https://kokonoshy-studio.itch.io/poppy-playtime-magyar"
     },
     2: {
         title: "Poppy Playtime - Chapter 2",
         image: "images/chapter2.png",
         description: `
-            <h3>A MAGYARÍTÁS FEJLESZTÉS ALATT!</h3>
+            <h3>Poppy Playtime Chapter 2</h3>
             <p>Szeretnéd magyarul játszani a Poppy Playtime Chapter 2-t? Akkor ez a mod neked készült! A magyarítás segítségével teljes mértékben élvezheted a játék történetét, ijesztő pillanatait és rejtélyeit, immár anyanyelveden.</p>
             
             <p><b>Mivel feliratok nincsenek a játékban, ezért csak a textúrák magyarítását tudjuk megcsinálni.</b></p>
             
             <ul>
                 <li>🔹 Magyar Textúrák és Dokumentációk</li>
+                <li>🔹 Magyar Szinkron</li>
                 <li>🔹 Egyszerű telepítés</li>
                 <li>🔹 Eredeti játékélmény, magyar nyelven</li>
             </ul>
         `,
-        trailer: "https://www.youtube.com/embed/yn_Ht3N80X0?si=PsX7Y0POZ9fOeAyU",
+        trailer: "https://www.youtube.com/embed/n6EasSST0BU?si=EKLbo62hNIQMZzC_",
         download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-2-magyar"
     },
     3: {
@@ -72,7 +73,7 @@ const chapters = {
 
             <p>👾 Jó játékot, és ne hagyd, hogy CatNap elkapjon! 👀💀</p>
         `,
-        trailer: "https://www.youtube.com/embed/wEyyL5YFQuM?si=lmbDm6KbA7cJaM0H",
+        trailer: "https://www.youtube.com/embed/iDnja4to_-I?si=sTUVqkDL41DWwrpm",
         download: "https://kokonoshy-studio.itch.io/ppch3-magyar"
     },
     4: {
@@ -94,7 +95,7 @@ const chapters = {
 
             <p>Töltsd le most, és éld át a Poppy Playtime: Chapter 4 rémisztő pillanatait magyarul! 🎃👻</p>
         `,
-        trailer: "https://www.youtube.com/embed/bXMfqsuUqNo?si=3hj6c_fOpf2pPcYW",
+        trailer: "https://www.youtube.com/embed/-WlFgNka1QM?si=bMyPnfKbiN6tmxTf",
         download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-4-magyar"
     },
     5: {
@@ -110,7 +111,7 @@ const chapters = {
                 <li>🔹 Eredeti játékélmény, magyar nyelven</li>
             </ul>
         `,
-        trailer: "https://www.youtube.com/embed/UzrQUXOJWt8?si=gwxmipiQ2BSPzfWp",
+        trailer: "https://www.youtube.com/embed/-mUHMhBTPus?si=6v-a-kx5ANdpe8Dc",
         download: "https://kokonoshy-studio.itch.io/"
     },
     6: {
@@ -126,7 +127,7 @@ const chapters = {
                 <li>🔹 Eredeti játékélmény, magyar nyelven</li>
             </ul>
         `,
-        trailer: "https://www.youtube.com/embed/ZGHvGk2Q5ew?si=qZgElkFq0-CVxRnU",
+        trailer: "https://www.youtube.com/embed/jD-8kDFQVqI?si=TF2bB9fY1yFQUbPc",
         download: "https://kokonoshy-studio.itch.io/granny-magyar/"
     }
 };
