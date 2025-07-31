@@ -1,0 +1,142 @@
+/* Alapbeállítások */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+  color: #fff;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+/* Fejléc */
+header {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeIn 1s ease forwards;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #ff6ec4;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+/* Kártyák */
+.card-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.card {
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 30px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(255, 110, 196, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(255, 110, 196, 0.25);
+}
+
+.card img {
+  max-width: 100px;
+  margin-bottom: 20px;
+  /*filter: brightness(0) invert(1);*/
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #ff99cc;
+}
+
+.card p {
+  color: #bbb;
+  font-size: 0.95rem;
+}
+
+/* Lábléc */
+footer {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+hr {
+    width: 400px;
+    color: #ff6ec4;
+    margin: auto;
+}
+
+/* Animáció */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.support-wall {
+  background-color: #181818;
+  padding: 3rem 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.support-wall h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffcc00;
+}
+
+.support-wall p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.support-card {
+  display: inline-block;
+  background-color: #242424;
+  border: 1px solid #444;
+  padding: 1rem 1.5rem;
+  margin: 0.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.support-name {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.support-amount {
+  font-size: 0.9rem;
+  color: #ffcc00;
+}
+
