@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animachina Stúdió - Csapat</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="images/icon.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="star-canvas"></canvas>
+    <canvas id="shooting-stars"></canvas>
+
+    <header class="video-header">
+      <video autoplay muted loop playsinline class="background-video">
+        <source src="videos/bg.mp4" type="video/mp4">
+        A böngésződ nem támogatja a videólejátszást.
+      </video>
+      <div class="video-overlay">
+        <h1 class="video-title">Animachina Stúdió</h1>
+      </div>
+    </header>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav>
+      <ul id="nav-menu">
+        <li>
+          <a href="index.html">
+            <i class="fas fa-home"></i> Főoldal </a>
+        </li>
+        <li>
+          <a href="translations.html">
+            <i class="fas fa-download"></i> Magyarítások </a>
+        </li>
+        <li>
+          <a href="team.html">
+            <i class="fas fa-users"></i> Csapat
+          </a>
+        </li>
+      </ul>
+      <ul id="nav-menu">
+        <li>
+          <a href="portfolio.html">
+            <i class="fas fa-question"></i> Kondix </a>
+        </li>
+        <li>
+          <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
+            <i class="fab fa-discord"></i> Discord </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+            <i class="fab fa-instagram"></i>Instagram </a>
+        </li>
+        <li>
+          <a href="support.html">
+            <i class="fas fa-envelope"></i> Támogatás </a>
+        </li>
+      </ul>
+    </nav>
+
+  <section class="team-section">
+    <h2>Ismerd meg a csapatot</h2>
+    <div class="team-tree">
+
+      <div class="team-card">
+        <img src="images/kondix.jpg" alt="Kondix profilkép" draggable="false">
+        <h3>Kondix</h3>
+        <p>Tulajdonos & Mod Készítő & Szinkronhang</p>
+        <p><a href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a></p>
+        <p><a href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a></p>
+        <p><a href="https://kokonoshy-studio.itch.io/" target="_blank">Itch.io</a></p>
+      </div>
+
+      <div class="tree-line"></div>
+
+      <div class="tree-branches">
+        <div class="team-subgroup">
+          <div class="team-card">
+                <img src="images/szinkronok/choso.jpg" alt="Chosomoso profilkép" class="choso" draggable="false">
+                <h3 class="chosoh3">Chosomoso</h3>
+                <p>Grafikus</p>
+                <p><a href="https://www.instagram.com/viviennct/" target="_blank" class="chosop">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/fox.png" alt="Fox profilkép" draggable="false" class="thauxeon">
+                <h3 class="thauh3">Fox</h3>
+                <p>Szinkronhang & Szinkrontanító</p>
+                <p><a href="https://www.youtube.com/@overclock352" class="thaup" target="_blank">YouTube</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/thauxeon.jpg" alt="ThauXeon profilkép" class="thauxeon" draggable="false">
+                <h3 class="thauh3">ThauXeon</h3>
+                <p>Szinkronhang & Felirat Fordító</p>
+                <p><a href="https://www.instagram.com/thauxeon?igsh=eTNpZDdscmF6eDVx" target="_blank" class="thaup">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/arynox.jpg" alt="Arynox profilkép" class="arynox" draggable="false">
+                <h3 class="arynoxh3">Arynox</h3>
+                <p>Mod Készítő & Szinkronhang</p>
+                <p><a href="https://www.youtube.com/@Arynox_23" target="_blank" class="arynoxp">YouTube</a></p>
+                <p><a href="https://arynox.itch.io/" target="_blank" class="arynoxp">Itch.io</a></p>
+                <p><a href="https://www.instagram.com/arynox23/" target="_blank" class="arynoxp">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/sun.png" alt="Sunbakery profilkép" class="sun" draggable="false">
+                <h3 class="sunh3">Sunbakery</h3>
+                <p>Textúra Fordító & Szinkronhang</p>
+                <p><a href="https://x.com/frienbear28478?t=pcyJU0pop2PZIVv9arHrJQ&s=09" target="_blank" class="sunp">Twitter (X)</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/bezd.jpg" alt="Bezd profilkép" draggable="false">
+                <h3>Bezd</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://youtube.com/@bezd01?si=SphJSISgE2Zio_nF" target="_blank">YouTube</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/beaaa.jpg" alt="Beaaa profilkép" draggable="false">
+                <h3>Beaaa</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.instagram.com/bea_2007_01/" target="_blank">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/chiyo.jpg" alt="Chiyo profilkép" draggable="false">
+                <h3>Chiyo</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://youtube.com/@fusion_szinkron?si=uZSkOSSyszbXr2vq" target="_blank">YouTube 1</a></p>
+                <p><a href="https://youtube.com/@abyssalstudiohun?si=oAQB5tDX17gkThT4" target="_blank">YouTube 2</a></p>
+                <p><a href="https://www.tiktok.com/@fusion.szinkron.f?_t=ZN-8xO4rDzCn4s&_r=1" target="_blank">TikTok 1</a></p>
+                <p><a href="https://www.tiktok.com/@abyssalstudioofficial?_t=ZN-8xO4vvl3cQw&_r=1" target="_blank">TikTok 2</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/kaizen.jpg" alt="Kaizen profilkép" draggable="false">
+                <h3>Kaizen</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.youtube.com/@SeiyuuLockSzinkron" target="_blank">YouTube</a></p>
+                <p><a href="https://www.tiktok.com/@seiyuu.lock.szinkron" target="_blank">TikTok</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/ashyy.jpg" alt="Ashyy profilkép" draggable="false">
+                <h3>Ashyy</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://youtube.com/@ashy_szinkron?si=kzyzs4tbKUGC4uA1" target="_blank">YouTube</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/sans.png" alt="Sans profilkép" draggable="false">
+                <h3>Sans The Skeleton</h3>
+                <p>Szinkronhang</p>
+                <!--<p><a href="mailto:tag9@example.com">Kapcsolat</a></p>-->
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/izumi.png" alt="Izumi profilkép" draggable="false">
+                <h3>Izumi</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.tiktok.com/@izumi_rangiku_cosplay?_t=ZN-8xQNIZ8FDkM&_r=1" target="_blank">TikTok</a></p>
+                <p><a href="https://www.instagram.com/izumi_rangiku_cos?igsh=MTlsdmt2dzRxYWxnOA==" target="_blank">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/Niki.jpg" alt="Niki profilkép" class="niki" draggable="false">
+                <h3 class="nikih3">Tanczik Nikoletta</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.tiktok.com/@nikoletta_potfiok?_t=ZN-8xQN3v6YnKA&_r=1" target="_blank" class="nikip">TikTok</a></p>
+                <p><a href="https://www.instagram.com/tancziknikoletta?igsh=cG5wYXQ3YW15aWVt" target="_blank" class="nikip">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/mango.JPG" alt="AronKostan profilkép" class="mango" draggable="false">
+                <h3 class="mangoh3">AronKostan</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.instagram.com/aronkostan/" class="mangop" target="_blank">Instagram</a></p>
+              </div>
+
+              <div class="team-card">
+              <div class="trafn-img"></div>
+              <h3 class="trafnh3">Trafn</h3>
+              <p>Szinkronhang</p>
+              <p><a href="https://www.youtube.com/@trafn1419" target="_blank" class="trafnp">YouTube</a></p>
+            </div>
+
+
+              <div class="team-card">
+                <img src="images/szinkronok/yuzu.jpg" alt="Yuzu profilkép" draggable="false">
+                <h3>Yuzucchi Mei</h3>
+                <p>Szinkronhang</p>
+                <!--<p><a href="" target="_blank">Kapcsolat</a></p>-->
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/sunny.jpg" alt="Sunny profilkép" draggable="false">
+                <h3>Sunny</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.diabolicalaudestudios.hu/" target="_blank">Weboldal</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/petrov.jpg" alt="Petrov profilkép" draggable="false">
+                <h3>Petrov</h3>
+                <p>Szinkronhang</p>
+                <p><a href="https://www.youtube.com/channel/UC8ieIMmMYtDwD2TFGAyiAoA" target="_blank">YouTube</a></p>
+              </div>
+
+              <div class="team-card">
+                <img src="images/szinkronok/patrik.png" alt="Patrik profilkép" draggable="false">
+                <h3>patriknpa641</h3>
+                <p>Szinkronhang</p>
+                <!--<p><a href="" target="_blank">Kapcsolat</a></p>-->
+              </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+      <p>© 2025 Animachina Studios - Minden jog fenntartva.</p>
+      <div class="footer-links">
+        <a href="https://www.tiktok.com/@animachina_studios" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.youtube.com/@KondixOfficial" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+         <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/stars.js"></script>
+    <script src="scripts/shooting-stars.js"></script>
+
+</body>
+</html>

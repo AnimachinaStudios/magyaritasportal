@@ -1,0 +1,408 @@
+body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background: #0c0c0c;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: linear-gradient(90deg, #8000ff, #ff00aa);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 36px;
+      color: #fff;
+      text-shadow: 2px 2px 10px #ff00ff;
+    }
+
+    .skills {
+      margin: 40px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1000px;
+      padding: 0 20px;
+    }
+
+    .skill {
+      background: linear-gradient(135deg, #222, #333);
+      border: 2px solid #ff00ff;
+      border-radius: 12px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffccff;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+    }
+
+    .contact {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .contact a {
+      background: linear-gradient(90deg, #ff00ff, #a200ff);
+      padding: 14px 28px;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .contact a:hover {
+      background: linear-gradient(90deg, #ff33ff, #c266ff);
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .skill {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    .skill-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .skill-buttons button {
+      background: linear-gradient(90deg, #ff00ff, #a200ff);
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 0, 255, 0.2);
+    }
+
+    .skill-buttons button:hover {
+      background: linear-gradient(90deg, #ff33ff, #bb66ff);
+      transform: scale(1.05);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+        position: relative; /* ez az új sor */
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 8px 20px rgba(255, 0, 255, 0.4);
+        animation: slideInRight 0.4s ease-out;
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #ff99ff;
+    }
+
+.about {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.about-text {
+  color: #ccc;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+.projects {
+  margin: 60px auto;
+  padding: 0 20px;
+  max-width: 1000px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #ffccff;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.project {
+  background: #1a1a1a;
+  border-left: 4px solid #ff00ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 0, 255, 0.2), transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.project:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+  animation: pulseGlow 1s infinite alternate;
+}
+
+.project:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: linear-gradient(145deg, #2a0030, #1a001f);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.5), 0 0 10px rgba(255, 0, 255, 0.3) inset;
+}
+
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+  }
+}
+
+.project h3,
+.project p,
+.project a {
+  position: relative;
+  z-index: 2;
+}
+
+.project a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #ff00ff, #a200ff);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #ff99ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.project a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-30deg);
+  transition: 0.4s ease;
+  z-index: 0;
+}
+
+.project a:hover::before {
+  left: 120%;
+}
+
+.project a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  background: linear-gradient(90deg, #ff33ff, #bb66ff);
+}
+
+.itch {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #ff00ff, #a200ff);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #ff99ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.itch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-30deg);
+  transition: 0.4s ease;
+  z-index: 0;
+}
+
+.itch:hover::before {
+    left: 120%;
+}
+
+.itch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  background: linear-gradient(90deg, #ff33ff, #bb66ff);
+}
+
+.stats {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  color: #ffccff;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #ff00ff, #a200ff);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #ff99ff;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.back::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-30deg);
+  transition: 0.4s ease;
+  z-index: 0;
+}
+
+.back:hover::before {
+    left: 120%;
+}
+
+.back:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  background: linear-gradient(90deg, #ff33ff, #bb66ff);
+}

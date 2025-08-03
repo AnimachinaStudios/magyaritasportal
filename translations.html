@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Magyarosításaink – Animachina Stúdió</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="images/icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="star-canvas"></canvas>
+    <canvas id="shooting-stars"></canvas>
+
+    <header class="video-header">
+      <video autoplay muted loop playsinline class="background-video">
+        <source src="videos/bg.mp4" type="video/mp4">
+        A böngésződ nem támogatja a videólejátszást.
+      </video>
+      <div class="video-overlay">
+        <h1 class="video-title">Animachina Stúdió</h1>
+      </div>
+    </header>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav>
+      <ul id="nav-menu">
+        <li>
+          <a href="index.html">
+            <i class="fas fa-home"></i> Főoldal </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-download"></i> Magyarítások </a>
+        </li>
+        <li>
+          <a href="team.html">
+            <i class="fas fa-users"></i> Csapat
+          </a>
+        </li>
+      </ul>
+      <ul id="nav-menu">
+        <li>
+          <a href="portfolio.html">
+            <i class="fas fa-question"></i> Kondix </a>
+        </li>
+        <li>
+          <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
+            <i class="fab fa-discord"></i> Discord </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+            <i class="fab fa-instagram"></i>Instagram </a>
+        </li>
+        <li>
+          <a href="support.html">
+            <i class="fas fa-envelope"></i> Támogatás </a>
+        </li>
+      </ul>
+    </nav>
+
+  <div class="title">
+    <h2>Magyarosításaink</h2>
+  </div>
+
+  <hr />
+
+  <div class="title">
+    <h2>Poppy Playtime</h2>
+  </div>
+
+  <div class="cards" id="fejezetek">
+    <div class="card" onclick="showDetails(1)">
+      <img src="images/chapter1.png" alt="Chapter 1" />
+      <h2>Chapter 1</h2>
+      <p>Poppy Playtime Első Fejezetének Teljes Magyarosítása!</p>
+      <button onclick="showDetails(1)">Részletek</button>
+    </div>
+
+    <div class="card" onclick="showDetails(2)">
+      <img src="images/chapter2.png" alt="Chapter 2" />
+      <h2>Chapter 2</h2>
+      <p>Poppy Playtime Második Fejezetének Teljes Magyarosítása!</p>
+      <button onclick="showDetails(2)">Részletek</button>
+    </div>
+
+    <div class="card" onclick="showDetails(3)">
+      <img src="images/chapter3.png" alt="Chapter 3" />
+      <h2>Chapter 3</h2>
+      <p>Poppy Playtime Harmadik Fejezetének Teljes Magyarosítása!</p>
+      <button onclick="showDetails(3)">Részletek</button>
+    </div>
+
+    <div class="card" onclick="showDetails(4)">
+      <img src="images/chapter4.png" alt="Chapter 4" />
+      <h2>Chapter 4</h2>
+      <p>Poppy Playtime Negyedik Fejezetének Teljes Magyarosítása!</p>
+      <button onclick="showDetails(4)">Részletek</button>
+    </div>
+  </div>
+
+  <div class="title">
+    <h2>Bendy</h2>
+  </div>
+
+  <div class="cards" id="fejezetek">
+    <div class="card" onclick="showDetails(5)">
+      <img src="images/bendy.png" alt="Bendy and the Ink Machine" />
+      <h2>Bendy and the Ink Machine</h2>
+      <p>Bendy és a Tintagép Teljes Magyarosítása!</p>
+      <button onclick="showDetails(5)">Részletek</button>
+    </div>
+  </div>
+
+  <div class="title">
+    <h2>Granny</h2>
+  </div>
+
+  <div class="cards" id="fejezetek">
+    <div class="card" onclick="showDetails(6)">
+      <img src="images/granny.png" alt="Granny Chapter 1" />
+      <h2>Granny Chapter 1</h2>
+      <p>Granny Chapter 1 Teljes Magyarosítása!</p>
+      <button onclick="showDetails(6)">Részletek</button>
+    </div>
+  </div>
+
+    <div id="detail-card">
+    <button class="close-btn" onclick="hideDetails()">✖</button>
+    <h2 id="detail-title"></h2>
+    <img id="detail-image" src="" alt="Chapter Image">
+
+    <div class="video-wrapper">
+        <div class="custom-player">
+        <iframe
+            id="detail-video"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&rel=0&controls=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+        ></iframe>
+        </div>
+    </div>
+
+    <p id="detail-description"></p>
+    <a id="download-link" href="#" download>Letöltés</a>
+    </div>
+
+
+  
+
+  <footer>
+      <p>© 2025 Animachina Studios - Minden jog fenntartva.</p>
+      <div class="footer-links">
+        <a href="https://www.tiktok.com/@animachina_studios" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.youtube.com/@KondixOfficial" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+         <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/stars.js"></script>
+    <script src="scripts/shooting-stars.js"></script>
+    
+</body>
+</html>
