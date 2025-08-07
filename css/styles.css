@@ -992,3 +992,19 @@ footer p {
         width: 70%;
     }
 }
+
+.background-image {
+  position: absolute;
+  inset: 0;
+  background: url('../images/doctordoey.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: -3;
+  filter: brightness(0.5) contrast(1.2);
+}
+
+.background-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
