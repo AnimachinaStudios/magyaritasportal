@@ -7,10 +7,71 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+  background: linear-gradient(to bottom, #0a0a0a, #111);
   color: #fff;
   line-height: 1.6;
   padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Horror stílusú elemek */
+.blood-drips {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,0 Q30,15 20,30 Q10,45 20,60 Q30,75 20,90 L25,100 L30,90 Q20,75 30,60 Q40,45 30,30 Q20,15 30,0 Z" fill="rgba(150,0,0,0.1)"/></svg>');
+  background-size: 200px 200px;
+  opacity: 0.3;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.flicker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.blood-text {
+  color: #ff3333;
+  text-shadow: 0 0 5px #ff0000, 0 0 15px #7f0000;
+}
+
+.glow-text {
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.custom-hr {
+  height: 3px;
+  width: 400px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.blood {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ff3333, transparent);
+  animation: bloodFlow 3s infinite linear;
+}
+
+@keyframes bloodFlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* Fejléc */
@@ -18,17 +79,57 @@ header {
   text-align: center;
   margin-bottom: 60px;
   animation: fadeIn 1s ease forwards;
+  position: relative;
 }
 
 header h1 {
-  font-size: 3rem;
-  color: #ff6ec4;
-  margin-bottom: 10px;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 2px;
 }
 
 header p {
   color: #ccc;
   font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.intro {
+  background: rgba(20, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 3px solid #ff3333;
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+.rewards {
+  background: rgba(40, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #ff3333;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.reward-list {
+  text-align: left;
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+.reward-list li {
+  margin: 15px 0;
+  padding-left: 30px;
+  position: relative;
+}
+
+.reward-list li:before {
+  content: '🩸';
+  position: absolute;
+  left: 0;
 }
 
 /* Kártyák */
@@ -41,32 +142,63 @@ header p {
 }
 
 .card {
-  background: #1e1e1e;
-  border-radius: 16px;
+  background: rgba(30, 0, 0, 0.5);
+  border-radius: 10px;
   padding: 30px;
-  width: 280px;
+  width: 300px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(255, 110, 196, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ff3333;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,50,50,0.1) 0%, rgba(30,0,0,0.5) 70%);
+  z-index: -1;
+}
+
+.card-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,0,0,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(255, 110, 196, 0.25);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+}
+
+.card:hover .card-hover {
+  opacity: 1;
 }
 
 .card img {
   max-width: 100px;
   margin-bottom: 20px;
-  /*filter: brightness(0) invert(1);*/
+  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
 }
 
 .card h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #ff99cc;
+  color: #ff9999;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 1px;
 }
 
 .card p {
@@ -77,15 +209,25 @@ header p {
 /* Lábléc */
 footer {
   text-align: center;
-  margin-top: 60px;
-  font-size: 0.9rem;
-  color: #666;
+  margin-top: 100px;
+  font-size: 1rem;
+  background: linear-gradient(to right, #1a0000, #0f0f0f);
+  padding: 30px 20px;
+  border-top: 2px solid #ff3333;
+  box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
-hr {
-    width: 400px;
-    color: #ff6ec4;
-    margin: auto;
+footer:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="10" viewBox="0 0 100 10"><path d="M0,0 L20,10 L40,0 L60,10 L80,0 L100,10" stroke="rgba(255,0,0,0.5)" fill="none" stroke-width="2"/></svg>');
+  background-size: 100px 10px;
 }
 
 /* Animáció */
@@ -100,43 +242,113 @@ hr {
   }
 }
 
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
 .support-wall {
-  background-color: #181818;
+  background-color: rgba(10, 0, 0, 0.7);
   padding: 3rem 2rem;
   color: #fff;
   text-align: center;
+  margin-top: 80px;
+  border-top: 1px solid #ff3333;
+  border-bottom: 1px solid #ff3333;
+  position: relative;
 }
 
 .support-wall h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #ffcc00;
-}
-
-.support-wall p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: #ccc;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
 }
 
 .support-card {
   display: inline-block;
-  background-color: #242424;
-  border: 1px solid #444;
+  background-color: rgba(40, 0, 0, 0.5);
+  border: 1px solid #ff3333;
   padding: 1rem 1.5rem;
   margin: 0.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   font-weight: bold;
   color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.support-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.support-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s;
+}
+
+.support-card:hover:before {
+  left: 100%;
 }
 
 .support-name {
   display: block;
   font-size: 1.1rem;
+  color: #fff;
 }
 
 .support-amount {
   font-size: 0.9rem;
   color: #ffcc00;
+  text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
 }
 
+.background-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  inset: 0;
+  background: url('../images/catnap.png') no-repeat center center;
+  background-size: cover;
+  z-index: -3;
+  filter: brightness(0.5) contrast(1.2);
+}
+
+#smokeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .custom-hr {
+    width: 80%;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 350px;
+  }
+}

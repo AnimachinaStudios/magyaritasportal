@@ -8,28 +8,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="icon" type="image/png" href="images/icon.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <div class="background-wrapper">
+    <div class="background-image"></div>
+    <canvas id="smokeCanvas"></canvas>
+  </div>
+
+  <div class="blood-drips"></div>
+  <div class="flicker"></div>
+
   <header>
-    <h1>💖 Támogatás</h1>
-    <hr><br>
-    <p>Ahhoz, hogy valóban professzionális szinkronokat készíthessünk magyar nyelven,<br>
-    <strong>szükségünk van a közösség erejére is!</strong></p>
+    <h1><span class="blood-text">💖 TÁMOGATÁS</span></h1>
+    <div class="custom-hr"><div class="blood"></div></div>
+    <p class="glow-text">Ahhoz, hogy valóban professzionális szinkronokat készíthessünk magyar nyelven,<br>
+    <strong class="blood-text">szükségünk van a közösség erejére is!</strong></p>
 
     <p class="intro">
       Az anyagi hozzájárulásotok lehetővé teszi számunkra a minőségi technika bérlését, valamint tehetséges szinkronszínészek munkájának méltó díjazását.<br>
-      Minden beérkező támogatást <strong>közvetlenül ezekre a célokra</strong> fordítunk – cserébe pedig szeretnénk egyedi meglepetésekkel kedveskedni azoknak, akik mellénk állnak.<br><br>
+      Minden beérkező támogatást <strong class="blood-text">közvetlenül ezekre a célokra</strong> fordítunk – cserébe pedig szeretnénk egyedi meglepetésekkel kedveskedni azoknak, akik mellénk állnak.<br><br>
       A támogatás természetesen <strong>nem kötelező</strong>, és a kész szinkronokat <strong>mindenki szabadon élvezheti</strong>!
     </p>
 
-    <br>
     <div class="rewards">
-      <h2>Mit nyújtunk viszonzásképp?</h2>
-      <br><hr><br>
-      <ul>
-        <li><strong>2 000 Ft felett:</strong> Neved felkerül a támogatói falra.</li>
-        <li><strong>5 000 Ft felett:</strong> Neved elhangzik a szinkronizált játék stáblistájában, mint kiemelt támogató.</li>
-        <li><strong>10 000 Ft felett:</strong> Kiemelt főtámogatóként jelenünk meg a neveddel a stáblistában és a támogatói fal élén.</li>
+      <h2 class="glow-text">Mit nyújtunk viszonzásképp?</h2>
+      <div class="custom-hr"><div class="blood"></div></div>
+      <ul class="reward-list">
+        <li><strong class="blood-text">2 000 Ft felett:</strong> Neved felkerül a támogatói falra.</li>
+        <li><strong class="blood-text">5 000 Ft felett:</strong> Neved elhangzik a szinkronizált játék stáblistájában, mint kiemelt támogató.</li>
+        <li><strong class="blood-text">10 000 Ft felett:</strong> Kiemelt főtámogatóként jelenünk meg a neveddel a stáblistában és a támogatói fal élén.</li>
       </ul>
     </div>
   </header>
@@ -39,56 +49,128 @@
 
       <!-- Patreon kártya -->
       <a class="card" href="https://www.patreon.com/AnimachinaStudio" target="_blank">
+        <div class="card-bg"></div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Patreon_logo.svg" alt="Patreon logó">
         <h2>Patreon</h2>
         <p>Légy részese a közösségünknek – a támogatók exkluzív kulisszatitkokhoz és előzetesekhez is hozzáférhetnek!</p>
+        <div class="card-hover"></div>
       </a>
 
       <!-- PayPal kártya -->
       <a class="card" href="">
+        <div class="card-bg"></div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal logó">
         <h2>PayPal – HAMAROSAN</h2>
         <p>Egyszeri támogatásod gyorsan és biztonságosan megvalósítható ezzel az opcióval.</p>
+        <div class="card-hover"></div>
       </a>
 
       <!-- Ko-fi kártya -->
       <a class="card" href="https://ko-fi.com/animachinastudios" target="_blank">
+        <div class="card-bg"></div>
         <img src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/670f5a01229bf8a18f97a3c1_favion.png" alt="Ko-fi logó">
         <h2>Ko-fi</h2>
         <p>Egy kis figyelmesség is sokat jelent – „dobj be egy kávéra”! ☕</p>
+        <div class="card-hover"></div>
       </a>
 
     </div>
   </main>
 
-   <!-- Támogatói fal -->
+  <!-- Támogatói fal -->
   <section class="support-wall">
-    <h2>🎖️ Támogatói fal</h2>
-    <p>JELENLEG NINCS TÁMOGATÓ.</p>
+    <h2 class="glow-text">🎖️ TÁMOGATÓI FAL</h2>
+    <!--<p>JELENLEG NINCS TÁMOGATÓ.</p>--->
     
     <div class="support-card">
         <span class="support-name">OwnMcKendry</span>
-        <span class="support-amount">Videó  </span>
+        <span class="support-amount">Videó</span>
     </div>
     <div class="support-card">
         <span class="support-name">Trafn</span>
-        <span class="support-amount">Videó  </span>
+        <span class="support-amount">Videó</span>
     </div>
-
-    <!--
-      Ha lesz támogatód, így adj hozzá egy kártyát:
-
-      <div class="support-card">
-        <span class="support-name">Név</span>
-        <span class="support-amount">5 000 Ft</span>
-      </div>
-    -->
-
   </section>
 
   <footer>
-    <p>Hálásan köszönjük, hogy támogatod az <strong>Animachina Stúdió</strong> küldetését! 🎮🇭🇺</p>
+    <p class="glow-text">Hálásan köszönjük, hogy támogatod az <strong class="blood-text">Animachina Stúdió</strong> küldetését! 🎮🇭🇺</p>
   </footer>
+
+<script>
+const canvas = document.getElementById('smokeCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: canvas.height + 100,
+    radius: 100 + Math.random() * 100,
+    speedY: 0.5 + Math.random() * 1,
+    alpha: 0.1 + Math.random() * 0.2
+  };
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.y -= p.speedY;
+    ctx.beginPath();
+    let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+    gradient.addColorStop(0, `rgba(255, 0, 0, ${p.alpha})`);
+    gradient.addColorStop(1, `rgba(255, 0, 0, 0)`);
+    ctx.fillStyle = gradient;
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Remove if out of screen
+    if (p.y + p.radius < 0) {
+      particles.splice(i, 1);
+    }
+  });
+
+  while (particles.length < 30) {
+    particles.push(createParticle());
+  }
+
+  requestAnimationFrame(drawParticles);
+}
+
+drawParticles();
+
+// Flicker effect
+setInterval(() => {
+  const flicker = document.querySelector('.flicker');
+  flicker.style.opacity = Math.random() * 0.1;
+}, 100);
+</script>
+
+<audio id="bg-sound" src="images/sound.wav" preload="auto" loop></audio>
+
+<script>
+  const sound = document.getElementById("bg-sound");
+
+  function enableSound() {
+    sound.volume = 1.0; // halkítva indítjuk, módosítható
+    sound.play().catch(e => {
+      console.warn("A hang nem indult el automatikusan:", e);
+    });
+    document.removeEventListener("click", enableSound);
+  }
+
+  // Első kattintás után indul a hang
+  document.addEventListener("click", enableSound);
+</script>
+
 
 </body>
 </html>
