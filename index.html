@@ -14,6 +14,22 @@
 
   <body>
 
+  <div class="preloader" id="preloader">
+    <div class="harley-video-container">
+        <video class="harley-eyes-video" muted playsinline>
+            <source src="images/sawyer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
+    </div>
+</div>
+
     <canvas id="star-canvas"></canvas>
     <canvas id="shooting-stars"></canvas>
 
@@ -141,6 +157,7 @@
     <script src="scripts/stars.js"></script>
     <script src="scripts/shooting-stars.js"></script>
     <script src="scripts/carousel.js"></script>
+    <script src="scripts/preloader.js"></script>
 
     <audio id="bg-sound" src="images/all_seeing_eye.mp3" preload="auto" loop></audio>
 
