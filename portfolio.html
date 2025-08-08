@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kondix | Portfolio</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/png" href="images/icon.jpg">
+  <link rel="stylesheet" href="css/portfolio.css">
+</head>
+<body>
+
+  <header data-aos="fade-down">
+    <img src="images/kondix.jpg" alt="Kondix" class="profile-pic" />
+    <h1>Kondix</h1>
+  </header>
+
+  <div class="skills-section">
+    <h2 class="section-title">Képességek</h2>
+    <div class="skill-buttons">
+      <button onclick="showSkillInfo('unity')" data-aos="fade-left">Unity Modolás</button>
+      <button onclick="showSkillInfo('unreal')" data-aos="fade-left">Unreal Engine modolás</button>
+      <button onclick="showSkillInfo('web')" data-aos="fade-left">Webprogramozás</button>
+      <button onclick="showSkillInfo('csharp')" data-aos="fade-left">C# (WPF, Console)</button>
+      <button onclick="showSkillInfo('unrealgame')" data-aos="fade-left">Unreal Engine játékfejlesztés</button>
+    </div>
+  </div>
+
+  <div id="skill-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="hideModal()">&times;</span>
+      <h3 id="skill-title"></h3>
+      <p id="skill-description"></p>
+    </div>
+  </div>
+
+  <section class="contact" data-aos="zoom-in">
+    <h2>Lépj kapcsolatba velem:</h2>
+    <p>
+      <a href="mailto:kondix.dev@gmail.com">
+        <i class="fas fa-envelope"></i> kondix.dev@gmail.com
+      </a>
+    </p>
+  </section>
+
+  <section class="projects" data-aos="fade-up">
+  <h2 class="section-title">Projektek</h2>
+  <div class="project-list">
+    <div class="project">
+      <h3>Weboldal</h3>
+      <p>Lásd a jelenlegi weboldalt :). Nagyon más webes projektben még nem szerepeltem. Csak a vizsgaremekemnél.</p>
+      <a href="https://www.youtube.com/@KondixOfficial" target="_blank">SABLONOK - HAMAROSAN</a>
+    </div>
+    <div class="project">
+      <h3>Unreal Engine 2D-s Játék</h3>
+      <p>Saját fejlesztésű UE5 action platformer játék, AI ellenséggel és történetvezérelt játékmenettel. OwnMcKendrynek készül jelenleg is!</p>
+      <a href="https://www.youtube.com/@KondixOfficial target="_blank">Demo Videó - HAMAROSAN!</a>
+    </div>
+    <div class="project">
+      <h3>Unity Mod Toolkit</h3>
+      <p>Egy komplett csomag amiben minden olyan eszköz megtalálható amivel Unity-s játékot tudunk modolni! Az unity modolós videóm után lesz elérhető!</p>
+      <a href="https://www.youtube.com/watch?v=naTHhrpX9rc" target="_blank">Trailer Videó</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" data-aos="fade-up">
+  <h2 class="section-title">Rólam</h2>
+  <p class="about-text">
+    Szenvedélyem a játékfejlesztés, modding és a webtechnológiák. Több éves tapasztalattal rendelkezem Unreal Engine és Unity moddolásban, valamint modern webalkalmazások fejlesztésében. Célom, hogy technológiával élményt nyújtsak – akár egy játékban, akár egy letisztult webes felületen. Valamint szenvedélyem a játék fejlesztés!
+  </p>
+</section>
+
+<section class="highlights" data-aos="fade-up">
+  <h2 class="section-title">Eredményeim</h2>
+  <ul class="stats">
+    <li>🎮 5+ játékmod készült</li>
+    <li>📦 5.000+ letöltés az itch.io platformon</li>
+    <li>👨‍💻 10+ projektekben vettem részt</li>
+    <li>⭐ 8 év programozási tapasztalat</li>
+  </ul>
+  <a href="https://kokonoshy-studio.itch.io/" target="_blank" class="itch">Itch.Io oldalam</a>
+</section>
+
+  <br>
+  <a href="index.html" class="back">Vissza a főoldalra</a>
+
+  <footer>
+    <p>© 2025 Kondix | Minden jog fenntartva</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true });
+
+    const skillData = {
+        unity: {
+            title: "Unity Modolás",
+            description: "Unity-ben játékok fájljainak módosítása, beleértve feliratok, textúrák, hangok és UI elemek szerkesztését. Jártas vagyok a .assets fájlformátum kezelésében, valamint modding eszközök használatában, mint az AssetBundleExtractor és saját eszközök/programok használatával. Csakis Arynox segítségével!"
+        },
+        unreal: {
+            title: "Unreal Engine modolás",
+            description: "Unreal Engine alapú játékok moddolása, különféle fájlformátumok (pl. .pak) kicsomagolása, szerkesztése és újracsomagolása. Feliratok, textúrák és hangeffektek testreszabása, valamint a modding workflow és fájlstruktúra alapos ismerete."
+        },
+        web: {
+            title: "Webprogramozás",
+            description: "Teljes stack webfejlesztési tapasztalat: Frontend technológiák (HTML, CSS, JavaScript, React) és Backend megoldások (Node.js, Express). Reszponzív weboldalak, RESTful API-k létrehozása, modern felhasználói élmény biztosítása animált UI komponensekkel és interaktív elemekkel."
+        },
+        csharp: {
+            title: "C# (WPF, Console)",
+            description: "C# nyelv használata komplex desktop alkalmazások fejlesztésére WPF keretrendszerben, MVVM architektúrával. Robusztus konzolos eszközök készítése, hibakezelés, adatbázis-kezelés, valamint strukturált kódbázis és újrafelhasználható komponensek kialakítása."
+        },
+        unrealgame: {
+            title: "Unreal Engine játékfejlesztés",
+            description: "Teljes értékű játékfejlesztés Unreal Engine-ben, C++ és Blueprint rendszerek kombinált használatával. Interaktív UI rendszer, komplex játékmenet logika, mesterséges intelligencia, karaktervezérlés, valamint pályák és szintek tervezése, optimalizálása."
+        }
+    };
+
+
+    function showSkillInfo(key) {
+      const modal = document.getElementById("skill-modal");
+      const content = document.querySelector(".modal-content");
+      const title = document.getElementById("skill-title");
+      const desc = document.getElementById("skill-description");
+
+      title.textContent = skillData[key].title;
+      desc.textContent = skillData[key].description;
+
+      content.style.animation = "none";
+      content.offsetHeight;
+      content.style.animation = "slideInRight 0.4s ease-out";
+
+      modal.style.display = "flex";
+    }
+
+    function hideModal() {
+        const modal = document.getElementById("skill-modal");
+        const content = document.querySelector(".modal-content");
+
+        content.style.animation = "slideOutRight 0.3s ease-out";
+
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 200);
+        }
+
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("skill-modal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>
