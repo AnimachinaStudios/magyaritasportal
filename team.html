@@ -72,11 +72,12 @@
       </ul>
     </nav>
 
-  <section class="team-section">
+  <section class="team-section with-mommy">
     <h2>Ismerd meg a csapatot</h2>
-    <div class="team-tree">
-
-      <div class="team-card">
+    <img src="images/mommyhugg.png" alt="Mommy Long Legs" class="mommy-hugg" draggable="false">
+    
+    <div class="horizontal-team">
+      <div class="team-card kondix-card">
         <img src="images/kondix.jpg" alt="Kondix profilkép" draggable="false">
         <h3>Kondix</h3>
         <p>Tulajdonos & Mod Készítő & Szinkronhang</p>
@@ -84,8 +85,6 @@
         <p><a href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a></p>
         <p><a href="https://kokonoshy-studio.itch.io/" target="_blank">Itch.io</a></p>
       </div>
-
-      <div class="tree-line"></div>
 
       <div class="tree-branches">
         <div class="team-subgroup">
@@ -99,8 +98,9 @@
               <div class="team-card">
                 <img src="images/szinkronok/fox.png" alt="Fox profilkép" draggable="false" class="thauxeon">
                 <h3 class="thauh3">Fox</h3>
-                <p>Szinkronhang & Szinkrontanító</p>
+                <p>Szinkronhang & Rendezőasszisztens</p>
                 <p><a href="https://www.youtube.com/@overclock352" class="thaup" target="_blank">YouTube</a></p>
+                <p><a href="https://www.tiktok.com/@overclock354" class="thaup" target="_blank">TikTok</a></p>
               </div>
 
               <div class="team-card">
@@ -122,7 +122,7 @@
               <div class="team-card">
                 <img src="images/szinkronok/sun.png" alt="Sunbakery profilkép" class="sun" draggable="false">
                 <h3 class="sunh3">Sunbakery</h3>
-                <p>Textúra Fordító & Szinkronhang</p>
+                <p>Grafikai Fordító & Szinkronhang</p>
                 <p><a href="https://x.com/frienbear28478?t=pcyJU0pop2PZIVv9arHrJQ&s=09" target="_blank" class="sunp">Twitter (X)</a></p>
               </div>
 
@@ -231,6 +231,7 @@
                 <!--<p><a href="" target="_blank">Kapcsolat</a></p>-->
               </div>
         </div>
+
       </div>
 
     </div>
@@ -256,6 +257,26 @@
         </a>
       </div>
     </footer>
+
+    <audio id="bg-sound" src="images/ch2.mp3" preload="auto" loop autoplay></audio>
+
+<script>
+
+audioElement.play();
+
+  const sound = document.getElementById("bg-sound");
+
+  function enableSound() {
+    sound.volume = 1.0; // halkítva indítjuk, módosítható
+    sound.play().catch(e => {
+      console.warn("A hang nem indult el automatikusan:", e);
+    });
+    document.removeEventListener("click", enableSound);
+  }
+
+  // Első kattintás után indul a hang
+  document.addEventListener("click", enableSound);
+</script>
 
     <script src="scripts/script.js"></script>
     <script src="scripts/stars.js"></script>

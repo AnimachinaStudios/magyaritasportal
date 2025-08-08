@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Magyarosításaink – Animachina Stúdió</title>
+  <title>Animachina Stúdió – Magyarosításaink </title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="icon" type="image/png" href="images/icon.jpg">
@@ -181,6 +181,26 @@
         </a>
       </div>
     </footer>
+
+    <audio id="bg-sound" src="images/ch1.mp3" preload="auto" loop autoplay></audio>
+
+<script>
+
+audioElement.play();
+
+  const sound = document.getElementById("bg-sound");
+
+  function enableSound() {
+    sound.volume = 0.3; // halkítva indítjuk, módosítható
+    sound.play().catch(e => {
+      console.warn("A hang nem indult el automatikusan:", e);
+    });
+    document.removeEventListener("click", enableSound);
+  }
+
+  // Első kattintás után indul a hang
+  document.addEventListener("click", enableSound);
+</script>
 
     <script src="scripts/script.js"></script>
     <script src="scripts/stars.js"></script>

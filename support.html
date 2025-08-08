@@ -154,9 +154,12 @@ setInterval(() => {
 }, 100);
 </script>
 
-<audio id="bg-sound" src="images/sound.wav" preload="auto" loop></audio>
+<audio id="bg-sound" src="images/sound.wav" preload="auto" loop autoplay></audio>
 
 <script>
+
+audioElement.play();
+
   const sound = document.getElementById("bg-sound");
 
   function enableSound() {
