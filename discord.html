@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/discord.css">
+    <title>Animachina Stúdió - Discord</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="images/icon.jpg" type="image/x-icon">
+</head>
+<body>
+
+     <div class="background-wrapper">
+        <div class="background-image"></div>
+        <canvas id="smokeCanvas"></canvas>
+    </div>
+
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 200px; height: 200px; top: 10%; left: 5%;"></div>
+        <div class="floating-element" style="width: 150px; height: 150px; bottom: 15%; right: 10%;"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; top: 60%; left: 20%;"></div>
+    </div>
+    
+    <div class="discord-card pulse">
+        <div class="server-banner" id="serverBanner">
+            <div class="server-icon" id="serverIcon">
+                <img src="" alt="Server Icon" id="serverIconImg">
+            </div>
+        </div>
+        
+        <div class="server-info">
+            <h1 class="server-name glitch-effect" id="serverName" data-text="Betöltés...">Betöltés...</h1>
+            <p class="server-description" id="serverDescription">A szerver adatai betöltődnek...</p>
+            
+            <div class="server-stats">
+                <div class="stat">
+                    <i class="fas fa-users"></i>
+                    <span id="memberCount">-</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <span id="onlineCount">-</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-bolt"></i>
+                    <span id="boostCount">-</span>
+                </div>
+            </div>
+            
+            <a href="https://discord.gg/b3DNs98Dnz" class="join-button" id="joinButton">
+                <i class="fas fa-door-open"></i> Csatlakozás
+            </a>
+            
+            <div class="members-online">
+                <div class="members-title">Online tagok</div>
+                <div class="member-list" id="memberList">
+                    <!-- Tagok dinamikusan betöltődnek -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Discord API hívás a szerver adatokért
+            const INVITE_CODE = 'b3DNs98Dnz'; // A meghívó kódod
+            const SERVER_ID = '1056292985140154398'; // A szerver ID-d (opcionális, de segít)
+            
+            // Discord API végpontok
+            const INVITE_API = `https://discord.com/api/v9/invites/${INVITE_CODE}?with_counts=true&with_expiration=true`;
+            const SERVER_API = SERVER_ID ? `https://discord.com/api/v9/guilds/${SERVER_ID}/preview` : null;
+            
+            // Elemek kiválasztása
+            const serverName = document.getElementById('serverName');
+            const serverDescription = document.getElementById('serverDescription');
+            const serverBanner = document.getElementById('serverBanner');
+            const serverIconImg = document.getElementById('serverIconImg');
+            const memberCount = document.getElementById('memberCount');
+            const onlineCount = document.getElementById('onlineCount');
+            const boostCount = document.getElementById('boostCount');
+            const memberList = document.getElementById('memberList');
+            const joinButton = document.getElementById('joinButton');
+            
+            // Szerver adatok lekérése
+            // Szerver adatok lekérése - módosított változat
+            async function fetchServerData() {
+                try {
+                    // 1. Lekérjük a meghívó adatait (még mindig működik)
+                    const inviteResponse = await fetch(INVITE_API);
+                    const inviteData = await inviteResponse.json();
+                    
+                    // 2. Widget API használata preview adatokhoz
+                    const WIDGET_API = `https://discord.com/api/guilds/${SERVER_ID}/widget.json`;
+                    let widgetData = null;
+                    
+                    try {
+                        const widgetResponse = await fetch(WIDGET_API);
+                        if (widgetResponse.ok) {
+                            widgetData = await widgetResponse.json();
+                        }
+                    } catch (widgetError) {
+                        console.log('Widget API nem elérhető, csak alapadatok használata');
+                    }
+                    
+                    // 3. Frissítjük az UI-t
+                    updateUI(inviteData, widgetData);
+                } catch (error) {
+                    console.error('Hiba a Discord API hívás során:', error);
+                    fallbackUI();
+                }
+            }
+
+            // Alternatív megoldás proxy szerverrel
+            const PROXY_API = `https://your-proxy-server.com/discord/${SERVER_ID}`;
+
+            async function fetchViaProxy() {
+                try {
+                    const response = await fetch(PROXY_API);
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('Proxy hiba:', error);
+                    return null;
+                }
+            }
+            
+            // UI frissítése
+            function updateUI(inviteData, widgetData) {
+                // Alapadatok
+                serverName.textContent = inviteData.guild.name;
+                serverName.setAttribute('data-text', inviteData.guild.name);
+                
+                // Tag számok
+                memberCount.textContent = inviteData.approximate_member_count?.toLocaleString() || 'Ismeretlen';
+                onlineCount.textContent = inviteData.approximate_presence_count?.toLocaleString() || 'Ismeretlen';
+                boostCount.textContent = inviteData.guild.premium_subscription_count?.toLocaleString() || '0';
+                
+                // Leírás
+                serverDescription.textContent = inviteData?.description || 'Animachina Stúdió Official Discord Szervere!';
+                
+                // Ikon
+                if (inviteData.guild.icon) {
+                    const iconUrl = `https://cdn.discordapp.com/icons/${inviteData.guild.id}/${inviteData.guild.icon}.${inviteData.guild.icon.startsWith('a_') ? 'gif' : 'png'}?size=256`;
+                    serverIconImg.src = iconUrl;
+                }
+                
+                // Banner (ha van)
+                if (inviteData.guild.banner) {
+                    const bannerUrl = `https://cdn.discordapp.com/banners/${inviteData.guild.id}/${inviteData.guild.banner}.${inviteData.guild.banner.startsWith('a_') ? 'gif' : 'png'}?size=600`;
+                    serverBanner.style.backgroundImage = `linear-gradient(45deg, #2b0000, #8b0000), url('${bannerUrl}')`;
+                }
+                
+                // Online tagok (widget API-ból)
+                memberList.innerHTML = '';
+                
+                if (widgetData?.members?.length > 0) {
+                    // Csak az első 5 tagot mutatjuk
+                    widgetData.members.slice(0, 5).forEach(member => {
+                        const memberElement = document.createElement('div');
+                        memberElement.className = 'member';
+                        memberElement.innerHTML = `
+                            <img src="${member.avatar_url}" class="member-avatar" alt="Member">
+                            <span>${member.username}</span>
+                        `;
+                        memberList.appendChild(memberElement);
+                    });
+                    
+                    // Ha nincs elég tag, kiegészítjük placeholderrel
+                    if (widgetData.members.length < 5) {
+                        const placeholders = 5 - widgetData.members.length;
+                        for (let i = 0; i < placeholders; i++) {
+                            const memberElement = document.createElement('div');
+                            memberElement.className = 'member';
+                            memberElement.innerHTML = `
+                                <img src="https://cdn.discordapp.com/embed/avatars/${i % 5}.png" class="member-avatar" alt="Member">
+                                <span>Tag${i+1}</span>
+                            `;
+                            memberList.appendChild(memberElement);
+                        }
+                    }
+                } else {
+                    // Ha nincsenek tagadatok, alapértelmezett tagok
+                    const defaultMembers = [
+                        { name: 'Nocturna', avatar: 'https://i.imgur.com/3QZJX7y.png' },
+                        { name: 'Raven', avatar: 'https://i.imgur.com/5X6JX7y.png' },
+                        { name: 'Spectre', avatar: 'https://i.imgur.com/7X8JX7y.png' },
+                        { name: 'Void', avatar: 'https://i.imgur.com/9X0JX7y.png' },
+                        { name: 'Morticia', avatar: 'https://i.imgur.com/1X2JX7y.png' }
+                    ];
+                    
+                    defaultMembers.forEach(member => {
+                        const memberElement = document.createElement('div');
+                        memberElement.className = 'member';
+                        memberElement.innerHTML = `
+                            <img src="${member.avatar}" class="member-avatar" alt="Member">
+                            <span>${member.name}</span>
+                        `;
+                        memberList.appendChild(memberElement);
+                    });
+                }
+            }
+            
+            // Fallback UI ha valami hiba történik
+            // Továbbfejlesztett hibakezelés
+            function fallbackUI() {
+                console.log('Fallback UI használata');
+                serverName.textContent = 'Animachina Stúdió';
+                serverName.setAttribute('data-text', 'Animachina Stúdió');
+                serverDescription.textContent = 'Hivatalos Discord szerverünk. Csatlakozz és légy részese a közösségnek!';
+                
+                // Statisztikák
+                memberCount.textContent = '100+';
+                onlineCount.textContent = '20+';
+                boostCount.textContent = '5+';
+                
+                // Ikon
+                serverIconImg.src = 'https://i.imgur.com/JX6p7FD.png';
+                
+                // Alapértelmezett tagok
+                const defaultMembers = [
+                    { name: 'Nocturna', avatar: 'https://i.imgur.com/3QZJX7y.png' },
+                    { name: 'Raven', avatar: 'https://i.imgur.com/5X6JX7y.png' },
+                    { name: 'Spectre', avatar: 'https://i.imgur.com/7X8JX7y.png' },
+                    { name: 'Void', avatar: 'https://i.imgur.com/9X0JX7y.png' },
+                    { name: 'Morticia', avatar: 'https://i.imgur.com/1X2JX7y.png' }
+                ];
+                
+                memberList.innerHTML = '';
+                defaultMembers.forEach(member => {
+                    const memberElement = document.createElement('div');
+                    memberElement.className = 'member';
+                    memberElement.innerHTML = `
+                        <img src="${member.avatar}" class="member-avatar" alt="Member">
+                        <span>${member.name}</span>
+                    `;
+                    memberList.appendChild(memberElement);
+                });
+            }
+            
+            // Csatlakozás gomb animáció
+            joinButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                joinButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Csatlakozás...';
+                joinButton.style.backgroundColor = '#5a0000';
+                
+                setTimeout(function() {
+                    window.location.href = `https://discord.gg/${INVITE_CODE}`;
+                }, 1500);
+            });
+            
+            // Véletlenszerű glitch effekt a címhez
+            const glitchTitle = document.querySelector('.glitch-effect');
+            
+            setInterval(function() {
+                if(Math.random() > 0.7) {
+                    glitchTitle.classList.add('glitch-active');
+                    setTimeout(function() {
+                        glitchTitle.classList.remove('glitch-active');
+                    }, 200);
+                }
+            }, 3000);
+            
+            // Lebegő elemek animációja
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach(el => {
+                const duration = 20 + Math.random() * 40;
+                const delay = Math.random() * 10;
+                const xMovement = (Math.random() - 0.5) * 100;
+                const yMovement = (Math.random() - 0.5) * 100;
+                
+                el.style.animation = `float ${duration}s ease-in-out ${delay}s infinite alternate`;
+                el.style.setProperty('--x-movement', `${xMovement}px`);
+                el.style.setProperty('--y-movement', `${yMovement}px`);
+            });
+            
+            // CSS animáció hozzáadása dinamikusan
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0);
+                    }
+                    100% {
+                        transform: translate(var(--x-movement), var(--y-movement));
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Szerver adatok betöltése
+            fetchServerData();
+        });
+    </script>
+
+<audio id="bg-sound" src="images/ch3.mp3" preload="auto" loop autoplay></audio>
+
+<script>
+
+  const sound = document.getElementById("bg-sound");
+
+  function enableSound() {
+    sound.volume = 0.2; // halkítva indítjuk, módosítható
+    sound.play().catch(e => {
+      console.warn("A hang nem indult el automatikusan:", e);
+    });
+    document.removeEventListener("click", enableSound);
+  }
+
+  // Első kattintás után indul a hang
+  document.addEventListener("click", enableSound);
+</script>
+
+<script>
+const canvas = document.getElementById('smokeCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: canvas.height + 100,
+    radius: 100 + Math.random() * 100,
+    speedY: 0.5 + Math.random() * 1,
+    alpha: 0.1 + Math.random() * 0.2
+  };
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.y -= p.speedY;
+    ctx.beginPath();
+    let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+    gradient.addColorStop(0, `rgba(255, 0, 0, ${p.alpha})`);
+    gradient.addColorStop(1, `rgba(255, 0, 0, 0)`);
+    ctx.fillStyle = gradient;
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Remove if out of screen
+    if (p.y + p.radius < 0) {
+      particles.splice(i, 1);
+    }
+  });
+
+  while (particles.length < 30) {
+    particles.push(createParticle());
+  }
+
+  requestAnimationFrame(drawParticles);
+}
+
+drawParticles();
+</script>
+
+</body>
+</html>

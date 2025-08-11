@@ -58,7 +58,7 @@
             <i class="fas fa-question"></i> Kondix </a>
         </li>
         <li>
-          <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
+          <a href="discord.html">
             <i class="fab fa-discord"></i> Discord </a>
         </li>
         <li>
@@ -73,7 +73,8 @@
     </nav>
 
   <section class="team-section with-mommy">
-    <h2>Ismerd meg a csapatot</h2>
+    <h2 class="desktop-team-title">Ismerd meg a csapatot</h2>
+    <h2 class="mobile-team-title">A Csapatunk</h2>
     <img src="images/mommyhugg.png" alt="Mommy Long Legs" class="mommy-hugg" draggable="false">
     
     <div class="horizontal-team">
@@ -253,8 +254,6 @@
 
 <script>
 
-audioElement.play();
-
   const sound = document.getElementById("bg-sound");
 
   function enableSound() {
@@ -267,6 +266,23 @@ audioElement.play();
 
   // Első kattintás után indul a hang
   document.addEventListener("click", enableSound);
+</script>
+
+<script>
+
+// Smooth horizontal scrolling for team section on mobile
+if (window.innerWidth <= 768) {
+  const teamContainer = document.querySelector('.horizontal-team');
+  if (teamContainer) {
+    teamContainer.addEventListener('wheel', (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        teamContainer.scrollLeft += e.deltaY;
+      }
+    });
+  }
+}
+
 </script>
 
     <script src="scripts/script.js"></script>

@@ -1112,3 +1112,104 @@ footer p {
   border: 2px solid #ff0066 !important;
   box-shadow: 0 0 10px #ff0066;
 }
+
+/* ===== MOBILE TEAM SECTION ===== */
+@media screen and (max-width: 768px) {
+
+  nav {
+    z-index: 999;
+  }
+
+  .team-section.with-mommy {
+    padding: 60px 15px;
+    background: linear-gradient(135deg, #1a001a, #000);
+  }
+  
+  .team-section.with-mommy h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .horizontal-team {
+    flex-direction: column;
+    overflow-x: visible;
+    gap: 15px;
+    padding-bottom: 0;
+  }
+  
+  .tree-branches {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .team-subgroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .team-card {
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #250025, #120012);
+    border: 1px solid #ff0066;
+  }
+  
+  .mommy-hugg {
+    display: none; /* Hide Mommy on mobile */
+  }
+  
+  /* Stacked layout for team members */
+  .horizontal-team > .kondix-card {
+    order: 1;
+    margin-bottom: 30px;
+  }
+  
+  .tree-branches {
+    order: 2;
+  }
+  
+  /* Compact card styles */
+  .team-card {
+    padding: 15px;
+  }
+  
+  .team-card img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .team-card h3 {
+    font-size: 16px;
+  }
+  
+  .team-card p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  /* Special mobile-only title */
+  .mobile-team-title {
+    display: block;
+    color: #ff66ff;
+    font-size: 1.5rem;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .desktop-team-title {
+    display: none;
+  }
+}
+
+/* ===== DESKTOP TEAM SECTION ===== */
+@media screen and (min-width: 769px) {
+  .mobile-team-title {
+    display: none;
+  }
+  
+  .desktop-team-title {
+    display: block;
+  }
+}
