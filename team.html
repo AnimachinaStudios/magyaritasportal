@@ -16,12 +16,36 @@
     <canvas id="star-canvas"></canvas>
     <canvas id="shooting-stars"></canvas>
 
+    <div class="preloader" id="preloader">
+    <div class="harley-video-container">
+        <video class="harley-eyes-video" muted playsinline>
+            <source src="images/sawyer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
+    </div>
+</div>
+
     <div class="background-wrapper">
       <div class="background-image2"></div>
+      <!-- Spider web elements added here -->
+      <div class="spider-web web-1"></div>
+      <div class="spider-web web-2"></div>
+      <div class="spider-web web-3"></div>
+      <div class="spider-web web-4"></div>
+      <div class="spider-web web-5"></div>
+      <div class="spider" id="spider-1"></div>
+      <div class="spider" id="spider-2"></div>
     </div>
 
     <header class="video-header">
-      <video autoplay muted loop playsinline class="background-video">
+      <video autoplay muted loop playsinline class="background-video" id="bg-video">
         <source src="videos/bg.mp4" type="video/mp4">
         A böngésződ nem támogatja a videólejátszást.
       </video>
@@ -30,6 +54,7 @@
       </div>
     </header>
 
+    <!-- Rest of your HTML remains the same -->
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span>
       <span></span>
@@ -283,11 +308,50 @@ if (window.innerWidth <= 768) {
   }
 }
 
+// Spider animation
+function animateSpiders() {
+  const spider1 = document.getElementById('spider-1');
+  const spider2 = document.getElementById('spider-2');
+  
+  // Random starting positions
+  spider1.style.left = `${Math.random() * 80 + 10}%`;
+  spider1.style.top = `${Math.random() * 30 + 10}%`;
+  
+  spider2.style.left = `${Math.random() * 80 + 10}%`;
+  spider2.style.top = `${Math.random() * 30 + 50}%`;
+  
+  // Animate spider 1
+  let pos1 = parseInt(spider1.style.top);
+  let direction1 = 1;
+  
+  // Animate spider 2
+  let pos2 = parseInt(spider2.style.left);
+  let direction2 = 1;
+  
+  setInterval(() => {
+    // Spider 1 moves up and down
+    pos1 += direction1;
+    spider1.style.top = `${pos1}%`;
+    
+    if (pos1 > 30 || pos1 < 10) {
+      direction1 *= -1;
+    }
+    
+    // Spider 2 moves left and right
+    pos2 += direction2;
+    spider2.style.left = `${pos2}%`;
+    
+    if (pos2 > 80 || pos2 < 10) {
+      direction2 *= -1;
+    }
+  }, 100);
+}
+
+window.onload = animateSpiders;
+
 </script>
 
     <script src="scripts/script.js"></script>
-    <script src="scripts/stars.js"></script>
-    <script src="scripts/shooting-stars.js"></script>
-
+    <script src="scripts/preloader.js"></script>
 </body>
 </html>

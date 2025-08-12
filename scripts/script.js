@@ -128,3 +128,19 @@ function closeOnOutsideClick(event) {
     
     hideDetails();
 }
+
+const video = document.getElementById('bg-video');
+
+// Teljesen tiltjuk a jobb klikk menüt
+video.addEventListener('contextmenu', e => e.preventDefault());
+
+// Megakadályozzuk, hogy a videó megálljon (pl. billentyűzet vagy kattintás miatt)
+video.addEventListener('pause', () => video.play());
+
+// Biztosítjuk, hogy ne lehessen teljes képernyőre tenni
+video.addEventListener('webkitfullscreenchange', () => {
+    if (document.webkitFullscreenElement) document.webkitExitFullscreen();
+});
+video.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+});

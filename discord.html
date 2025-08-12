@@ -10,6 +10,24 @@
 </head>
 <body>
 
+    <div class="preloader" id="preloader">
+    <div class="harley-video-container">
+        <video class="harley-eyes-video" muted playsinline>
+            <source src="images/sawyer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
+    </div>
+</div>
+
+
+
      <div class="background-wrapper">
         <div class="background-image"></div>
         <canvas id="smokeCanvas"></canvas>
@@ -363,5 +381,6 @@ function drawParticles() {
 drawParticles();
 </script>
 
+    <script src="scripts/preloader.js"></script>
 </body>
 </html>

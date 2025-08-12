@@ -3,25 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Animachina Stúdió – Magyarosításaink </title>
+  <title>Animachina Stúdió – Magyarosításaink</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="icon" type="image/png" href="images/icon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Truculenta', sans-serif;
+    }
+    
+    .background-image3 {
+      filter: brightness(0.3) contrast(1.5) hue-rotate(330deg);
+      background-blend-mode: hard-light;
+    }
+    
+    .title h2 {
+      color: #ff3333;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+      font-family: 'Savate', sans-serif;
+      letter-spacing: 2px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .title h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff3333, transparent);
+    }
+    
+    hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ff3333, transparent);
+      margin: 40px auto;
+    }
+    
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #ff3333;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+      border-color: #ff6666;
+    }
+    
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff3333, #8b0000, #ff3333);
+    }
+    
+    .card img {
+      filter: brightness(0.8) contrast(1.2);
+      transition: filter 0.3s ease;
+    }
+    
+    .card:hover img {
+      filter: brightness(1) contrast(1.3) hue-rotate(-5deg);
+    }
+    
+    .card h2 {
+      color: #ff6666;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+    
+    .card p {
+      color: #b0b0b0;
+    }
+    
+    .card button {
+      background: linear-gradient(90deg, #8b0000, #ff3333);
+      border: none;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    
+    .card button:hover {
+      background: linear-gradient(90deg, #ff3333, #ff6666);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    
+    footer {
+      background: linear-gradient(90deg, #1a0000, #330000, #1a0000);
+      border-top: 1px solid #ff3333;
+    }
+    
+    /* Blood drips effect */
+    .blood-drip {
+      position: fixed;
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(255,0,0,0.8), transparent);
+      z-index: -1;
+      animation: drip 8s infinite;
+      opacity: 0.6;
+    }
+    
+    @keyframes drip {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    
+    /* Creepy eyes in the background */
+    .creepy-eye {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #ff0000 0%, #8b0000 70%, transparent 71%);
+      border-radius: 50%;
+      z-index: -2;
+      opacity: 0;
+      animation: blink 15s infinite;
+      box-shadow: 0 0 10px #ff0000;
+    }
+    
+    @keyframes blink {
+      0%, 96%, 100% { opacity: 0; }
+      97%, 98% { opacity: 0.3; }
+      99% { opacity: 0.1; }
+    }
+    
+    /* Detail card horror style */
+    #detail-card {
+      background: rgba(20, 0, 0, 0.9);
+      border: 1px solid #ff3333;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    }
+    
+    #detail-card h2 {
+      color: #ff6666;
+    }
+    
+    .close-btn:hover {
+      color: #ff3333;
+      text-shadow: 0 0 5px #ff0000;
+    }
+    
+    /* Glitch effect on hover */
+    .card:hover h2 {
+      animation: glitch 0.5s linear infinite;
+    }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    
+    /* Distorted video effect */
+    .video-wrapper {
+      position: relative;
+    }
+    
+    .video-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.05 0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>');
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+  </style>
 </head>
 <body>
 
     <canvas id="star-canvas"></canvas>
     <canvas id="shooting-stars"></canvas>
 
+      <div class="preloader" id="preloader">
+    <div class="harley-video-container">
+        <video class="harley-eyes-video" muted playsinline>
+            <source src="images/sawyer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
+    </div>
+</div>
+
+    <!-- Blood drips -->
+    <div class="blood-drip" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="blood-drip" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="blood-drip" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="blood-drip" style="left: 70%; animation-delay: 1s;"></div>
+    <div class="blood-drip" style="left: 80%; animation-delay: 3s;"></div>
+    <div class="blood-drip" style="left: 90%; animation-delay: 5s;"></div>
+    
+    <!-- Creepy eyes -->
+    <div class="creepy-eye" style="top: 15%; left: 15%; animation-delay: 2s;"></div>
+    <div class="creepy-eye" style="top: 25%; left: 85%; animation-delay: 5s;"></div>
+    <div class="creepy-eye" style="top: 75%; left: 25%; animation-delay: 8s;"></div>
+    <div class="creepy-eye" style="top: 85%; left: 75%; animation-delay: 11s;"></div>
+
     <div class="background-wrapper">
       <div class="background-image3"></div>
     </div>
 
     <header class="video-header">
-      <video autoplay muted loop playsinline class="background-video">
+      <video autoplay muted loop playsinline class="background-video" id="bg-video">
         <source src="videos/bg.mp4" type="video/mp4">
         A böngésződ nem támogatja a videólejátszást.
       </video>
@@ -156,13 +371,10 @@
 
     <p id="detail-description"></p>
     <a id="download-link" href="#" download>Letöltés</a>
-    </div>
-
-
-  
+    </div>  
 
   <footer>
-      <p>© 2025 Animachina Studios - Minden jog fenntartva.</p>
+      <p>© 2025 Animachina Stúdió - Minden jog fenntartva.</p>
       <div class="footer-links">
         <a href="https://www.tiktok.com/@animachina_studios" target="_blank">
           <i class="fab fa-tiktok"></i>
@@ -200,11 +412,35 @@ audioElement.play();
 
   // Első kattintás után indul a hang
   document.addEventListener("click", enableSound);
+  
+  // Create additional blood drips dynamically
+  document.addEventListener('DOMContentLoaded', function() {
+    for (let i = 0; i < 5; i++) {
+      const drip = document.createElement('div');
+      drip.className = 'blood-drip';
+      drip.style.left = Math.random() * 100 + '%';
+      drip.style.animationDelay = Math.random() * 6 + 's';
+      drip.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      drip.style.height = (Math.random() * 100 + 50) + 'px';
+      drip.style.opacity = Math.random() * 0.4 + 0.3;
+      document.body.appendChild(drip);
+    }
+    
+    // Create additional creepy eyes
+    for (let i = 0; i < 3; i++) {
+      const eye = document.createElement('div');
+      eye.className = 'creepy-eye';
+      eye.style.top = Math.random() * 100 + '%';
+      eye.style.left = Math.random() * 100 + '%';
+      eye.style.animationDelay = (Math.random() * 15) + 's';
+      eye.style.width = (Math.random() * 20 + 15) + 'px';
+      eye.style.height = eye.style.width;
+      document.body.appendChild(eye);
+    }
+  });
 </script>
 
     <script src="scripts/script.js"></script>
-    <script src="scripts/stars.js"></script>
-    <script src="scripts/shooting-stars.js"></script>
-    
+    <script src="scripts/preloader.js"></script>
 </body>
 </html>

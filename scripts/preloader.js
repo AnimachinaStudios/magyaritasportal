@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Forced minimum display time (5 seconds)
     const startTime = Date.now();
-    const minDisplayTime = 5000;
+    const minDisplayTime = 1500;
     
     // Loading simulation
     let progress = 0;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const elapsed = Date.now() - startTime;
         const loadProgress = Math.min((elapsed / minDisplayTime) * 100, 100);
         
-        progress = Math.min(progress + 2, loadProgress); // Smooth progress
+        progress = Math.min(progress + 5, loadProgress); // Smooth progress
         progressBar.style.width = `${progress}%`;
         percentDisplay.textContent = Math.floor(progress);
         
