@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animachina Stúdió - Hidden Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: #000;
+        }
+        
+        #fullscreen-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+        }
+        
+        #background {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            display: none;
+            animation: flicker 8s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                filter: brightness(1);
+            }
+            20% {
+                opacity: 0.8;
+                filter: brightness(0.6) sepia(0.5) hue-rotate(-10deg);
+            }
+            22% {
+                opacity: 0.6;
+                filter: brightness(0.8) sepia(0.3) hue-rotate(-5deg);
+            }
+            24% {
+                opacity: 0.4;
+                filter: brightness(0.4) sepia(0.7) hue-rotate(-15deg);
+            }
+            55% {
+                opacity: 0.7;
+                filter: brightness(0.7) sepia(0.4) hue-rotate(-8deg);
+            }
+        }
+        
+        #tv-container {
+            position: fixed;
+            width: 65%;
+            height: 65%;
+            top: 67%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        
+        #tv-screen {
+            position: fixed;
+            width: 17%;
+            height: 25%;
+            top: 40%;
+            left: 23%;
+            background-color: #000;
+            display: none;
+            overflow: hidden;
+            border-radius: 2px;
+            z-index: 30;
+        }
+        
+        #tv-model {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        #video-container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #vhs-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('vhs-effect.gif') center/cover;
+            display: none;
+            pointer-events: none;
+            z-index: 35;
+        }
+        
+        /* Távirányító stílusok */
+        #remote-control {
+            position: absolute;
+            width: 250px;
+            height: 350px;
+            bottom: 60px;
+            left: 400px;
+            background: #222;
+            border: 1px solid #444;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .remote-section {
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .remote-title {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        #power-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff4444;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .channel-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #555;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .channel-btn:hover, #power-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .channel-row {
+            display: flex;
+            justify-content: center;
+        }
+        
+        #radio-btn {
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            background: #444;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .light-flicker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            animation: lightFlicker 15s infinite;
+        }
+
+        @keyframes lightFlicker {
+            0%, 5%, 7%, 9%, 11%, 45%, 47%, 70%, 72%, 74%, 76%, 100% {
+                opacity: 0;
+            }
+            6%, 8%, 10%, 46%, 71%, 73%, 75% {
+                opacity: 0.1;
+            }
+        }
+        
+        #audio-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: white;
+            font-size: 12px;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: none;
+            z-index: 4;
+        }
+
+        /* Új stílus mobil üzenethez */
+        #mobile-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 200;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* ===== Horror Countdown Bar ===== */
+        #countdown-bar{
+        position:fixed;
+        top:0; left:0; width:100%;
+        z-index:9999;
+        pointer-events:none; /* ne zavarja a kattintásokat alatta */
+        background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 100%);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.8), inset 0 -2px 0 rgba(150,0,0,0.6);
+        backdrop-filter: blur(2px);
+        border-bottom: 1px solid rgba(120,0,0,0.5);
+        animation: cdw-flicker 8s infinite steps(60,end);
+        }
+        @keyframes cdw-flicker{
+        0%,97%,100%{filter:none; }
+        5%{filter:brightness(0.92);}
+        11%{filter:contrast(1.05) saturate(1.2);}
+        13%{filter:hue-rotate(-5deg) brightness(0.85);}
+        25%{filter:brightness(1);}
+        66%{filter:saturate(1.1);}
+        }
+
+        #countdown-bar .cdw-inner{
+        max-width:1200px; margin:0 auto;
+        display:flex; align-items:center; gap:18px;
+        padding:10px 16px 12px;
+        }
+
+        #countdown-bar .cdw-label{
+        font-family: "Impact", Arial, sans-serif;
+        letter-spacing: 2px;
+        color:#ff2d2d;
+        text-shadow: 0 0 10px rgba(255,0,0,0.5), 1px 1px 0 #000, -1px -1px 0 #000;
+        user-select:none;
+        pointer-events:none;
+        font-size:14px;
+        transform:skewX(-6deg);
+        animation: cdw-glitch 2.6s infinite;
+        }
+        @keyframes cdw-glitch{
+        0%,100%{text-shadow: 0 0 10px rgba(255,0,0,0.5), 1px 1px 0 #000;}
+        3%{text-shadow: -2px 0 #ff0000, 2px 0 #8a0000;}
+        4%{text-shadow: 2px 0 #ff5e5e, -2px 0 #5a0000;}
+        5%{text-shadow: 0 0 10px rgba(255,0,0,0.5), 1px 1px 0 #000;}
+        }
+
+        #countdown-bar .cdw-time{
+        margin-left:auto;
+        display:flex; align-items:stretch; gap:8px;
+        }
+
+        #countdown-bar .cdw-box{
+        pointer-events:none;
+        min-width:72px;
+        padding:6px 8px 4px;
+        background: radial-gradient(120% 120% at 30% 20%, rgba(60,0,0,0.9) 0%, rgba(20,0,0,0.9) 60%, rgba(0,0,0,0.95) 100%);
+        border:1px solid rgba(180,0,0,0.6);
+        border-radius:10px;
+        box-shadow: inset 0 0 12px rgba(255,0,0,0.25), 0 2px 12px rgba(0,0,0,0.8);
+        text-align:center;
+        position:relative;
+        }
+
+        #countdown-bar .cdw-box span{
+        display:block;
+        font-family: "Digital-7", "OCR A Std", monospace;
+        font-variant-numeric: tabular-nums;
+        font-size:22px;
+        line-height:1;
+        color:#ff3b3b;
+        text-shadow: 0 0 12px rgba(255,40,40,0.55), 0 0 2px #ff0000;
+        }
+
+        #countdown-bar .cdw-box small{
+        display:block;
+        margin-top:2px;
+        font-size:10px;
+        color:#caa; letter-spacing:0.5px;
+        text-transform:uppercase;
+        text-shadow: 0 1px 0 #000;
+        }
+
+        #countdown-bar .cdw-sep{
+        align-self:center;
+        font-size:20px; line-height:1;
+        color:#a00;
+        text-shadow: 0 0 8px rgba(255,0,0,0.4);
+        margin:0 2px;
+        transform: translateY(-1px);
+        }
+
+        /* vércseppek */
+        #countdown-bar .cdw-drip{
+        position:absolute;
+        top:100%;
+        width:6px; height:0;
+        background: linear-gradient(#a00,#600);
+        border-radius:3px;
+        box-shadow: 0 0 8px rgba(150,0,0,0.6);
+        animation: cdw-drip 6s infinite ease-in;
+        opacity:.85;
+        }
+        #countdown-bar .cdw-drip::after{
+        content:"";
+        position:absolute; bottom:-6px; left:-2px;
+        width:10px; height:10px; border-radius:50%;
+        background: radial-gradient(circle at 40% 40%, #ff3b3b 0%, #a00 60%, #600 100%);
+        }
+        #countdown-bar .d1{ left:8%; animation-delay:0.6s;}
+        #countdown-bar .d2{ left:52%; animation-delay:2.2s;}
+        #countdown-bar .d3{ left:86%; animation-delay:3.5s;}
+        @keyframes cdw-drip{
+        0%{height:0; opacity:0;}
+        10%{height:8px; opacity:.9;}
+        40%{height:22px;}
+        70%{height:34px;}
+        100%{height:0; opacity:0;}
+        }
+
+        /* kisebb képernyők */
+        @media (max-width: 640px){
+        #countdown-bar .cdw-box{ min-width:56px; padding:5px 6px 3px;}
+        #countdown-bar .cdw-box span{ font-size:18px;}
+        #countdown-bar .cdw-label{ display:none; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HORROR COUNTDOWN BAR -->
+    <div id="countdown-bar" aria-live="polite">
+    <div class="cdw-inner">
+        <span class="cdw-label">VÉGZETIG HÁTRA</span>
+        <div class="cdw-time">
+        <div class="cdw-box"><span id="cdw-days">07</span><small>Napok</small></div>
+        <div class="cdw-sep">:</div>
+        <div class="cdw-box"><span id="cdw-hours">00</span><small>Órák</small></div>
+        <div class="cdw-sep">:</div>
+        <div class="cdw-box"><span id="cdw-mins">00</span><small>Percek</small></div>
+        <div class="cdw-sep">:</div>
+        <div class="cdw-box"><span id="cdw-secs">00</span><small>Másodpercek</small></div>
+        </div>
+    </div>
+    <!-- vércsöpögés dísz -->
+    <div class="cdw-drip d1"></div>
+    <div class="cdw-drip d2"></div>
+    <div class="cdw-drip d3"></div>
+    </div>
+
+
+        <!-- Mobil üzenet -->
+    <div id="mobile-message">
+        <h1>Ez az alkalmazás nem támogatott mobil eszközön!</h1>
+        <p>Kérjük, számítógépen vagy laptopon nyissa meg az oldalt.</p>
+    </div>
+
+    <div id="fullscreen-message">
+        <h1>Kérjük, kapcsoljon át teljes képernyős módra!</h1>
+        <p>Az alkalmazás csak teljes képernyős módban működik.</p>
+        <button id="fullscreen-btn" style="padding: 10px 20px; font-size: 16px; margin-top: 20px;">Teljes képernyő</button>
+    </div>
+    
+    <div id="background">
+        <!-- 3D TV modell -->
+        <div id="tv-container">
+            <div id="tv-screen">
+                <div id="vhs-effect"></div>
+                <div id="video-container">
+                    <video id="video-player" loop></video>
+                </div>
+            </div>
+            <img id="tv-model" src="tv.png" alt="3D TV modell">
+        </div>
+        
+        <!-- Távirányító -->
+        <div id="remote-control">
+            <div class="remote-section">
+                <div class="remote-title">TÁVÍRÁNYÍTÓ</div>
+                <button id="power-btn">BE/KI</button>
+            </div>
+            
+            <div class="remote-section">
+                <div class="remote-title">CSATORNÁK</div>
+                <div class="channel-row">
+                    <button class="channel-btn" data-channel="1">1</button>
+                    <button class="channel-btn" data-channel="2">2</button>
+                </div>
+                <div class="channel-row">
+                    <button class="channel-btn" data-channel="3">3</button>
+                    <button class="channel-btn" data-channel="4">4</button>
+                </div>
+            </div>
+            
+            <div class="remote-section">
+                <button id="radio-btn">RÁDIÓ</button>
+                <div style="display: flex; align-items: center; margin-top: 10px;">
+                    <span style="color: white; margin-right: 10px;">Hangerő:</span>
+                    <input type="range" id="radio-volume" min="0" max="1" step="0.1" value="0.3">
+                </div>
+            </div>
+        </div>
+        
+        <div id="audio-indicator">Hang: be</div>
+    </div>
+
+    <script>
+
+        // Hangerő szabályzó kezelése
+        document.getElementById('radio-volume').addEventListener('input', function() {
+            if (radioAudio) {
+                radioAudio.volume = this.value;
+            }
+            // Elmentjük az új hangerő értékét
+            RADIO_VOLUME = parseFloat(this.value);
+        });
+
+        // Mobil eszköz ellenőrzése
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+
+        // Ha mobil eszköz, megjelenítjük az üzenetet és nem engedjük tovább
+        if (isMobileDevice()) {
+            document.getElementById('mobile-message').style.display = 'flex';
+            document.getElementById('fullscreen-message').style.display = 'none';
+            document.getElementById('background').style.display = 'none';
+        }
+
+        // Fullscreen kezelés
+        document.getElementById('fullscreen-btn').addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Hiba a teljes képernyős módban: ${err.message}`);
+                });
+            }
+        });
+
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                document.getElementById('fullscreen-message').style.display = 'none';
+                document.getElementById('background').style.display = 'block';
+            } else {
+                document.getElementById('fullscreen-message').style.display = 'flex';
+                document.getElementById('background').style.display = 'none';
+            }
+        });
+
+        // Videók a csatornákon - videos mappából
+        const channels = {
+            1: {video: 'videos/channel1.mp4'},
+            2: {video: 'videos/channel2.mp4'},
+            3: {video: 'videos/channel3.mp4'},
+            4: {video: 'videos/channel4.mp4'}
+        };
+
+        // Rádió hangstream
+        const radioStream = 'videos/radio.mp3';
+
+        // Videó player változók
+        const videoPlayer = document.getElementById('video-player');
+        let radioAudio = null;
+        
+        // TV állapot változók
+        let tvOn = false;
+        let currentChannel = 1;
+        let radioPlaying = false;
+
+        // Hang effektek
+        function playSound(type) {
+            try {
+                const sounds = {
+                    'vhs': {url: 'sounds/vhs.mp3'},
+                    'tv-on': {url: 'sounds/tv-on.mp3'},
+                    'tv-off': {url: 'sounds/tv-off.mp3'},
+                    'radio-static': {url: 'sounds/radio-static.mp3'}
+                };
+                
+                const audio = new Audio(sounds[type].url);
+                audio.volume = type === 'radio-static' ? 0.2 : 0.4;
+                if (type === 'radio-static' && radioPlaying) {
+                    audio.loop = true;
+                }
+                audio.play().catch(e => console.log("Hang lejátszási hiba:", e));
+                return audio;
+            } catch (e) {
+                console.log("Hang hiba:", e);
+                return null;
+            }
+        }
+
+        // TV be/kapcsolása
+        // TV be/kapcsolásnál rádió kikapcsolása
+        document.getElementById('power-btn').addEventListener('click', function() {
+            if (!document.fullscreenElement) return;
+            
+            const tvScreen = document.getElementById('tv-screen');
+            const vhsEffect = document.getElementById('vhs-effect');
+            const audioIndicator = document.getElementById('audio-indicator');
+            
+            tvOn = !tvOn;
+            
+            if (tvOn) {
+                // TV bekapcsolása
+                tvScreen.style.display = 'block';
+                vhsEffect.style.display = 'block';
+                playSound('tv-on');
+                
+                // Rádió kikapcsolása ha be van kapcsolva
+                if (radioPlaying) {
+                    toggleRadio();
+                }
+                
+                // VHS effektus 1 másodpercig
+                setTimeout(() => {
+                    vhsEffect.style.display = 'none';
+                    // Első csatorna betöltése
+                    loadChannel(currentChannel);
+                    audioIndicator.textContent = "Hang: be";
+                    audioIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        audioIndicator.style.display = 'none';
+                    }, 2000);
+                }, 1000);
+            } else {
+                // TV kikapcsolása
+                vhsEffect.style.display = 'block';
+                playSound('tv-off');
+                
+                setTimeout(() => {
+                    tvScreen.style.display = 'none';
+                    vhsEffect.style.display = 'none';
+                    videoPlayer.pause();
+                    videoPlayer.currentTime = 0;
+                    audioIndicator.textContent = "Hang: ki";
+                    audioIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        audioIndicator.style.display = 'none';
+                    }, 2000);
+                }, 800);
+            }
+        });
+
+        // Csatorna váltás
+        document.querySelectorAll('.channel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!tvOn || !document.fullscreenElement) return;
+                
+                const newChannel = parseInt(this.getAttribute('data-channel'));
+                if (newChannel !== currentChannel) {
+                    currentChannel = newChannel;
+                    changeChannel();
+                }
+            });
+        });
+
+        function loadChannel(channel) {
+            if (channels[channel] && channels[channel].video) {
+                videoPlayer.src = channels[channel].video;
+                videoPlayer.loop = true;
+                videoPlayer.play().catch(e => console.log("Videó lejátszási hiba:", e));
+            }
+        }
+
+        let vhsSound = null;
+
+        function changeChannel() {
+        const vhsEffect = document.getElementById('vhs-effect');
+        const audioIndicator = document.getElementById('audio-indicator');
+        
+        // VHS effektus mutatása és hang lejátszása
+        vhsEffect.style.display = 'block';
+        
+        // Előző VHS hang leállítása ha még megy
+        if (vhsSound) {
+            vhsSound.pause();
+            vhsSound.currentTime = 0;
+        }
+        
+        // Új VHS hang lejátszása
+        vhsSound = playSound('vhs');
+        
+        videoPlayer.pause();
+        
+        setTimeout(() => {
+            vhsEffect.style.display = 'none';
+            // Új csatorna betöltése
+            loadChannel(currentChannel);
+            audioIndicator.textContent = "Csatorna: " + currentChannel;
+            audioIndicator.style.display = 'block';
+            
+            // VHS hang leállítása 1 másodperc után
+            setTimeout(() => {
+                if (vhsSound) {
+                    vhsSound.pause();
+                    vhsSound.currentTime = 0;
+                }
+                audioIndicator.style.display = 'none';
+            }, 1000);
+            
+        }, 1000);
+    }
+
+        // Rádió kezelése
+        // A rádió zenék listája
+        // Rádió zenék listája - ellenőrizni kell, hogy a fájlok léteznek-e
+        const radioSongs = [
+            { name: 'music1.mp3', path: 'sounds/music1.mp3' },
+            { name: 'music2.mp3', path: 'sounds/music2.mp3' },
+            { name: 'music3.mp3', path: 'sounds/music3.mp3' }
+        ];
+        let currentRadioSongIndex = 0;
+
+        // Rádió kezelése
+        // Rádió kezelése - javított verzió hangerő beállítással
+        let radioStaticAudio = null;
+        const RADIO_VOLUME = 0.3; // 30%-os hangerő (0.3 az 30%, 0.5 az 50% stb.)
+
+        async function toggleRadio() {
+            const audioIndicator = document.getElementById('audio-indicator');
+            
+            radioPlaying = !radioPlaying;
+            
+            if (radioPlaying) {
+                // Rádió bekapcsolása
+                try {
+                    radioStaticAudio = playSound('radio-static');
+                    
+                    // Rádió stream indítása (véletlenszerű zene kiválasztása)
+                    currentRadioSongIndex = Math.floor(Math.random() * radioSongs.length);
+                    const songPath = radioSongs[currentRadioSongIndex].path;
+                    
+                    // Ellenőrizzük, hogy a fájl létezik-e
+                    const response = await fetch(songPath);
+                    if (!response.ok) {
+                        throw new Error('A zene fájl nem található');
+                    }
+                    
+                    radioAudio = new Audio(songPath);
+                    radioAudio.loop = true;
+                    radioAudio.volume = RADIO_VOLUME; // Itt állítjuk be a hangerőt
+                    
+                    // Várakozunk a metaadatok betöltésére
+                    await new Promise((resolve, reject) => {
+                        radioAudio.addEventListener('loadedmetadata', resolve);
+                        radioAudio.addEventListener('error', reject);
+                    });
+                    
+                    // Lejátszás indítása
+                    await radioAudio.play();
+                    
+                    audioIndicator.textContent = "Rádió: be (" + radioSongs[currentRadioSongIndex].name + ")";
+                    audioIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        audioIndicator.style.display = 'none';
+                    }, 1500);
+                } catch (error) {
+                    console.error("Rádió hiba:", error);
+                    radioPlaying = false;
+                    if (radioStaticAudio) {
+                        radioStaticAudio.pause();
+                        radioStaticAudio = null;
+                    }
+                    audioIndicator.textContent = "Hiba: " + (error.message || "Nem sikerült betölteni a zenét");
+                    audioIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        audioIndicator.style.display = 'none';
+                    }, 2000);
+                }
+            } else {
+                // Rádió kikapcsolása
+                if (radioStaticAudio) {
+                    radioStaticAudio.pause();
+                    radioStaticAudio = null;
+                }
+                
+                if (radioAudio) {
+                    radioAudio.pause();
+                    radioAudio.currentTime = 0;
+                }
+                
+                audioIndicator.textContent = "Rádió: ki";
+                audioIndicator.style.display = 'block';
+                
+                setTimeout(() => {
+                    audioIndicator.style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        // Zene váltás funkció hozzáadása
+        function changeRadioSong() {
+            if (!radioPlaying) return;
+            
+            if (radioAudio) {
+                radioAudio.pause();
+                radioAudio.currentTime = 0;
+            }
+            
+            currentRadioSongIndex = (currentRadioSongIndex + 1) % radioSongs.length;
+            radioAudio = new Audio(radioSongs[currentRadioSongIndex]);
+            radioAudio.loop = true;
+            radioAudio.play().catch(e => console.log("Rádió lejátszási hiba:", e));
+            
+            const audioIndicator = document.getElementById('audio-indicator');
+            audioIndicator.textContent = "Rádió: " + (currentRadioSongIndex + 1) + ". szám";
+            audioIndicator.style.display = 'block';
+            setTimeout(() => {
+                audioIndicator.style.display = 'none';
+            }, 1500);
+        }
+
+        // Rádió gomb eseménykezelő
+        // Rádió gomb eseménykezelő
+        document.getElementById('radio-btn').addEventListener('click', function() {
+            if (!document.fullscreenElement) return;
+            
+            // Csak akkor kapcsoljuk a rádiót, ha a TV KI van kapcsolva
+            if (tvOn) {
+                const audioIndicator = document.getElementById('audio-indicator');
+                audioIndicator.textContent = "Előbb kapcsold ki a TV-t!";
+                audioIndicator.style.display = 'block';
+                setTimeout(() => {
+                    audioIndicator.style.display = 'none';
+                }, 2000);
+                return;
+            }
+            
+            toggleRadio();
+        });
+
+    </script>
+
+    <audio id="bg-sound" src="sounds/ambience.ogg" preload="auto" autoplay loop></audio>
+
+    <script>
+      const sound = document.getElementById("bg-sound");
+
+      function enableSound() {
+        sound.volume = 1; // halkítva indítjuk, módosítható
+        sound.play().catch(e => {
+          console.warn("A hang nem indult el automatikusan:", e);
+        });
+        document.removeEventListener("click", enableSound);
+      }
+
+      // Első kattintás után indul a hang
+      document.addEventListener("click", enableSound);
+      
+      // Create additional blood drips dynamically
+      document.addEventListener('DOMContentLoaded', function() {
+        for (let i = 0; i < 5; i++) {
+          const drip = document.createElement('div');
+          drip.className = 'blood-drip';
+          drip.style.left = Math.random() * 100 + '%';
+          drip.style.animationDelay = Math.random() * 6 + 's';
+          drip.style.animationDuration = (Math.random() * 5 + 5) + 's';
+          drip.style.height = (Math.random() * 100 + 50) + 'px';
+          drip.style.opacity = Math.random() * 0.4 + 0.3;
+          document.body.appendChild(drip);
+        }
+        
+        // Create additional creepy eyes
+        for (let i = 0; i < 3; i++) {
+          const eye = document.createElement('div');
+          eye.className = 'creepy-eye';
+          eye.style.top = Math.random() * 100 + '%';
+          eye.style.left = Math.random() * 100 + '%';
+          eye.style.animationDelay = (Math.random() * 15) + 's';
+          eye.style.width = (Math.random() * 20 + 15) + 'px';
+          eye.style.height = eye.style.width;
+          document.body.appendChild(eye);
+        }
+      });
+    </script>
+
+    <script>
+        // Megkeressük a videó lejátszót
+        const video = document.getElementById('video-player');
+
+        // Letiltjuk a jobb klikk menüt csak a videón
+        video.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            return false;
+        });
+    </script>
+
+    <script>
+    /* ===== Horror Countdown Logic (1 hét) =====
+    - Az első betöltéskor most+7 napot beállít
+    - localStorage-ban megőrzi, így frissítéskor sem indul elölről
+    - Mindig a localStorage-ban tárolt végidőpont alapján számol
+    */
+    (function(){
+    const LS_KEY = 'horrorCountdownEnd';
+    const now = Date.now();
+
+    // ha nincs mentett dátum vagy már lejárt, állítsuk most+7 napra
+    let end = parseInt(localStorage.getItem(LS_KEY), 10);
+    if (!end || isNaN(end) || end <= now){
+        end = now + 7 * 24 * 60 * 60 * 1000; // 7 nap ms-ben
+        localStorage.setItem(LS_KEY, String(end));
+    }
+
+    const $d = document.getElementById('cdw-days');
+    const $h = document.getElementById('cdw-hours');
+    const $m = document.getElementById('cdw-mins');
+    const $s = document.getElementById('cdw-secs');
+
+    function pad(n){ return (n<10?'0':'') + n; }
+
+    function updateCountdown(){
+        const currentTime = Date.now();
+        const remainingTime = end - currentTime;
+        
+        if (remainingTime <= 0){
+            $d.textContent = '00';
+            $h.textContent = '00';
+            $m.textContent = '00';
+            $s.textContent = '00';
+            clearInterval(timer);
+            // extra: villanás, amikor lejár
+            document.getElementById('countdown-bar').style.animation = 'none';
+            setTimeout(()=>{ 
+                document.getElementById('countdown-bar').style.animation = ''; 
+            }, 20);
+            return;
+        }
+        
+        const totalSec = Math.floor(remainingTime / 1000);
+        const days = Math.floor(totalSec / 86400);
+        const hours = Math.floor((totalSec % 86400) / 3600);
+        const mins = Math.floor((totalSec % 3600) / 60);
+        const secs = totalSec % 60;
+
+        $d.textContent = pad(days);
+        $h.textContent = pad(hours);
+        $m.textContent = pad(mins);
+        $s.textContent = pad(secs);
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    // ha szeretnéd nullázni és újra 7 napot adni, hívd meg: window.resetHorrorCountdown()
+    window.resetHorrorCountdown = function(){
+        const newEnd = Date.now() + 7*24*60*60*1000;
+        localStorage.setItem(LS_KEY, String(newEnd));
+        end = newEnd;
+        updateCountdown();
+    };
+    })();
+</script>
+
+</body>
+</html>
