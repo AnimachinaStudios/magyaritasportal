@@ -93,6 +93,19 @@
     </div>
   </main>
 
+  <section class="supp">
+    <div class="wrap">
+      <div id="support-meter" class="meter" aria-label="Támogatottság">
+        <div class="ring"></div>
+        <div class="center">
+          <div class="value" id="support-value">0%</div>
+          <div class="label">Poppy Playtime Chapter 3 Támogatottság</div>
+        </div>
+        <div class="blood-drips"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Támogatói fal -->
   <section class="support-wall">
     <h2 class="glow-text">🎖️ TÁMOGATÓI FAL</h2>
@@ -178,8 +191,6 @@ setInterval(() => {
 
 <script>
 
-audioElement.play();
-
   const sound = document.getElementById("bg-sound");
 
   function enableSound() {
@@ -195,5 +206,6 @@ audioElement.play();
 </script>
 
     <script src="scripts/preloader.js"></script>
+    <script src="scripts/meter.js"></script>
 </body>
 </html>
