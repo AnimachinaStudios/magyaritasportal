@@ -52,6 +52,15 @@ const chapters = {
         `,
         trailer: "https://www.youtube.com/embed/jD-8kDFQVqI?si=TF2bB9fY1yFQUbPc",
         download: "https://kokonoshy-studio.itch.io/granny-magyar/"
+    },
+    7: {
+        title: "The Walking Dead Definitive Series",
+        image: "images/twd.jpg",
+        description: `
+        <p>A The Walking Dead Definitive Series magyar verziója fejlesztés alatt áll!</p>
+        `,
+        trailer: "videos/trailer.mp4",
+        download: "https://animachina-studios.itch.io/"
     }
 };
 
