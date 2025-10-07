@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telltale's The Walking Dead - Magyarosítás</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS CSS (Animációk) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Egyedi CSS -->
+    <style>
+        :root {
+            --blood-red: #c1121f;
+            --blood-dark: #6b0f0f;
+            --zombie-green: #7a8b5e;
+            --dark-gray: #0e0e0e;
+            --mid-gray: #1b1b1b;
+            --light-gray: #252525;
+            --text-color: #e8e8e8;
+            --accent: #ff4e4e;
+            --font-main: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-gray);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Header és trailer */
+        #trailer-header {
+            position: relative;
+            height: 85vh;
+            overflow: hidden;
+            border-bottom: 3px solid var(--blood-red);
+        }
+
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.3) saturate(1.1);
+        }
+
+        
+        .trailer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.85));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
+        
+        .main-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 25px rgba(255, 0, 0, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.9);
+            margin-bottom: 20px;
+        }
+
+        
+        .subtitle {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #ccc;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        
+        /* Navigáció */
+        .navbar {
+            background: rgba(15, 15, 15, 0.85) !important;
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--blood-red);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-brand {
+            color: var(--blood-red) !important;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: #dcdcdc !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Tartalom szekciók */
+        .section-title {
+            color: var(--accent);
+            border-bottom: 2px solid var(--zombie-green);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        
+        .content-section {
+            padding: 90px 0;
+            background: var(--mid-gray);
+        }
+        
+        .content-section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #1c1c1c, #141414);
+            border: 1px solid rgba(200, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        /* Karakter kártyák */
+        .character-card {
+            background-color: rgba(51, 51, 51, 0.7);
+            border: 1px solid var(--zombie-green);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .character-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .character-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(0.3) contrast(1.1);
+        }
+        
+        .character-name {
+            color: var(--blood-red);
+            font-weight: bold;
+            margin: 15px 0 10px;
+        }
+        
+        /* Letöltés szekció */
+        .download-btn {
+            background: var(--blood-red);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: white;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .download-btn:hover {
+            background: var(--accent);
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* Támogatás szekció */
+        .support-card {
+            background: linear-gradient(145deg, #191919, #101010);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+        }
+
+        .support-btn {
+            border: 2px solid var(--blood-red);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .support-btn:hover {
+            background: var(--blood-red);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+        
+        .support-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .paypal-icon {
+            color: #0070ba;
+        }
+        
+        .kofi-icon {
+            color: #ff5e5e;
+        }
+        
+        .patreon-icon {
+            color: #f96854;
+        }
+        
+        .support-btn {
+            background-color: transparent;
+            border: 2px solid var(--blood-red);
+            color: var(--text-color);
+            padding: 10px 20px;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .support-btn:hover {
+            background-color: var(--blood-red);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+       footer {
+            background: #0a0a0a;
+            border-top: 3px solid var(--blood-red);
+            padding: 50px 0 25px;
+            color: #aaa;
+        }
+        
+        .social-icons a {
+            color: #bbb;
+            font-size: 1.6rem;
+            margin: 0 12px;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        /* Horror effektek */
+        .blood-splatter {
+            opacity: 0.07;
+            filter: blur(3px);
+        }
+        
+        .zombie-hand {
+            position: fixed;
+            bottom: -100px;
+            right: 60px;
+            font-size: 6rem;
+            color: var(--zombie-green);
+            opacity: 0.8;
+            animation: zombieRise 12s infinite ease-in-out;
+        }
+
+        @keyframes zombieRise {
+            0%, 100% { bottom: -100px; transform: rotate(0deg); }
+            50% { bottom: 10px; transform: rotate(-5deg); }
+        }
+        
+        /* Reszponzív beállítások */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            #trailer-header {
+                height: 60vh;
+            }
+            .zombie-hand {
+                display: none;
+            }
+        }
+
+        .mute-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .mute-btn:hover {
+            background: rgba(255, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        /* Mobilbarát */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            #trailer-header {
+                height: 70vh;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Zombie hand animáció -->
+    <div class="zombie-hand">
+        <i class="fas fa-hand-paper"></i>
+    </div>
+    
+    <!-- Header rész trailerrel -->
+    <header id="trailer-header">
+        <div class="blood-splatter"></div>
+        <video id="trailer-video" autoplay muted loop>
+            <!-- A valós projektben itt lenne a trailer videó -->
+            <source src="videos/trailer.mp4" type="video/mp4">
+            A böngészője nem támogatja a videó lejátszást.
+        </video>
+
+        <!-- Hang ikon -->
+        <button id="mute-toggle" class="mute-btn">
+            <i class="fas fa-volume-mute"></i>
+        </button>
+
+        <div class="trailer-overlay">
+            <h1 class="main-title" data-aos="fade-down">The Walking Dead</h1>
+            <p class="subtitle" data-aos="fade-up" data-aos-delay="300">Definitive Edition - Magyarosítás</p>
+            <button class="btn btn-danger btn-lg" data-aos="zoom-in" data-aos-delay="600">Hamarosan</button>
+        </div>
+    </header>
+    
+    <!-- Navigációs sáv -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-skull-crossbones me-2"></i>Animachina Stúdió
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">A projekt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Jellemzők</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Letöltés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#support">Támogatás</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kapcsolat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- A projekt szekció -->
+    <section id="about" class="content-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-right">A Projekt</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="lead text-center" data-aos="fade-up">
+                        A Telltale Games The Walking Dead sorozatának teljes magyarítási projektje, amely magában foglalja a szinkront és a feliratokat is. A Definitive Edition összes epizódját lefedő projektünk célja, hogy a magyar játékosok teljes mértékben élvezhessék ezt a rendkívüli történetet.
+                    </p>
+                    <div class="row mt-5">
+                        <div class="col-md-6" data-aos="fade-right">
+                            <h4><i class="fas fa-microphone me-2 text-danger"></i>Teljes szinkron</h4>
+                            <p>Minden szereplő hangja magyar nyelven hallható, profi szinkron színészek közreműködésével.</p>
+                        </div>
+                        <div class="col-md-6" data-aos="fade-left">
+                            <h4><i class="fas fa-closed-captioning me-2 text-danger"></i>Feliratosítás</h4>
+                            <p>A játék minden szövege, párbeszéde és felirata magyar nyelven olvasható.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Jellemzők szekció -->
+    <section id="features" class="content-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-left">Projekt Jellemzői</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h4>Minden epizód</h4>
+                        <p>A Definitive Edition összes évada és epizódja teljes magyarításban.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Profi csapat</h4>
+                        <p>Tapasztalt fordítók, szinkronrendezők és színészek dolgoznak a projekten.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h4>Folyamatos fejlesztés</h4>
+                        <p>A projekt folyamatosan frissül és javul a közösség visszajelzései alapján.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Letöltés szekció -->
+    <section id="download" class="content-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-left">Letöltés - HAMAROSAN</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead mb-5" data-aos="fade-up">
+                        A magyarítási csomag letöltése ingyenes, és kompatibilis a The Walking Dead: The Telltale Definitive Series PC Steam verziójával.
+                    </p>
+                    <div data-aos="zoom-in">
+                        <button class="btn download-btn">
+                            <i class="fas fa-download me-2"></i>Magyarítás letöltése - HAMAROSAN
+                        </button>
+                        <button class="btn btn-outline-light download-btn">
+                            <i class="fas fa-book me-2"></i>Telepítési útmutató - HAMAROSAN
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Támogatás szekció -->
+    <section id="support" class="content-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-right">Támogatás</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <p class="lead" data-aos="fade-up">
+                        A projekt teljes mértékben közösségi alapú, és támogatásod segítségével tudjuk fenntartani és fejleszteni a magyarítást. Bármilyen összeg hatalmas segítséget jelent számunkra!
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="support-card">
+                        <div class="support-icon paypal-icon">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <h4>PayPal - HAMAROSAN</h4>
+                        <p>Egyszeri adomány küldése PayPalon keresztül. Gyors és biztonságos módja a támogatásnak.</p>
+                        <a href="#" class="support-btn">Támogatás PayPalon</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="support-card">
+                        <div class="support-icon kofi-icon">
+                            <i class="fas fa-mug-hot"></i>
+                        </div>
+                        <h4>Ko-fi</h4>
+                        <p>Támogass minket egy "kávéval" Ko-fin keresztül. Egyszerű és közvetlen támogatási mód.</p>
+                        <a href="https://ko-fi.com/animachinastudios" class="support-btn" target="_blank">Támogatás Ko-fin</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="support-card">
+                        <div class="support-icon patreon-icon">
+                            <i class="fab fa-patreon"></i>
+                        </div>
+                        <h4>Patreon</h4>
+                        <p>Légy rendszeres támogatónk Patreonon keresztül, és kapj exkluzív tartalmakat cserébe.</p>
+                        <a href="https://www.patreon.com/cw/AnimachinaStudio" class="support-btn" target="_blank">Támogatás Patreonon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h5>Miért érdemes támogatni?</h5>
+                    <p>A támogatásból származó bevétel segít finanszírozni a szinkronstúdió költségeit, a fordítók munkáját és a projekt további fejlesztését.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h5 class="text-danger">Telltale's The Walking Dead - Magyarosítás</h5>
+                    <p>Ez egy rajongói projekt, nem hivatalos. A The Walking Dead a Telltale Games, Skybound Entertainment és Robert Kirkman tulajdona.</p>
+                </div>
+                <div class="col-md-6 mb-4 text-md-end">
+                    <h5 class="text-danger">Kapcsolat</h5>
+                    <p>Projektvezető: kondix.dev@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://discord.gg/b3DNs98Dnz" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-danger">
+            <div class="text-center pt-3">
+                <p>&copy; 2025 Animachina Stúdió -  Minden jog fenntartva.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS (Animációk) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Egyedi JS -->
+    <script>
+        // AOS inicializálása
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+            
+            // Navbar átlátszósága görgetéskor
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+                } else {
+                    navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.8)';
+                }
+            });
+            
+            // Sima görgetés navigációs linkekre kattintáskor
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Véletlenszerű vérfolt effekt hozzáadása
+            function addBloodSplatters() {
+                const splatterContainer = document.querySelector('.blood-splatter');
+                for (let i = 0; i < 20; i++) {
+                    const splatter = document.createElement('div');
+                    splatter.style.position = 'absolute';
+                    splatter.style.width = Math.random() * 100 + 50 + 'px';
+                    splatter.style.height = Math.random() * 100 + 50 + 'px';
+                    splatter.style.left = Math.random() * 100 + '%';
+                    splatter.style.top = Math.random() * 100 + '%';
+                    splatter.style.background = 'radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 70%)';
+                    splatter.style.opacity = Math.random() * 0.3 + 0.1;
+                    splatter.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    splatter.style.pointerEvents = 'none';
+                    splatterContainer.appendChild(splatter);
+                }
+            }
+            
+            addBloodSplatters();
+        });
+
+        // Videó némítás / hang ikon váltás
+        const video = document.getElementById('trailer-video');
+        const muteBtn = document.getElementById('mute-toggle');
+        const muteIcon = muteBtn.querySelector('i');
+
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteIcon.classList.toggle('fa-volume-mute', video.muted);
+            muteIcon.classList.toggle('fa-volume-up', !video.muted);
+        });
+
+    </script>
+</body>
+</html>
