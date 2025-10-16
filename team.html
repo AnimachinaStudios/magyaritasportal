@@ -11,7 +11,56 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
 </head>
+<style>
+  .mute-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .mute-btn:hover {
+            background: rgba(255, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+</style>
 <body>
+
+  <!-- Hang ikon -->
+        <button id="mute-toggle" class="mute-btn">
+            <i class="fas fa-volume-mute"></i>
+        </button>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              const audio = document.getElementById('bg-sound');
+              const muteBtn = document.getElementById('mute-toggle');
+              const muteIcon = document.getElementById('mute-icon');
+
+              muteBtn.addEventListener('click', function () {
+                  audio.muted = !audio.muted;
+
+                  // Ikon csere
+                  if (audio.muted) {
+                      muteIcon.classList.remove('fa-volume-up');
+                      muteIcon.classList.add('fa-volume-mute');
+                  } else {
+                      muteIcon.classList.remove('fa-volume-mute');
+                      muteIcon.classList.add('fa-volume-up');
+                  }
+              });
+          });
+          </script>
 
     <canvas id="star-canvas"></canvas>
     <canvas id="shooting-stars"></canvas>
