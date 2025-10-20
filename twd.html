@@ -27,6 +27,18 @@
             --accent: #ff4e4e;
             --font-main: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+      
+      /* Üres támogatói fal stílusok */
+      .empty-supporters-message {
+          padding: 60px 20px;
+          border: 2px dashed rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          background: rgba(30, 30, 30, 0.5);
+      }
+      
+      .text-muted {
+        color: white;
+      }
         
         body {
             background-color: var(--dark-gray);
@@ -350,6 +362,83 @@
             transform: scale(1.1);
         }
 
+        /* Támogatói fal stílusok */
+        .supporter-card {
+            background: linear-gradient(145deg, #1c1c1c, #141414);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .supporter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .supporter-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .supporter-amount {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .supporter-role {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .supporter-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .pagination-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .pagination-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #444;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination-dot.active {
+            background-color: var(--blood-red);
+            transform: scale(1.2);
+        }
+        
+        .supporter-section-title {
+            color: var(--accent);
+            border-bottom: 2px solid var(--zombie-green);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
         /* Mobilbarát */
         @media (max-width: 768px) {
             .main-title {
@@ -414,6 +503,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#support">Támogatás</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#supporters">Támogatók</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Kapcsolat</a>
@@ -557,6 +649,92 @@
         </div>
     </section>
     
+    <!-- TÁMOGATÓI FAL szekció -->
+    <!-- TÁMOGATÓI FAL szekció -->
+    <section id="supporters" class="content-section">
+        <div class="container">
+            <h2 class="supporter-section-title text-center" data-aos="fade-right">Támogatói Fal</h2>
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead" data-aos="fade-up">
+                        Még senki sem támogatta a projektet. Legyél te az első!
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Támogatók kártyái - ÜRES ÁLLAPOT -->
+            <div id="supporter-cards-container">
+                <!--
+                <div class="row supporter-page active">
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">ClementineFan</div>
+                            <div class="supporter-amount">15.000 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">LeeEverett</div>
+                            <div class="supporter-amount">12.500 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">KennyBoat</div>
+                            <div class="supporter-amount">10.000 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row supporter-page">
+                    <div class="col-md-4 mb-4">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">MichonneKatana</div>
+                            <div class="supporter-amount">8.000 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">DarylCrossbow</div>
+                            <div class="supporter-amount">7.500 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="supporter-card text-center">
+                            <div class="supporter-name">RickGrimes</div>
+                            <div class="supporter-amount">6.000 Ft</div>
+                            <div class="supporter-role">Arany szintű támogató</div>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+            
+            <!-- Üres állapot üzenet -->
+            <div class="text-center mt-5" data-aos="fade-up">
+                <div class="empty-supporters-message">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Még nincsenek támogatók</h4>
+                    <p class="text-muted">Legyél te az első, aki támogatja a projektünket!</p>
+                    <a href="#support" class="btn btn-danger mt-3">Támogatás</a>
+                </div>
+            </div>
+            
+            <!-- Navigációs pontok - ELREJTVE, mert nincsenek támogatók -->
+            <!--
+            <div class="pagination-dots">
+                <div class="pagination-dot active" data-page="0"></div>
+                <div class="pagination-dot" data-page="1"></div>
+            </div>
+            -->
+        </div>
+    </section>
+    
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
@@ -641,6 +819,34 @@
             }
             
             addBloodSplatters();
+            
+            // Támogatói fal oldalváltás
+            const paginationDots = document.querySelectorAll('.pagination-dot');
+            const supporterPages = document.querySelectorAll('.supporter-page');
+            
+            paginationDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageIndex = parseInt(this.getAttribute('data-page'));
+                    
+                    // Aktív oldal beállítása
+                    supporterPages.forEach((page, index) => {
+                        if (index === pageIndex) {
+                            page.classList.add('active');
+                        } else {
+                            page.classList.remove('active');
+                        }
+                    });
+                    
+                    // Aktív pont beállítása
+                    paginationDots.forEach((d, index) => {
+                        if (index === pageIndex) {
+                            d.classList.add('active');
+                        } else {
+                            d.classList.remove('active');
+                        }
+                    });
+                });
+            });
         });
 
         // Videó némítás / hang ikon váltás
@@ -711,8 +917,3 @@
 </body>
 
 </html>
-
-
-
-
-
