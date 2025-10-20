@@ -35,6 +35,10 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
+
+        #player-container iframe {
+            pointer-events: none;
+        }
         
         /* Header és trailer */
         #trailer-header {
@@ -369,16 +373,16 @@
     <!-- Header rész trailerrel -->
     <header id="trailer-header">
         <div class="blood-splatter"></div>
-        <video id="trailer-video" autoplay muted loop>
-            <!-- A valós projektben itt lenne a trailer videó -->
-            <source src="videos/trailer.mp4" type="video/mp4">
-            A böngészője nem támogatja a videó lejátszást.
-        </video>
-
+       <!-- YouTube trailer videó -->
+        <div id="player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:1;">
+            <div id="youtube-player" style="width:100%;height:100%;"></div>
+        </div>
+        
         <!-- Hang ikon -->
         <button id="mute-toggle" class="mute-btn">
             <i class="fas fa-volume-mute"></i>
         </button>
+
 
         <div class="trailer-overlay">
             <h1 class="main-title" data-aos="fade-down">The Walking Dead</h1>
@@ -650,6 +654,60 @@
         });
 
     </script>
+
+    <!-- YouTube API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+    let player;
+    let isMuted = true;
+
+    // YouTube API inicializálás
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+            videoId: 'JOMScEpwaFI', // A megadott YouTube videó ID
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                showinfo: 0,
+                modestbranding: 1,
+                loop: 1,
+                playlist: 'JOMScEpwaFI',
+                fs: 0,
+                rel: 0,
+                mute: 1, // Alapból némítva indul
+                playsinline: 1
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    // Lejátszó beállítása készenlétkor
+    function onPlayerReady(event) {
+        event.target.playVideo();
+
+        const muteBtn = document.getElementById('mute-toggle');
+        const muteIcon = muteBtn.querySelector('i');
+
+        muteBtn.addEventListener('click', function() {
+            if (isMuted) {
+                player.unMute();
+                muteIcon.classList.remove('fa-volume-mute');
+                muteIcon.classList.add('fa-volume-up');
+            } else {
+                player.mute();
+                muteIcon.classList.remove('fa-volume-up');
+                muteIcon.classList.add('fa-volume-mute');
+            }
+            isMuted = !isMuted;
+        });
+    }
+</script>
+
+    
 </body>
 
 </html>
+
