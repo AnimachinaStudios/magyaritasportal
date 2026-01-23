@@ -217,6 +217,31 @@
             transform: scale(1.1);
         }
 
+        /* Részletek kártya letöltési link stílusa */
+        #detail-download-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #8b0000, #ff3333);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        #detail-download-link:hover {
+            background: linear-gradient(90deg, #ff3333, #ff6666);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transform: translateY(-3px);
+        }
+
   </style>
 </head>
 <body>
@@ -363,32 +388,6 @@
     </div>
   </div>
 
-  <div class="title">
-    <h2>Bendy</h2>
-  </div>
-
-  <div class="cards" id="fejezetek">
-    <div class="card" onclick="showDetails(5)">
-      <img src="images/bendy.png" alt="Bendy and the Ink Machine" />
-      <h2>Bendy and the Ink Machine</h2>
-      <p>Bendy és a Tintagép Teljes Magyarosítása!</p>
-      <button onclick="showDetails(5)">Részletek</button>
-    </div>
-  </div>
-
-  <div class="title">
-    <h2>Granny</h2>
-  </div>
-
-  <div class="cards" id="fejezetek">
-    <div class="card" onclick="showDetails(6)">
-      <img src="images/granny.png" alt="Granny Chapter 1" />
-      <h2>Granny Chapter 1</h2>
-      <p>Granny Chapter 1 Teljes Magyarosítása!</p>
-      <button onclick="showDetails(6)">Részletek</button>
-    </div>
-  </div>
-
     <div id="detail-card">
     <button class="close-btn" onclick="hideDetails()">✖</button>
     <h2 id="detail-title"></h2>
@@ -406,7 +405,7 @@
     </div>
 
     <p id="detail-description"></p>
-    <a id="download-link" href="#" download>Letöltés</a>
+      <a id="detail-download-link" href="#" download target="_blank">Letöltés</a>
     </div>  
 
   <footer>

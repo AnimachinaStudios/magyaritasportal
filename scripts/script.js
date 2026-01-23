@@ -6,7 +6,7 @@ const chapters = {
         <p>A Poppy Playtime első fejezete mostantól teljes magyar fordítással érhető el, így a történetet teljesen anyanyelven élvezheted.</p>
         `,
         trailer: "https://www.youtube.com/embed/AJnGRhAuWZk?si=c3kAC53GR-G5vks0",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-magyar"
+        download: "https://animachina-studios.itch.io/poppy-playtime-magyar"
     },
     2: {
         title: "Poppy Playtime - Chapter 2",
@@ -15,7 +15,7 @@ const chapters = {
         <p>A második fejezet magyarítása még folyamatban de hamarosan elkészül és így még mélyebben elmerülhetsz a játék világában magyar nyelven.</p>
         `,
         trailer: "https://www.youtube.com/embed/n6EasSST0BU?si=EKLbo62hNIQMZzC_",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-2-magyar"
+        download: "https://animachina-studios.itch.io/poppy-playtime-chapter-2-magyar"
     },
     3: {
         title: "Poppy Playtime - Chapter 3",
@@ -24,7 +24,7 @@ const chapters = {
         <p>Magyarul is elérhető a harmadik fejezet, hogy még izgalmasabb legyen a kaland anyanyelven. De jelenleg még csak felirattal!</p>
         `,
         trailer: "https://www.youtube.com/embed/iDnja4to_-I?si=sTUVqkDL41DWwrpm",
-        download: "https://kokonoshy-studio.itch.io/ppch3-magyar"
+        download: "https://animachina-studios.itch.io/ppch3-magyar"
     },
     4: {
         title: "Poppy Playtime - Chapter 4",
@@ -33,34 +33,7 @@ const chapters = {
         <p>Fedezd fel a Chapter 4 rémisztő történetét magyarul, teljes fordítással és lokalizált élménnyel. De jelenleg még csak felirattal!</p>
         `,
         trailer: "https://www.youtube.com/embed/-WlFgNka1QM?si=bMyPnfKbiN6tmxTf",
-        download: "https://kokonoshy-studio.itch.io/poppy-playtime-chapter-4-magyar"
-    },
-    5: {
-        title: "Bendy és a Tintagép",
-        image: "images/bendy.png",
-        description: `
-        <p>A magyarítás készülőben van, de már most betekintést nyerhetsz a Bendy sötét világába magyar nyelven.</p>
-        `,
-        trailer: "https://www.youtube.com/embed/-mUHMhBTPus?si=6v-a-kx5ANdpe8Dc",
-        download: "https://kokonoshy-studio.itch.io/"
-    },
-    6: {
-        title: "Granny Chapter 1",
-        image: "images/granny.png",
-        description: `
-        <p>A Granny Chapter 1 magyar verziója fejlesztés alatt áll, de már elérhető kipróbálásra!</p>
-        `,
-        trailer: "https://www.youtube.com/embed/jD-8kDFQVqI?si=TF2bB9fY1yFQUbPc",
-        download: "https://kokonoshy-studio.itch.io/granny-magyar/"
-    },
-    7: {
-        title: "The Walking Dead Definitive Series",
-        image: "images/twd.jpg",
-        description: `
-        <p>A The Walking Dead Definitive Series magyar verziója fejlesztés alatt áll!</p>
-        `,
-        trailer: "videos/trailer.mp4",
-        download: "https://animachina-studios.itch.io/"
+        download: "https://animachina-studios.itch.io/poppy-playtime-chapter-4-magyar"
     }
 };
 
@@ -73,20 +46,37 @@ function showDetails(chapter) {
 
     if (isDetailsVisible || isAnimating) return;
 
+    // Ellenőrizzük, hogy létezik-e a fejezet
+    if (!chapters[chapter]) {
+        console.error(`A(z) ${chapter} azonosítójú fejezet nem található!`);
+        return;
+    }
+
     isAnimating = true;
     const content = document.getElementById("content");
 
     document.getElementById("detail-title").innerText = chapters[chapter].title;
     document.getElementById("detail-image").src = chapters[chapter].image;
     document.getElementById("detail-description").innerHTML = chapters[chapter].description;
-    document.getElementById("download-link").href = chapters[chapter].download;
+    
+    // Letöltési link beállítása
+    const downloadLink = document.getElementById("detail-download-link");
+    downloadLink.href = chapters[chapter].download;
+    downloadLink.textContent = chapters[chapter].download === "#" ? "Hamarosan..." : "Letöltés";
+    
+    // Videó beállítása (ha van)
     const video = document.getElementById("detail-video");
-    const baseUrl = chapters[chapter].trailer;
+    const trailer = chapters[chapter].trailer;
+    
+    if (trailer && trailer.trim() !== "") {
+        video.style.display = "block";
+        const embedUrl = trailer.replace("watch?v=", "embed/") + "?autoplay=1&mute=1&rel=0&controls=1";
+        video.src = embedUrl;
+    } else {
+        video.style.display = "none";
+    }
 
-    const embedUrl = baseUrl.replace("watch?v=", "embed/") + "?autoplay=1&mute=1&rel=0&controls=1";
-    video.src = embedUrl;
-
-
+    // Kártya megjelenítése
     detailCard.style.display = "block";
     if (content) content.classList.add("blur");
 
@@ -109,7 +99,11 @@ function hideDetails() {
 
     detailCard.classList.remove("visible");
     if (content) content.classList.remove("blur");
-    document.getElementById("detail-video").src = "";
+    
+    // Videó forrásának törlése
+    const video = document.getElementById("detail-video");
+    video.src = "";
+    video.style.display = "block"; // Alaphelyzetbe állítjuk
 
     setTimeout(() => {
         detailCard.style.display = "none";
@@ -118,7 +112,6 @@ function hideDetails() {
         document.removeEventListener("click", closeOnOutsideClick);
     }, 300);
 }
-
 
 function toggleMenu() {
     const menu = document.querySelector("nav");
