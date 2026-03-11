@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felhasználási Feltételek / Terms of Service — Hungarian Patch Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e8000d;
+    --green: #00ff88;
+    --dark: #040a0f;
+    --darker: #020508;
+    --border: rgba(0,255,136,0.15);
+    --text: #c8e6d4;
+    --muted: #4a7a60;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darker);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  #cursor { position:fixed; width:10px; height:10px; background:var(--green); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:screen; }
+  #cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid rgba(0,255,136,0.5); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .08s ease; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:900;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 60px;
+    background:rgba(4,10,15,0.92);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:1rem; letter-spacing:2px; background:linear-gradient(90deg,var(--green),#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+  .nav-back { font-family:'Share Tech Mono',monospace; font-size:.7rem; letter-spacing:2px; color:var(--muted); text-decoration:none; border:1px solid var(--border); padding:7px 18px; transition:all .2s; }
+  .nav-back:hover { color:var(--green); border-color:var(--green); }
+
+  .lang-bar {
+    position:sticky; top:61px; z-index:800;
+    display:flex; justify-content:center;
+    background:rgba(4,10,15,0.97);
+    border-bottom:1px solid var(--border);
+  }
+  .lang-btn {
+    font-family:'Orbitron',monospace; font-size:.7rem; letter-spacing:3px;
+    padding:13px 40px; border:none; cursor:pointer;
+    background:transparent; color:var(--muted);
+    text-transform:uppercase; transition:all .2s;
+    border-bottom:2px solid transparent;
+  }
+  .lang-btn.active { color:var(--green); border-bottom-color:var(--green); background:rgba(0,255,136,0.04); }
+  .lang-btn:hover:not(.active) { color:var(--text); }
+
+  .content-section { display:none; }
+  .content-section.active { display:block; }
+
+  .doc-hero {
+    padding:140px 60px 60px;
+    background:var(--dark);
+    border-bottom:1px solid var(--border);
+    position:relative; overflow:hidden;
+  }
+  .doc-hero::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 80% 50%, rgba(232,0,13,0.06) 0%, transparent 60%),
+               radial-gradient(ellipse at 20% 20%, rgba(0,255,136,0.04) 0%, transparent 50%);
+  }
+  .doc-hero-inner { position:relative; max-width:860px; margin:0 auto; }
+  .doc-label { font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:4px; color:var(--green); margin-bottom:12px; }
+  .doc-title { font-family:'Orbitron',monospace; font-weight:900; font-size:clamp(1.8rem,4vw,3rem); line-height:1.1; margin-bottom:16px; background:linear-gradient(135deg,#fff 40%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .doc-meta { font-family:'Share Tech Mono',monospace; font-size:.7rem; letter-spacing:2px; color:var(--muted); display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; }
+
+  .doc-body { max-width:860px; margin:0 auto; padding:60px 60px 100px; }
+
+  .doc-toc {
+    background:rgba(0,255,136,0.03); border:1px solid var(--border);
+    padding:24px 28px; margin-bottom:50px;
+  }
+  .doc-toc h3 { font-family:'Orbitron',monospace; font-size:.78rem; letter-spacing:2px; color:var(--green); margin-bottom:14px; }
+  .doc-toc ol { padding-left:20px; display:flex; flex-direction:column; gap:7px; }
+  .doc-toc a { color:var(--muted); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:.74rem; letter-spacing:1px; transition:color .2s; }
+  .doc-toc a:hover { color:var(--green); }
+
+  .doc-section { margin-bottom:52px; scroll-margin-top:130px; }
+  .doc-section-num { font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:3px; color:var(--green); margin-bottom:6px; }
+  .doc-section h2 { font-family:'Orbitron',monospace; font-weight:700; font-size:1.1rem; letter-spacing:1px; color:#fff; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .doc-section p { font-size:1rem; line-height:1.85; color:var(--muted); margin-bottom:14px; }
+  .doc-section p strong { color:var(--text); font-weight:600; }
+  .doc-section ul, .doc-section ol { padding-left:22px; margin-bottom:14px; display:flex; flex-direction:column; gap:8px; }
+  .doc-section li { font-size:.96rem; line-height:1.7; color:var(--muted); }
+  .doc-section li strong { color:var(--text); }
+
+  .doc-highlight {
+    background:rgba(0,255,136,0.04); border-left:3px solid var(--green);
+    padding:16px 20px; margin:20px 0;
+    font-size:.92rem; line-height:1.7; color:var(--text);
+  }
+  .doc-highlight.warn { border-color:#ffaa00; background:rgba(255,170,0,0.04); }
+  .doc-highlight.danger { border-color:var(--red); background:rgba(232,0,13,0.04); }
+
+  .doc-footer {
+    border-top:1px solid var(--border); padding:36px 60px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:1px; color:var(--muted);
+    background:var(--darker);
+  }
+  .doc-footer a { color:var(--green); text-decoration:none; }
+  .doc-footer a:hover { text-decoration:underline; }
+  .footer-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:.85rem; background:linear-gradient(90deg,var(--green),#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+  body::after { content:''; position:fixed; inset:0; z-index:9990; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px); }
+
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:700px){
+    nav { padding:14px 20px; }
+    .doc-hero, .doc-body { padding-left:20px; padding-right:20px; }
+    .doc-footer { padding:24px 20px; flex-direction:column; align-items:flex-start; }
+    .lang-btn { padding:12px 20px; font-size:.62rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">HPH // PATCH HUB</a>
+  <a class="nav-back" href="index.html">← Vissza / Back</a>
+</nav>
+
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-hu" onclick="setLang('hu')">🇭🇺 Magyar</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HUNGARIAN VERSION
+═══════════════════════════════════════════════ -->
+<div class="content-section active" id="section-hu">
+
+  <div class="doc-hero">
+    <div class="doc-hero-inner">
+      <div class="doc-label">// felhasználási feltételek</div>
+      <h1 class="doc-title">Felhasználási Feltételek</h1>
+      <div class="doc-meta">
+        <span>📅 Hatályos: 2026. február 20.</span>
+        <span>🌐 Hungarian Patch Hub</span>
+        <span>📄 v1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <div class="doc-toc reveal">
+      <h3>// Tartalomjegyzék</h3>
+      <ol>
+        <li><a href="#hu-t1">A Szolgáltatás leírása</a></li>
+        <li><a href="#hu-t2">Elfogadás és jogosultság</a></li>
+        <li><a href="#hu-t3">Szellemi tulajdon</a></li>
+        <li><a href="#hu-t4">Megengedett és tiltott felhasználás</a></li>
+        <li><a href="#hu-t5">Backup rendszerek</a></li>
+        <li><a href="#hu-t6">Automatikus frissítések</a></li>
+        <li><a href="#hu-t7">Felelősség korlátozása</a></li>
+        <li><a href="#hu-t8">Garancia kizárása</a></li>
+        <li><a href="#hu-t9">Fiók és hozzáférés</a></li>
+        <li><a href="#hu-t10">Felmondás</a></li>
+        <li><a href="#hu-t11">Módosítások</a></li>
+        <li><a href="#hu-t13">Kapcsolat</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t1">
+      <div class="doc-section-num">// 01</div>
+      <h2>A Szolgáltatás leírása</h2>
+      <p>A <strong>Hungarian Patch Hub</strong> (HPH) egy közösségi alapon működő, ingyenes projekt, amelynek célja magyar nyelvű patch-ek (magyarosítások) biztosítása népszerű videójátékokhoz. A Szolgáltatás magában foglalja:</p>
+      <ul>
+        <li>Az HPH telepítő alkalmazást</li>
+        <li>A Lokális Backup rendszert</li>
+        <li>A Google Drive Backup rendszert (opcionális)</li>
+        <li>Az Automatikus Frissítési rendszert</li>
+      </ul>
+      <div class="doc-highlight">
+        Az HPH és minden patch-e <strong>ingyenes</strong>. Ha valaki az HPH nevében fizetést kér patch-ekért, az nem az HPH hivatalos csapatának tevékenysége.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t2">
+      <div class="doc-section-num">// 02</div>
+      <h2>Elfogadás és jogosultság</h2>
+      <p>A Szolgáltatás letöltésével, telepítésével vagy használatával Ön elfogadja ezeket a feltételeket. Ha nem ért egyet velük, <strong>ne töltse le és ne használja</strong> az HPH szoftverét.</p>
+      <p>A Szolgáltatás használatához az alábbi feltételeknek kell teljesülnie:</p>
+      <ul>
+        <li>Ön legalább <strong>16 éves</strong>, vagy törvényes gyámja beleegyezésével jár el.</li>
+        <li>Ön <strong>jogszerűen birtokolja</strong> azt a játékot, amelyhez a patch-et telepíteni kívánja. Az HPH nem támogat és nem tesz lehetővé kalóz szoftverek használatát.</li>
+        <li>Ön betartja az adott játék kiadójának felhasználási feltételeit.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t3">
+      <div class="doc-section-num">// 03</div>
+      <h2>Szellemi tulajdon</h2>
+      <p>Az HPH patch-ek <strong>kizárólag fordítói és lokalizációs munkát</strong> tartalmaznak – az eredeti játék grafikai elemeit, vagy egyéb szellemi tulajdonát nem módosítják, és nem tartalmazzák azokat önállóan.</p>
+      <p>Az HPH szoftvere (installer, backup rendszer) a vonatkozó licenc feltételei szerint érhető el. Az eredeti játékok és azok tartalmainak minden joga a respectív jogosultaknál marad.</p>
+      <div class="doc-highlight warn">
+        Az HPH nem rendelkezik és nem vindikál semmilyen jogot az érintett videójátékok, védjegyek vagy karakterek tekintetében. Minden bejegyzett védjegy a respectív tulajdonosuk tulajdona.
+      </div>
+      <p>Az HPH saját logója, weboldalának grafikai elemei és az installer egyedi felülete az HPH szellemi tulajdonát képezik. Ezek kereskedelmi célú felhasználása engedélyköteles.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t4">
+      <div class="doc-section-num">// 04</div>
+      <h2>Megengedett és tiltott felhasználás</h2>
+      <p><strong>Megengedett:</strong></p>
+      <ul>
+        <li>Az HPH patch-ek személyes, nem kereskedelmi célú letöltése és telepítése</li>
+        <li>A patch-ek megosztása barátokkal, amennyiben az eredeti forrásra (hungarianpatchhub.hu) hivatkoznak</li>
+        <li>A projekt közösségi fordításhoz való hozzájárulás</li>
+        <li>Vélemény, visszajelzés és hibajelentés megosztása</li>
+      </ul>
+      <p><strong>Tilos:</strong></p>
+      <ul>
+        <li>Az HPH patch-einek <strong>kereskedelmi célú értékesítése</strong> vagy fizetős terjesztése</li>
+        <li>Az HPH szoftverének visszafejtése (reverse engineering), módosítása saját terjesztés céljából az eredeti projekt megjelölése nélkül</li>
+        <li>Az HPH márkaneveinek, logójának vagy arculatának engedély nélküli felhasználása</li>
+        <li>Más felhasználók zaklatása, félrevezetése vagy kártevő tartalmak terjesztése a közösségi platformokon</li>
+        <li>Automatizált eszközökkel (botok, scrapers) a weboldalon vagy szerveren való visszaélés</li>
+        <li>Az HPH nevének felhasználása hamis vagy megtévesztő tartalmak terjesztésére</li>
+      </ul>
+      <div class="doc-highlight danger">
+        A tiltott felhasználás felfedezése esetén az érintett hozzáférését azonnal visszavonjuk, és szükség esetén jogi lépéseket teszünk.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t5">
+      <div class="doc-section-num">// 05</div>
+      <h2>Backup rendszerek</h2>
+      <p>Az HPH kétféle backup rendszert kínál az eredeti játékfájlok védelmére:</p>
+      <p><strong>Lokális Backup:</strong> Az eredeti játékfájlok másolatát az Ön által megadott helyi mappába menti. Az HPH nem felelős az elveszett vagy sérült helyi backup adatokért.</p>
+      <p><strong>Google Drive Backup:</strong> Az opcionális Drive backup a saját Google fiókjára menti a backup fájlokat. A hozzáférés Google OAuth2-n keresztül történik, és az Ön Google Fiókja biztonsági beállításainál bármikor visszavonható. Az adatok kizárólag az Ön Drive-ján tárolódnak – az HPH szerverein semmi nem kerül mentésre.</p>
+      <div class="doc-highlight warn">
+        A backup rendszer az eredeti játékfájlokat védi, de <strong>nem helyettesíti</strong> a játék saját mentési funkcióját. A játékmenetek védelméről a felhasználó maga gondoskodik.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t6">
+      <div class="doc-section-num">// 06</div>
+      <h2>Automatikus frissítések</h2>
+      <p>Az automatikus frissítési rendszer célja, hogy a telepített patch mindig kompatibilis legyen a játék legfrissebb verziójával.</p>
+      <ul>
+        <li>A frissítések letöltéséhez <strong>internetkapcsolat szükséges</strong>.</li>
+        <li>A frissítési rendszer alapértelmezetten bekapcsolt, de az alkalmazás beállításaiban bármikor kikapcsolható.</li>
+        <li>Az HPH értesítést küld, mielőtt nagyobb frissítéseket telepítene.</li>
+        <li>A frissítés telepítése előtt a rendszer automatikusan elvégez egy új lokális backupot (ha ez a funkció engedélyezett).</li>
+        <li>Az HPH nem vállal felelősséget az olyan problémákért, amelyek a frissítés elutasításából vagy a frissítési rendszer kikapcsolásából erednek.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t7">
+      <div class="doc-section-num">// 07</div>
+      <h2>Felelősség korlátozása</h2>
+      <p>Az HPH egy önkéntes közösségi projekt. Az alkalmazható jog által megengedett legszélesebb körben:</p>
+      <ul>
+        <li>Az HPH <strong>nem vállal felelősséget</strong> a Szolgáltatás használatából eredő közvetlen, közvetett, véletlenszerű, különleges vagy következményes károkért.</li>
+        <li>Az HPH nem felelős a játékgyártók vagy kiadók által hozott döntésekért (pl. játékfrissítések, amelyek inkompatibilissé teszik a patch-et).</li>
+        <li>Az HPH nem vállal felelősséget a Szolgáltatás átmeneti elérhetetlenségéért vagy technikai hibáiért.</li>
+        <li>Az HPH nem felelős a harmadik féltől (pl. nem hivatalos forrásból) letöltött, HPH-nak álcázott szoftverekért.</li>
+      </ul>
+      <p>Az HPH felelőssége minden esetben nem haladhatja meg azt az összeget, amelyet Ön a Szolgáltatásért ténylegesen fizetett – ami jelen esetben nulla (0) forint, mivel a Szolgáltatás ingyenes.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t8">
+      <div class="doc-section-num">// 08</div>
+      <h2>Garancia kizárása</h2>
+      <p>A Szolgáltatást <strong>„ahogy van" (as-is)</strong> alapon nyújtjuk, mindenféle kifejezett vagy hallgatólagos garancia nélkül, beleértve, de nem kizárólagosan:</p>
+      <ul>
+        <li>Az eladhatóságra, meghatározott célra való alkalmasságra vonatkozó garanciák</li>
+        <li>A Szolgáltatás megszakítás- és hibamentességére vonatkozó garanciák</li>
+        <li>A patch adott játékverziójával való kompatibilitásának garantálása (különösen friss játékfrissítések esetén)</li>
+      </ul>
+      <p>Az HPH csapata minden tőle telhetőt megtesz a minőség és kompatibilitás biztosítása érdekében, azonban a fenti garanciákat jogilag nem tudja vállalni.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t9">
+      <div class="doc-section-num">// 09</div>
+      <h2>Fiók és hozzáférés</h2>
+      <p>A Google Drive Backup funkció használatához Google fiók szükséges. A fiókra vonatkozó szabályok:</p>
+      <ul>
+        <li>A Drive hozzáférés személyes – más fiókjának használata nem megengedett.</li>
+        <li>Az HPH fenntartja a jogot, hogy a Feltételeket megsértő felhasználók hozzáférését felfüggessze vagy törölje.</li>
+        <li>A backup adatait bármikor eltávolíthatja a Google Fiókja biztonsági beállításainál.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t10">
+      <div class="doc-section-num">// 10</div>
+      <h2>Felmondás</h2>
+      <p>Ön bármikor abbahagyhatja a Szolgáltatás használatát és törölheti az alkalmazást, ehhez semmilyen engedély nem szükséges.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t11">
+      <div class="doc-section-num">// 11</div>
+      <h2>Módosítások</h2>
+      <p>Az HPH fenntartja a jogot, hogy ezeket a Felhasználási Feltételeket bármikor módosítsa. Az aktuális verzió mindig elérhető a weboldalon. Lényeges változtatásokról az alkalmazáson vagy e-mailen keresztül értesítjük a felhasználókat.</p>
+      <p>A módosított feltételek közzétételétől számított <strong>30 nap elteltével</strong> lépnek hatályba. A Szolgáltatás további használata a módosítások elfogadásának minősül.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-t13">
+      <div class="doc-section-num">// 12</div>
+      <h2>Kapcsolat</h2>
+      <p>A Felhasználási Feltételekkel kapcsolatos kérdéseket az alábbi elérhetőségeken fogadjuk:</p>
+      <ul>
+        <li><strong>E-mail:</strong> kondix.dev@gmail.com</li>
+        <li><strong>Discord:</strong> Animachina Stúdió – #ticket csatorna</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /section-hu -->
+
+<!-- ═══════════════════════════════════════════════
+     ENGLISH VERSION - CLEANED UP (only local + Google Drive backup)
+═══════════════════════════════════════════════ -->
+<div class="content-section" id="section-en">
+
+  <div class="doc-hero">
+    <div class="doc-hero-inner">
+      <div class="doc-label">// terms of service</div>
+      <h1 class="doc-title">Terms of Service</h1>
+      <div class="doc-meta">
+        <span>📅 Effective: February 20, 2026</span>
+        <span>🌐 Hungarian Patch Hub</span>
+        <span>📄 v1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <div class="doc-toc reveal">
+      <h3>// Table of Contents</h3>
+      <ol>
+        <li><a href="#en-t1">Description of the Service</a></li>
+        <li><a href="#en-t2">Acceptance and Eligibility</a></li>
+        <li><a href="#en-t3">Intellectual Property</a></li>
+        <li><a href="#en-t4">Permitted and Prohibited Use</a></li>
+        <li><a href="#en-t5">Backup Systems</a></li>
+        <li><a href="#en-t6">Automatic Updates</a></li>
+        <li><a href="#en-t7">Limitation of Liability</a></li>
+        <li><a href="#en-t8">Disclaimer of Warranties</a></li>
+        <li><a href="#en-t9">Accounts and Access</a></li>
+        <li><a href="#en-t10">Termination</a></li>
+        <li><a href="#en-t11">Modifications</a></li>
+        <li><a href="#en-t13">Contact</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section reveal" id="en-t1">
+      <div class="doc-section-num">// 01</div>
+      <h2>Description of the Service</h2>
+      <p><strong>Hungarian Patch Hub</strong> (HPH) is a community-driven, free project providing Hungarian-language patches (localizations) for popular video games. The Service includes:</p>
+      <ul>
+        <li>The HPH installer application</li>
+        <li>The Local Backup System</li>
+        <li>The Google Drive Backup System (optional)</li>
+        <li>The Automatic Update System</li>
+      </ul>
+      <div class="doc-highlight">
+        HPH and all its patches are <strong>free of charge</strong>. If anyone requests payment for HPH patches, they are not acting as part of the official HPH team.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="en-t2">
+      <div class="doc-section-num">// 02</div>
+      <h2>Acceptance and Eligibility</h2>
+      <p>By downloading, installing, or using the Service, you agree to these Terms. If you do not agree, <strong>do not download or use</strong> the HPH software.</p>
+      <p>To use the Service, the following conditions must be met:</p>
+      <ul>
+        <li>You are at least <strong>16 years old</strong>, or acting with the consent of your legal guardian.</li>
+        <li>You <strong>legally own</strong> the game for which you wish to install the patch. HPH does not support or enable the use of pirated software.</li>
+        <li>You comply with the terms of service of the relevant game publisher.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-t3">
+      <div class="doc-section-num">// 03</div>
+      <h2>Intellectual Property</h2>
+      <p>HPH patches contain <strong>exclusively translation and localisation work</strong> — they do not modify or independently include the original game's graphical assets or other intellectual property.</p>
+      <p>The HPH software (installer, backup system) is available under its applicable licence. All rights to the affected games and their content remain with the respective rights holders.</p>
+      <div class="doc-highlight warn">
+        HPH does not claim any rights over the video games, trademarks, or characters it relates to. All registered trademarks are the property of their respective owners.
+      </div>
+      <p>HPH's own logo, website design elements, and the installer's unique interface are the intellectual property of HPH. Commercial use of these assets requires prior written permission.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-t4">
+      <div class="doc-section-num">// 04</div>
+      <h2>Permitted and Prohibited Use</h2>
+      <p><strong>Permitted:</strong></p>
+      <ul>
+        <li>Downloading and installing HPH patches for personal, non-commercial use</li>
+        <li>Sharing patches with friends, provided the original source (hungarianpatchhub.hu) is credited</li>
+        <li>Contributing to the project's community translation efforts</li>
+        <li>Sharing opinions, feedback, and bug reports</li>
+      </ul>
+      <p><strong>Prohibited:</strong></p>
+      <ul>
+        <li><strong>Selling</strong> or distributing HPH patches for payment or commercial gain</li>
+        <li>Reverse-engineering or modifying HPH software for independent redistribution without attribution</li>
+        <li>Using HPH's brand names, logo, or visual identity without permission</li>
+        <li>Harassing, misleading, or distributing malicious content on community platforms</li>
+        <li>Abusing the website or servers with automated tools (bots, scrapers)</li>
+        <li>Using the HPH name to spread false or deceptive content</li>
+      </ul>
+      <div class="doc-highlight danger">
+        Discovery of prohibited use will result in immediate revocation of access, and legal action may be taken where appropriate.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="en-t5">
+      <div class="doc-section-num">// 05</div>
+      <h2>Backup Systems</h2>
+      <p>HPH offers two backup systems to protect original game files before patching:</p>
+      <p><strong>Local Backup:</strong> Saves a copy of the original game files to a folder of your choice on your computer. HPH is not responsible for lost or corrupted local backup data.</p>
+      <p><strong>Google Drive Backup:</strong> The optional Drive backup saves your backup files directly to your own Google Drive. Access is granted via Google OAuth2 and can be revoked at any time from your Google Account security settings. HPH does not store any of your data on its own servers — everything stays in your Drive.</p>
+      <div class="doc-highlight warn">
+        The backup system protects original game files but does <strong>not replace</strong> the game's own save-file system. Users are responsible for safeguarding their own game saves.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="en-t6">
+      <div class="doc-section-num">// 06</div>
+      <h2>Automatic Updates</h2>
+      <p>The automatic update system ensures installed patches remain compatible with the latest game versions.</p>
+      <ul>
+        <li>An <strong>internet connection is required</strong> to download updates.</li>
+        <li>The update system is enabled by default but can be disabled in the application settings at any time.</li>
+        <li>HPH will notify you before installing major updates.</li>
+        <li>A new local backup is automatically created before any update is applied (if this feature is enabled).</li>
+        <li>HPH is not liable for issues arising from refusing updates or disabling the update system.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-t7">
+      <div class="doc-section-num">// 07</div>
+      <h2>Limitation of Liability</h2>
+      <p>HPH is a volunteer community project. To the extent permitted by law:</p>
+      <ul>
+        <li>HPH is <strong>not liable</strong> for any damages arising from use of the Service.</li>
+        <li>HPH is not responsible for decisions made by game developers or publishers (e.g. game updates that make a patch incompatible).</li>
+        <li>HPH is not liable for temporary unavailability of or technical errors in the Service.</li>
+        <li>HPH is not responsible for software downloaded from third-party sources that impersonates HPH.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-t8">
+      <div class="doc-section-num">// 08</div>
+      <h2>Disclaimer of Warranties</h2>
+      <p>The Service is provided on an <strong>"as-is"</strong> basis, without any warranties, including but not limited to:</p>
+      <ul>
+        <li>Uninterrupted or error-free operation of the Service</li>
+        <li>Compatibility with any specific game version, particularly after recent game updates</li>
+      </ul>
+      <p>The HPH team does its best to ensure quality and compatibility, but cannot make any formal guarantees.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-t9">
+      <div class="doc-section-num">// 09</div>
+      <h2>Accounts and Access</h2>
+      <p>A Google account is required to use the Google Drive Backup feature. The following rules apply:</p>
+      <ul>
+        <li>Drive access is personal — using another person's account is not permitted.</li>
+        <li>HPH may revoke access to the Service if a user violates these Terms.</li>
+        <li>You can remove your backup data at any time from your Google Account security settings.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-t10">
+      <div class="doc-section-num">// 10</div>
+      <h2>Termination</h2>
+      <p>You may stop using the Service and uninstall the application at any time — no permission required.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-t11">
+      <div class="doc-section-num">// 11</div>
+      <h2>Modifications</h2>
+      <p>HPH reserves the right to update these Terms at any time. The current version will always be available on the website. Users will be notified of significant changes via in-app notification or e-mail.</p>
+      <p>Updated terms take effect <strong>30 days</strong> after publication. Continued use of the Service constitutes acceptance of the updated Terms.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-t13">
+      <div class="doc-section-num">// 12</div>
+      <h2>Contact</h2>
+      <p>For enquiries regarding these Terms, please reach us through:</p>
+      <ul>
+        <li><strong>E-mail:</strong> kondix.dev@gmail.com</li>
+        <li><strong>Discord:</strong> Animachina Studio — #ticket channel</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /section-en -->
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <div>
+    <div class="footer-logo">HUNGARIAN PATCH HUB</div>
+    <div style="margin-top:6px;">© 2025 Hungarian Patch Hub — 🇭🇺 Made in Hungary</div>
+  </div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="index.html">Főoldal / Home</a>
+    <a href="privacy_policy.html">Adatvédelem / Privacy</a>
+    <a href="tos.html">Feltételek / Terms</a>
+  </div>
+</footer>
+
+<script>
+  const cur=document.getElementById('cursor'), ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+  function setLang(lang){
+    document.getElementById('section-hu').classList.toggle('active', lang==='hu');
+    document.getElementById('section-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-hu').classList.toggle('active', lang==='hu');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.documentElement.lang = lang;
+    window.scrollTo({top:0, behavior:'smooth'});
+    setTimeout(triggerReveals, 100);
+  }
+
+  function triggerReveals(){
+    const els = document.querySelectorAll('.content-section.active .reveal');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.1});
+    els.forEach(el=>{ el.classList.remove('visible'); obs.observe(el); });
+  }
+  triggerReveals();
+</script>
+</body>
+</html>

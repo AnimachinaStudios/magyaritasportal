@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adatvédelmi Irányelvek / Privacy Policy — Hungarian Patch Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e8000d;
+    --green: #00ff88;
+    --dark: #040a0f;
+    --darker: #020508;
+    --border: rgba(0,255,136,0.15);
+    --text: #c8e6d4;
+    --muted: #4a7a60;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darker);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  #cursor { position:fixed; width:10px; height:10px; background:var(--green); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:screen; }
+  #cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid rgba(0,255,136,0.5); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .08s ease; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:900;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 60px;
+    background: rgba(4,10,15,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:1rem; letter-spacing:2px; background:linear-gradient(90deg,var(--green),#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+  .nav-back { font-family:'Share Tech Mono',monospace; font-size:.7rem; letter-spacing:2px; color:var(--muted); text-decoration:none; border:1px solid var(--border); padding:7px 18px; transition:all .2s; }
+  .nav-back:hover { color:var(--green); border-color:var(--green); }
+
+  /* LANG TOGGLE */
+  .lang-bar {
+    position: sticky; top: 61px; z-index: 800;
+    display:flex; justify-content:center; gap:0;
+    background: rgba(4,10,15,0.97);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .lang-btn {
+    font-family:'Orbitron',monospace; font-size:.7rem; letter-spacing:3px;
+    padding:13px 40px; border:none; cursor:pointer;
+    background:transparent; color:var(--muted);
+    text-transform:uppercase; transition:all .2s;
+    border-bottom: 2px solid transparent;
+    position:relative;
+  }
+  .lang-btn.active { color:var(--green); border-bottom-color:var(--green); background:rgba(0,255,136,0.04); }
+  .lang-btn:hover:not(.active) { color:var(--text); }
+
+  /* CONTENT WRAPPER */
+  .content-section { display:none; }
+  .content-section.active { display:block; }
+
+  /* HERO BAND */
+  .doc-hero {
+    padding: 140px 60px 60px;
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .doc-hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
+  }
+  .doc-hero-inner { position:relative; max-width:860px; margin:0 auto; }
+  .doc-label { font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:4px; color:var(--green); margin-bottom:12px; }
+  .doc-title { font-family:'Orbitron',monospace; font-weight:900; font-size:clamp(1.8rem,4vw,3rem); line-height:1.1; margin-bottom:16px; background:linear-gradient(135deg,#fff 40%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .doc-meta { font-family:'Share Tech Mono',monospace; font-size:.7rem; letter-spacing:2px; color:var(--muted); display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; }
+  .doc-meta span { display:flex; align-items:center; gap:6px; }
+
+  /* MAIN DOC BODY */
+  .doc-body { max-width:860px; margin:0 auto; padding:60px 60px 100px; }
+
+  .doc-toc {
+    background:rgba(0,255,136,0.03); border:1px solid var(--border);
+    padding:24px 28px; margin-bottom:50px;
+  }
+  .doc-toc h3 { font-family:'Orbitron',monospace; font-size:.78rem; letter-spacing:2px; color:var(--green); margin-bottom:14px; }
+  .doc-toc ol { padding-left:20px; display:flex; flex-direction:column; gap:7px; }
+  .doc-toc a { color:var(--muted); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:.74rem; letter-spacing:1px; transition:color .2s; }
+  .doc-toc a:hover { color:var(--green); }
+
+  .doc-section { margin-bottom:52px; scroll-margin-top:130px; }
+  .doc-section-num { font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:3px; color:var(--green); margin-bottom:6px; }
+  .doc-section h2 { font-family:'Orbitron',monospace; font-weight:700; font-size:1.1rem; letter-spacing:1px; color:#fff; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .doc-section p { font-size:1rem; line-height:1.85; color:var(--muted); margin-bottom:14px; }
+  .doc-section p strong { color:var(--text); font-weight:600; }
+  .doc-section ul, .doc-section ol { padding-left:22px; margin-bottom:14px; display:flex; flex-direction:column; gap:8px; }
+  .doc-section li { font-size:.96rem; line-height:1.7; color:var(--muted); }
+  .doc-section li strong { color:var(--text); }
+
+  .doc-highlight {
+    background:rgba(0,255,136,0.04); border-left:3px solid var(--green);
+    padding:16px 20px; margin:20px 0;
+    font-size:.92rem; line-height:1.7; color:var(--text);
+  }
+  .doc-highlight.warn { border-color:#ffaa00; background:rgba(255,170,0,0.04); }
+
+  .doc-divider { border:none; border-top:1px solid var(--border); margin:40px 0; }
+
+  /* FOOTER */
+  .doc-footer {
+    border-top:1px solid var(--border); padding:36px 60px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:1px; color:var(--muted);
+    background: var(--darker);
+  }
+  .doc-footer a { color:var(--green); text-decoration:none; }
+  .doc-footer a:hover { text-decoration:underline; }
+  .footer-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:.85rem; background:linear-gradient(90deg,var(--green),#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* Scanline */
+  body::after { content:''; position:fixed; inset:0; z-index:9990; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px); }
+
+  /* Scroll reveal */
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:700px){
+    nav { padding:14px 20px; }
+    .doc-hero, .doc-body { padding-left:20px; padding-right:20px; }
+    .doc-footer { padding:24px 20px; flex-direction:column; align-items:flex-start; }
+    .lang-btn { padding:12px 20px; font-size:.62rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">HPH // PATCH HUB</a>
+  <a class="nav-back" href="index.html">← Vissza / Back</a>
+</nav>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-hu" onclick="setLang('hu')">🇭🇺 Magyar</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HUNGARIAN VERSION
+═══════════════════════════════════════════════ -->
+<div class="content-section active" id="section-hu">
+
+  <div class="doc-hero">
+    <div class="doc-hero-inner">
+      <div class="doc-label">// adatvédelmi irányelvek</div>
+      <h1 class="doc-title">Adatvédelmi Irányelvek</h1>
+      <div class="doc-meta">
+        <span>📅 Utolsó frissítés: 2026. február 20.</span>
+        <span>🌐 Hungarian Patch Hub</span>
+        <span>📄 v1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <div class="doc-toc reveal">
+      <h3>// Tartalomjegyzék</h3>
+      <ol>
+        <li><a href="#hu-1">Bevezetés</a></li>
+        <li><a href="#hu-2">Milyen adatokat gyűjtünk</a></li>
+        <li><a href="#hu-3">Az adatok felhasználása</a></li>
+        <li><a href="#hu-4">Adattárolás</a></li>
+        <li><a href="#hu-5">Google Drive Backup</a></li>
+        <li><a href="#hu-6">Harmadik felek</a></li>
+        <li><a href="#hu-7">Gyermekek adatvédelme</a></li>
+        <li><a href="#hu-8">Az Ön jogai</a></li>
+        <li><a href="#hu-9">Cookie-k és nyomkövetés</a></li>
+        <li><a href="#hu-10">Változtatások</a></li>
+        <li><a href="#hu-11">Kapcsolat</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section reveal" id="hu-1">
+      <div class="doc-section-num">// 01</div>
+      <h2>Bevezetés</h2>
+      <p>A <strong>Hungarian Patch Hub</strong> (HPH) elkötelezett a felhasználók személyes adatainak védelme iránt. Ez az adatvédelmi irányelv leírja, hogy milyen adatokat gyűjtünk, és hogyan használjuk fel azokat.</p>
+      <p>Az HPH telepítő alkalmazás és a weboldal használatával Ön elfogadja az ebben a dokumentumban leírt adatkezelési gyakorlatokat.</p>
+      <div class="doc-highlight">
+        Az HPH egy <strong>közösségi, ingyenes projekt</strong>. Nem értékesítünk személyes adatokat harmadik feleknek.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="hu-2">
+      <div class="doc-section-num">// 02</div>
+      <h2>Milyen adatokat gyűjtünk</h2>
+      <p>Az HPH a következő adatokat gyűjtheti:</p>
+      <ul>
+        <li><strong>Telepítési adatok:</strong> Milyen patch-et telepített, melyik játékhoz – ezeket helyben, a saját gépén tároljuk.</li>
+        <li><strong>Google Drive Backup (csak ha engedélyezi):</strong> Ha aktiválja a Drive Backup funkciót, a backup fájlok az Ön Google Drive-jára kerülnek.</li>
+        <li><strong>Kapcsolatfelvételi adatok:</strong> Ha e-mailen vagy Discordon keresztül keresi fel csapatunkat, az üzenet tartalma.</li>
+      </ul>
+      <div class="doc-highlight warn">
+        Az HPH <strong>nem</strong> gyűjt hitelkártya-adatokat, jelszavakat, vagy más érzékeny személyes adatot.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="hu-3">
+      <div class="doc-section-num">// 03</div>
+      <h2>Az adatok felhasználása</h2>
+      <p>A gyűjtött adatokat kizárólag a következő célokra használjuk fel:</p>
+      <ul>
+        <li>A Szolgáltatás működtetése</li>
+        <li>Patch-ek frissítéseinek biztosítása</li>
+        <li>Hibaelhárítás és technikai támogatás nyújtása</li>
+        <li>A Google Drive Backup funkció működtetése (ha engedélyezett)</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-4">
+      <div class="doc-section-num">// 04</div>
+      <h2>Adattárolás</h2>
+      <p>A <strong>lokális adatok</strong> (telepítési naplók, backup fájlok) kizárólag az Ön számítógépén tárolódnak. Ezeket az adatokat mi nem látjuk és nem érjük el.</p>
+      <p>A <strong>Google Drive Backup</strong> adatok az Ön Google Drive-ján tárolódnak, nem az HPH szerverein.</p>
+      <p>Minden adatátvitel HTTPS protokollon keresztül zajlik.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-5">
+      <div class="doc-section-num">// 05</div>
+      <h2>Google Drive Backup</h2>
+      <p>A Google Drive Backup funkció <strong>opcionális</strong> és alapértelmezetten kikapcsolt. Ha aktiválja, az HPH a Google OAuth2 rendszerén keresztül kér hozzáférést a Google Drive-jához. Fontos tudnivalók:</p>
+      <ul>
+        <li>A backup fájlok <strong>a saját Google Drive-jára</strong> kerülnek mentésre.</li>
+        <li>Az HPH nem tárol semmit a saját szerverein.</li>
+        <li>A Drive hozzáférést bármikor visszavonhatja a Google Fiók biztonsági beállításainál.</li>
+        <li>A Google saját adatvédelmi irányelvei érvényesek: <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--green)">policies.google.com/privacy</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-6">
+      <div class="doc-section-num">// 06</div>
+      <h2>Harmadik felek</h2>
+      <p>Az HPH <strong>nem adja el</strong> személyes adatait harmadik feleknek.</p>
+      <p>Az alábbi szolgáltatásokat használjuk:</p>
+      <ul>
+        <li><strong>Google Drive:</strong> Csak ha Ön engedélyezi a backup funkciót.</li>
+        <li><strong>Discord:</strong> Közösségi kommunikáció.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="hu-7">
+      <div class="doc-section-num">// 07</div>
+      <h2>Gyermekek adatvédelme</h2>
+      <p>Az HPH Szolgáltatása <strong>nem irányul 16 év alatti személyeknek</strong>. Ha tudomást szerzünk arról, hogy ilyen adatokat gyűjtöttünk, azokat töröljük.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-8">
+      <div class="doc-section-num">// 08</div>
+      <h2>Az Ön jogai</h2>
+      <p>Az EU GDPR alapján az alábbi jogok illetik meg Önt:</p>
+      <ul>
+        <li><strong>Hozzáférési jog:</strong> Tájékoztatást kérhet az adatairól.</li>
+        <li><strong>Törlési jog:</strong> Kérheti adatai törlését.</li>
+      </ul>
+      <p>Jogai gyakorlásához kérjük, vegye fel velünk a kapcsolatot.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-9">
+      <div class="doc-section-num">// 09</div>
+      <h2>Cookie-k és nyomkövetés</h2>
+      <p>A <strong>weboldal</strong> kizárólag technikailag szükséges cookie-kat használ. Nem alkalmazunk tracking-et.</p>
+      <p>Az <strong>alkalmazás</strong> nem használ cookie-kat.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-10">
+      <div class="doc-section-num">// 10</div>
+      <h2>Változtatások</h2>
+      <p>Az HPH fenntartja a jogot, hogy ezt az adatvédelmi irányelvet módosítsa. Lényeges változtatásokról értesítjük a felhasználókat.</p>
+    </div>
+
+    <div class="doc-section reveal" id="hu-11">
+      <div class="doc-section-num">// 11</div>
+      <h2>Kapcsolat</h2>
+      <ul>
+        <li><strong>E-mail:</strong> kondix.dev@gmail.com</li>
+        <li><strong>Discord:</strong> Animachina Stúdió – #ticket csatorna</li>
+      </ul>
+    </div>
+
+  </div><!-- /doc-body -->
+</div><!-- /section-hu -->
+
+<!-- ═══════════════════════════════════════════════
+     ENGLISH VERSION - CLEANED UP (only local + Google Drive backup)
+═══════════════════════════════════════════════ -->
+<div class="content-section" id="section-en">
+
+  <div class="doc-hero">
+    <div class="doc-hero-inner">
+      <div class="doc-label">// privacy policy</div>
+      <h1 class="doc-title">Privacy Policy</h1>
+      <div class="doc-meta">
+        <span>📅 Last updated: February 20, 2026</span>
+        <span>🌐 Hungarian Patch Hub</span>
+        <span>📄 v1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <div class="doc-toc reveal">
+      <h3>// Table of Contents</h3>
+      <ol>
+        <li><a href="#en-1">Introduction</a></li>
+        <li><a href="#en-2">Data We Collect</a></li>
+        <li><a href="#en-3">How We Use Your Data</a></li>
+        <li><a href="#en-4">Data Storage</a></li>
+        <li><a href="#en-5">Google Drive Backup</a></li>
+        <li><a href="#en-6">Third Parties</a></li>
+        <li><a href="#en-7">Children's Privacy</a></li>
+        <li><a href="#en-8">Your Rights</a></li>
+        <li><a href="#en-9">Cookies and Tracking</a></li>
+        <li><a href="#en-10">Changes to This Policy</a></li>
+        <li><a href="#en-11">Contact</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section reveal" id="en-1">
+      <div class="doc-section-num">// 01</div>
+      <h2>Introduction</h2>
+      <p><strong>Hungarian Patch Hub</strong> (HPH) cares about your privacy. This page explains what data is involved when you use the installer and the website.</p>
+      <div class="doc-highlight">
+        HPH is a <strong>free community project</strong>. We do not sell your personal data to anyone.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="en-2">
+      <div class="doc-section-num">// 02</div>
+      <h2>Data We Collect</h2>
+      <p>HPH collects as little data as possible:</p>
+      <ul>
+        <li><strong>Installation log:</strong> Which patch was installed and for which game — saved locally on your machine only.</li>
+        <li><strong>Google Drive Backup (only if enabled):</strong> Backup files are saved to your own Google Drive.</li>
+        <li><strong>Contact messages:</strong> If you write to us via e-mail or Discord, we receive the contents of your message.</li>
+      </ul>
+      <div class="doc-highlight warn">
+        HPH does <strong>not</strong> collect passwords, payment data, or any sensitive personal information.
+      </div>
+    </div>
+
+    <div class="doc-section reveal" id="en-3">
+      <div class="doc-section-num">// 03</div>
+      <h2>How We Use Your Data</h2>
+      <p>The small amount of data we have is only ever used to:</p>
+      <ul>
+        <li>Keep the Service running</li>
+        <li>Deliver patch updates</li>
+        <li>Help troubleshoot issues if you contact us</li>
+        <li>Run the Google Drive Backup feature (only if enabled by you)</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-4">
+      <div class="doc-section-num">// 04</div>
+      <h2>Data Storage</h2>
+      <p><strong>Local data</strong> (installation logs, backup files) is saved on <strong>your own computer</strong>. HPH has no access to these files.</p>
+      <p><strong>Google Drive Backup</strong> data is stored on your own Google Drive — not on HPH servers.</p>
+      <p>All data transmission occurs over HTTPS.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-5">
+      <div class="doc-section-num">// 05</div>
+      <h2>Google Drive Backup</h2>
+      <p>The Google Drive Backup feature is <strong>optional and off by default</strong>. When you turn it on, the app asks you to sign in with your Google account. Here's what that means:</p>
+      <ul>
+        <li>Backup files are saved <strong>directly to your own Google Drive</strong>.</li>
+        <li>HPH does not store anything on its own servers.</li>
+        <li>You can disconnect your Google account at any time from your <a href="https://myaccount.google.com/permissions" target="_blank" style="color:var(--green)">Google Account settings</a>.</li>
+        <li>Google's own privacy policy applies: <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--green)">policies.google.com/privacy</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-6">
+      <div class="doc-section-num">// 06</div>
+      <h2>Third Parties</h2>
+      <p>We don't sell or share your data. The only external services involved are:</p>
+      <ul>
+        <li><strong>Google Drive</strong> — only if you choose to enable the backup feature.</li>
+        <li><strong>Discord</strong> — our community platform.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section reveal" id="en-7">
+      <div class="doc-section-num">// 07</div>
+      <h2>Children's Privacy</h2>
+      <p>The HPH Service is <strong>not directed at persons under the age of 16</strong>. If we become aware that such data has been collected, we will delete it.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-8">
+      <div class="doc-section-num">// 08</div>
+      <h2>Your Rights</h2>
+      <p>Under EU GDPR, you have the following rights:</p>
+      <ul>
+        <li><strong>Right of access:</strong> Request information about your data.</li>
+        <li><strong>Right to erasure:</strong> Request deletion of your data.</li>
+      </ul>
+      <p>To exercise your rights, please contact us.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-9">
+      <div class="doc-section-num">// 09</div>
+      <h2>Cookies and Tracking</h2>
+      <p>The website uses only basic session cookies. We don't use any third-party tracking or analytics tools.</p>
+      <p>The installer app doesn't use cookies.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-10">
+      <div class="doc-section-num">// 10</div>
+      <h2>Changes to This Policy</h2>
+      <p>If we update this policy, we'll let you know via the app or by e-mail. The latest version is always on this page.</p>
+    </div>
+
+    <div class="doc-section reveal" id="en-11">
+      <div class="doc-section-num">// 11</div>
+      <h2>Contact</h2>
+      <ul>
+        <li><strong>E-mail:</strong> kondix.dev@gmail.com</li>
+        <li><strong>Discord:</strong> Animachina Studio — #ticket channel</li>
+      </ul>
+    </div>
+
+  </div><!-- /doc-body -->
+</div><!-- /section-en -->
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <div>
+    <div class="footer-logo">HUNGARIAN PATCH HUB</div>
+    <div style="margin-top:6px;">© 2025 Hungarian Patch Hub — 🇭🇺 Made in Hungary</div>
+  </div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="index.html">Főoldal / Home</a>
+    <a href="privacy_policy.html">Adatvédelem / Privacy</a>
+    <a href="tos.html">Feltételek / Terms</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cur=document.getElementById('cursor'), ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+  // Lang switch
+  function setLang(lang){
+    document.getElementById('section-hu').classList.toggle('active', lang==='hu');
+    document.getElementById('section-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-hu').classList.toggle('active', lang==='hu');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.documentElement.lang = lang;
+    window.scrollTo({top:0, behavior:'smooth'});
+    setTimeout(triggerReveals, 100);
+  }
+
+  // Scroll reveal
+  function triggerReveals(){
+    const els = document.querySelectorAll('.content-section.active .reveal');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.1});
+    els.forEach(el=>{ el.classList.remove('visible'); obs.observe(el); });
+  }
+  triggerReveals();
+</script>
+</body>
+</html>
