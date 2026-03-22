@@ -1,437 +1,319 @@
 <!DOCTYPE html>
-<html lang="hu">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animachina Stúdió - Főlap</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="images/icon.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
-    <meta name="description" content="Animachina Stúdió hivatalos oldala: horror, játékok és kreatív projektek egy helyen. Nézd meg legújabb magyarításainkat és fejlesztéseinket!">
-    <meta name="keywords" content="horror, játékok, magyarítás, animachina, stúdió">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <style>
-      body {
-        background-color: #0a0a0a;
-        color: #e0e0e0;
-        font-family: 'Truculenta', sans-serif;
-      }
-      
-      .background-image {
-        filter: brightness(0.3) contrast(1.5) hue-rotate(330deg);
-        background-blend-mode: hard-light;
-      }
-      
-      .welcome {
-        background: rgba(20, 0, 0, 0.7);
-        border: 1px solid #ff3333;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-        color: #d0d0d0;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .welcome::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.05 0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>');
-        pointer-events: none;
-        z-index: 0;
-      }
-      
-      .welcome h1 {
-        color: #ff3333;
-        text-shadow: 0 0 10px #8b0000;
-        font-family: 'Savate', sans-serif;
-        position: relative;
-        animation: flicker 2s infinite alternate;
-      }
-      
-      .welcome p {
-        color: #b0b0b0;
-        position: relative;
-      }
-      
-      .welcome .link {
-        color: #ff6666;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-      }
-      
-      .welcome .link:hover {
-        color: #ff3333;
-        text-shadow: 0 0 5px #ff0000;
-      }
-      
-      /* Blood drips effect */
-      .blood-drip {
-        position: fixed;
-        width: 2px;
-        height: 100px;
-        background: linear-gradient(to bottom, rgba(255,0,0,0.8), transparent);
-        z-index: -1;
-        animation: drip 8s infinite;
-        opacity: 0.6;
-      }
-      
-      @keyframes drip {
-        0% { transform: translateY(-100px); opacity: 0; }
-        10% { opacity: 0.6; }
-        90% { opacity: 0.6; }
-        100% { transform: translateY(100vh); opacity: 0; }
-      }
-      
-      /* Creepy eyes in the background */
-      .creepy-eye {
-        position: fixed;
-        width: 30px;
-        height: 30px;
-        background: radial-gradient(circle, #ff0000 0%, #8b0000 70%, transparent 71%);
-        border-radius: 50%;
-        z-index: -2;
-        opacity: 0;
-        animation: blink 15s infinite;
-        box-shadow: 0 0 10px #ff0000;
-      }
-      
-      @keyframes blink {
-        0%, 96%, 100% { opacity: 0; }
-        97%, 98% { opacity: 0.3; }
-        99% { opacity: 0.1; }
-      }
-      
-      /* News carousel horror style */
-      .news-carousel {
-        background: rgba(20, 0, 0, 0.7);
-        border: 1px solid #ff3333;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-        padding: 30px;
-        border-radius: 15px;
-      }
-      
-      .news-carousel h2 {
-        color: #ff3333;
-        text-shadow: 0 0 5px #8b0000;
-        font-family: 'Savate', sans-serif;
-      }
-      
-      .news-item {
-        background: #1a0000 !important;
-        border: 1px solid #ff3333 !important;
-      }
-      
-      .news-item h3 {
-        color: #ff6666 !important;
-      }
-      
-      .news-item p {
-        color: #b0b0b0 !important;
-      }
-      
-      .btn {
-        background: linear-gradient(90deg, #8b0000, #ff3333) !important;
-        transition: all 0.3s ease;
-      }
-      
-      .btn:hover {
-        background: linear-gradient(90deg, #ff3333, #ff6666) !important;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-      }
-      
-      .carousel-dots .dot.active {
-        background: #ff3333 !important;
-      }
-      
-      /* Flicker animation */
-      @keyframes flicker {
-        0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-          opacity: 1;
-          text-shadow: 0 0 10px #ff0000;
-        }
-        20%, 22%, 24%, 55% {
-          opacity: 0.7;
-          text-shadow: none;
-        }
-      }
-      
-      /* Distortion effect */
-      .distort {
-        animation: distort 5s infinite alternate;
-      }
-      
-      @keyframes distort {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.01) skewX(-1deg); }
-        100% { transform: scale(1); }
-      }
-
-      .mute-btn {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            color: #fff;
-            font-size: 1.6rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .mute-btn:hover {
-            background: rgba(255, 0, 0, 0.5);
-            transform: scale(1.1);
-        }
-
-    </style>
-  </head>
-
-  <body>
-
-    <div class="background-wrapper">
-      <div class="background-image"></div>
-    </div>
-
-      <!-- Hang ikon -->
-        <button id="mute-toggle" class="mute-btn">
-            <i class="fas fa-volume-mute"></i>
-        </button>
-
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-              const audio = document.getElementById('bg-sound');
-              const muteBtn = document.getElementById('mute-toggle');
-              const muteIcon = document.getElementById('mute-icon');
-
-              muteBtn.addEventListener('click', function () {
-                  audio.muted = !audio.muted;
-
-                  // Ikon csere
-                  if (audio.muted) {
-                      muteIcon.classList.remove('fa-volume-up');
-                      muteIcon.classList.add('fa-volume-mute');
-                  } else {
-                      muteIcon.classList.remove('fa-volume-mute');
-                      muteIcon.classList.add('fa-volume-up');
-                  }
-              });
-          });
-          </script>
-
-
-    <!-- Blood drips -->
-    <div class="blood-drip" style="left: 5%; animation-delay: 0s;"></div>
-    <div class="blood-drip" style="left: 15%; animation-delay: 2s;"></div>
-    <div class="blood-drip" style="left: 25%; animation-delay: 4s;"></div>
-    <div class="blood-drip" style="left: 75%; animation-delay: 1s;"></div>
-    <div class="blood-drip" style="left: 85%; animation-delay: 3s;"></div>
-    <div class="blood-drip" style="left: 95%; animation-delay: 5s;"></div>
-    
-    <!-- Creepy eyes -->
-    <div class="creepy-eye" style="top: 10%; left: 10%; animation-delay: 2s;"></div>
-    <div class="creepy-eye" style="top: 20%; left: 90%; animation-delay: 5s;"></div>
-    <div class="creepy-eye" style="top: 80%; left: 20%; animation-delay: 8s;"></div>
-    <div class="creepy-eye" style="top: 90%; left: 80%; animation-delay: 11s;"></div>
-
-  <div class="preloader" id="preloader">
-    <div class="harley-video-container">
-        <video class="harley-eyes-video" muted playsinline>
-            <source src="images/sawyer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
-    <div class="progress-container">
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="Animachina Stúdió">
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <div class="nav-item dropdown">
+                    <span class="nav-link">MAGYAROSÍTÁSOK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="translations.html#chapter1">POPPY PLAYTIME 1. FEJEZET</a>
+                        <a href="translations.html#chapter2">POPPY PLAYTIME 2. FEJEZET</a>
+                        <a href="translations.html#chapter3">POPPY PLAYTIME 3. FEJEZET</a>
+                        <a href="translations.html#chapter4">POPPY PLAYTIME 4. FEJEZET</a>
+                        <a href="translations.html#chapter5">POPPY PLAYTIME 5. FEJEZET</a>
+                        <a href="hph.html">HUNGARIAN PATCH HUB - Magyarosítás Telepítő</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item dropdown">
+                    <span class="nav-link">RÓLUNK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="#about">A STÚDIÓ</a>
+                        <a href="team.html">A CSAPAT</a>
+                    </div>
+                </div>
+                
+                <a href="#careers" class="nav-link">CSATLAKOZÁS</a>
+                <a href="#news" class="nav-link">HÍREK</a>
+                <a href="#contact" class="nav-link">KAPCSOLAT</a>
+                <a href="support.html" class="nav-link">TÁMOGATÁS</a>
+            </div>
+            
+            <div class="nav-mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
-    </div>
-</div>
-
-    <canvas id="star-canvas"></canvas>
-    <canvas id="shooting-stars"></canvas>
-
-    <header class="video-header">
-      <video autoplay muted loop playsinline class="background-video" id="bg-video">
-        <source src="videos/bg.mp4" type="video/mp4">
-        A böngésződ nem támogatja a videólejátszást.
-      </video>
-      <div class="video-overlay">
-        <h1 class="video-title">Animachina Stúdió</h1>
-      </div>
-    </header>
-
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <nav>
-      <ul id="nav-menu">
-        <li>
-          <a href="#">
-            <i class="fas fa-home"></i> Főoldal </a>
-        </li>
-        <li>
-          <a href="translations.html">
-            <i class="fas fa-download"></i> Magyarosítások </a>
-        </li>
-        <li>
-          <a href="team.html">
-            <i class="fas fa-users"></i> Csapat
-          </a>
-        </li>
-      </ul>
-      <ul id="nav-menu">
-        <li>
-          <a href="portfolio.html">
-            <i class="fas fa-question"></i> Kondix </a>
-        </li>
-        <li>
-          <a href="discord.html">
-            <i class="fab fa-discord"></i> Discord </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/animachinastudio/" target="_blank">
-            <i class="fab fa-instagram"></i>Instagram </a>
-        </li>
-        <li>
-          <a href="support.html">
-            <i class="fas fa-envelope"></i> Támogatás </a>
-        </li>
-      </ul>
     </nav>
 
-    <main id="content">
-      <section class="welcome distort">
-        <h1>Üdvözöllek az Animachina Stúdió oldalán!</h1>
-        <p>Az Animachina Stúdió egy elkötelezett, lelkes csapat, amelynek célja, hogy a külföldi játékokat és tartalmakat a magyar közösség számára is elérhetővé tegye. Szenvedélyesen dolgozunk azon, hogy minőségi magyar fordításokat készítsünk, amelyek nemcsak pontosak, hanem a játék eredeti hangulatát is hűen visszaadják.</p>
-        <p>Csapatunk különböző háttérrel rendelkező tagokból áll – vannak köztünk tapasztalt fordítók, nyelvészek, valamint játékrajongók, akik mind egy közös cél érdekében dolgoznak: hogy mindenki anyanyelvén élvezhesse kedvenc játékait. A szövegek lefordítása mellett figyelmet fordítunk arra is, hogy a magyar nyelvi sajátosságokhoz igazítsuk a párbeszédeket, a menüket és a játék egyéb szöveges tartalmait.</p>
-        <p>Itt megtalálhatod a legújabb és legjobb fordításokat a játékokhoz. <a href="translations.html" class="link">Válassz egy Magyarosítást!</a></p>
-      </section>
-    </main>
-
-<section class="news-carousel">
-  <h2>Legfrissebb hírek</h2>
-  <div class="carousel-wrapper">
-    <div class="carousel-track">
-      <div class="news-item">
-        <img src="images/chapter3.png" alt="Hír 1">
-        <div class="news-content">
-          <h3>Poppy Playtime Chapter 3</h3>
-          <p>A Chapter 3 Szinkronja elkészült! Néhány módosítás vissza van!</p>
-          <a href="https://animachina-studios.itch.io/ppch3-magyar" class="btn" target="_blank">Weboldal</a>
-        </div>
-      </div>
-      <div class="news-item">
-        <img src="images/chapter4.png" alt="Hír 2">
-        <div class="news-content">
-          <h3>Poppy Playtime Chapter 4 már folyamatban!</h3>
-          <p>Folyamatban!</p>
-          <a href="support.html" class="btn">Támogasd a projektet</a>
-        </div>
-      </div>
-      <div class="news-item">
-        <img src="images/icon.jpg" alt="Hír 3">
-        <div class="news-content">
-          <h3>Titkos Projekt Hamarosan!</h3>
-          <p>Nemsokára bejelentés!</p>
-          <a href="support.html" class="btn">Támogasd a projektet</a>
-        </div>
-      </div>
+    <div class="social-bar">
+        <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.tiktok.com/@animachinastudio" target="_blank" class="social-icon">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="social-icon">
+            <i class="fab fa-discord"></i>
+        </a>
     </div>
-    <div class="carousel-dots">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
-    </div>
-  </div>
-</section>
 
 
-    <footer>
-      <p>© 2025 Animachina Studios - Minden jog fenntartva.</p>
-      <div class="footer-links">
-        <a href="https://www.tiktok.com/@animachina_studios" target="_blank">
-          <i class="fab fa-tiktok"></i>
-        </a>
-        <a href="https://www.youtube.com/@KondixOfficial" target="_blank">
-          <i class="fab fa-youtube"></i>
-        </a>
-         <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
-          <i class="fab fa-discord"></i>
-        </a>
-        <a href="https://www.instagram.com/animachinastudio/" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
-      </div>
+    <section class="hero">
+        <div class="hero-background">
+            <img src="images/ch4.jpg" alt="Chapter 5 Background">
+        </div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/pplogo.png" alt="Chapter 5">
+            </div>
+            <div class="hero-buttons">
+                <a href="https://www.youtube.com/watch?v=5qY3u9rsEPI" target="_blank" class="btn btn-primary">
+                    NÉZD MEG AZ ELŐZETEST
+                    <span class="arrow-right">→</span>
+                </a>
+                <a href="https://animachina-studios.itch.io/" target="_blank" class="btn btn-secondary">
+                    <span class="icon-steam">🎮</span>
+                    Nézd meg Itch.io-n
+                    <span class="arrow-right">→</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partnership-cta" id="contact">
+        <div class="container">
+            <h3>SZERETNÉL CSATLAKOZNI A CSAPATBA?</h3>
+            <h2>KERESS FEL MINKET MÉG MA!</h2>
+            <p>Csatlakozz a Discord Szerverünkre ha szeretnél segíteni a szinkronizálásban vagy tagja szeretnél lenni egy kedves közösségnek!</p>
+            <a href="https://discord.gg/b3DNs98Dnz" target="_blank" class="btn btn-large">Discord</a>
+        </div>
+    </section>
+
+    <section class="featured-projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">EDDIGI PROJEKTJEINK</span>
+                <h2>Animachina Stúdió</h2>
+            </div>
+            
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <img src="images/chapter1.png" alt="Chapter 1">
+                    <div class="project-overlay">
+                        <h3>Poppy Playtime 1. Fejezet: Szorult Helyzet Magyarosítás</h3>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="images/chapter2.png" alt="Chapter 2">
+                    <div class="project-overlay">
+                        <h3>Poppy Playtime 2. Fejezet: Légy a Hálóban Magyarosítás</h3>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="images/chapter3.png" alt="Chapter 3">
+                    <div class="project-overlay">
+                        <h3>Poppy Playtime 3. Fejezet: Mély Álom Magyarosítás</h3>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="images/chapter4.png" alt="Chapter 4">
+                    <div class="project-overlay">
+                        <h3>Poppy Playtime 4. Fejezet: Biztonságos Menedék Magyarosítás</h3>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="images/chapter5.png" alt="Chapter 5">
+                    <div class="project-overlay">
+                        <h3>Poppy Playtime 5. Fejezet: Sérült Dolgok Magyarosítás</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="community">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">KÖZÖSSÉGI MÉDIA</span>
+                <h2>ANIMACHINA KÖZÖSSÉG</h2>
+            </div>
+            
+            <div class="social-follow">
+                <span class="label">KÖVESS MINKET ITT</span>
+                <div class="social-icons-large">
+                    <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon-large">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank" class="social-icon-large">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@animachinastudio" target="_blank" class="social-icon-large">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="social-icon-large">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="culture" id="about">
+        <div class="container">
+            <div class="culture-content">
+                <div class="culture-text">
+                    <span class="label">RÓLUNK</span>
+                    <h2>Az Animachina Stúdió</h2>
+                    <p>Az Animachina Stúdió egy elkötelezett, lelkes csapat, amelynek célja, hogy a külföldi játékokat és tartalmakat a magyar közösség számára is elérhetővé tegye. Szenvedélyesen dolgozunk azon, hogy minőségi magyar fordításokat készítsünk, amelyek nemcsak pontosak, hanem a játék eredeti hangulatát is hűen visszaadják.Csapatunk különböző háttérrel rendelkező tagokból áll – vannak köztünk tapasztalt fordítók, nyelvészek, valamint játékrajongók, akik mind egy közös cél érdekében dolgoznak: hogy mindenki anyanyelvén élvezhesse kedvenc játékait. A szövegek lefordítása mellett figyelmet fordítunk arra is, hogy a magyar nyelvi sajátosságokhoz igazítsuk a párbeszédeket, a menüket és a játék egyéb szöveges tartalmait.</p>
+                </div>
+                <div class="culture-images">
+                    <img src="images/logo.png" alt="Logo">
+                    <img src="images/icon.jpg" alt="Logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="careers" id="careers">
+        <div class="container">
+            <div class="careers-content">
+                <div class="careers-image">
+                    <img src="images/ch5.png" alt="Logo">
+                </div>
+                <div class="careers-text">
+                    <span class="label">CSATLAKOZÁS</span>
+                    <h2>Csatlakozz az Animachinához!</h2>
+                    <p>Fordító, Szinkronhang, Hang vágó vagy akár Grafikusnak is csatlakozhatsz hozzánk! A munka folyamat egyszerű -> Discord szükséges.</p>
+                    <div class="careers-buttons">
+                        <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="btn btn-primary">
+                            Csatlakozás!
+                            <span class="arrow-right">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="press" id="news">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">HÍREK</span>
+                <h2>LEGÚJABB HÍREINK</h2>
+            </div>
+            
+            <div class="press-grid">
+                <article class="press-card">
+                    <img src="images/chapter1.png" alt="Article">
+                    <div class="press-content">
+                        <span class="press-date">Február 13 - 2026</span>
+                        <h3>Poppy Playtime 1. Fejezetet totálisan újra csináltuk és már elérhető az Itch.io-n!</h3>
+                    </div>
+                </article>
+                
+                <article class="press-card">
+                    <img src="images/chapter4.png" alt="Article">
+                    <div class="press-content">
+                        <span class="press-date">Március 19 - 2026</span>
+                        <h3>Poppy Playtime 4. Fejezet Szinkronja nemsokára elkészül!</h3>
+                    </div>
+                </article>
+                
+                <article class="press-card">
+                    <img src="images/chapter2.png" alt="Article">
+                    <div class="press-content">
+                        <span class="press-date">Március 20 - 2026</span>
+                        <h3>Poppy Playtime 2. Fejezet Szinkronjának újra csinálása elkezdve!</h3>
+                    </div>
+                </article>
+
+                <article class="press-card">
+                    <img src="images/chapter5.png" alt="Article">
+                    <div class="press-content">
+                        <span class="press-date">Február 20 - 2026</span>
+                        <h3>Poppy Playtime 5. Fejezet Feliratai Elkészítve!</h3>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Mob Entertainment">
+                    <div class="footer-contact">
+                        <h4>KAPCSOLAT</h4>
+                        <a href="mailto:kondix.dev@gmail.com">kondix.dev@gmail.com</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>KÖVESS MINKET</h4>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@animachinastudio" target="_blank">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>NAVIGÁCIÓ</h4>
+                        <a href="#about">RÓLUNK</a>
+                        <a href="#news">HÍREK</a>
+                        <a href="#projects">PROJEKTJEINK</a>
+                        <a href="#careers">CSATLAKOZÁS</a>
+                        <a href="#contact">KAPCSOLAT</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Animachina Stúdió, All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="scripts/script.js"></script>
-    <script src="scripts/carousel.js"></script>
-    <script src="scripts/preloader.js"></script>
-
-    <audio id="bg-sound" src="images/all_seeing_eye.mp3" preload="auto" autoplay loop></audio>
+    <script src="script.js"></script>
 
     <script>
-      const sound = document.getElementById("bg-sound");
+     const obs = new IntersectionObserver(
+       (entries) => entries.forEach(e => {
+         if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+       }),
+       { threshold: 0.12 }
+     );
+     document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+       .forEach(el => obs.observe(el));
+   </script>
 
-      function enableSound() {
-        sound.volume = 1; // halkítva indítjuk, módosítható
-        sound.play().catch(e => {
-          console.warn("A hang nem indult el automatikusan:", e);
-        });
-        document.removeEventListener("click", enableSound);
-      }
-
-      // Első kattintás után indul a hang
-      document.addEventListener("click", enableSound);
-      
-      // Create additional blood drips dynamically
-      document.addEventListener('DOMContentLoaded', function() {
-        for (let i = 0; i < 5; i++) {
-          const drip = document.createElement('div');
-          drip.className = 'blood-drip';
-          drip.style.left = Math.random() * 100 + '%';
-          drip.style.animationDelay = Math.random() * 6 + 's';
-          drip.style.animationDuration = (Math.random() * 5 + 5) + 's';
-          drip.style.height = (Math.random() * 100 + 50) + 'px';
-          drip.style.opacity = Math.random() * 0.4 + 0.3;
-          document.body.appendChild(drip);
-        }
-        
-        // Create additional creepy eyes
-        for (let i = 0; i < 3; i++) {
-          const eye = document.createElement('div');
-          eye.className = 'creepy-eye';
-          eye.style.top = Math.random() * 100 + '%';
-          eye.style.left = Math.random() * 100 + '%';
-          eye.style.animationDelay = (Math.random() * 15) + 's';
-          eye.style.width = (Math.random() * 20 + 15) + 'px';
-          eye.style.height = eye.style.width;
-          document.body.appendChild(eye);
-        }
-      });
-    </script>
-
-  </body>
-
+</body>
 </html>
-

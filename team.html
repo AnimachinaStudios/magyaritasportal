@@ -3,401 +3,676 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animachina Stúdió - Csapat</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Animachina Stúdió – Csapat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/team.css">
   <link rel="icon" type="image/png" href="images/icon.jpg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
 </head>
-<style>
-  .mute-btn {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            color: #fff;
-            font-size: 1.6rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .mute-btn:hover {
-            background: rgba(255, 0, 0, 0.5);
-            transform: scale(1.1);
-        }
-</style>
 <body>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ANIMACHINA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Főoldal</a></li>
+    <li><a href="translations.html">Magyarítások</a></li>
+    <li><a href="discord.html">Discord</a></li>
+    <li><a href="support.html">Támogatás</a></li>
+  </ul>
+</nav>
 
-  <!-- Hang ikon -->
-        <button id="mute-toggle" class="mute-btn">
-            <i class="fas fa-volume-mute"></i>
-        </button>
+<!-- HERO -->
+<section class="hero">
+  <canvas id="cube-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">// Animachina Stúdió — 2026</p>
+    <h1 class="hero-title glitch-wrap" data-text="A CSAPATUNK">A <span>CSAPATUNK</span></h1>
+    <p class="hero-sub">Ismerd meg az embereket a stúdió mögött</p>
+    <a href="#leader" class="hero-cta">Felfedezés →</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Görgess</span>
+  </div>
+</section>
 
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-              const audio = document.getElementById('bg-sound');
-              const muteBtn = document.getElementById('mute-toggle');
-              const muteIcon = document.getElementById('mute-icon');
-
-              muteBtn.addEventListener('click', function () {
-                  audio.muted = !audio.muted;
-
-                  // Ikon csere
-                  if (audio.muted) {
-                      muteIcon.classList.remove('fa-volume-up');
-                      muteIcon.classList.add('fa-volume-mute');
-                  } else {
-                      muteIcon.classList.remove('fa-volume-mute');
-                      muteIcon.classList.add('fa-volume-up');
-                  }
-              });
-          });
-          </script>
-
-    <canvas id="star-canvas"></canvas>
-    <canvas id="shooting-stars"></canvas>
-
-    <div class="preloader" id="preloader">
-    <div class="harley-video-container">
-        <video class="harley-eyes-video" muted playsinline>
-            <source src="images/sawyer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
-    <div class="progress-container">
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
-        </div>
-        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
-    </div>
+<!-- STATS -->
+<div class="stats-bar reveal">
+  <div class="stat"><span class="stat-num" data-target="36">0</span><span class="stat-label">Csapattag</span></div>
+  <div class="stat"><span class="stat-num" data-target="3">0</span><span class="stat-label">Grafikus</span></div>
+  <div class="stat"><span class="stat-num" data-target="32">0</span><span class="stat-label">Szinkronhang</span></div>
+  <div class="stat"><span class="stat-num" data-target="2025">0</span><span class="stat-label">Alapítva</span></div>
 </div>
 
-    <div class="background-wrapper">
-      <div class="background-image2"></div>
-      <!-- Spider web elements added here -->
-      <div class="spider-web web-1"></div>
-      <div class="spider-web web-2"></div>
-      <div class="spider-web web-3"></div>
-      <div class="spider-web web-4"></div>
-      <div class="spider-web web-5"></div>
-      <div class="spider" id="spider-1"></div>
-      <div class="spider" id="spider-2"></div>
+<!-- LEADER SECTION -->
+<section id="leader" style="padding: 8rem 2rem; background: var(--bg2);">
+  <div class="leader-section reveal">
+    <div class="leader-visual">
+      <div class="leader-ring leader-ring-2"></div>
+      <div class="leader-ring"></div>
+      <img class="leader-img" src="images/szinkronok/kondix.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Kondix">
+      <div style="display:none;width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,rgba(0,255,229,.15),rgba(255,38,247,.1));border:3px solid var(--neon);box-shadow:0 0 30px rgba(0,255,229,.4);position:relative;z-index:2;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:2.5rem;color:var(--neon);">K</div>
+      <div class="leader-badge">Tulajdonos</div>
     </div>
-
-    <header class="video-header">
-      <video autoplay muted loop playsinline class="background-video" id="bg-video">
-        <source src="videos/bg.mp4" type="video/mp4">
-        A böngésződ nem támogatja a videólejátszást.
-      </video>
-      <div class="video-overlay">
-        <h1 class="video-title">Animachina Stúdió</h1>
+    <div class="leader-info">
+      <p class="section-label">// Vezető</p>
+      <h2 class="leader-name">Kondix</h2>
+      <p class="leader-role">Tulajdonos · Mod Készítő · Szinkronhang</p>
+      <p class="leader-desc">
+        Az Animachina Stúdió alapítója és motorja. Modok készítése, szinkronhangként való részvétel és a stúdió egészének irányítása – mindez egyszerre.
+      </p>
+      <div class="leader-links">
+        <a class="link-pill" href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a>
+        <a class="link-pill" href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a>
+        <a class="link-pill" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
       </div>
-    </header>
-
-    <!-- Rest of your HTML remains the same -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
     </div>
+  </div>
+</section>
 
-    <nav>
-      <ul id="nav-menu">
-        <li>
-          <a href="index.html">
-            <i class="fas fa-home"></i> Főoldal </a>
-        </li>
-        <li>
-          <a href="translations.html">
-            <i class="fas fa-download"></i> Magyarítások </a>
-        </li>
-        <li>
-          <a href="team.html">
-            <i class="fas fa-users"></i> Csapat
-          </a>
-        </li>
-      </ul>
-      <ul id="nav-menu">
-        <li>
-          <a href="portfolio.html">
-            <i class="fas fa-question"></i> Kondix </a>
-        </li>
-        <li>
-          <a href="discord.html">
-            <i class="fab fa-discord"></i> Discord </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/animachinastudio/" target="_blank">
-            <i class="fab fa-instagram"></i>Instagram </a>
-        </li>
-        <li>
-          <a href="support.html">
-            <i class="fas fa-envelope"></i> Támogatás </a>
-        </li>
-      </ul>
-    </nav>
+<div class="neon-divider"></div>
 
-  <section class="team-section with-mommy">
-    <h2 class="desktop-team-title">Ismerd meg a csapatot</h2>
-    <h2 class="mobile-team-title">A Csapatunk</h2>
-    <img src="images/mommyhugg.png" alt="Mommy Long Legs" class="mommy-hugg" draggable="false">
-    
-    <div class="horizontal-team">
-      <div class="team-card kondix-card">
-        <img src="images/kondix.jpg" alt="Kondix profilkép" draggable="false">
-        <h3>Kondix</h3>
-        <p>Tulajdonos & Mod Készítő & Szinkronhang</p>
-        <p><a href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a></p>
-        <p><a href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a></p>
-        <p><a href="https://kokonoshy-studio.itch.io/" target="_blank">Itch.io</a></p>
+<!-- TEAM SECTION with cube bg -->
+<section class="cube-section" style="padding: 7rem 2rem;">
+  <canvas class="cube-section-canvas" id="cube-canvas-2"></canvas>
+  <div class="cube-section-inner">
+    <div class="reveal">
+      <p class="section-label">// Grafikusok & Fejlesztők</p>
+      <h2 class="section-title">Vizuális <span>Csapat</span></h2>
+      <p class="section-desc">Ők felelnek a stúdió arculatáért, a játékban a poszterekért, grafikáiért és vizuális megjelenéséért.</p>
+    </div>
+    <div class="team-grid reveal">
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/choso.jpg" alt="IzmosCica">
+      </div>
+        <div class="role-tag rt-graphic">Grafikus</div>
+        <div class="card-name">IzmosCica</div>
+        <div class="card-role">Grafikus</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.instagram.com/viviennct/" target="_blank">Instagram</a>
+        </div>
       </div>
 
-      <div class="tree-branches">
-        <div class="team-subgroup">
-          <div class="team-card">
-                <img src="images/szinkronok/choso.jpg" alt="Chosomoso profilkép" class="choso" draggable="false">
-                <h3 class="chosoh3">Chosomoso</h3>
-                <p>Grafikus</p>
-                <p><a href="https://www.instagram.com/viviennct/" target="_blank" class="chosop">Instagram</a></p>
-              </div>
+    <div class="team-card">
+      <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/helikopter.png" alt="Helikopter">
+      </div>
+      <div class="role-tag rt-graphic">Grafikus</div>
+      <div class="card-name">Helikopter</div>
+      <div class="card-role">Szinkronhang & Grafikus</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.instagram.com/huncuttka__?igsh=NThscm53Z3NhOG4w" target="_blank">Instagram</a>
+      </div>
+    </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/fox.png" alt="Fox profilkép" draggable="false" class="thauxeon">
-                <h3 class="thauh3">Fox</h3>
-                <p>Szinkronhang & Rendezőasszisztens</p>
-                <p><a href="https://www.youtube.com/@overclock352" class="thaup" target="_blank">YouTube</a></p>
-                <p><a href="https://www.tiktok.com/@overclock354" class="thaup" target="_blank">TikTok</a></p>
-              </div>
+      <div class="team-card">
+         <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/sun.png" alt="IzmosCica">
+      </div>
+        <div class="role-tag rt-translate">Grafikus és Fordító</div>
+        <div class="card-name">Sunbakery</div>
+        <div class="card-role">Grafikai Fordító & Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://x.com/frienbear28478" target="_blank">Twitter/X</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/thauxeon.jpg" alt="ThauXeon profilkép" class="thauxeon" draggable="false">
-                <h3 class="thauh3">ThauXeon</h3>
-                <p>Szinkronhang & Felirat Fordító</p>
-                <p><a href="https://www.instagram.com/thauxeon?igsh=eTNpZDdscmF6eDVx" target="_blank" class="thaup">Instagram</a></p>
-              </div>
+    </div>
+  </div>
+</section>
 
-              <div class="team-card">
-                <img src="images/szinkronok/arynox.png" alt="Arynox profilkép" class="arynox" draggable="false">
-                <h3 class="arynoxh3">Helikopter</h3>
-                <p>Szinkronhang & Grafikus</p>
-              </div>
+<div class="neon-divider"></div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/sun.png" alt="Sunbakery profilkép" class="sun" draggable="false">
-                <h3 class="sunh3">Sunbakery</h3>
-                <p>Grafikai Fordító & Szinkronhang</p>
-                <p><a href="https://x.com/frienbear28478?t=pcyJU0pop2PZIVv9arHrJQ&s=09" target="_blank" class="sunp">Twitter (X)</a></p>
-              </div>
+<!-- VOICE ACTORS SECTION -->
+<section style="padding: 7rem 2rem; background: var(--bg2);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="reveal">
+      <p class="section-label">// Hangok a háttérben</p>
+      <h2 class="section-title">Szinkron <span>Gárda</span></h2>
+      <p class="section-desc">A stúdió hangjait adó tehetséges színészek és hangok.</p>
+    </div>
+    <div class="team-grid reveal">
 
-              <div class="team-card">
-                <img src="images/szinkronok/bezd.jpg" alt="Bezd profilkép" draggable="false">
-                <h3>Bezd</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://youtube.com/@bezd01?si=SphJSISgE2Zio_nF" target="_blank">YouTube</a></p>
-              </div>
+      <div class="team-card">
+         <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/fox.png" alt="Fox">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Fox</div>
+        <div class="card-role">Szinkronhang & Rendező</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/@overclock352" target="_blank">YouTube</a>
+          <a class="card-link" href="https://www.tiktok.com/@overclock354" target="_blank">TikTok</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/beaaa.jpg" alt="Beaaa profilkép" draggable="false">
-                <h3>Beaaa</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.instagram.com/bea_2007_01/" target="_blank">Instagram</a></p>
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/bezd.jpg" alt="Bezd">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Bezd</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://youtube.com/@bezd01" target="_blank">YouTube</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/chiyo.jpg" alt="Chiyo profilkép" draggable="false">
-                <h3>Chiyo</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://youtube.com/@fusion_szinkron?si=uZSkOSSyszbXr2vq" target="_blank">YouTube 1</a></p>
-                <p><a href="https://youtube.com/@abyssalstudiohun?si=oAQB5tDX17gkThT4" target="_blank">YouTube 2</a></p>
-                <p><a href="https://www.tiktok.com/@fusion.szinkron.f?_t=ZN-8xO4rDzCn4s&_r=1" target="_blank">TikTok 1</a></p>
-                <p><a href="https://www.tiktok.com/@abyssalstudioofficial?_t=ZN-8xO4vvl3cQw&_r=1" target="_blank">TikTok 2</a></p>
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/beaaa.jpg" alt="Bea">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Beaaa</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.instagram.com/bea_2007_01/" target="_blank">Instagram</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/kaizen.jpg" alt="Kaizen profilkép" draggable="false">
-                <h3>Kaizen</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.youtube.com/@SeiyuuLockSzinkron" target="_blank">YouTube</a></p>
-                <p><a href="https://www.tiktok.com/@seiyuu.lock.szinkron" target="_blank">TikTok</a></p>
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/chiyo.jpg" alt="Chiyo">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Chiyo</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://youtube.com/@fusion_szinkron" target="_blank">YT 1</a>
+          <a class="card-link" href="https://youtube.com/@abyssalstudiohun" target="_blank">YT 2</a>
+          <a class="card-link" href="https://www.tiktok.com/@fusion.szinkron.f" target="_blank">TT 1</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/ashyy.jpg" alt="Ashyy profilkép" draggable="false">
-                <h3>Ashyy</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://youtube.com/@ashy_szinkron?si=kzyzs4tbKUGC4uA1" target="_blank">YouTube</a></p>
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/kaizen.jpg" alt="Kaizen">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Kaizen</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/@SeiyuuLockSzinkron" target="_blank">YouTube</a>
+          <a class="card-link" href="https://www.tiktok.com/@seiyuu.lock.szinkron" target="_blank">TikTok</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/sans.png" alt="Sans profilkép" draggable="false">
-                <h3>Sans The Skeleton</h3>
-                <p>Szinkronhang</p>
-                <!--<p><a href="mailto:tag9@example.com">Kapcsolat</a></p>-->
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/ashyy.jpg" alt="Ashyy">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Ashyy</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://youtube.com/@ashy_szinkron" target="_blank">YouTube</a>
+        </div>
+      </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/izumi.png" alt="Izumi profilkép" draggable="false">
-                <h3>Izumi</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.tiktok.com/@izumi_rangiku_cosplay?_t=ZN-8xQNIZ8FDkM&_r=1" target="_blank">TikTok</a></p>
-                <p><a href="https://www.instagram.com/izumi_rangiku_cos?igsh=MTlsdmt2dzRxYWxnOA==" target="_blank">Instagram</a></p>
-              </div>
-              <div class="team-card">
-                <img src="images/szinkronok/mango.JPG" alt="AronKostan profilkép" class="mango" draggable="false">
-                <h3 class="mangoh3">AronKostan</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.instagram.com/aronkostan/" class="mangop" target="_blank">Instagram</a></p>
-              </div>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/sans.png" alt="Sans">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Sans The Skeleton</div>
+        <div class="card-role">Szinkronhang</div>
+      </div>
 
-              <div class="team-card">
-              <div class="trafn-img"></div>
-              <h3 class="trafnh3">Trafn</h3>
-              <p>Szinkronhang</p>
-              <p><a href="https://www.youtube.com/@trafn1419" target="_blank" class="trafnp">YouTube</a></p>
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/izumi.png" alt="Izumi">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Izumi</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.tiktok.com/@izumi_rangiku_cosplay" target="_blank">TikTok</a>
+          <a class="card-link" href="https://www.instagram.com/izumi_rangiku_cos" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/mango.JPG" alt="Aron">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">AronKostan</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.instagram.com/aronkostan/" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/trafn.jpg" alt="Trafn">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Trafn</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/@trafn1419" target="_blank">YouTube</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/yuzu.jpg" alt="Yuzu">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Yuzucchi Mei</div>
+        <div class="card-role">Szinkronhang</div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/sunny.jpg" alt="Sunny">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Sunny</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.diabolicalaudestudios.hu/" target="_blank">Weboldal</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/petrov.jpg" alt="Petrov">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Petrov</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/channel/UC8ieIMmMYtDwD2TFGAyiAoA" target="_blank">YouTube</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/hiroo.jpg" alt="Hiroo">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Németh Zalán</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://open.spotify.com/artist/1g1pc7vfUbdPn4ysotdbPS?si=XY1ofx1IRDmOXQqDmD0_Qg" target="_blank" class="card-link">Spotify</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/zinzin.jpg" alt="ZinZin">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Horváth Rozina</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://www.instagram.com/z2in1i?igsh=MXN6enYxMzY4YTl6aQ==" target="_blank" class="card-link">Instagram</a>
+          <a href="tiktok.com/@6_da_soup_9" target="_blank" class="card-link">TikTok</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/fanni.jpg" alt="Fanni">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Kardos Fanni</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://www.tiktok.com/@gothicat___?_r=1&_t=ZN-94ZxjEaWNAE" target="_blank" class="card-link">TikTok</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/boben.png" alt="Boben">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Boben</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://www.youtube.com/@EchoLabHUN/videos" target="_blank" class="card-link">YouTube</a>
+          <a href="https://www.tiktok.com/@boben_06" target="_blank" class="card-link">TikTok</a>
+        </div>
+      </div>
+
+     <div class="team-card" onmouseenter="playDuck(this)" onmouseleave="stopDuck(this)">
+          <div class="duck-peek">
+            <div class="duck">
+              <div class="duck-body"></div>
+              <div class="duck-eye"></div>
+              <div class="duck-beak"></div>
             </div>
+          </div>
 
+          <audio class="duck-audio" src="images/szinkronok/duck.mp3"></audio>
 
-              <div class="team-card">
-                <img src="images/szinkronok/yuzu.jpg" alt="Yuzu profilkép" draggable="false">
-                <h3>Yuzucchi Mei</h3>
-                <p>Szinkronhang</p>
-                <!--<p><a href="" target="_blank">Kapcsolat</a></p>-->
-              </div>
+          <div class="card-avatar-placeholder">
+            <img src="images/szinkronok/kacsa.jpg" alt="Kacsa">
+          </div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/sunny.jpg" alt="Sunny profilkép" draggable="false">
-                <h3>Sunny</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.diabolicalaudestudios.hu/" target="_blank">Weboldal</a></p>
-              </div>
+          <div class="role-tag rt-voice">Szinkronhang</div>
+          <div class="card-name">Kacsa</div>
+          <div class="card-role">Szinkronhang</div>
 
-              <div class="team-card">
-                <img src="images/szinkronok/petrov.jpg" alt="Petrov profilkép" draggable="false">
-                <h3>Petrov</h3>
-                <p>Szinkronhang</p>
-                <p><a href="https://www.youtube.com/channel/UC8ieIMmMYtDwD2TFGAyiAoA" target="_blank">YouTube</a></p>
-              </div>
-
-              <div class="team-card">
-                <img src="images/szinkronok/patrik.png" alt="Patrik profilkép" draggable="false">
-                <h3>patriknpa641</h3>
-                <p>Szinkronhang</p>
-                <!--<p><a href="" target="_blank">Kapcsolat</a></p>-->
-              </div>
+          <div class="card-links">
+            <a href="https://www.instagram.com/maiducky?igsh=NnVvbGpiZWJ0Nm92&utm_source=qr" target="_blank" class="card-link">Instagram</a>
+          </div>
         </div>
 
+        <script>
+          function playDuck(card) {
+            const audio = card.querySelector(".duck-audio");
+            if (audio) {
+              audio.currentTime = 0;
+              audio.play();
+            }
+          }
+
+          function stopDuck(card) {
+            const audio = card.querySelector(".duck-audio");
+            if (audio) {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+          }
+          </script>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/froskoye.jpg" alt="Froskoye">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Froskoye</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://www.youtube.com/@froskoye" target="_blank" class="card-link">YouTube</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/takizol.png" alt="Takizol">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">takizoli/Arsene</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a href="https://twitch.tv/arsenedreamer" target="_blank" class="card-link">Twitch</a>
+          <a href="https://twitter.com/Arsene_VT" target="_blank" class="card-link">Twitter</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/bazix.jpg" alt="Bazix">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Bazix</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/channel/UCMCdOzp3ZQLoduayJVSuUug" target="_blank">YouTube</a>
+        </div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-      <p>© 2025 Animachina Studios - Minden jog fenntartva.</p>
-      <div class="footer-links">
-        <a href="https://www.tiktok.com/@animachina_studios" target="_blank">
-          <i class="fab fa-tiktok"></i>
-        </a>
-        <a href="https://www.youtube.com/@KondixOfficial" target="_blank">
-          <i class="fab fa-youtube"></i>
-        </a>
-         <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://discord.com/invite/heNvujBtdt" target="_blank">
-          <i class="fab fa-discord"></i>
-        </a>
-        <a href="https://www.instagram.com/animachinastudio/" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
+<div class="neon-divider"></div>
+
+<!-- TRANSLATORS SECTION with cube bg -->
+<section class="cube-section" style="padding: 7rem 2rem;">
+  <canvas class="cube-section-canvas" id="cube-canvas-2"></canvas>
+  <div class="cube-section-inner">
+    <div class="reveal">
+      <p class="section-label">// Fordítók</p>
+      <h2 class="section-title">Fordítói <span>Csapat</span></h2>
+      <p class="section-desc">Ők felelnek a fordításokért!</p>
+    </div>
+    <div class="team-grid reveal">
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/hiroo.jpg" alt="Hiroo">
       </div>
-    </footer>
+        <div class="role-tag rt-translate">Szinkron Fordító</div>
+        <div class="card-name">Németh Zalán</div>
+        <div class="card-role">Fordító</div>
+        <div class="card-links">
+          <a class="card-link" href="https://open.spotify.com/artist/1g1pc7vfUbdPn4ysotdbPS?si=XY1ofx1IRDmOXQqDmD0_Qg&nd=1&dlsi=06bba8d8f75a46fe" target="_blank">Spotify</a>
+        </div>
+      </div>
 
-    <audio id="bg-sound" src="images/ch2.mp3" preload="auto" loop autoplay></audio>
+    <div class="team-card">
+      <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/maximuszz.png" alt="Maximusz">
+      </div>
+      <div class="role-tag rt-translate">Menü Fordító</div>
+      <div class="card-name">maximusz_15</div>
+      <div class="card-role">Menü Fordító</div>
+    </div>
+
+    <div class="team-card">
+      <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/thauxeon.jpg" alt="ThauXeon">
+      </div>
+      <div class="role-tag rt-translate">Fordító</div>
+      <div class="card-name">ThauXeon</div>
+      <div class="card-role">Menü Fordító</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.instagram.com/thauxeon" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+      <div class="team-card">
+         <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/kondix.png" alt="Kondix">
+      </div>
+        <div class="role-tag rt-translate">Fordító</div>
+        <div class="card-name">Kondix</div>
+        <div class="card-role">Fordító</div>
+        <div class="card-links">
+           <a class="card-link" href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a>
+          <a class="card-link" href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a>
+          <a class="card-link" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<!-- BOTTOM CUBE SECTION + CTA -->
+<section class="cube-section" style="padding: 8rem 2rem; text-align: center;">
+  <canvas class="cube-section-canvas" id="cube-canvas-3"></canvas>
+  <div class="cube-section-inner reveal">
+    <p class="section-label" style="text-align:center;">// Csatlakozz hozzánk</p>
+    <h2 class="section-title" style="text-align:center;">Csatlakozz te is a <span>stúdióhoz</span></h2>
+    <p class="section-desc" style="margin: 1rem auto 2.5rem; text-align:center;">
+      Érdekel a szinkron, grafika vagy fordítás? Szeretnél te is részt venni? Keress minket Discordon!
+    </p>
+    <a class="link-pill" href="https://discord.com/invite/heNvujBtdt" target="_blank" style="font-size:.9rem; padding:.9rem 2.5rem; border-color: var(--neon); color: var(--neon);">Discord szerver →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">ANIMACHINA STÚDIÓ</p>
+  <div class="footer-social">
+    <a href="https://www.tiktok.com/@animachina_studios" target="_blank">TT</a>
+    <a href="https://www.youtube.com/@KondixOfficial" target="_blank">YT</a>
+    <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">YT2</a>
+    <a href="https://discord.com/invite/heNvujBtdt" target="_blank">DC</a>
+    <a href="https://www.instagram.com/animachinastudio/" target="_blank">IG</a>
+  </div>
+  <p class="footer-copy">© 2025 Animachina Studios — Minden jog fenntartva.</p>
+</footer>
 
 <script>
+// ── CUBE CANVAS SYSTEM ──
+function createCubeAnimation(canvasId, options = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const { color = '#00ffe5', count = 18, alpha = 0.7 } = options;
 
-  const sound = document.getElementById("bg-sound");
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-  function enableSound() {
-    sound.volume = 1.0; // halkítva indítjuk, módosítható
-    sound.play().catch(e => {
-      console.warn("A hang nem indult el automatikusan:", e);
+  const cubes = [];
+  for (let i = 0; i < count; i++) {
+    cubes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: 20 + Math.random() * 55,
+      rotX: Math.random() * Math.PI * 2,
+      rotY: Math.random() * Math.PI * 2,
+      rotZ: Math.random() * Math.PI * 2,
+      vX: (Math.random() - 0.5) * 0.4,
+      vY: (Math.random() - 0.5) * 0.4,
+      vRX: (Math.random() - 0.5) * 0.012,
+      vRY: (Math.random() - 0.5) * 0.012,
+      vRZ: (Math.random() - 0.5) * 0.008,
+      opacity: 0.15 + Math.random() * 0.55,
     });
-    document.removeEventListener("click", enableSound);
   }
 
-  // Első kattintás után indul a hang
-  document.addEventListener("click", enableSound);
-</script>
-
-<script>
-
-// Smooth horizontal scrolling for team section on mobile
-if (window.innerWidth <= 768) {
-  const teamContainer = document.querySelector('.horizontal-team');
-  if (teamContainer) {
-    teamContainer.addEventListener('wheel', (e) => {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
-        teamContainer.scrollLeft += e.deltaY;
-      }
-    });
+  function project3D(x, y, z, rX, rY, rZ) {
+    // rotate X
+    let y1 = y * Math.cos(rX) - z * Math.sin(rX);
+    let z1 = y * Math.sin(rX) + z * Math.cos(rX);
+    // rotate Y
+    let x2 = x * Math.cos(rY) + z1 * Math.sin(rY);
+    let z2 = -x * Math.sin(rY) + z1 * Math.cos(rY);
+    // rotate Z
+    let x3 = x2 * Math.cos(rZ) - y1 * Math.sin(rZ);
+    let y3 = x2 * Math.sin(rZ) + y1 * Math.cos(rZ);
+    const fov = 500;
+    const scale = fov / (fov + z2);
+    return { x: x3 * scale, y: y3 * scale, z: z2 };
   }
+
+  function drawCube(cx, cy, s, rX, rY, rZ, op) {
+    const hs = s / 2;
+    const verts = [
+      [-hs,-hs,-hs],[hs,-hs,-hs],[hs,hs,-hs],[-hs,hs,-hs],
+      [-hs,-hs, hs],[hs,-hs, hs],[hs,hs, hs],[-hs,hs, hs]
+    ].map(([x,y,z]) => {
+      const p = project3D(x, y, z, rX, rY, rZ);
+      return { x: cx + p.x, y: cy + p.y, z: p.z };
+    });
+
+    const faces = [
+      [0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[0,3,7,4],[1,2,6,5]
+    ];
+
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+
+    faces.forEach(face => {
+      const avgZ = face.reduce((s, i) => s + verts[i].z, 0) / 4;
+      const faceAlpha = op * (0.3 + 0.4 * ((avgZ + 100) / 200));
+      ctx.globalAlpha = Math.max(0, Math.min(1, faceAlpha));
+      ctx.beginPath();
+      ctx.moveTo(verts[face[0]].x, verts[face[0]].y);
+      for (let i = 1; i < face.length; i++) ctx.lineTo(verts[face[i]].x, verts[face[i]].y);
+      ctx.closePath();
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    cubes.forEach(c => {
+      c.x += c.vX;
+      c.y += c.vY;
+      c.rotX += c.vRX;
+      c.rotY += c.vRY;
+      c.rotZ += c.vRZ;
+      if (c.x < -100) c.x = canvas.width + 100;
+      if (c.x > canvas.width + 100) c.x = -100;
+      if (c.y < -100) c.y = canvas.height + 100;
+      if (c.y > canvas.height + 100) c.y = -100;
+      drawCube(c.x, c.y, c.size, c.rotX, c.rotY, c.rotZ, c.opacity * alpha);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
 
-// Spider animation
-function animateSpiders() {
-  const spider1 = document.getElementById('spider-1');
-  const spider2 = document.getElementById('spider-2');
-  
-  // Random starting positions
-  spider1.style.left = `${Math.random() * 80 + 10}%`;
-  spider1.style.top = `${Math.random() * 30 + 10}%`;
-  
-  spider2.style.left = `${Math.random() * 80 + 10}%`;
-  spider2.style.top = `${Math.random() * 30 + 50}%`;
-  
-  // Animate spider 1
-  let pos1 = parseInt(spider1.style.top);
-  let direction1 = 1;
-  
-  // Animate spider 2
-  let pos2 = parseInt(spider2.style.left);
-  let direction2 = 1;
-  
-  setInterval(() => {
-    // Spider 1 moves up and down
-    pos1 += direction1;
-    spider1.style.top = `${pos1}%`;
-    
-    if (pos1 > 30 || pos1 < 10) {
-      direction1 *= -1;
+// Init all cube canvases
+createCubeAnimation('cube-canvas',   { color: '#00ffe5', count: 22, alpha: 0.9 });
+createCubeAnimation('cube-canvas-2', { color: '#ff2cf7', count: 16, alpha: 0.7 });
+createCubeAnimation('cube-canvas-3', { color: '#00ffe5', count: 14, alpha: 0.8 });
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, idx) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), idx * 80);
+      io.unobserve(e.target);
     }
-    
-    // Spider 2 moves left and right
-    pos2 += direction2;
-    spider2.style.left = `${pos2}%`;
-    
-    if (pos2 > 80 || pos2 < 10) {
-      direction2 *= -1;
-    }
-  }, 100);
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => io.observe(r));
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1800;
+  const start = performance.now();
+  const isYear = target > 1000;
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const value = isYear
+      ? Math.floor(2000 + ease * (target - 2000))
+      : Math.floor(ease * target);
+    el.textContent = value;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
 }
 
-window.onload = animateSpiders;
+const counters = document.querySelectorAll('.stat-num[data-target]');
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
 
+// ── MOUSE PARALLAX ON HERO CUBE ──
+document.addEventListener('mousemove', (e) => {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const rect = hero.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  const canvas = document.getElementById('cube-canvas');
+  if (canvas) {
+    canvas.style.transform = `translate(${x * 18}px, ${y * 12}px)`;
+    canvas.style.transition = 'transform 0.5s ease';
+  }
+});
 </script>
-
-    <script src="scripts/script.js"></script>
-    <script src="scripts/preloader.js"></script>
 </body>
 </html>

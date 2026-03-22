@@ -1,211 +1,958 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Támogatás – Animachina Stúdió</title>
-  <link rel="stylesheet" href="css/support.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/png" href="images/icon.jpg">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animachina Stúdió - Támogatás</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/icon.jpg">
+<style>
+  :root {
+    --red: #ff1a2e;
+    --red-dim: #991020;
+    --red-glow: rgba(255,26,46,0.5);
+    --red-mist: rgba(255,26,46,0.15);
+    --bg: #050508;
+    --bg2: #0a0a10;
+    --border: rgba(255,26,46,0.25);
+    --text: #e8e0f0;
+    --text-dim: #7a7090;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(5,5,8,0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--red); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+  }
+  nav ul a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 13px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  nav ul a:hover, nav ul a.active { color: var(--red); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  /* Red smoke canvas */
+  #smoke-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Studio image placeholder / background image area */
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 80% at 50% 60%, rgba(20,0,0,0.6) 0%, transparent 70%),
+      url('images/catnap.png') center/cover no-repeat;
+    z-index: 0;
+    filter: brightness(0.35) saturate(1.2);
+  }
+
+  /* Scanlines overlay */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 780px;
+    padding: 0 24px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(42px, 8vw, 82px);
+    line-height: 1.0;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+    text-shadow:
+      0 0 40px var(--red-glow),
+      0 0 80px rgba(255,26,46,0.2);
+  }
+
+  .hero-title span {
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(232,224,240,0.7);
+    letter-spacing: 1.5px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 44px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 44px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: box-shadow 0.3s, transform 0.2s;
+    box-shadow: 0 0 24px var(--red-glow);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 48px var(--red-glow), 0 0 80px rgba(255,26,46,0.3);
+    transform: translateY(-2px);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 1.4s forwards;
+  }
+  .scroll-indicator span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 44px);
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-title span { color: var(--red); }
+
+  .section-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(232,224,240,0.6);
+    max-width: 560px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── PLATFORM CARDS ─── */
+  .platforms-section { padding-top: 20px; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 56px;
+  }
+
+  .card {
+    position: relative;
+    background: rgba(10,10,16,0.9);
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--red-mist) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent 340deg, var(--red-glow) 360deg);
+    animation: spin 6s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+
+  .card:hover {
+    border-color: var(--red);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(255,26,46,0.15), 0 0 0 1px var(--red);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  .card-platform {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .card-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-link::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+  .card:hover .card-link::after { transform: translateX(5px); }
+
+  /* Card accent colors */
+  .card-paypal .card-platform { color: #1DB8E8; }
+  .card-kofi .card-platform { color: #FF5E5B; }
+  .card-patreon .card-platform { color: #FF6B35; }
+  .card-itch .card-platform { color: #FA5C5C; }
+
+  .card-paypal { border-color: rgba(29,184,232,0.2); }
+  .card-kofi { border-color: rgba(255,94,91,0.2); }
+  .card-patreon { border-color: rgba(255,107,53,0.2); }
+  .card-itch { border-color: rgba(250,92,92,0.2); }
+
+  .card-paypal:hover { border-color: #1DB8E8; box-shadow: 0 20px 60px rgba(29,184,232,0.15); }
+  .card-kofi:hover { border-color: #FF5E5B; box-shadow: 0 20px 60px rgba(255,94,91,0.15); }
+  .card-patreon:hover { border-color: #FF6B35; box-shadow: 0 20px 60px rgba(255,107,53,0.15); }
+  .card-itch:hover { border-color: #FA5C5C; box-shadow: 0 20px 60px rgba(250,92,92,0.15); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), transparent);
+    margin: 0 auto;
+    opacity: 0.4;
+    max-width: 1200px;
+    padding: 0 48px;
+  }
+
+  /* ─── WHY SUPPORT ─── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+    align-items: start;
+  }
+
+  .why-text {
+    font-size: 16px;
+    line-height: 2;
+    color: rgba(232,224,240,0.75);
+    letter-spacing: 0.3px;
+  }
+  .why-text p { margin-bottom: 20px; }
+  .why-text strong { color: var(--red); font-weight: 600; }
+
+  .why-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bullet-item {
+    background: rgba(255,26,46,0.05);
+    border-left: 2px solid var(--red);
+    padding: 18px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: background 0.3s;
+  }
+  .bullet-item:hover { background: rgba(255,26,46,0.10); }
+
+  .bullet-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .bullet-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .bullet-body {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ─── SUPPORTER WALL ─── */
+  .wall-section { padding-top: 60px; }
+
+  .wall-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .total-box {
+    text-align: right;
+  }
+  .total-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .total-amount {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--red);
+    text-shadow: 0 0 20px var(--red-glow);
+  }
+
+  .wall-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+  }
+
+  .supporter-card {
+    background: rgba(10,10,16,0.95);
+    border: 1px solid rgba(255,26,46,0.08);
+    padding: 20px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .supporter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0%;
+    background: var(--red);
+    transition: height 0.4s ease;
+  }
+  .supporter-card:hover::before { height: 100%; }
+  .supporter-card:hover {
+    border-color: rgba(255,26,46,0.3);
+    background: rgba(255,26,46,0.05);
+  }
+
+  .supporter-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .supporter-amount {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .supporter-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 13px;
+    opacity: 0.6;
+  }
+
+  /* Tier highlight */
+  .tier-gold .supporter-name { color: #FFD700; }
+  .tier-gold .supporter-amount { color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+  .tier-gold { border-color: rgba(255,215,0,0.2); }
+
+  .tier-silver .supporter-name { color: #C0C0C0; }
+  .tier-silver { border-color: rgba(192,192,192,0.15); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    margin-top: 80px;
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--red); }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.2); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes glitch {
+    0%, 90%, 100% { text-shadow: 0 0 40px var(--red-glow); transform: none; }
+    92% { text-shadow: -3px 0 #ff1a2e, 3px 0 #00ffff; transform: translateX(2px); }
+    94% { text-shadow: 3px 0 #ff1a2e, -3px 0 #00ffff; transform: translateX(-2px); }
+  }
+
+  .hero-title { animation: fadeUp 0.8s 0.4s forwards, glitch 7s 2s infinite; }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    nav ul { gap: 20px; }
+    section { padding: 70px 20px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .wall-header { flex-direction: column; align-items: flex-start; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="preloader" id="preloader">
-    <div class="harley-video-container">
-        <video class="harley-eyes-video" muted playsinline>
-            <source src="images/sawyer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="loading-text">SYSTEM INITIALIZATION: <span id="loading-percent">0</span>%</div>
-    <div class="progress-container">
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
-        </div>
-        <div class="loading-message">DOCTOR PROTOKOLL BEINDÍTVA</div>
-    </div>
-</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Animachina <span>Stúdió</span></div>
+  <ul>
+    <li><a href="index.html">Főoldal</a></li>
+    <li><a href="translations.html">Projektek</a></li>
+    <li><a href="team.html">Csapat</a></li>
+    <li><a href="#platforms" class="active">Támogatás</a></li>
+  </ul>
+</nav>
 
-  <div class="background-wrapper">
-    <div class="background-image"></div>
-    <canvas id="smokeCanvas"></canvas>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-image"></div>
+  <canvas id="smoke-canvas"></canvas>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">// Magyar szinkron magyarítás — Videó játékokhoz</p>
+    <h1 class="hero-title">
+      Légy részese<span>velünk.</span>
+    </h1>
+    <p class="hero-sub">
+      Mi az Animachinánál a lehető legjobb szinkront szeretnénk kiadni játékokhoz! Jelenleg a <strong style="color:var(--red)">Poppy Playtime</strong> magyarításán dolgozunk – a te támogatásoddal jutunk el a következő fejezetig.
+    </p>
+    <div class="hero-cta">
+      <a href="#platforms" class="btn-primary">Támogatom →</a>
+    </div>
   </div>
 
-  <div class="blood-drips"></div>
-  <div class="flicker"></div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Görgess</span>
+  </div>
+</div>
 
-  <header>
-    <h1><span class="blood-text">💖 TÁMOGATÁS</span></h1>
-    <div class="custom-hr"><div class="blood"></div></div>
-    <p class="glow-text">Ahhoz, hogy valóban professzionális szinkronokat készíthessünk magyar nyelven,<br>
-    <strong class="blood-text">szükségünk van a közösség erejére is!</strong></p>
+<!-- PLATFORM CARDS -->
+<section class="platforms-section" id="platforms">
+  <p class="section-label reveal">Platform választó</p>
+  <h2 class="section-title reveal">Válaszd ki, <span>hogyan szeretnél</span> támogatni minket</h2>
+  <p class="section-desc reveal">Négy platformon keresztül vagyunk elérhetők – válaszd azt, amelyik a legkényelmesebb számodra.</p>
 
-    <p class="intro">
-      Az anyagi hozzájárulásotok lehetővé teszi számunkra a minőségi technika bérlését, valamint tehetséges szinkronszínészek munkájának méltó díjazását.<br>
-      Minden beérkező támogatást <strong class="blood-text">közvetlenül ezekre a célokra</strong> fordítunk – cserébe pedig szeretnénk egyedi meglepetésekkel kedveskedni azoknak, akik mellénk állnak.<br><br>
-      A támogatás természetesen <strong>nem kötelező</strong>, és a kész szinkronokat <strong>mindenki szabadon élvezheti</strong>!
-    </p>
+  <div class="cards-grid">
 
-    <div class="rewards">
-      <h2 class="glow-text">Mit nyújtunk viszonzásképp?</h2>
-      <div class="custom-hr"><div class="blood"></div></div>
-      <ul class="reward-list">
-        <li><strong class="blood-text">2 000 Ft felett:</strong> Neved felkerül a támogatói falra.</li>
-        <li><strong class="blood-text">5 000 Ft felett:</strong> Neved elhangzik a szinkronizált játék stáblistájában, mint kiemelt támogató.</li>
-        <li><strong class="blood-text">10 000 Ft felett:</strong> Kiemelt főtámogatóként jelenünk meg a neveddel a stáblistában és a támogatói fal élén.</li>
-      </ul>
+    <a href="https://paypal.com" target="_blank" class="card card-paypal reveal" style="transition-delay:0.1s">
+      <span class="card-icon">🅿</span>
+      <div class="card-platform">PayPal - HAMAROSAN</div>
+      <div class="card-desc">Gyors, biztonságos</div>
+      <div class="card-link">Támogatás indítása</div>
+    </a>
+
+    <a href="https://ko-fi.com/animachinastudios" target="_blank" class="card card-kofi reveal" style="transition-delay:0.2s">
+      <span class="card-icon">☕</span>
+      <div class="card-platform">Ko-fi</div>
+      <div class="card-desc">Vegyél nekünk egy kávét! Egyszerű, díjmentes adományozás – jutalommal vagy anélkül.</div>
+      <div class="card-link">Kávét hozok</div>
+    </a>
+
+    <a href="https://patreon.com" target="_blank" class="card card-patreon reveal" style="transition-delay:0.3s">
+      <span class="card-icon">🎖</span>
+      <div class="card-platform">Patreon - HAMAROSAN</div>
+      <div class="card-desc">Havi előfizetéssel exkluzív tartalmakhoz, előnézetekhez és a közösség tagjává válhatsz.</div>
+      <div class="card-link">Csatlakozás</div>
+    </a>
+
+    <a href="https://animachina-studios.itch.io/" target="_blank" class="card card-itch reveal" style="transition-delay:0.4s">
+      <span class="card-icon">🎮</span>
+      <div class="card-platform">Itch.io</div>
+      <div class="card-desc">Egy Projekt letöltése előtt az oldal kiírja hogy szeretnél e támogatni minket! Ezt ki tudod hagyni ha rányomsz a "No thanks, just make to the downloads" gombra</div>
+      <div class="card-link">Megnyitás</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY SUPPORT -->
+<section>
+  <p class="section-label reveal">Miért számít</p>
+  <h2 class="section-title reveal">Miért <span>érdemes</span> támogatni?</h2>
+
+  <div class="why-grid">
+    <div class="why-text reveal">
+      <p>Az Animachina Stúdió egy kis, <strong>független magyar alkotói csapat</strong>, amely videó játékok szinkron magyarítását készíti. Jelenleg a <strong>Poppy Playtime</strong> teljes magyar szinkronján dolgozunk.</p>
+      <p>Nincs mögöttünk nagy kiadó vagy befektető. <strong>Minden fillér, amit tőled kapunk</strong>, közvetlenül a szerver költségekbe, a hangstúdió munkájára és a magyarítás minőségére fordítódik.</p>
+      <p>Amikor minket támogatsz, nemcsak egy weboldalt tartasz fenn – <strong>lehetővé teszed, hogy a következő fejezet is magyarul szóljon</strong>.</p>
     </div>
-  </header>
 
-  <main>
-    <div class="card-grid">
-
-      <!-- Patreon kártya -->
-      <a class="card" href="https://www.patreon.com/AnimachinaStudio" target="_blank">
-        <div class="card-bg"></div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Patreon_logo.svg" alt="Patreon logó">
-        <h2>Patreon</h2>
-        <p>Légy részese a közösségünknek – a támogatók exkluzív kulisszatitkokhoz és előzetesekhez is hozzáférhetnek!</p>
-        <div class="card-hover"></div>
-      </a>
-
-      <!-- PayPal kártya -->
-      <a class="card" href="">
-        <div class="card-bg"></div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal logó">
-        <h2>PayPal – HAMAROSAN</h2>
-        <p>Egyszeri támogatásod gyorsan és biztonságosan megvalósítható ezzel az opcióval.</p>
-        <div class="card-hover"></div>
-      </a>
-
-      <!-- Ko-fi kártya -->
-      <a class="card" href="https://ko-fi.com/animachinastudios" target="_blank">
-        <div class="card-bg"></div>
-        <img src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/670f5a01229bf8a18f97a3c1_favion.png" alt="Ko-fi logó">
-        <h2>Ko-fi</h2>
-        <p>Egy kis figyelmesség is sokat jelent – „dobj be egy kávéra”! ☕</p>
-        <div class="card-hover"></div>
-      </a>
-
-    </div>
-  </main>
-
-  <section class="supp">
-    <div class="wrap">
-      <div id="support-meter" class="meter" aria-label="Támogatottság">
-        <div class="ring"></div>
-        <div class="center">
-          <div class="value" id="support-value">0%</div>
-          <div class="label">Poppy Playtime Chapter 3 Támogatottság</div>
+    <div class="why-bullets">
+      <div class="bullet-item reveal" style="transition-delay:0.1s">
+        <div class="bullet-icon">🌐</div>
+        <div>
+          <div class="bullet-title">Weboldal fenntartás</div>
+          <div class="bullet-body">Szerver, domain, tárhelydíjak – a jelenlétünk az interneten nem ingyenes, de a tartalmunk igen.</div>
         </div>
-        <div class="blood-drips"></div>
+      </div>
+      <div class="bullet-item reveal" style="transition-delay:0.3s">
+        <div class="bullet-icon">🎮</div>
+        <div>
+          <div class="bullet-title">Több játék, több magyar hang</div>
+          <div class="bullet-body">Célunk, hogy ne csak a Poppy Playtime szóljon magyarul – újabb játékok is sorra kerülhetnek a támogatásoddal.</div>
+        </div>
+      </div>
+      <div class="bullet-item reveal" style="transition-delay:0.4s">
+        <div class="bullet-icon">🏆</div>
+        <div>
+          <div class="bullet-title">Közösség ereje</div>
+          <div class="bullet-body">A támogatóink neve örökre bekerül a Támogatói Falra – köszönetünk nyilvános és tartós.</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Támogatói fal -->
-  <section class="support-wall">
-    <h2 class="glow-text">🎖️ TÁMOGATÓI FAL</h2>
-    <!--<p>JELENLEG NINCS TÁMOGATÓ.</p>--->
-    
-    <div class="support-card">
-        <span class="support-name">Arynox</span>
-        <span class="support-amount">Weboldal Támogatója</span>
-    </div>
-    <div class="support-card">
-        <span class="support-name">OwnMcKendry</span>
-        <span class="support-amount">Videó</span>
-    </div>
-    <div class="support-card">
-        <span class="support-name">Trafn</span>
-        <span class="support-amount">Videó</span>
-    </div>
-  </section>
+<div class="divider"></div>
 
-  <footer>
-    <p class="glow-text">Hálásan köszönjük, hogy támogatod az <strong class="blood-text">Animachina Stúdió</strong> küldetését! 🎮🇭🇺</p>
-  </footer>
+<!-- SUPPORTER WALL -->
+<section class="wall-section">
+  <div class="wall-header">
+    <div>
+      <p class="section-label reveal">Hősök névtára</p>
+      <h2 class="section-title reveal">Támogatói <span>Fal</span></h2>
+    </div>
+    <div class="total-box reveal">
+      <div class="total-label">Összesen begyűjtve</div>
+      <div class="total-amount">59 $ - 20.000 FT</div>
+    </div>
+  </div>
+
+  <div class="wall-grid">
+
+    <!-- Gold tier -->
+    <div class="supporter-card tier-gold reveal" style="transition-delay:0.05s">
+      <span class="supporter-badge">👑</span>
+      <div class="supporter-name">rotary94</div>
+      <div class="supporter-amount">21$</div>
+    </div>
+    <div class="supporter-card tier-gold reveal" style="transition-delay:0.10s">
+      <span class="supporter-badge">👑</span>
+      <div class="supporter-name">eszter.skull</div>
+      <div class="supporter-amount">16$</div>
+    </div>
+    <div class="supporter-card tier-gold reveal" style="transition-delay:0.10s">
+      <span class="supporter-badge">👑</span>
+      <div class="supporter-name">gerapas</div>
+      <div class="supporter-amount">9$</div>
+    </div>
+    <div class="supporter-card tier-gold reveal" style="transition-delay:0.15s">
+      <span class="supporter-badge">👑</span>
+      <div class="supporter-name">pusztailaca</div>
+      <div class="supporter-amount">4$</div>
+    </div>
+
+    <!-- Silver tier -->
+    <div class="supporter-card tier-silver reveal" style="transition-delay:0.20s">
+      <span class="supporter-badge">⭐</span>
+      <div class="supporter-name">tdavidamg</div>
+      <div class="supporter-amount">4$</div>
+    </div>
+    <div class="supporter-card tier-silver reveal" style="transition-delay:0.25s">
+      <span class="supporter-badge">⭐</span>
+      <div class="supporter-name">balint43</div>
+      <div class="supporter-amount">2$</div>
+    </div>
+    <div class="supporter-card tier-silver reveal" style="transition-delay:0.30s">
+      <span class="supporter-badge">⭐</span>
+      <div class="supporter-name">bence20000</div>
+      <div class="supporter-amount">2$</div>
+    </div>
+    <div class="supporter-card tier-silver reveal" style="transition-delay:0.35s">
+      <span class="supporter-badge">⭐</span>
+      <div class="supporter-name">80jocy</div>
+      <div class="supporter-amount">1$</div>
+    </div>
+
+    <!-- Regular 
+    <div class="supporter-card reveal" style="transition-delay:0.40s">
+      <div class="supporter-name">Nagy Zsolt</div>
+      <div class="supporter-amount">€40</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.45s">
+      <div class="supporter-name">Kiss Dóra</div>
+      <div class="supporter-amount">€35</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.50s">
+      <div class="supporter-name">Papp Roland</div>
+      <div class="supporter-amount">€30</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.55s">
+      <div class="supporter-name">Lukács Nóra</div>
+      <div class="supporter-amount">€25</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.60s">
+      <div class="supporter-name">Balogh Tibor</div>
+      <div class="supporter-amount">€25</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.65s">
+      <div class="supporter-name">Sipos Eszter</div>
+      <div class="supporter-amount">€20</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.70s">
+      <div class="supporter-name">Farkas Ádám</div>
+      <div class="supporter-amount">€20</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.75s">
+      <div class="supporter-name">Oláh Viktor</div>
+      <div class="supporter-amount">€15</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.80s">
+      <div class="supporter-name">Juhász Krisztina</div>
+      <div class="supporter-amount">€15</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.85s">
+      <div class="supporter-name">Takács Imre</div>
+      <div class="supporter-amount">€13</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.90s">
+      <div class="supporter-name">Bíró Orsolya</div>
+      <div class="supporter-amount">€10</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:0.95s">
+      <div class="supporter-name">Csizmadia B.</div>
+      <div class="supporter-amount">€10</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:1.00s">
+      <div class="supporter-name">Mészáros Helga</div>
+      <div class="supporter-amount">€10</div>
+    </div>
+    <div class="supporter-card reveal" style="transition-delay:1.05s">
+      <div class="supporter-name">Ferenczi Máté</div>
+      <div class="supporter-amount">€5</div>
+    </div>
+    -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Animachina<span>.</span>Stúdió</div>
+  <div class="footer-copy">© 2025 Animachina Stúdió — Minden jog fenntartva</div>
+</footer>
 
 <script>
-const canvas = document.getElementById('smokeCanvas');
-const ctx = canvas.getContext('2d');
+  // ─── RED SMOKE CANVAS ───
+  const canvas = document.getElementById('smoke-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
 
-let particles = [];
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+  class Particle {
+    constructor() { this.reset(); }
 
-function createParticle() {
-  return {
-    x: Math.random() * canvas.width,
-    y: canvas.height + 100,
-    radius: 100 + Math.random() * 100,
-    speedY: 0.5 + Math.random() * 1,
-    alpha: 0.1 + Math.random() * 0.2
-  };
-}
-
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach((p, i) => {
-    p.y -= p.speedY;
-    ctx.beginPath();
-    let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-    gradient.addColorStop(0, `rgba(255, 0, 0, ${p.alpha})`);
-    gradient.addColorStop(1, `rgba(255, 0, 0, 0)`);
-    ctx.fillStyle = gradient;
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Remove if out of screen
-    if (p.y + p.radius < 0) {
-      particles.splice(i, 1);
+    reset() {
+      // Spawn along the right edge of the canvas
+      this.x = canvas.width * 0.7 + Math.random() * canvas.width * 0.4;
+      this.y = canvas.height * 0.2 + Math.random() * canvas.height * 0.7;
+      // Drift leftward with slight vertical float
+      this.vx = -(Math.random() * 1.4 + 0.5);
+      this.vy = -(Math.random() * 0.5 + 0.1);
+      this.size = Math.random() * 100 + 50;
+      this.alpha = Math.random() * 0.25 + 0.05;
+      this.life = 0;
+      this.maxLife = Math.random() * 320 + 220;
+      this.red = 200 + Math.floor(Math.random() * 55);
+      this.green = Math.floor(Math.random() * 20);
+      this.blue = Math.floor(Math.random() * 20);
     }
-  });
 
-  while (particles.length < 30) {
-    particles.push(createParticle());
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life++;
+      // Slight vertical turbulence, no horizontal randomness to preserve leftward flow
+      this.vy += (Math.random() - 0.5) * 0.03;
+      this.size += 0.4;
+
+      const ratio = this.life / this.maxLife;
+      if (ratio < 0.15) {
+        this.alpha = (ratio / 0.15) * 0.22;
+      } else {
+        this.alpha = (1 - ratio) * 0.22;
+      }
+
+      if (this.life >= this.maxLife || this.x < -this.size) this.reset();
+    }
+
+    draw() {
+      const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+      grd.addColorStop(0, `rgba(${this.red},${this.green},${this.blue},${this.alpha})`);
+      grd.addColorStop(1, `rgba(${this.red},${this.green},${this.blue},0)`);
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 
-  requestAnimationFrame(drawParticles);
-}
+  // Pre-scatter particles across their natural path (right side, various life stages)
+  for (let i = 0; i < 60; i++) {
+    const p = new Particle();
+    // Spread them already in motion across the canvas
+    p.x = Math.random() * canvas.width;
+    p.y = canvas.height * 0.1 + Math.random() * canvas.height * 0.8;
+    p.life = Math.floor(Math.random() * p.maxLife);
+    particles.push(p);
+  }
 
-drawParticles();
+  function animateSmoke() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateSmoke);
+  }
+  animateSmoke();
 
-// Flicker effect
-setInterval(() => {
-  const flicker = document.querySelector('.flicker');
-  flicker.style.opacity = Math.random() * 0.1;
-}, 100);
-</script>
-
-<audio id="bg-sound" src="images/sound.wav" preload="auto" loop autoplay></audio>
-
-<script>
-
-  const sound = document.getElementById("bg-sound");
-
-  function enableSound() {
-    sound.volume = 1.0; // halkítva indítjuk, módosítható
-    sound.play().catch(e => {
-      console.warn("A hang nem indult el automatikusan:", e);
+  // ─── SCROLL REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
     });
-    document.removeEventListener("click", enableSound);
-  }
-
-  // Első kattintás után indul a hang
-  document.addEventListener("click", enableSound);
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
 </script>
-
-    <script src="scripts/preloader.js"></script>
-    <script src="scripts/meter.js"></script>
 </body>
 </html>
