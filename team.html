@@ -8,6 +8,53 @@
   <link rel="stylesheet" href="css/team.css">
   <link rel="icon" type="image/png" href="images/icon.jpg">
 </head>
+<style>
+  /* Emojik alapból rejtve */
+.muscle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  font-size: 30px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Bal oldal */
+.muscle.left {
+  left: -30px;
+}
+
+/* Jobb oldal */
+.muscle.right {
+  right: -30px;
+}
+
+/* Hover effekt */
+.team-card:hover .muscle {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* Animáció: "feszítés" */
+.team-card:hover .muscle.left {
+  animation: flexLeft 0.5s ease forwards;
+}
+
+.team-card:hover .muscle.right {
+  animation: flexRight 0.5s ease forwards;
+}
+
+@keyframes flexLeft {
+  0% { left: -30px; transform: translateY(-50%) scale(0.5); }
+  100% { left: 10px; transform: translateY(-50%) scale(1.2); }
+}
+
+@keyframes flexRight {
+  0% { right: -30px; transform: translateY(-50%) scale(0.5); }
+  100% { right: 10px; transform: translateY(-50%) scale(1.2); }
+}
+</style>
 <body>
 <!-- NAV -->
 <nav>
@@ -83,16 +130,33 @@
     <div class="team-grid reveal">
 
       <div class="team-card">
-        <div class="card-avatar-placeholder">
+      <div class="card-avatar-placeholder">
         <img src="images/szinkronok/choso.jpg" alt="IzmosCica">
       </div>
-        <div class="role-tag rt-graphic">Grafikus</div>
-        <div class="card-name">IzmosCica</div>
-        <div class="card-role">Grafikus</div>
-        <div class="card-links">
-          <a class="card-link" href="https://www.instagram.com/viviennct/" target="_blank">Instagram</a>
-        </div>
+
+      <div class="muscle left">💪</div>
+      <div class="muscle right">💪</div>
+
+      <audio class="meow-sound" src="images/meow.mp3"></audio>
+
+      <div class="role-tag rt-graphic">Grafikus</div>
+      <div class="card-name">IzmosCica</div>
+      <div class="card-role">Grafikus</div>
+      <div class="card-links">
+        <a class="card-link" href="https://www.instagram.com/viviennct/" target="_blank">Instagram</a>
       </div>
+    </div>
+
+    <script>
+      document.querySelectorAll('.team-card').forEach(card => {
+      const audio = card.querySelector('.meow-sound');
+
+      card.addEventListener('mouseenter', () => {
+        audio.currentTime = 0;
+        audio.play();
+      });
+    });
+    </script>
 
     <div class="team-card">
       <div class="card-avatar-placeholder">
