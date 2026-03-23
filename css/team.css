@@ -13,7 +13,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
     body {
       background: var(--bg);
@@ -21,6 +21,7 @@
       font-family: 'Rajdhani', sans-serif;
       font-size: 17px;
       overflow-x: hidden;
+      overflow-y: scroll;
     }
 
     /* ── SCROLLBAR ── */
@@ -28,7 +29,7 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 3px; }
 
-    /* ── NAV ── */
+    /* ── NAV ── 
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -63,6 +64,7 @@
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--neon); text-shadow: 0 0 8px var(--neon); }
+    */
 
     /* ── HERO ── */
     .hero {
@@ -633,9 +635,9 @@
 
     /* ── MOBILE ── */
     @media (max-width: 768px) {
-      nav { padding: 0 1.2rem; }
+      /*nav { padding: 0 1.2rem; }
       .nav-links { gap: 1rem; }
-      .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+      .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }*/
       .leader-section { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
       .leader-links { justify-content: center; }
       .leader-visual { margin-bottom: 1rem; }

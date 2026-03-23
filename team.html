@@ -6,6 +6,8 @@
   <title>Animachina Stúdió – Csapat</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/team.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/png" href="images/icon.jpg">
 </head>
 <style>
@@ -57,15 +59,62 @@
 </style>
 <body>
 <!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">ANIMACHINA</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Főoldal</a></li>
-    <li><a href="translations.html">Magyarítások</a></li>
-    <li><a href="discord.html">Discord</a></li>
-    <li><a href="support.html">Támogatás</a></li>
-  </ul>
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="index.html"><img src="images/logo.png" alt="Animachina Stúdió"></a>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+          <a href="index.html#careers" class="nav-link">FŐOLDAL</a>
+            <div class="nav-item dropdown">
+                <span class="nav-link">MAGYAROSÍTÁSOK <span class="arrow">▼</span></span>
+                <div class="dropdown-content">
+                    <a href="translations.html#chapter1">POPPY PLAYTIME 1. FEJEZET</a>
+                    <a href="translations.html#chapter2">POPPY PLAYTIME 2. FEJEZET</a>
+                    <a href="translations.html#chapter3">POPPY PLAYTIME 3. FEJEZET</a>
+                    <a href="translations.html#chapter4">POPPY PLAYTIME 4. FEJEZET</a>
+                    <a href="translations.html#chapter5">POPPY PLAYTIME 5. FEJEZET</a>
+                    <a href="hph.html">HUNGARIAN PATCH HUB - Magyarosítás Telepítő</a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <span class="nav-link">RÓLUNK <span class="arrow">▼</span></span>
+                <div class="dropdown-content">
+                    <a href="index.html#about">A STÚDIÓ</a>
+                    <a href="team.html">A CSAPAT</a>
+                </div>
+            </div>
+
+            <a href="index.html#careers" class="nav-link">CSATLAKOZÁS</a>
+            <a href="index.html#news" class="nav-link">HÍREK</a>
+            <a href="index.html#contact" class="nav-link">KAPCSOLAT</a>
+            <a href="support.html" class="nav-link">TÁMOGATÁS</a>
+        </div>
+
+        <div class="nav-mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 </nav>
+
+<div class="social-bar">
+    <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank" class="social-icon">
+        <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://www.tiktok.com/@animachinastudio" target="_blank" class="social-icon">
+        <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="social-icon">
+        <i class="fab fa-discord"></i>
+    </a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -738,5 +787,6 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 </script>
+<script src="script.js"></script>
 </body>
 </html>

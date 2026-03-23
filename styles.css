@@ -72,7 +72,7 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     z-index: 1000;
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
@@ -183,6 +183,11 @@ a {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+
+    position: absolute;   /* EZ A LÉNYEG */
+    right: 2rem;          /* fix hely */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .nav-mobile-toggle span {
@@ -191,6 +196,8 @@ a {
     background: var(--text-white);
     transition: all var(--transition-fast);
 }
+
+
 
 /* ========================================
    SOCIAL BAR

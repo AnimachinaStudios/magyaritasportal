@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Animachina Stúdió - Támogatás</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="icon" type="image/png" href="images/icon.jpg">
 <style>
   :root {
@@ -32,46 +34,7 @@
     overflow-x: hidden;
   }
 
-  /* ─── NAVIGATION ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 18px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(5,5,8,0.7);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 18px;
-    color: var(--white);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .nav-logo span { color: var(--red); }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 36px;
-  }
-  nav ul a {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-size: 13px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  nav ul a:hover, nav ul a.active { color: var(--red); }
+  /* ─── NAVIGATION ─── (handled by styles.css) ─── */
 
   /* ─── HERO ─── */
   .hero {
@@ -616,21 +579,69 @@
     .why-grid { grid-template-columns: 1fr; }
     .wall-header { flex-direction: column; align-items: flex-start; }
     footer { flex-direction: column; text-align: center; }
+    .scroll-indicator { display: none; }
   }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">Animachina <span>Stúdió</span></div>
-  <ul>
-    <li><a href="index.html">Főoldal</a></li>
-    <li><a href="translations.html">Projektek</a></li>
-    <li><a href="team.html">Csapat</a></li>
-    <li><a href="#platforms" class="active">Támogatás</a></li>
-  </ul>
-</nav>
+<nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="Animachina Stúdió">
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+              <a href="index.html" class="nav-link">FŐOLDAL</a>
+                <div class="nav-item dropdown">
+                    <span class="nav-link">MAGYAROSÍTÁSOK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="translations.html#chapter1">POPPY PLAYTIME 1. FEJEZET</a>
+                        <a href="translations.html#chapter2">POPPY PLAYTIME 2. FEJEZET</a>
+                        <a href="translations.html#chapter3">POPPY PLAYTIME 3. FEJEZET</a>
+                        <a href="translations.html#chapter4">POPPY PLAYTIME 4. FEJEZET</a>
+                        <a href="translations.html#chapter5">POPPY PLAYTIME 5. FEJEZET</a>
+                        <a href="hph.html">HUNGARIAN PATCH HUB - Magyarosítás Telepítő</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item dropdown">
+                    <span class="nav-link">RÓLUNK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="#about">A STÚDIÓ</a>
+                        <a href="team.html">A CSAPAT</a>
+                    </div>
+                </div>
+                
+                <a href="#careers" class="nav-link">CSATLAKOZÁS</a>
+                <a href="#news" class="nav-link">HÍREK</a>
+                <a href="#contact" class="nav-link">KAPCSOLAT</a>
+                <a href="support.html" class="nav-link">TÁMOGATÁS</a>
+            </div>
+            
+            <div class="nav-mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+<div class="social-bar">
+    <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank" class="social-icon">
+        <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://www.tiktok.com/@animachinastudio" target="_blank" class="social-icon">
+        <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="social-icon">
+        <i class="fab fa-discord"></i>
+    </a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -943,16 +954,17 @@
   animateSmoke();
 
   // ─── SCROLL REVEAL ───
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        observer.unobserve(e.target);
+        revealObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
+
+<script src="script.js"></script>
 </body>
 </html>
