@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animachina Stúdió - Zene Lejátszó</title>
+<link rel="stylesheet" href="zene.css">
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+<div class="crt"></div>
+
+<div class="shell">
+  <div class="logo">Zene Lejátszó</div>
+  <div class="logo-tag">▶ ANIMACHINA AUDIO SYSTEM ◀</div>
+
+  <div class="stage">
+
+    <!-- CASSETTE + DISC -->
+    <div class="cassette-col">
+      <div class="cassette" id="cassette">
+        <div class="c-body">
+          <div class="c-rib"></div>
+          <div class="c-label" id="c-label">
+            <img class="c-label-img" id="c-label-img" src="" alt="" style="opacity:0" draggable="false">
+            <div class="c-label-color" id="c-label-color" style="color:rgba(255,255,255,.3)">VÁLASSZ EGY ZENÉT</div>
+          </div>
+          <div class="c-led">
+            <div class="led red"></div>
+            <div class="led green"></div>
+          </div>
+          <div class="c-window">
+            <div class="reel" id="reel-l">
+              <div class="spoke" style="transform:rotate(0deg) translateX(-50%)"></div>
+              <div class="spoke" style="transform:rotate(120deg) translateX(-50%)"></div>
+              <div class="spoke" style="transform:rotate(240deg) translateX(-50%)"></div>
+            </div>
+            <div class="reel" id="reel-r">
+              <div class="spoke" style="transform:rotate(60deg) translateX(-50%)"></div>
+              <div class="spoke" style="transform:rotate(180deg) translateX(-50%)"></div>
+              <div class="spoke" style="transform:rotate(300deg) translateX(-50%)"></div>
+            </div>
+          </div>
+          <div class="c-screw tl"></div><div class="c-screw tr"></div>
+          <div class="c-screw bl"></div><div class="c-screw br"></div>
+        </div>
+      </div>
+
+      <div class="disc-wrap">
+        <div class="disc-ring" id="disc-ring">
+          <img class="disc-art" id="disc-art" src="" alt="" style="opacity:0">
+          <canvas class="disc-canvas" id="disc-canvas" width="180" height="180"></canvas>
+          <div class="disc-shine"></div>
+        </div>
+        <div class="disc-hole"></div>
+      </div>
+      <div class="now-title" id="now-title">— VÁLASSZ SZÁMOT —</div>
+      <div class="now-artist" id="now-artist">&nbsp;</div>
+    </div>
+
+    <!-- CONTROLS + TRACKLIST -->
+    <div class="controls-col">
+      <div class="visualizer" id="viz"></div>
+
+      <div class="np-strip">
+        <div class="rec-dot"></div>
+        <div class="np-name" id="np-name">-- VÁLASSZ SZÁMOT --</div>
+        <div class="np-time" id="np-time">0:00 / 0:00</div>
+      </div>
+
+      <div class="prog-wrap" id="prog-wrap">
+        <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn" id="btn-prev" title="Előző">⏮</button>
+        <button class="btn" id="btn-rw" title="-10s">⏪</button>
+        <button class="btn play" id="btn-play">▶</button>
+        <button class="btn" id="btn-ff" title="+10s">⏩</button>
+        <button class="btn" id="btn-next" title="Következő">⏭</button>
+      </div>
+
+      <div class="extras">
+        <div class="spd-group">
+          <span class="micro-label">SPD</span>
+          <button class="spd-btn" data-s="0.5">0.5×</button>
+          <button class="spd-btn on" data-s="1">1×</button>
+          <button class="spd-btn" data-s="1.5">1.5×</button>
+          <button class="spd-btn" data-s="2">2×</button>
+        </div>
+        <div class="vol-group">
+          <span class="micro-label">VOL</span>
+          <input type="range" id="vol" min="0" max="1" step="0.01" value="0.85">
+        </div>
+      </div>
+
+      <div class="tracklist">
+        <div class="tracklist-header">KAZETTA LISTA</div>
+        <div id="tlist"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<audio id="aud"></audio>
+
+<script>
+/* ══════════════════════════════════════════════════
+   TRACK ADATOK — IDE ÍRDÁTOK A SAJÁT ZENÉITEKET
+   
+   audioUrl: a WAV fájl neve (pl. "01.wav")
+             Ha az index.html mellé teszed a WAV fájlokat,
+             elég csak a fájlnév.
+   imageUrl: borítókép (pl. "cover1.jpg") vagy null
+   color:    neon szín a témához (#rrggbb)
+══════════════════════════════════════════════════ */
+const TRACKS = [
+  {
+    name:     "CSÁBÍT",
+    artist:   "Zazaa",
+    audioUrl: "zene/track1.mp3",
+    imageUrl: "zene/1.png",
+    color:    "#00ffff",
+  },
+  {
+    name:     "ÉVEK",
+    artist:   "Zazaa",
+    audioUrl: "zene/track2.mp3",
+    imageUrl: "zene/2.png",
+    color:    "#ff0040",
+  },
+  {
+    name:     "KÁBULOK",
+    artist:   "Zazaa",
+    audioUrl: "zene/track3.mp3",
+    imageUrl: "zene/3.png",
+    color:    "#cc00ff",
+  },
+  {
+    name:     "ANGYAL",
+    artist:   "Zazaa",
+    audioUrl: "zene/track4.mp3",
+    imageUrl: "zene/4.png",
+    color:    "#ffe600",
+  },
+  {
+    name:     "KÉK ÉS PIROS",
+    artist:   "Zazaa",
+    audioUrl: "zene/track5.mp3",
+    imageUrl: "zene/5.png",
+    color:    "#ffffff",
+  },
+];
+/* ════════════════════════════════════════════════ */
+
+const aud = document.getElementById('aud');
+let curIdx = -1, playing = false, speed = 1;
+
+/* ── CSS variable helper ── */
+function setTC(col){
+  document.documentElement.style.setProperty('--tc', col);
+}
+
+/* ── BACKGROUND CANVAS ── */
+const bg = document.getElementById('bg');
+const bx = bg.getContext('2d');
+let BW, BH;
+function rsz(){ BW=bg.width=innerWidth; BH=bg.height=innerHeight; }
+window.addEventListener('resize', rsz); rsz();
+
+const pts = Array.from({length:70}, ()=>({
+  x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+  vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
+  r:Math.random()*2+.5,
+  col:['#00ffff','#ff0040','#cc00ff','#ffe600','#00ff88'][Math.floor(Math.random()*5)],
+  a:Math.random()*.5+.1, ph:Math.random()*Math.PI*2
+}));
+
+function animBG(ts){
+  requestAnimationFrame(animBG);
+  bx.clearRect(0,0,BW,BH);
+  const beat = playing ? Math.sin(ts/480)*.5+.5 : .15;
+
+  /* grid */
+  bx.strokeStyle='rgba(0,255,255,0.03)'; bx.lineWidth=.5;
+  const gs=65, ox=(ts*.012)%gs, oy=(ts*.008)%gs;
+  for(let x=-gs+ox;x<BW+gs;x+=gs){bx.beginPath();bx.moveTo(x,0);bx.lineTo(x,BH);bx.stroke();}
+  for(let y=-gs+oy;y<BH+gs;y+=gs){bx.beginPath();bx.moveTo(0,y);bx.lineTo(BW,y);bx.stroke();}
+
+  /* horizon glow lines */
+  [.28,.5,.72].forEach((t,i)=>{
+    const y=BH*t+Math.sin(ts/600+i*1.3)*10*beat;
+    const a=(.05+beat*.06)*(1-Math.abs(t-.5)*1.5+.4);
+    const g=bx.createLinearGradient(0,y,BW,y);
+    g.addColorStop(0,'transparent');
+    g.addColorStop(.35,i===1?`rgba(0,255,255,${a})`:`rgba(204,0,255,${a*.6})`);
+    g.addColorStop(.65,i===1?`rgba(0,255,255,${a})`:`rgba(204,0,255,${a*.6})`);
+    g.addColorStop(1,'transparent');
+    bx.strokeStyle=g; bx.lineWidth=1+beat*2.5;
+    bx.beginPath(); bx.moveTo(0,y); bx.lineTo(BW,y); bx.stroke();
+  });
+
+  /* waveform */
+  if(playing){
+    bx.strokeStyle=`rgba(0,255,255,${.08+beat*.08})`; bx.lineWidth=1.5;
+    bx.beginPath();
+    for(let x=0;x<BW;x+=2){
+      const y=BH*.87+Math.sin(x/BW*Math.PI*5+ts/420)*(10+beat*20)+Math.sin(x/BW*Math.PI*9+ts/250)*(5+beat*10);
+      x===0?bx.moveTo(x,y):bx.lineTo(x,y);
+    }
+    bx.stroke();
+  }
+
+  /* particles */
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=BW; if(p.x>BW)p.x=0;
+    if(p.y<0)p.y=BH; if(p.y>BH)p.y=0;
+    const pulse=Math.sin(ts/900+p.ph)*.3+.7;
+    bx.save();
+    bx.globalAlpha=p.a*pulse;
+    bx.fillStyle=p.col; bx.shadowColor=p.col; bx.shadowBlur=playing?8+beat*10:3;
+    bx.beginPath(); bx.arc(p.x,p.y,p.r*(playing?1+beat*.9:1)*pulse,0,Math.PI*2); bx.fill();
+    bx.restore();
+  });
+}
+requestAnimationFrame(animBG);
+
+/* ── VISUALIZER ── */
+const vizEl = document.getElementById('viz');
+const BARS = 36;
+const bars = Array.from({length:BARS}, ()=>{ const b=document.createElement('div'); b.className='vbar'; vizEl.appendChild(b); return b; });
+function animViz(){
+  requestAnimationFrame(animViz);
+  const t=Date.now(), col=curIdx>=0?TRACKS[curIdx].color:'#00ffff';
+  bars.forEach((b,i)=>{
+    const ph=i/BARS*Math.PI*2;
+    const h=playing?(Math.abs(Math.sin(t/290+ph*2.3))*22+Math.abs(Math.sin(t/170+ph))*14+Math.random()*7):(Math.abs(Math.sin(t/1300+ph))*4+2);
+    b.style.height=Math.max(3,h)+'px';
+    b.style.background=`linear-gradient(0deg,${col},#cc00ff)`;
+  });
+}
+animViz();
+
+/* ── DISC PLACEHOLDER ── */
+function drawDisc(col, num){
+  const cv=document.getElementById('disc-canvas');
+  const cx=cv.getContext('2d'); const s=180;
+  cx.clearRect(0,0,s,s);
+  const g=cx.createRadialGradient(s/2,s/2,10,s/2,s/2,s/2);
+  g.addColorStop(0,'#0d0d20'); g.addColorStop(.6,'#080815'); g.addColorStop(1,'#04040e');
+  cx.fillStyle=g; cx.beginPath(); cx.arc(s/2,s/2,s/2,0,Math.PI*2); cx.fill();
+  for(let r=24;r<82;r+=9){ cx.strokeStyle=col+'25'; cx.lineWidth=.8; cx.beginPath(); cx.arc(s/2,s/2,r,0,Math.PI*2); cx.stroke(); }
+  const cg=cx.createRadialGradient(s/2,s/2,0,s/2,s/2,40);
+  cg.addColorStop(0,col+'60'); cg.addColorStop(1,'transparent');
+  cx.fillStyle=cg; cx.beginPath(); cx.arc(s/2,s/2,40,0,Math.PI*2); cx.fill();
+  cx.fillStyle=col; cx.font='bold 28px Orbitron,monospace';
+  cx.textAlign='center'; cx.textBaseline='middle';
+  cx.shadowColor=col; cx.shadowBlur=14;
+  cx.fillText(num,s/2,s/2);
+}
+
+/* ── APPLY THEME ── */
+function applyTheme(idx){
+  const tr=TRACKS[idx]; const col=tr.color;
+  setTC(col);
+
+  /* cassette label */
+  const lc=document.getElementById('c-label-color');
+  lc.style.background=`linear-gradient(135deg,${col}1a,${col}08)`;
+  lc.style.color=col;
+  lc.style.border=`1px solid ${col}50`;
+  lc.style.opacity='1';
+  lc.style.fontSize='.52rem';
+  lc.style.letterSpacing='.18em';
+  lc.textContent=tr.name;
+
+  const li=document.getElementById('c-label-img');
+  if(tr.imageUrl){ li.src=tr.imageUrl; li.style.opacity='1'; lc.style.opacity='0'; }
+  else { li.style.opacity='0'; lc.style.opacity='1'; }
+
+  /* disc */
+  const da=document.getElementById('disc-art'), dc=document.getElementById('disc-canvas');
+  if(tr.imageUrl){ da.src=tr.imageUrl; da.style.opacity='1'; dc.style.opacity='0'; }
+  else { da.style.opacity='0'; dc.style.opacity='1'; drawDisc(col, String(idx+1).padStart(2,'0')); }
+
+  document.getElementById('disc-ring').style.setProperty('--tc', col);
+
+  /* text */
+  document.getElementById('now-title').textContent=tr.name;
+  document.getElementById('now-artist').textContent=tr.artist;
+  const npn=document.getElementById('np-name');
+  npn.textContent=tr.name; npn.style.color=col; npn.style.textShadow=`0 0 8px ${col}`;
+
+  /* progress */
+  const pf=document.getElementById('prog-fill');
+  pf.style.background=`linear-gradient(90deg,${col},#cc00ff)`;
+  pf.style.boxShadow=`0 0 8px ${col}`;
+
+  document.getElementById('cassette').classList.add('active');
+  document.getElementById('disc-ring').classList.add('glow');
+}
+
+/* ── TRACKLIST ── */
+function buildList(){
+  const tl=document.getElementById('tlist'); tl.innerHTML='';
+  TRACKS.forEach((tr,i)=>{
+    const el=document.createElement('div');
+    el.className='track-item'+(i===curIdx?' selected':'');
+    el.style.setProperty('--ic',tr.color);
+    el.innerHTML=`<span class="ti-num">${String(i+1).padStart(2,'0')}</span><span class="ti-dot"></span><span class="ti-name">${tr.name}</span><span class="ti-artist">${tr.artist}</span><span class="ti-arrow">▶</span>`;
+    el.addEventListener('click',()=>selectTrack(i));
+    tl.appendChild(el);
+  });
+}
+
+/* ── TIME FORMAT ── */
+function fmt(s){ if(!s||isNaN(s))return'0:00'; return Math.floor(s/60)+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60); }
+
+/* ── SELECT TRACK ── */
+function selectTrack(idx){
+  if(idx===curIdx){ playing?doPause():doResume(); return; }
+  curIdx=idx;
+  applyTheme(idx);
+  buildList();
+  aud.src=TRACKS[idx].audioUrl;
+  aud.playbackRate=speed;
+  aud.volume=parseFloat(document.getElementById('vol').value);
+  aud.play().catch(()=>{});
+  playing=true;
+  updBtn(); setSpin(true);
+}
+
+function doPause(){ aud.pause(); playing=false; updBtn(); setSpin(false); }
+function doResume(){ aud.play().catch(()=>{}); playing=true; updBtn(); setSpin(true); }
+function updBtn(){ document.getElementById('btn-play').textContent=playing?'⏸':'▶'; }
+function setSpin(on){
+  document.getElementById('disc-ring').classList.toggle('spinning',on);
+  document.getElementById('reel-l').classList.toggle('spin',on);
+  document.getElementById('reel-r').classList.toggle('spin',on);
+}
+
+/* ── EVENTS ── */
+document.getElementById('btn-play').addEventListener('click',()=>{ if(curIdx<0){selectTrack(0);return;} playing?doPause():doResume(); });
+document.getElementById('btn-prev').addEventListener('click',()=>selectTrack((curIdx<=0?TRACKS.length:curIdx)-1));
+document.getElementById('btn-next').addEventListener('click',()=>selectTrack((curIdx+1)%TRACKS.length));
+document.getElementById('btn-rw').addEventListener('click',()=>{ aud.currentTime=Math.max(0,aud.currentTime-10); });
+document.getElementById('btn-ff').addEventListener('click',()=>{ aud.currentTime=Math.min(aud.duration||0,aud.currentTime+10); });
+
+document.querySelectorAll('.spd-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    speed=parseFloat(btn.dataset.s); aud.playbackRate=speed;
+    document.querySelectorAll('.spd-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+  });
+});
+
+document.getElementById('vol').addEventListener('input',function(){ aud.volume=parseFloat(this.value); });
+
+document.getElementById('prog-wrap').addEventListener('click',function(e){
+  const r=this.getBoundingClientRect();
+  if(aud.duration) aud.currentTime=aud.duration*(e.clientX-r.left)/r.width;
+});
+
+aud.addEventListener('timeupdate',()=>{
+  const c=aud.currentTime, d=aud.duration||0;
+  document.getElementById('prog-fill').style.width=(d?c/d*100:0)+'%';
+  document.getElementById('np-time').textContent=fmt(c)+' / '+fmt(d);
+});
+aud.addEventListener('ended',()=>selectTrack((curIdx+1)%TRACKS.length));
+
+/* ── INIT ── */
+buildList();
+drawDisc('#00ffff','?');
+</script>
+</body>
+</html>
