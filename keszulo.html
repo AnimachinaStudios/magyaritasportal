@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animachina Stúdió - Készülő Projektek</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/icon.jpg">
+    <style>
+        /* ── PAGE HEADER ── */
+        .page-header {
+            padding: 10rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(123,44,191,.35) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-header .label {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: .85rem;
+            letter-spacing: 4px;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p {
+            margin-top: 1.25rem;
+            color: var(--text-gray);
+            max-width: 520px;
+            margin-inline: auto;
+            font-size: .95rem;
+            line-height: 1.7;
+        }
+
+        /* ── ACTIVE PROJECTS SECTION ── */
+        .active-projects {
+            padding: 4rem 0 7rem;
+        }
+
+        /* ── PROJECT CARD ── */
+        .wip-card {
+            background: var(--secondary-bg);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+        }
+        .wip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(123,44,191,.25);
+        }
+
+        /* image side */
+        .wip-card__image {
+            position: relative;
+            overflow: hidden;
+        }
+        .wip-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        .wip-card:hover .wip-card__image img {
+            transform: scale(1.06);
+        }
+        .wip-card__badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            font-family: var(--font-heading);
+            font-size: .75rem;
+            letter-spacing: 2px;
+            padding: .35rem .9rem;
+            border-radius: 20px;
+        }
+
+        /* content side */
+        .wip-card__body {
+            padding: 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+        .wip-card__title {
+            font-family: var(--font-heading);
+            font-size: 1.9rem;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+        .wip-card__title span {
+            display: block;
+            font-size: 1rem;
+            color: var(--accent-purple);
+            letter-spacing: 3px;
+            margin-bottom: .25rem;
+        }
+        .wip-card__desc {
+            color: var(--text-gray);
+            font-size: .9rem;
+            line-height: 1.7;
+            max-width: 540px;
+        }
+
+        /* ── PROGRESS STEPS ── */
+        .progress-steps {
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+        }
+        .progress-step {
+            display: grid;
+            grid-template-columns: 140px 1fr 48px;
+            align-items: center;
+            gap: 1rem;
+        }
+        .progress-step__label {
+            font-family: var(--font-heading);
+            font-size: .85rem;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+        .progress-step__bar-wrap {
+            background: rgba(255,255,255,.08);
+            border-radius: 30px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-step__bar {
+            height: 100%;
+            border-radius: 30px;
+            transition: width 1.2s cubic-bezier(.4,0,.2,1);
+            width: 0;  /* animated via JS */
+        }
+        /* colour states */
+        .bar--done    { background: linear-gradient(90deg, #00c853, #64dd17); }
+        .bar--active  { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
+        .bar--pending { background: rgba(255,255,255,.15); }
+
+        .progress-step__pct {
+            font-family: var(--font-heading);
+            font-size: .9rem;
+            color: var(--text-gray);
+            text-align: right;
+        }
+        .progress-step__pct.done  { color: #64dd17; }
+        .progress-step__pct.now   { color: var(--accent-pink); }
+
+        /* step icon dot */
+        .progress-step__label::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: .5rem;
+            vertical-align: middle;
+            background: rgba(255,255,255,.2);
+        }
+        .progress-step.is-done .progress-step__label::before  { background: #64dd17; }
+        .progress-step.is-active .progress-step__label::before { background: var(--accent-pink); box-shadow: 0 0 6px var(--accent-pink); }
+
+        /* overall bar */
+        .wip-card__overall {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .wip-card__overall-bar-wrap {
+            flex: 1;
+            background: rgba(255,255,255,.06);
+            border-radius: 30px;
+            height: 6px;
+            overflow: hidden;
+        }
+        .wip-card__overall-bar {
+            height: 100%;
+            border-radius: 30px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            transition: width 1.4s cubic-bezier(.4,0,.2,1);
+            width: 0;
+        }
+        .wip-card__overall-label {
+            font-family: var(--font-heading);
+            font-size: .8rem;
+            color: var(--text-gray);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+        .wip-card__overall-pct {
+            font-family: var(--font-heading);
+            font-size: .95rem;
+            color: var(--accent-cyan);
+            min-width: 44px;
+            text-align: right;
+        }
+
+        /* ── EMPTY STATE ── */
+        .no-projects {
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-gray);
+        }
+        .no-projects i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: .3;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .wip-card {
+                grid-template-columns: 1fr;
+            }
+            .wip-card__image {
+                height: 220px;
+            }
+            .progress-step {
+                grid-template-columns: 120px 1fr 40px;
+            }
+        }
+        @media (max-width: 560px) {
+            .wip-card__body {
+                padding: 1.5rem;
+            }
+            .progress-step {
+                grid-template-columns: 105px 1fr 36px;
+                gap: .6rem;
+            }
+            .progress-step__label {
+                font-size: .78rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ NAVBAR (változatlan) ═══════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="Animachina Stúdió">
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">FŐLAP</a>
+                <div class="nav-item dropdown">
+                    <span class="nav-link">MAGYAROSÍTÁSOK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="translations.html#chapter1">POPPY PLAYTIME 1. FEJEZET</a>
+                        <a href="translations.html#chapter2">POPPY PLAYTIME 2. FEJEZET</a>
+                        <a href="translations.html#chapter3">POPPY PLAYTIME 3. FEJEZET</a>
+                        <a href="translations.html#chapter4">POPPY PLAYTIME 4. FEJEZET</a>
+                        <a href="translations.html#chapter5">POPPY PLAYTIME 5. FEJEZET</a>
+                        <a href="hph.html">HUNGARIAN PATCH HUB - Magyarosítás Telepítő</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <span class="nav-link">RÓLUNK <span class="arrow">▼</span></span>
+                    <div class="dropdown-content">
+                        <a href="index.html#about">A STÚDIÓ</a>
+                        <a href="team.html">A CSAPAT</a>
+                    </div>
+                </div>
+                <a href="index.html#careers" class="nav-link">CSATLAKOZÁS</a>
+                <a href="index.html#news" class="nav-link">HÍREK</a>
+                <a href="index.html#contact" class="nav-link">KAPCSOLAT</a>
+                <a href="zene.html" class="nav-link">ZENE</a>
+                <a href="keszulo.html" class="nav-link" style="color:var(--accent-cyan)">KÉSZÜLŐ</a>
+            </div>
+            <div class="nav-mobile-toggle" id="mobileToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════ SOCIAL BAR ═══════════════ -->
+    <div class="social-bar">
+        <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@AnimachinaStudio"  target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@animachinastudio"   target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+        <a href="https://discord.com/invite/b3DNs98Dnz"      target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+    </div>
+
+    <!-- ═══════════════ PAGE HEADER ═══════════════ -->
+    <div class="page-header">
+        <span class="label">ANIMACHINA STÚDIÓ</span>
+        <h1>KÉSZÜLŐ PROJEKTEK</h1>
+        <p>Kövesd figyelemmel aktív magyarosításaink előrehaladását – az előkészületektől egészen a kész modolásig!</p>
+    </div>
+
+    <!-- ═══════════════ ACTIVE PROJECTS ═══════════════ -->
+    <section class="active-projects">
+        <div class="container">
+
+            <!-- ══ CARD: Poppy Playtime Chapter 5 ══ -->
+            <div class="wip-card" data-aos>
+                <div class="wip-card__image">
+                    <img src="images/chapter5.png" alt="Poppy Playtime 5. Fejezet">
+                    <span class="wip-card__badge">FOLYAMATBAN</span>
+                </div>
+                <div class="wip-card__body">
+                    <div>
+                        <h2 class="wip-card__title">
+                            <span>POPPY PLAYTIME</span>
+                            5. FEJEZET: SÉRÜLT DOLGOK
+                        </h2>
+                        <p class="wip-card__desc">
+                            A Poppy Playtime ötödik fejezetének teljes magyar szinkronjain és szövegmagyarosításán dolgozunk. Kövesd az alábbi lépések előrehaladását, és csatlakozz Discord szerverünkre a legfrissebb hírekért!
+                        </p>
+                    </div>
+
+                    <!-- LÉPÉSEK -->
+                    <div class="progress-steps" id="ch5-steps">
+
+                        <div class="progress-step is-done"
+                             data-target="100" data-state="done">
+                            <span class="progress-step__label">Előkészületek</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--done"></div>
+                            </div>
+                            <span class="progress-step__pct done">100%</span>
+                        </div>
+
+                        <div class="progress-step is-active"
+                             data-target="45" data-state="active">
+                            <span class="progress-step__label">Szövegkönyv</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--active"></div>
+                            </div>
+                            <span class="progress-step__pct now">45%</span>
+                        </div>
+
+                        <div class="progress-step"
+                             data-target="0" data-state="pending">
+                            <span class="progress-step__label">Hangok</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--pending"></div>
+                            </div>
+                            <span class="progress-step__pct">25%</span>
+                        </div>
+
+                        <div class="progress-step"
+                             data-target="0" data-state="pending">
+                            <span class="progress-step__label">Modolás</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--pending"></div>
+                            </div>
+                            <span class="progress-step__pct">5%</span>
+                        </div>
+
+                    </div>
+
+                    <!-- OVERALL -->
+                    <div class="wip-card__overall">
+                        <span class="wip-card__overall-label">ÖSSZESÍTETT HALADÁS</span>
+                        <div class="wip-card__overall-bar-wrap">
+                            <div class="wip-card__overall-bar" data-target="36"></div>
+                        </div>
+                        <span class="wip-card__overall-pct">36%</span>
+                    </div>
+                </div>
+            </div>
+            <!-- ══ / CARD ══ -->
+
+        </div>
+    </section>
+
+    <!-- ═══════════════ CTA ═══════════════ -->
+    <section class="partnership-cta" style="padding: 4rem 0">
+        <div class="container">
+            <h3>SZERETNÉL SEGÍTENI?</h3>
+            <h2>CSATLAKOZZ A CSAPATHOZ!</h2>
+            <p>Fordítónak, szinkronhangnak, hangvágónak vagy grafikusnak is csatlakozhatsz – mindössze egy Discord fiókra van szükséged!</p>
+            <a href="https://discord.gg/b3DNs98Dnz" target="_blank" class="btn btn-large">Discord</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Animachina Stúdió">
+                    <div class="footer-contact">
+                        <h4>KAPCSOLAT</h4>
+                        <a href="mailto:kondix.dev@gmail.com">kondix.dev@gmail.com</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>KÖVESS MINKET</h4>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/animachinastudio/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@AnimachinaStudio"  target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.tiktok.com/@animachinastudio"   target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://discord.com/invite/b3DNs98Dnz"      target="_blank"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>NAVIGÁCIÓ</h4>
+                        <a href="index.html#about">RÓLUNK</a>
+                        <a href="index.html#news">HÍREK</a>
+                        <a href="index.html#projects">PROJEKTJEINK</a>
+                        <a href="index.html#careers">CSATLAKOZÁS</a>
+                        <a href="index.html#contact">KAPCSOLAT</a>
+                        <a href="keszulo.html">KÉSZÜLŐ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Animachina Stúdió, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        /* ── Animate progress bars on scroll ── */
+        const animateBars = (entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                /* individual step bars */
+                entry.target.querySelectorAll('.progress-step').forEach(step => {
+                    const bar    = step.querySelector('.progress-step__bar');
+                    const target = parseInt(step.dataset.target, 10);
+                    setTimeout(() => { bar.style.width = target + '%'; }, 200);
+                });
+
+                /* overall bar */
+                const overall = entry.target.querySelector('.wip-card__overall-bar');
+                if (overall) {
+                    const ot = parseInt(overall.dataset.target, 10);
+                    setTimeout(() => { overall.style.width = ot + '%'; }, 400);
+                }
+
+                observer.unobserve(entry.target);
+            });
+        };
+
+        const barObserver = new IntersectionObserver(animateBars, { threshold: 0.25 });
+        document.querySelectorAll('.wip-card').forEach(card => barObserver.observe(card));
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -2,6 +2,8 @@
    RESET & BASE STYLES
    ======================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +38,7 @@
     --transition-slow: 0.6s ease;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap');
+
 
 body {
     font-family: var(--font-body);
