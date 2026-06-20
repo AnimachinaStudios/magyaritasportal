@@ -252,6 +252,163 @@
                 font-size: .78rem;
             }
         }
+
+        /* ── MINI GRID SECTION ── */
+        .mini-grid-section {
+            padding: 0 0 7rem;
+        }
+        .mini-grid-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.25rem;
+        }
+
+        /* ── MINI CARD ── */
+        .mini-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,.06);
+            background: var(--secondary-bg);
+        }
+        .mini-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .4s ease, filter .4s ease;
+        }
+        .mini-card:hover img {
+            transform: scale(1.06);
+            filter: brightness(.35);
+        }
+
+        /* hover overlay */
+        .mini-card__overlay {
+            position: absolute;
+            inset: 0;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: .6rem;
+            opacity: 0;
+            transition: opacity .35s ease;
+            background: linear-gradient(to top, rgba(10,5,20,.95) 0%, rgba(10,5,20,.6) 60%, transparent 100%);
+        }
+        .mini-card:hover .mini-card__overlay {
+            opacity: 1;
+        }
+        .mini-card__name {
+            font-family: var(--font-heading);
+            font-size: .8rem;
+            letter-spacing: 1.5px;
+            line-height: 1.3;
+            color: #fff;
+        }
+        .mini-card__badge {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: .65rem;
+            letter-spacing: 1.5px;
+            padding: .2rem .6rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            margin-bottom: .25rem;
+            width: fit-content;
+        }
+
+        /* mini progress steps */
+        .mini-steps {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+        .mini-step {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: .4rem;
+        }
+        .mini-step__label {
+            font-family: var(--font-heading);
+            font-size: .65rem;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,.6);
+        }
+        .mini-step__pct {
+            font-family: var(--font-heading);
+            font-size: .65rem;
+            color: var(--text-gray);
+        }
+        .mini-step__pct.done { color: #64dd17; }
+        .mini-step__pct.now  { color: var(--accent-pink); }
+        .mini-step__bar-wrap {
+            grid-column: 1 / -1;
+            background: rgba(255,255,255,.1);
+            border-radius: 20px;
+            height: 5px;
+            overflow: hidden;
+            margin-top: -3px;
+        }
+        .mini-step__bar {
+            height: 100%;
+            border-radius: 20px;
+        }
+        .mini-bar--done    { background: linear-gradient(90deg,#00c853,#64dd17); }
+        .mini-bar--active  { background: linear-gradient(90deg,var(--accent-purple),var(--accent-pink)); }
+        .mini-bar--pending { background: rgba(255,255,255,.15); }
+
+        /* overall mini */
+        .mini-overall {
+            margin-top: .25rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .mini-overall span {
+            font-family: var(--font-heading);
+            font-size: .65rem;
+            color: var(--accent-cyan);
+            white-space: nowrap;
+        }
+        .mini-overall-bar-wrap {
+            flex: 1;
+            background: rgba(255,255,255,.08);
+            border-radius: 20px;
+            height: 4px;
+            overflow: hidden;
+        }
+        .mini-overall-bar {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            transition: width 1.2s cubic-bezier(.4,0,.2,1);
+            width: 0;
+        }
+
+        @media (max-width: 700px) {
+            .mini-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: .75rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .mini-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -316,7 +473,7 @@
             <!-- ══ CARD: Poppy Playtime Chapter 5 ══ -->
             <div class="wip-card" data-aos>
                 <div class="wip-card__image">
-                    <img src="images/chapter5.png" alt="Poppy Playtime 5. Fejezet">
+                    <img src="keszulo/poppy.png" alt="Poppy Playtime 5. Fejezet">
                     <span class="wip-card__badge">FOLYAMATBAN</span>
                 </div>
                 <div class="wip-card__body">
@@ -383,6 +540,402 @@
             </div>
             <!-- ══ / CARD ══ -->
 
+            <!-- ══ CARD: FNaF ══ -->
+            <div class="wip-card" data-aos>
+                <div class="wip-card__image">
+                    <img src="keszulo/fnaf.webp" alt="FNaF 1-2-3-4-SL">
+                    <span class="wip-card__badge">FOLYAMATBAN</span>
+                </div>
+                <div class="wip-card__body">
+                    <div>
+                        <h2 class="wip-card__title">
+                            <span>Five Nights at Freddy's</span>
+                            1-2-3-4-Sister Location
+                        </h2>
+                        <p class="wip-card__desc">
+                            A Five Nights at Freddy's játék szériájának a teljes magyar szinkronjain és szövegmagyarosításán dolgozunk. Kövesd az alábbi lépések előrehaladását, és csatlakozz Discord szerverünkre a legfrissebb hírekért!
+                        </p>
+                    </div>
+
+                    <!-- LÉPÉSEK -->
+                    <div class="progress-steps" id="ch5-steps">
+
+                        <div class="progress-step is-done"
+                             data-target="100" data-state="done">
+                            <span class="progress-step__label">Előkészületek</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--done"></div>
+                            </div>
+                            <span class="progress-step__pct done">100%</span>
+                        </div>
+
+                        <div class="progress-step is-active"
+                             data-target="45" data-state="active">
+                            <span class="progress-step__label">Szövegkönyv</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--active"></div>
+                            </div>
+                            <span class="progress-step__pct now">70%</span>
+                        </div>
+
+                        <div class="progress-step"
+                             data-target="0" data-state="pending">
+                            <span class="progress-step__label">Hangok</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--pending"></div>
+                            </div>
+                            <span class="progress-step__pct">0%</span>
+                        </div>
+
+                        <div class="progress-step"
+                             data-target="0" data-state="pending">
+                            <span class="progress-step__label">Modolás</span>
+                            <div class="progress-step__bar-wrap">
+                                <div class="progress-step__bar bar--pending"></div>
+                            </div>
+                            <span class="progress-step__pct">5%</span>
+                        </div>
+
+                    </div>
+
+                    <!-- OVERALL -->
+                    <div class="wip-card__overall">
+                        <span class="wip-card__overall-label">ÖSSZESÍTETT HALADÁS</span>
+                        <div class="wip-card__overall-bar-wrap">
+                            <div class="wip-card__overall-bar" data-target="15"></div>
+                        </div>
+                        <span class="wip-card__overall-pct">15%</span>
+                    </div>
+                </div>
+            </div>
+            <!-- ══ / CARD ══ -->
+
+
+        </div>
+    </section>
+
+    <!-- ═══════════════ MINI GRID ═══════════════ -->
+    <section class="mini-grid-section">
+        <div class="container">
+            <h2>TOVÁBBI PROJEKTEK (MAJD A JÖVŐBEN)</h2>
+            <div class="mini-grid" id="miniGrid">
+
+                <!-- Sally Face -->
+                <div class="mini-card">
+                    <img src="keszulo/sf.jpg" alt="Sally Face">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">SALLY FACE</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">NINCS A JÁTÉKBAN</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cult of the Lamb -->
+                <div class="mini-card">
+                    <img src="keszulo/col.jpg" alt="Cult of the Lamb">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">CULT OF THE LAMB</div>
+                         <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">NINCS A JÁTÉKBAN</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bendy and the Dark Revival -->
+                <div class="mini-card">
+                    <img src="keszulo/bendy2.jpg" alt="Bendy and the Dark Revival">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">BENDY AND THE DARK REVIVAL</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bendy and the Ink Machine -->
+                <div class="mini-card">
+                    <img src="keszulo/bendy1.jpg" alt="Bendy and the Ink Machine">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">BENDY AND THE INK MACHINE</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postal 2 -->
+                <div class="mini-card">
+                    <img src="keszulo/post.jpg" alt="Postal 2">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">POSTAL 2</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alien: Isolation -->
+                <div class="mini-card">
+                    <img src="keszulo/ai.jpg" alt="Alien: Isolation">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">ALIEN: ISOLATION</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amanda the Adventurer -->
+                <div class="mini-card">
+                    <img src="keszulo/ata.jpg" alt="Amanda the Adventurer">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">AMANDA THE ADVENTURER</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Granny -->
+                <div class="mini-card">
+                    <img src="keszulo/granny.jpg" alt="Granny">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">FOLYAMATBAN</span>
+                        <div class="mini-card__name">GRANNY</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">100%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:100%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">100%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:100%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">100%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:100%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">80%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:80%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>85%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="85"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- At Dead Of Night -->
+                <div class="mini-card">
+                    <img src="keszulo/dn.jpg" alt="At Dead Of Night">
+                    <div class="mini-card__overlay">
+                        <span class="mini-card__badge">TERVEZÉS ALATT</span>
+                        <div class="mini-card__name">AT DEAD OF NIGHT</div>
+                        <div class="mini-steps">
+                            <div class="mini-step">
+                                <span class="mini-step__label">Előkészületek</span>
+                                <span class="mini-step__pct done">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Szövegkönyv</span>
+                                <span class="mini-step__pct now">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Hangok</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                            <div class="mini-step">
+                                <span class="mini-step__label">Modolás</span>
+                                <span class="mini-step__pct">0%</span>
+                            </div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--pending" style="width:0%"></div></div>
+                        </div>
+                        <div class="mini-overall">
+                            <span>0%</span>
+                            <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /mini-grid -->   
         </div>
     </section>
 
@@ -461,6 +1014,22 @@
 
         const barObserver = new IntersectionObserver(animateBars, { threshold: 0.25 });
         document.querySelectorAll('.wip-card').forEach(card => barObserver.observe(card));
+
+        /* ── Animate mini overall bars when section enters view ── */
+        const miniSection = document.querySelector('.mini-grid-section');
+        if (miniSection) {
+            const miniObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    document.querySelectorAll('.mini-overall-bar').forEach(bar => {
+                        const target = parseInt(bar.dataset.target, 10);
+                        setTimeout(() => { bar.style.width = target + '%'; }, 300);
+                    });
+                    miniObserver.unobserve(entry.target);
+                });
+            }, { threshold: 0.1 });
+            miniObserver.observe(miniSection);
+        }
     </script>
 
     <script src="script.js"></script>
