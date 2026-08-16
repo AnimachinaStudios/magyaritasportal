@@ -299,7 +299,6 @@
   const resultTitle = document.getElementById('result-title');
   const resultSub = document.getElementById('result-sub');
 
-  // floating background hearts
   const heartField = document.getElementById('heartField');
   const heartSVG = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.2 2.6 4 6.6 4c2 0 3.7 1.1 4.4 2.7C11.7 5.1 13.4 4 15.4 4c4 0 6.2 4.2 4.6 7.7C19.5 16.4 12 21 12 21z"/></svg>';
 
@@ -319,7 +318,6 @@
   setInterval(spawnBgHeart, 550);
   for(let i=0;i<6;i++) setTimeout(spawnBgHeart, i*300);
 
-  // dodging "Nem" button logic
   let dodges = 0;
 
   const dodgeMessages = [
@@ -341,15 +339,12 @@
   function moveNoButton(){
   const container = document.querySelector('.buttons');
 
-  // A Nem gomb mérete
   const btnWidth = noBtn.offsetWidth;
   const btnHeight = noBtn.offsetHeight;
 
-  // A konténer mérete
   const containerWidth = container.clientWidth;
   const containerHeight = container.clientHeight;
 
-  // Az Igen gomb helye a .buttons-on belül
   const yesRect = yesBtn.getBoundingClientRect();
   const containerRect = container.getBoundingClientRect();
 
@@ -361,7 +356,6 @@
 
   const safePad = 12;
 
-  // Mennyi helyen mozoghat a Nem gomb
   const maxX = containerWidth - btnWidth;
   const maxY = containerHeight - btnHeight;
 
@@ -372,11 +366,9 @@
   let attempts = 0;
   const maxAttempts = 100;
 
-  // Jelenlegi pozíció
 const currentX = noBtn.offsetLeft;
 const currentY = noBtn.offsetTop;
 
-// Minimum távolság az előző helytől
 const minDistance = 80;
 
 do {
@@ -390,7 +382,6 @@ do {
     bottom: newY + btnHeight
   };
 
-  // Középpontok közötti távolság
   const oldCenterX = currentX + btnWidth / 2;
   const oldCenterY = currentY + btnHeight / 2;
 
@@ -415,16 +406,12 @@ do {
 
   attempts++;
 
-  // Új hely csak akkor jó, ha:
-  // 1. nincs az Igen gombon
-  // 2. elég messze van az előző helytől
   if (!overlapsYes && distance >= minDistance) {
     break;
   }
 
 } while (attempts < maxAttempts);
 
-  // Ha sikerült biztonságos helyet találni
   noBtn.style.left = `${newX}px`;
   noBtn.style.top = `${newY}px`;
 
@@ -447,16 +434,6 @@ do {
   noBtn.addEventListener('click', (e)=>{ e.preventDefault(); moveNoButton(); });
   noBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); moveNoButton(); }, {passive:false});
 
-  window.addEventListener('resize', ()=>{
-    if(!noStatic){
-      const btnRect = noBtn.getBoundingClientRect();
-      const margin = 16;
-      const maxX = window.innerWidth - btnRect.width - margin;
-      const maxY = window.innerHeight - btnRect.height - margin;
-      noBtn.style.left = Math.min(parseFloat(noBtn.style.left)||0, maxX) + 'px';
-      noBtn.style.top = Math.min(parseFloat(noBtn.style.top)||0, maxY) + 'px';
-    }
-  });
 
   const yesMessages = [
     { title: "Tudtam, hogy igent mondasz! 🥰", sub: "Alig várom, hogy találkozzunk! 🌹 LOVE YOUUU <3" },
