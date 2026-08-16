@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Szeretnél velem randizni?</title>
+<style>
+  :root{
+    --blush-50:#fff5f7;
+    --blush-100:#ffe4ec;
+    --rose-300:#ffb3c6;
+    --rose-500:#ff6f91;
+    --rose-700:#e0446e;
+    --plum-900:#4a1942;
+    --gold-400:#ffd166;
+    --cream:#fffaf6;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    font-family:'Quicksand', 'Segoe UI', sans-serif;
+    background:
+      radial-gradient(circle at 15% 20%, var(--blush-100), transparent 45%),
+      radial-gradient(circle at 85% 80%, var(--rose-300), transparent 50%),
+      linear-gradient(160deg, var(--blush-50) 0%, var(--blush-100) 45%, var(--rose-300) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  @font-face{
+    font-family:'Playfair-fallback';
+  }
+
+  .heart-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+
+  .bg-heart{
+    position:absolute;
+    bottom:-10%;
+    opacity:0.35;
+    animation:floatUp linear infinite;
+    color:var(--rose-500);
+    filter:drop-shadow(0 2px 4px rgba(224,68,110,0.15));
+  }
+
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.4; }
+    90%{ opacity:0.3; }
+    100%{ transform:translateY(-115vh) translateX(var(--drift,20px)) rotate(25deg); opacity:0; }
+  }
+
+  .card{
+    position:relative;
+    z-index:2;
+    background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:32px;
+    padding:56px 48px 64px;
+    text-align:center;
+    max-width:520px;
+    width:90%;
+    box-shadow:
+      0 30px 60px -20px rgba(224,68,110,0.35),
+      0 0 0 1px rgba(255,255,255,0.6) inset;
+    border:1px solid rgba(255,255,255,0.7);
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--rose-700);
+    font-weight:700;
+    margin-bottom:18px;
+  }
+
+  .eyebrow svg{ width:14px; height:14px; }
+
+  h1{
+    font-family:'Georgia', 'Playfair Display', serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(28px, 5.5vw, 42px);
+    color:var(--plum-900);
+    margin:0 0 12px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+
+  .sub{
+    color:#8a5b6b;
+    font-size:16px;
+    margin:0 0 40px;
+    font-weight:500;
+  }
+
+  .big-heart{
+    width:64px;
+    height:64px;
+    margin:0 auto 20px;
+    display:block;
+    animation:beat 1.4s ease-in-out infinite;
+    filter:drop-shadow(0 8px 16px rgba(224,68,110,0.35));
+  }
+
+  @keyframes beat{
+    0%,100%{ transform:scale(1); }
+    15%{ transform:scale(1.15); }
+    30%{ transform:scale(0.98); }
+    45%{ transform:scale(1.08); }
+    60%{ transform:scale(1); }
+  }
+
+.buttons {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 220px;
+  width: 100%;
+  overflow: hidden;
+}
+
+  button{
+    font-family:inherit;
+    font-weight:700;
+    font-size:17px;
+    padding:16px 34px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing:0.01em;
+  }
+
+  #yes-btn{
+    background:linear-gradient(135deg, var(--rose-500), var(--rose-700));
+    color:white;
+    box-shadow:0 14px 28px -10px rgba(224,68,110,0.6);
+  }
+
+  #yes-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 18px 34px -10px rgba(224,68,110,0.75);
+  }
+
+  #yes-btn:active{
+    transform:translateY(0) scale(0.98);
+  }
+
+  #no-btn{
+  background:white;
+  color:var(--rose-700);
+  border:2px solid var(--rose-300);
+  position:absolute;
+  z-index:10;
+  transition:
+    left 0.18s cubic-bezier(.2,.9,.3,1.2),
+    top 0.18s cubic-bezier(.2,.9,.3,1.2);
+}
+
+  #no-btn.static{
+    position:relative;
+    left:auto;
+    top:auto;
+  }
+
+  .result{
+    display:none;
+    position:relative;
+    z-index:2;
+  }
+
+  .result.show{
+    display:block;
+    animation:popIn 0.5s cubic-bezier(.2,.9,.3,1.4);
+  }
+
+  @keyframes popIn{
+    0%{ transform:scale(0.6); opacity:0; }
+    60%{ transform:scale(1.06); opacity:1; }
+    100%{ transform:scale(1); }
+  }
+
+  .result-emoji{
+    font-size:56px;
+    margin-bottom:8px;
+    display:block;
+  }
+
+  .result h2{
+    font-family:'Georgia', 'Playfair Display', serif;
+    font-style:italic;
+    color:var(--rose-700);
+    font-size:clamp(24px,5vw,34px);
+    margin:0 0 10px;
+  }
+
+  .result p{
+    color:#8a5b6b;
+    font-size:16px;
+    margin:0;
+    font-weight:500;
+  }
+
+.no-count{
+  position:absolute;
+  bottom:-38px;
+  left:0;
+  right:0;
+  font-size:12px;
+  color:#c98298;
+  font-weight:600;
+  letter-spacing:0.02em;
+  pointer-events:none;
+}
+
+  .confetti{
+    position:fixed;
+    top:-20px;
+    z-index:60;
+    pointer-events:none;
+    animation:fall linear forwards;
+    font-size:20px;
+  }
+
+  @keyframes fall{
+    to{ transform:translateY(105vh) rotate(360deg); opacity:0.2; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .bg-heart, .big-heart{ animation:none; }
+    #no-btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="heart-field" id="heartField"></div>
+
+<div class="card">
+
+  <div id="question-view">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.2 2.6 4 6.6 4c2 0 3.7 1.1 4.4 2.7C11.7 5.1 13.4 4 15.4 4c4 0 6.2 4.2 4.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
+      egy fontos kérdés
+    </div>
+
+    <svg class="big-heart" viewBox="0 0 24 24" fill="#e0446e">
+      <path d="M12 21s-7.5-4.6-10-9.3C.4 8.2 2.6 4 6.6 4c2 0 3.7 1.1 4.4 2.7C11.7 5.1 13.4 4 15.4 4c4 0 6.2 4.2 4.6 7.7C19.5 16.4 12 21 12 21z"/>
+    </svg>
+
+    <h1>Szeretnél velem<br>eljönni randizni?</h1>
+    <p class="sub">Csak egy igenre van szükségem 💌</p>
+
+    <div class="buttons">
+      <button id="yes-btn">Igen! 💖</button><br> <br><br> <br><br> <br>
+      <button id="no-btn">Nem</button>
+      <div class="no-count" id="noCount"></div>
+    </div>
+  </div>
+
+  <div class="result" id="result-view">
+    <span class="result-emoji">🥰</span>
+    <h2 id="result-title">Tudtam, hogy igent mondasz!</h2>
+    <p id="result-sub">Alig várom, hogy találkozzunk. Öltözz ki, foglalok asztalt! 🌹</p>
+  </div>
+
+</div>
+
+<script>
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn = document.getElementById('no-btn');
+  const noCount = document.getElementById('noCount');
+  const questionView = document.getElementById('question-view');
+  const resultView = document.getElementById('result-view');
+  const resultTitle = document.getElementById('result-title');
+  const resultSub = document.getElementById('result-sub');
+
+  // floating background hearts
+  const heartField = document.getElementById('heartField');
+  const heartSVG = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.2 2.6 4 6.6 4c2 0 3.7 1.1 4.4 2.7C11.7 5.1 13.4 4 15.4 4c4 0 6.2 4.2 4.6 7.7C19.5 16.4 12 21 12 21z"/></svg>';
+
+  function spawnBgHeart(){
+    const h = document.createElement('div');
+    h.className = 'bg-heart';
+    h.innerHTML = heartSVG;
+    const size = 12 + Math.random()*26;
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.width = size + 'px';
+    h.style.height = size + 'px';
+    h.style.setProperty('--drift', (Math.random()*80-40) + 'px');
+    h.style.animationDuration = (8 + Math.random()*8) + 's';
+    heartField.appendChild(h);
+    setTimeout(()=>h.remove(), 17000);
+  }
+  setInterval(spawnBgHeart, 550);
+  for(let i=0;i<6;i++) setTimeout(spawnBgHeart, i*300);
+
+  // dodging "Nem" button logic
+  let dodges = 0;
+
+  const dodgeMessages = [
+    "Próbáld újra 😏",
+    "Nem sikerült 😉",
+    "Túl gyors vagyok!",
+    "Még mindig nem 🙈",
+    "Kicsit közelebb...",
+    "Ennyire szeretnél nemet mondani? 😄"
+  ];
+
+  function rectsOverlap(a, b, pad){
+    return !(a.right + pad < b.left ||
+             a.left - pad > b.right ||
+             a.bottom + pad < b.top ||
+             a.top - pad > b.bottom);
+  }
+
+  function moveNoButton(){
+  const container = document.querySelector('.buttons');
+
+  // A Nem gomb mérete
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  // A konténer mérete
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+
+  // Az Igen gomb helye a .buttons-on belül
+  const yesRect = yesBtn.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const yesLeft = yesRect.left - containerRect.left;
+  const yesTop = yesRect.top - containerRect.top;
+
+  const yesWidth = yesRect.width;
+  const yesHeight = yesRect.height;
+
+  const safePad = 12;
+
+  // Mennyi helyen mozoghat a Nem gomb
+  const maxX = containerWidth - btnWidth;
+  const maxY = containerHeight - btnHeight;
+
+  let newX;
+  let newY;
+  let candidate;
+
+  let attempts = 0;
+  const maxAttempts = 100;
+
+  // Jelenlegi pozíció
+const currentX = noBtn.offsetLeft;
+const currentY = noBtn.offsetTop;
+
+// Minimum távolság az előző helytől
+const minDistance = 80;
+
+do {
+  newX = Math.random() * maxX;
+  newY = Math.random() * maxY;
+
+  candidate = {
+    left: newX,
+    right: newX + btnWidth,
+    top: newY,
+    bottom: newY + btnHeight
+  };
+
+  // Középpontok közötti távolság
+  const oldCenterX = currentX + btnWidth / 2;
+  const oldCenterY = currentY + btnHeight / 2;
+
+  const newCenterX = newX + btnWidth / 2;
+  const newCenterY = newY + btnHeight / 2;
+
+  const distance = Math.hypot(
+    newCenterX - oldCenterX,
+    newCenterY - oldCenterY
+  );
+
+  const overlapsYes = rectsOverlap(
+    candidate,
+    {
+      left: yesLeft,
+      right: yesLeft + yesWidth,
+      top: yesTop,
+      bottom: yesTop + yesHeight
+    },
+    safePad
+  );
+
+  attempts++;
+
+  // Új hely csak akkor jó, ha:
+  // 1. nincs az Igen gombon
+  // 2. elég messze van az előző helytől
+  if (!overlapsYes && distance >= minDistance) {
+    break;
+  }
+
+} while (attempts < maxAttempts);
+
+  // Ha sikerült biztonságos helyet találni
+  noBtn.style.left = `${newX}px`;
+  noBtn.style.top = `${newY}px`;
+
+  dodges++;
+
+  if(dodges % 2 === 0){
+    const msg =
+      dodgeMessages[
+        Math.min(
+          Math.floor(dodges / 2) - 1,
+          dodgeMessages.length - 1
+        )
+      ];
+
+    noCount.textContent = msg;
+  }
+}
+
+  noBtn.addEventListener('mouseenter', moveNoButton);
+  noBtn.addEventListener('click', (e)=>{ e.preventDefault(); moveNoButton(); });
+  noBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); moveNoButton(); }, {passive:false});
+
+  window.addEventListener('resize', ()=>{
+    if(!noStatic){
+      const btnRect = noBtn.getBoundingClientRect();
+      const margin = 16;
+      const maxX = window.innerWidth - btnRect.width - margin;
+      const maxY = window.innerHeight - btnRect.height - margin;
+      noBtn.style.left = Math.min(parseFloat(noBtn.style.left)||0, maxX) + 'px';
+      noBtn.style.top = Math.min(parseFloat(noBtn.style.top)||0, maxY) + 'px';
+    }
+  });
+
+  const yesMessages = [
+    { title: "Tudtam, hogy igent mondasz! 🥰", sub: "Alig várom, hogy találkozzunk! 🌹 LOVE YOUUU <3" },
+    { title: "A szívem repes az örömtől! 💓", sub: "Ez lesz a legszebb randink, ígérem. LOVE YOUUU <3" },
+    { title: "Igen! Végre! 😍", sub: "Már gondolkodom is, hova vigyelek el. LOVE YOUUU <3" }
+  ];
+
+  function confettiBurst(){
+    const emojis = ['💖','💕','🌹','✨','💗','🥂'];
+    for(let i=0;i<28;i++){
+      setTimeout(()=>{
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.animationDuration = (2.2 + Math.random()*1.6) + 's';
+        c.style.fontSize = (16 + Math.random()*18) + 'px';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(), 4000);
+      }, i*40);
+    }
+  }
+
+  yesBtn.addEventListener('click', ()=>{
+    const pick = yesMessages[Math.floor(Math.random()*yesMessages.length)];
+    resultTitle.textContent = pick.title;
+    resultSub.textContent = pick.sub;
+    questionView.style.display = 'none';
+    resultView.classList.add('show');
+    confettiBurst();
+  });
+</script>
+
+</body>
+</html>
