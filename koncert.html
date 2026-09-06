@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animachina Stúdió - Koncert</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/icon.jpg">
+    <meta property="og:title" content="Animachina Stúdió - Koncert">
+    <meta property="og:description" content="Ingyenes koncert: Zazaa, Lil Kairo, SÁGI, IVYN, DEMURE – Bäse Bár, október 17.">
+    <meta property="og:type" content="website">
+    <style>
+        /* ===== Animated Background ===== */
+        .concert-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a0a 70%);
+        }
+
+        .animated-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(123, 44, 191, 0.8), transparent);
+            animation: floatParticle linear infinite;
+            pointer-events: none;
+        }
+
+        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; top: 20%; animation-duration: 18s; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 12px; height: 12px; left: 25%; top: 60%; animation-duration: 22s; animation-delay: -3s; background: radial-gradient(circle, rgba(255, 0, 110, 0.7), transparent); }
+        .particle:nth-child(3) { width: 6px; height: 6px; left: 40%; top: 15%; animation-duration: 15s; animation-delay: -7s; }
+        .particle:nth-child(4) { width: 14px; height: 14px; left: 55%; top: 70%; animation-duration: 25s; animation-delay: -2s; background: radial-gradient(circle, rgba(0, 245, 255, 0.6), transparent); }
+        .particle:nth-child(5) { width: 10px; height: 10px; left: 70%; top: 30%; animation-duration: 20s; animation-delay: -5s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 85%; top: 55%; animation-duration: 17s; animation-delay: -9s; background: radial-gradient(circle, rgba(255, 0, 110, 0.7), transparent); }
+        .particle:nth-child(7) { width: 11px; height: 11px; left: 15%; top: 80%; animation-duration: 23s; animation-delay: -4s; }
+        .particle:nth-child(8) { width: 9px; height: 9px; left: 90%; top: 10%; animation-duration: 19s; animation-delay: -6s; }
+        .particle:nth-child(9) { width: 5px; height: 5px; left: 5%; top: 45%; animation-duration: 16s; animation-delay: -8s; background: radial-gradient(circle, rgba(0, 245, 255, 0.5), transparent); }
+        .particle:nth-child(10) { width: 13px; height: 13px; left: 60%; top: 5%; animation-duration: 21s; animation-delay: -1s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+            25% { transform: translateY(-80px) translateX(40px) scale(1.2); opacity: 1; }
+            50% { transform: translateY(-160px) translateX(-20px) scale(0.9); opacity: 0.7; }
+            75% { transform: translateY(-240px) translateX(60px) scale(1.1); opacity: 0.9; }
+            100% { transform: translateY(-320px) translateX(10px) scale(1); opacity: 0; }
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.35;
+            animation: orbPulse 8s ease-in-out infinite alternate;
+        }
+        .glow-orb.one {
+            width: 400px; height: 400px;
+            background: var(--accent-purple);
+            top: -10%; left: -10%;
+            animation-duration: 10s;
+        }
+        .glow-orb.two {
+            width: 300px; height: 300px;
+            background: var(--accent-pink);
+            bottom: -5%; right: -5%;
+            animation-duration: 12s;
+            animation-delay: -3s;
+        }
+        .glow-orb.three {
+            width: 250px; height: 250px;
+            background: var(--accent-cyan);
+            top: 40%; left: 60%;
+            animation-duration: 9s;
+            animation-delay: -5s;
+            opacity: 0.2;
+        }
+
+        @keyframes orbPulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.3) translate(30px, -20px); }
+        }
+
+        .wave-lines {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .wave-lines svg {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 100%;
+            animation: waveMove 12s linear infinite;
+        }
+        .wave-lines svg:nth-child(2) {
+            animation-duration: 18s;
+            opacity: 0.5;
+        }
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .concert-hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .concert-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            font-family: var(--font-heading);
+            letter-spacing: 3px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .concert-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.8rem, 8vw, 5rem);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #fff, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 1s ease 0.2s both;
+        }
+
+        .concert-hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .free-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 200, 83, 0.15);
+            border: 1px solid #00c853;
+            color: #69f0ae;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .free-tag i { font-size: 1.2rem; }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .meta-item i {
+            color: var(--accent-purple);
+            font-size: 1.3rem;
+        }
+
+        .concert-details {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .details-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .details-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.25);
+        }
+
+        .details-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .details-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== PAPER-STYLE ARTISTS LIST ===== */
+        .paper-list {
+            background: #f7f3e8;
+            background-image:
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 31px,
+                    rgba(120, 140, 180, 0.35) 31px,
+                    rgba(120, 140, 180, 0.35) 32px
+                );
+            border-radius: 4px 12px 12px 4px;
+            padding: 1.8rem 1.5rem 1.5rem 0.8rem;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.45),
+                inset 0 0 40px rgba(0,0,0,0.04);
+            position: relative;
+            transform: rotate(-0.6deg);
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .paper-list::before {
+            content: '';
+            position: absolute;
+            left: 42px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(220, 80, 80, 0.45);
+        }
+
+        .paper-item {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 0.5rem 0 0.2rem;
+            position: relative;
+        }
+
+        .paper-num {
+            font-family: 'Segoe Print', 'Comic Sans MS', 'Bradley Hand', cursive;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            line-height: 1;
+            transform: rotate(-8deg);
+            user-select: none;
+        }
+
+        .paper-num.circled {
+            border: 2.5px solid #1a1a1a;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transform: rotate(-12deg);
+        }
+
+        .paper-num.hash {
+            font-size: 1.15rem;
+            letter-spacing: -1px;
+        }
+
+        .paper-num.crossed {
+            text-decoration: line-through;
+            text-decoration-thickness: 2.5px;
+            opacity: 0.85;
+        }
+
+        .paper-num.star {
+            font-size: 1.1rem;
+        }
+
+        .paper-content {
+            padding-left: 0.6rem;
+        }
+
+        .paper-name {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            color: #111;
+            line-height: 1.1;
+            display: inline-block;
+        }
+
+        .paper-name.underline {
+            border-bottom: 2.5px solid #111;
+            padding-bottom: 1px;
+        }
+
+        .paper-doodle {
+            position: absolute;
+            right: 10px;
+            font-size: 1.1rem;
+            color: #222;
+            opacity: 0.7;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .paper-footer-note {
+            margin-top: 1.2rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed rgba(0,0,0,0.15);
+            font-size: 0.85rem;
+            color: #444;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .map-photo-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--secondary-bg);
+        }
+
+        .map-photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .map-container, .photo-container {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #111;
+            position: relative;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            display: block;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .photo-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .address-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(123, 44, 191, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .address-box h4 {
+            font-family: var(--font-heading);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--accent-pink);
+        }
+
+        .address-box p {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .concert-cta {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.15), rgba(255, 0, 110, 0.1));
+        }
+
+        .concert-cta h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .concert-cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+            font-size: 1.15rem;
+        }
+
+        @media (max-width: 900px) {
+            .details-grid,
+            .map-photo-grid {
+                grid-template-columns: 1fr;
+            }
+            .map-container iframe,
+            .photo-container img {
+                height: 320px;
+            }
+            .concert-hero h1 {
+                font-size: 2.6rem;
+            }
+            .paper-list {
+                transform: none;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .concert-cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><img src="images/logo.png" alt="Animachina Stúdió"></a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">FŐLAP</a>
+                <a href="koncert.html" class="nav-link" style="color: var(--accent-pink);">KONCERT</a>
+            </div>
+            
+            <div class="nav-mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="social-bar">
+        <a href="https://www.instagram.com/animachinastudio/" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank" class="social-icon">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.tiktok.com/@animachinastudio" target="_blank" class="social-icon">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="social-icon">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+
+    <section class="concert-hero">
+        <div class="animated-bg">
+            <div class="glow-orb one"></div>
+            <div class="glow-orb two"></div>
+            <div class="glow-orb three"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="wave-lines">
+                <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+                    <path d="M0,90 C150,20 300,160 450,90 C600,20 750,160 900,90 C1050,20 1200,90 1200,90 L1200,180 L0,180 Z" fill="rgba(123,44,191,0.15)"/>
+                </svg>
+                <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+                    <path d="M0,110 C200,40 400,140 600,80 C800,20 1000,150 1200,100 L1200,180 L0,180 Z" fill="rgba(255,0,110,0.1)"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="concert-hero-content">
+            <span class="concert-badge">ÉLŐ KONCERT</span>
+            <h1>Animachina Koncert</h1>
+            <p class="subtitle">5 különleges előadó · Bäse Bár</p>
+            <div class="free-tag">
+                <i class="fas fa-ticket-alt"></i>
+                INGYENES BELÉPÉS
+            </div>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>2026. október 17. · "Pontos idő hamarosan!"</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Bäse Bár, Budapest</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Kapunyitás: "Pontos idő hamarosan!"</span>
+                </div>
+            </div>
+            <a href="#details" class="btn btn-primary">
+                RÉSZLETEK
+                <span class="arrow-right">→</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="concert-details" id="details">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">KONCERT INFÓ</span>
+                <h2>Minden, amit tudnod kell</h2>
+            </div>
+
+            <div class="details-grid">
+                <div class="details-card" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;"><i class="fas fa-users"></i> Előadók</h3>
+                    
+                    <div class="paper-list">
+                        <div class="paper-item">
+                            <div class="paper-num circled">1</div>
+                            <div class="paper-content">
+                                <span class="paper-name">Zazaa</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num">2</div>
+                            <div class="paper-content">
+                                <span class="paper-name">Lil Kairo</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num hash">#3</div>
+                            <div class="paper-content">
+                                <span class="paper-name underline">SÁGI</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num crossed">4</div>
+                            <div class="paper-content">
+                                <span class="paper-name">IVYN</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num star">★5</div>
+                            <div class="paper-content">
+                                <span class="paper-name">DEMURE</span>
+                                <span class="paper-doodle">✦</span>
+                            </div>
+                        </div>
+                        <div class="paper-footer-note">
+                            handwritten lineup · 17.10.2026
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 1.8rem; color: var(--text-light);">A magyar underground és modern hangzás találkozása egy estén. Hip-hop, trap és elektronikus elemek keveréke élőben a Bäse Bárban.</p>
+                </div>
+
+                <div class="details-card">
+                    <h3><i class="fas fa-info-circle"></i> Fontos tudnivalók</h3>
+                    <p><strong>Dátum:</strong> 2026. október 17. (szombat)</p>
+                    <p><strong>Időpont:</strong> "Pontos idő hamarosan!"</p>
+                    <p><strong>Kapunyitás:</strong> "Pontos idő hamarosan!"</p>
+                    <p><strong>Belépés:</strong> Teljesen ingyenes – nincs szükség jegyre</p>
+                    <p><strong>Korhatár:</strong> Minden korosztály számára nyitott</p>
+                    <p><strong>Ajánlott:</strong> A rendezvény ingyenes, de a fogyasztás kötelező! Szóval egy darab italra mindenképp szükséged lesz!</p>
+                </div>
+            </div>
+
+            <div class="address-box">
+                <h4><i class="fas fa-map-pin"></i> Pontos cím</h4>
+                <p>
+                    <strong>Bäse Bár</strong><br>
+                    Budapest, Paulay Ede u. 2, 1061<br>
+                    (Terézváros, az Andrássy út közelében)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-photo-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">HELYSZÍN</span>
+                <h2>Térkép & Hangulat</h2>
+            </div>
+
+            <div class="map-photo-grid">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.6!2d19.0575!3d47.5015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc3f8c8c8c8d%3A0x0!2sPaulay%20Ede%20u.%202%2C%201061%20Budapest!5e0!3m2!1shu!2shu!4v1725600000000!5m2!1shu!2shu&q=Paulay+Ede+u.+2,+1061+Budapest"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Koncert helyszín - Bäse Bár, Paulay Ede u. 2">
+                    </iframe>
+                </div>
+
+                <div class="photo-container">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnsys6KSUXA_YpGVkFAwGFXCbTt3hR1Mr4TcobRVILPx8FbMSrWvF_4K0WymsfVjsTieL7sniiXNdSG7U8ETXwHGaJPw2zBiVWqjJ5hEi_NIGObP8uSufWkvgILFc7MAJ24PU-Lzm4iBf6w=s680-w680-h510-rw" 
+                         alt="Koncert hangulat - Bäse Bár"
+                         onerror="this.src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80'">
+                    <div class="photo-caption">
+                        Bäse Bár · Paulay Ede u. 2 · 2026. október 17.
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Paulay+Ede+u.+2,+1061+Budapest" 
+                   target="_blank" 
+                   class="btn btn-secondary">
+                    <i class="fas fa-directions"></i>
+                    Útvonaltervezés
+                    <span class="arrow-right">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="concert-cta">
+        <div class="container">
+            <h2>GYERE EL – INGYEN!</h2>
+            <p>Nincs jegy, nincs regisztráció. Csak gyere el a Bäse Bárba, hozd a barátaidat, és élvezd a zenét.</p>
+            <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank" class="btn btn-large btn-primary">
+                Csatlakozz a Discord közösséghez
+                <span class="arrow-right">→</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Animachina Stúdió">
+                    <div class="footer-contact">
+                        <h4>KAPCSOLAT</h4>
+                        <a href="mailto:kondix.dev@gmail.com">kondix.dev@gmail.com</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>KÖVESS MINKET</h4>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/animachinastudio/" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@animachinastudio/" target="_blank">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://discord.com/invite/b3DNs98Dnz" target="_blank">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>NAVIGÁCIÓ</h4>
+                        <a href="index.html">FŐLAP</a>
+                        <a href="koncert.html">KONCERT</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Animachina Stúdió, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
