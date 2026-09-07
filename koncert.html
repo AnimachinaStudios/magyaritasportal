@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="images/icon.jpg">
     <meta property="og:title" content="Animachina Stúdió - Koncert">
-    <meta property="og:description" content="Ingyenes koncert: Zazaa, Lil Kairo, SÁGI, IVYN, DEMURE – Bäse Bár, október 17.">
+    <meta property="og:description" content="Ingyenes koncert: Kondix, IVYN, SÁGI, DEMURE, Lil Kairo, ZAZAA, Chongee – Bäse Bár, október 17.">
     <meta property="og:type" content="website">
     <style>
         /* ===== Animated Background ===== */
@@ -331,14 +331,60 @@
             padding-bottom: 1px;
         }
 
+        .paper-role {
+            display: block;
+            font-size: 0.72rem;
+            color: #555;
+            font-style: italic;
+            margin-top: 1px;
+            letter-spacing: 0.3px;
+            font-family: Georgia, serif;
+        }
+
+        .paper-bang {
+            font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: #111;
+            margin-right: 4px;
+            transform: rotate(-8deg);
+            display: inline-block;
+        }
+        .paper-bang.right {
+            margin-left: 6px;
+            margin-right: 0;
+            transform: rotate(10deg);
+        }
+
+        .paper-num.slash {
+            text-decoration: line-through;
+            text-decoration-thickness: 2.5px;
+            opacity: 0.9;
+        }
+
+        .paper-crown {
+            text-align: center;
+            font-size: 1.6rem;
+            line-height: 1;
+            margin-bottom: 0.15rem;
+            color: #1a1a1a;
+            transform: translateX(12px);
+            opacity: 0.9;
+        }
+
         .paper-doodle {
             position: absolute;
             right: 10px;
-            font-size: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(12deg);
+            font-size: 1.15rem;
             color: #222;
-            opacity: 0.7;
-            transform: rotate(15deg);
+            opacity: 0.75;
             pointer-events: none;
+        }
+
+        .paper-item {
+            min-height: 38px;
         }
 
         .paper-footer-note {
@@ -532,7 +578,7 @@
         <div class="concert-hero-content">
             <span class="concert-badge">ÉLŐ KONCERT</span>
             <h1>Animachina Koncert</h1>
-            <p class="subtitle">5 különleges előadó · Bäse Bár</p>
+            <p class="subtitle">7 különleges előadó · Bäse Bár</p>
             <div class="free-tag">
                 <i class="fas fa-ticket-alt"></i>
                 INGYENES BELÉPÉS
@@ -540,7 +586,7 @@
             <div class="hero-meta">
                 <div class="meta-item">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>2026. október 17. · "Pontos idő hamarosan!"</span>
+                    <span>2026. október 17. · 19:00</span>
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -548,7 +594,7 @@
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-clock"></i>
-                    <span>Kapunyitás: "Pontos idő hamarosan!"</span>
+                    <span>Kapunyitás: 18:00</span>
                 </div>
             </div>
             <a href="#details" class="btn btn-primary">
@@ -570,35 +616,57 @@
                     <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;"><i class="fas fa-users"></i> Előadók</h3>
                     
                     <div class="paper-list">
+                        <div class="paper-crown">♛</div>
                         <div class="paper-item">
                             <div class="paper-num circled">1</div>
                             <div class="paper-content">
-                                <span class="paper-name">Zazaa</span>
+                                <span class="paper-bang">!!</span>
+                                <span class="paper-name">Kondix</span>
+                                <span class="paper-bang right">!!</span>
+                                <span class="paper-role">(DJ)</span>
                             </div>
                         </div>
                         <div class="paper-item">
-                            <div class="paper-num">2</div>
+                            <div class="paper-num slash">2</div>
                             <div class="paper-content">
-                                <span class="paper-name">Lil Kairo</span>
+                                <span class="paper-name">IVYN</span>
+                                <span class="paper-role">(Előadó)</span>
                             </div>
                         </div>
                         <div class="paper-item">
                             <div class="paper-num hash">#3</div>
                             <div class="paper-content">
-                                <span class="paper-name underline">SÁGI</span>
+                                <span class="paper-name">SÁGI</span>
+                                <span class="paper-role">(Előadó)</span>
                             </div>
                         </div>
                         <div class="paper-item">
-                            <div class="paper-num crossed">4</div>
-                            <div class="paper-content">
-                                <span class="paper-name">IVYN</span>
-                            </div>
-                        </div>
-                        <div class="paper-item">
-                            <div class="paper-num star">★5</div>
+                            <div class="paper-num slash">4</div>
                             <div class="paper-content">
                                 <span class="paper-name">DEMURE</span>
+                                <span class="paper-role">(Előadó)</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num slash">5</div>
+                            <div class="paper-content">
+                                <span class="paper-name">Lil Kairo</span>
+                                <span class="paper-role">(Előadó)</span>
                                 <span class="paper-doodle">✦</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num hash">#6</div>
+                            <div class="paper-content">
+                                <span class="paper-name underline">ZAZAA</span>
+                                <span class="paper-role">(Előadó)</span>
+                            </div>
+                        </div>
+                        <div class="paper-item">
+                            <div class="paper-num slash">7</div>
+                            <div class="paper-content">
+                                <span class="paper-name underline">Chongee</span>
+                                <span class="paper-role">(Előadó)</span>
                             </div>
                         </div>
                         <div class="paper-footer-note">
@@ -612,8 +680,8 @@
                 <div class="details-card">
                     <h3><i class="fas fa-info-circle"></i> Fontos tudnivalók</h3>
                     <p><strong>Dátum:</strong> 2026. október 17. (szombat)</p>
-                    <p><strong>Időpont:</strong> "Pontos idő hamarosan!"</p>
-                    <p><strong>Kapunyitás:</strong> "Pontos idő hamarosan!"</p>
+                    <p><strong>Időpont:</strong> 19:00 – kb. 22:30</p>
+                    <p><strong>Kapunyitás:</strong> 18:00</p>
                     <p><strong>Belépés:</strong> Teljesen ingyenes – nincs szükség jegyre</p>
                     <p><strong>Korhatár:</strong> Minden korosztály számára nyitott</p>
                     <p><strong>Ajánlott:</strong> A rendezvény ingyenes, de a fogyasztás kötelező! Szóval egy darab italra mindenképp szükséged lesz!</p>
@@ -650,7 +718,7 @@
                 </div>
 
                 <div class="photo-container">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnsys6KSUXA_YpGVkFAwGFXCbTt3hR1Mr4TcobRVILPx8FbMSrWvF_4K0WymsfVjsTieL7sniiXNdSG7U8ETXwHGaJPw2zBiVWqjJ5hEi_NIGObP8uSufWkvgILFc7MAJ24PU-Lzm4iBf6w=s680-w680-h510-rw" 
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80" 
                          alt="Koncert hangulat - Bäse Bár"
                          onerror="this.src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80'">
                     <div class="photo-caption">
@@ -720,7 +788,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>© 2026 Animachina Stúdió, All Rights Reserved.</p>
+                <p>© 2024–2026 Animachina Stúdió, All Rights Reserved.</p>
             </div>
         </div>
     </footer>
