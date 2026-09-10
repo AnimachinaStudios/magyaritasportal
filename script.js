@@ -146,20 +146,6 @@ animateOnScroll.forEach(el => {
 });
 
 // ========================================
-// PARALLAX EFFECT
-// ========================================
-
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero-background img');
-    
-    parallaxElements.forEach(el => {
-        const speed = 0.5;
-        el.style.transform = `translateY(${scrolled * speed}px) scale(1.1)`;
-    });
-});
-
-// ========================================
 // PROJECT CARDS HOVER EFFECT
 // ========================================
 

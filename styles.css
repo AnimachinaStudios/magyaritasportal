@@ -255,6 +255,8 @@ a {
     width: 100%;
     height: 100%;
     z-index: 1;
+    transform: scale(1.08);
+    will-change: transform;
 }
 
 .hero-background::after {
@@ -271,7 +273,9 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: slowZoom 20s ease-in-out infinite alternate;
+    transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.08);
+    will-change: transform;
+    transition: transform 0.08s linear;
 }
 
 @keyframes slowZoom {
@@ -1187,5 +1191,388 @@ a {
     .btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Parallax réteg: a kissé túlnagyított kép nem hagy üres sávot görgetéskor. */
+.parallax-media {
+    --parallax-y: 0px;
+}
+
+/* ========================================
+   POLISHED VISUAL LAYER
+   ======================================== */
+
+html {
+    scroll-padding-top: 88px;
+}
+
+body {
+    background:
+        radial-gradient(circle at 15% 18%, rgba(123, 44, 191, 0.12), transparent 28rem),
+        radial-gradient(circle at 85% 55%, rgba(255, 0, 110, 0.08), transparent 30rem),
+        var(--primary-bg);
+}
+
+::selection {
+    background: var(--accent-pink);
+    color: var(--text-white);
+}
+
+.navbar {
+    background: rgba(8, 8, 10, 0.78);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.hero-background::after {
+    background:
+        linear-gradient(180deg, rgba(5, 5, 8, 0.18) 0%, rgba(5, 5, 8, 0.62) 62%, rgba(10, 10, 10, 0.98) 100%),
+        linear-gradient(90deg, rgba(123, 44, 191, 0.18), transparent 48%, rgba(255, 0, 110, 0.1));
+}
+
+.hero-content {
+    max-width: 920px;
+    text-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.hero-logo img {
+    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55));
+}
+
+.partnership-cta,
+.community,
+.careers {
+    position: relative;
+    isolation: isolate;
+}
+
+.partnership-cta {
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    background: linear-gradient(120deg, rgba(123, 44, 191, 0.2), rgba(20, 20, 24, 0.94) 45%, rgba(255, 0, 110, 0.16));
+}
+
+.partnership-cta::before {
+    content: '';
+    position: absolute;
+    inset: -45%;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0, transparent 56%);
+    transform: translateX(-24%);
+}
+
+.section-header h2,
+.partnership-cta h2,
+.culture-text h2,
+.careers-text h2 {
+    line-height: 0.95;
+    text-wrap: balance;
+}
+
+.section-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+}
+
+.project-card,
+.press-card {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.project-card {
+    background: #111116;
+}
+
+.project-card:hover,
+.press-card:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.press-card {
+    background: linear-gradient(145deg, rgba(34, 34, 40, 0.98), rgba(19, 19, 23, 0.98));
+}
+
+.press-content {
+    min-height: 136px;
+}
+
+.btn {
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8d3ed2, #e00066);
+}
+
+.footer {
+    background: linear-gradient(180deg, rgba(16, 16, 20, 0.92), var(--primary-bg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-background img {
+        transition: none;
+    }
+}
+
+/* ========================================
+   HERO REFINEMENT
+   ======================================== */
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4rem) 2rem 8.5rem;
+}
+
+.hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.3rem;
+    padding: 0.48rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(10, 10, 14, 0.42);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.82);
+    font-family: var(--font-heading);
+    font-size: clamp(0.68rem, 1.2vw, 0.82rem);
+    letter-spacing: 1.6px;
+}
+
+.hero-kicker span {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--accent-pink);
+    box-shadow: 0 0 0 4px rgba(255, 0, 110, 0.16);
+}
+
+.hero-logo {
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.scroll-indicator {
+    bottom: clamp(1.25rem, 3.5vh, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    pointer-events: none;
+}
+
+.scroll-label {
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.mouse {
+    width: 25px;
+    height: 40px;
+    border-color: rgba(255, 255, 255, 0.62);
+}
+
+.wheel {
+    top: 6px;
+}
+
+@media (max-height: 720px) {
+    .hero-content {
+        padding-bottom: 6rem;
+    }
+
+    .hero-kicker {
+        margin-bottom: 0.8rem;
+    }
+
+    .scroll-label {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-kicker {
+        max-width: 90vw;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.25;
+    }
+}
+
+/* ========================================
+   TRANSLATIONS PAGE
+   ======================================== */
+
+.translations-page .translations-hero {
+    min-height: 680px;
+    height: min(100vh, 820px);
+}
+
+.translations-page .hero-background img {
+    animation: translationsAmbient 18s ease-in-out infinite alternate;
+}
+
+@keyframes translationsAmbient {
+    from { transform: scale(1.08) translate3d(0, -1%, 0); }
+    to { transform: scale(1.17) translate3d(-1.5%, 1%, 0); }
+}
+
+.translations-page .hero-content {
+    max-width: 780px;
+}
+
+.translations-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.7rem, 9vw, 7.2rem);
+    letter-spacing: clamp(2px, 0.6vw, 8px);
+    line-height: 0.85;
+    color: #f8edff;
+    text-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.18),
+        0 10px 24px rgba(0, 0, 0, 0.42),
+        0 0 28px rgba(192, 116, 255, 0.2);
+}
+
+.translations-lead {
+    max-width: 600px;
+    margin: -0.5rem auto 2rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(1rem, 1.8vw, 1.18rem);
+    line-height: 1.65;
+}
+
+.translations-page .chapter-section {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 8vw, 7.5rem) 0;
+    border-top: 0;
+}
+
+.translations-page .chapter-section::before {
+    content: attr(data-chapter);
+    position: absolute;
+    top: -0.2em;
+    right: max(3vw, 1rem);
+    z-index: 0;
+    color: rgba(255, 255, 255, 0.025);
+    font-family: var(--font-heading);
+    font-size: clamp(13rem, 28vw, 28rem);
+    line-height: 0.8;
+    pointer-events: none;
+}
+
+.translations-page .chapter-section.alt {
+    background: linear-gradient(115deg, rgba(123, 44, 191, 0.1), rgba(25, 25, 30, 0.86) 45%, rgba(255, 0, 110, 0.06));
+}
+
+.translations-page .translation-card {
+    position: relative;
+    z-index: 1;
+    padding: clamp(1.15rem, 3vw, 2.2rem);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.translations-page .translation-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 30px 72px rgba(0, 0, 0, 0.42), 0 0 40px rgba(123, 44, 191, 0.08);
+}
+
+.translations-page .chapter-image {
+    overflow: hidden;
+    border-radius: 13px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
+}
+
+.translations-page .chapter-image img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.7s ease;
+}
+
+.translations-page .translation-card:hover .chapter-image img {
+    transform: scale(1.07);
+    filter: saturate(1.1) contrast(1.04);
+}
+
+.translations-page .chapter-content .label {
+    display: inline-flex;
+    margin-bottom: 1.1rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(157, 86, 220, 0.5);
+    border-radius: 999px;
+    color: #d8afff;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    letter-spacing: 1.6px;
+}
+
+.translations-page .chapter-content h2 {
+    font-size: clamp(2.15rem, 4.2vw, 3.5rem);
+    line-height: 0.95;
+}
+
+.translations-page .chapter-content p {
+    max-width: 51ch;
+    font-size: 1.04rem;
+    line-height: 1.75;
+}
+
+.translations-page .status {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 7px 18px rgba(0, 0, 0, 0.2);
+}
+
+.translations-page .reveal {
+    opacity: 0;
+    transform: translateY(36px) scale(0.985);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.translations-page .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@media (max-width: 1024px) {
+    .translations-page .translation-card {
+        gap: 2.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .translations-page .translations-hero {
+        min-height: 620px;
+    }
+
+    .translations-page .chapter-section::before {
+        font-size: 12rem;
+    }
+
+    .translations-page .translation-card:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .translations-page .hero-background img {
+        animation: none;
+    }
+
+    .translations-page .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
