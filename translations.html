@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animachina Stúdió – Magyarosításaink</title>
+    <title>Animachina Stúdió – Magyarosításaink | Halloween</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="images/icon.jpg">
 </head>
 
-<body class="translations-page">
+<body class="translations-page halloween-mode">
+    <audio id="halloweenAmbience" loop preload="auto" autoplay>
+        <source src="sounds/ambience.ogg" type="audio/ogg">
+    </audio>
+
+    <div class="halloween-atmosphere" aria-hidden="true">
+        <span class="harvest-moon"></span>
+        <span class="mist mist-one"></span>
+        <span class="mist mist-two"></span>
+        <span class="bat bat-one">⌁</span>
+        <span class="bat bat-two">⌁</span>
+        <span class="bat bat-three">⌁</span>
+        <span class="spider-line"><i>✦</i></span>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Halloween háttérhang bekapcsolása">
+        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+        <span>HANG BE</span>
+    </button>
 
 <!-- =========================
      NAVBAR
@@ -250,6 +268,36 @@
      );
      document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
        .forEach(el => obs.observe(el));
+
+     const halloweenAmbience = document.getElementById('halloweenAmbience');
+     const soundToggle = document.getElementById('soundToggle');
+
+     if (halloweenAmbience && soundToggle) {
+       halloweenAmbience.volume = 0.22;
+
+       const updateSoundButton = (isPlaying) => {
+         soundToggle.classList.toggle('is-playing', isPlaying);
+         soundToggle.setAttribute('aria-pressed', String(isPlaying));
+         soundToggle.setAttribute('aria-label', isPlaying ? 'Halloween háttérhang kikapcsolása' : 'Halloween háttérhang bekapcsolása');
+         soundToggle.querySelector('i').className = isPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+         soundToggle.querySelector('span').textContent = isPlaying ? 'HANG KI' : 'HANG BE';
+       };
+
+       const startAmbience = () => halloweenAmbience.play()
+         .then(() => updateSoundButton(true))
+         .catch(() => updateSoundButton(false));
+
+       soundToggle.addEventListener('click', () => {
+         if (halloweenAmbience.paused) startAmbience();
+         else {
+           halloweenAmbience.pause();
+           updateSoundButton(false);
+         }
+       });
+
+       startAmbience();
+       window.addEventListener('pointerdown', startAmbience, { once: true });
+     }
    </script>
 
 </body>

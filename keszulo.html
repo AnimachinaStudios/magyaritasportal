@@ -411,7 +411,20 @@
         }
     </style>
 </head>
-<body>
+<body class="halloween-mode team-halloween">
+<audio id="halloweenAmbience" loop preload="auto" autoplay>
+  <source src="sounds/ambience.ogg" type="audio/ogg">
+</audio>
+
+<div class="halloween-atmosphere" aria-hidden="true">
+  <span class="harvest-moon"></span>
+  <span class="mist mist-one"></span>
+  <span class="mist mist-two"></span>
+  <span class="bat bat-one">⌁</span>
+  <span class="bat bat-two">⌁</span>
+  <span class="bat bat-three">⌁</span>
+  <span class="spider-line"><i>✦</i></span>
+</div>
 
     <!-- ═══════════════ NAVBAR (változatlan) ═══════════════ -->
     <nav class="navbar" id="navbar">
@@ -442,8 +455,6 @@
                 <a href="index.html#careers" class="nav-link">CSATLAKOZÁS</a>
                 <a href="index.html#news" class="nav-link">HÍREK</a>
                 <a href="index.html#contact" class="nav-link">KAPCSOLAT</a>
-                <a href="zene.html" class="nav-link">ZENE</a>
-                <a href="keszulo.html" class="nav-link" style="color:var(--accent-cyan)">KÉSZÜLŐ</a>
             </div>
             <div class="nav-mobile-toggle" id="mobileToggle">
                 <span></span><span></span><span></span>
@@ -500,30 +511,30 @@
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="85" data-state="active">
+                             data-target="100" data-state="active">
                             <span class="progress-step__label">Szövegkönyv</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct now">85%</span>
+                            <span class="progress-step__pct now">100%</span>
                         </div>
 
-                        <div class="progress-step"
-                             data-target="75" data-state="active">
+                        <div class="progress-step is-active"
+                             data-target="95" data-state="active">
                             <span class="progress-step__label">Hangok</span>
                             <div class="progress-step__bar-wrap">
-                                <div class="progress-step__bar bar--pending"></div>
+                                <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">75%</span>
+                            <span class="progress-step__pct">95%</span>
                         </div>
 
-                        <div class="progress-step"
-                             data-target="45" data-state="active">
+                        <div class="progress-step is-active"
+                             data-target="75" data-state="active">
                             <span class="progress-step__label">Modolás</span>
                             <div class="progress-step__bar-wrap">
-                                <div class="progress-step__bar bar--pending"></div>
+                                <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">45%</span>
+                            <span class="progress-step__pct">75%</span>
                         </div>
 
                     </div>
@@ -878,9 +889,9 @@
                             <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--done" style="width:100%"></div></div>
                             <div class="mini-step">
                                 <span class="mini-step__label">Szövegkönyv</span>
-                                <span class="mini-step__pct now">0%</span>
+                                <span class="mini-step__pct now">15%</span>
                             </div>
-                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:0%"></div></div>
+                            <div class="mini-step__bar-wrap"><div class="mini-step__bar mini-bar--active" style="width:15%"></div></div>
                             <div class="mini-step">
                                 <span class="mini-step__label">Hangok</span>
                                 <span class="mini-step__pct">0%</span>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,26 @@
     <meta property="twitter:card" content="https://yt3.googleusercontent.com/dqmrV3-M2BPy3vK1-VX8petCC8zgRVFhp5LKcLEqnmTpeI6IC_E6Zq6YIlsI1VzKaacZqj3h-A=w2120-fcrop64=1,00000000ffffffff-k-c0xffffffff-no-nd-rj">
     <meta property="twitter:card" content="summary_large_image">
 </head>
-<body>
+<body class="halloween-mode">
+    <!-- A hangot a böngésző csak felhasználói interakció után engedélyezheti. -->
+    <audio id="halloweenAmbience" loop preload="auto" autoplay>
+        <source src="sounds/ambience.ogg" type="audio/ogg">
+    </audio>
+
+    <div class="halloween-atmosphere" aria-hidden="true">
+        <span class="harvest-moon"></span>
+        <span class="mist mist-one"></span>
+        <span class="mist mist-two"></span>
+        <span class="bat bat-one">⌁</span>
+        <span class="bat bat-two">⌁</span>
+        <span class="bat bat-three">⌁</span>
+        <span class="spider-line"><i>✦</i></span>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Halloween háttérhang bekapcsolása">
+        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+        <span>HANG BE</span>
+    </button>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -74,6 +93,7 @@
         </a>
     </div>
 
+
     <section class="hero">
         <div class="hero-background">
             <img src="https://basebar.hu/assets/gallery-8.jpg" alt="Koncert Háttér" class="parallax-media" data-parallax-speed="0.08">
@@ -99,8 +119,7 @@
     </section>
 
     
-<!-- 
-    <section class="hero">
+    <!-- <section class="hero">
         <div class="hero-background">
             <img src="images/ch5.png" alt="Chapter 5 Background">
         </div>
@@ -260,31 +279,23 @@
                     <img src="images/chapter4.png" alt="Article">
                     <div class="press-content">
                         <span class="press-date">Június 12 - 2026</span>
-                        <h3>Poppy Playtime 4. Fejezetet elkészült!</h3>
+                        <h3>Poppy Playtime 4. Fejezet elkészült!</h3>
                     </div>
                 </article>
                 
                 <article class="press-card">
                     <img src="images/chapter5.png" alt="Article">
                     <div class="press-content">
-                        <span class="press-date">Június 16 - 2026</span>
-                        <h3>Poppy Playtime 5. Fejezet előkészületek folyamatban!</h3>
-                    </div>
-                </article>
-                
-                <article class="press-card">
-                    <img src="images/chapter2.png" alt="Article">
-                    <div class="press-content">
-                        <span class="press-date">Június 16 - 2026</span>
-                        <h3>Poppy Playtime 2. Fejezet Remake Elkészült! Megjelenés: HAMAROSAN!</h3>
+                        <span class="press-date">Szeptember 20 - 2026</span>
+                        <h3>Poppy Playtime 5. Fejezet hamarosan!</h3>
                     </div>
                 </article>
 
                 <article class="press-card">
                     <img src="images/chapter3.png" alt="Article">
                     <div class="press-content">
-                        <span class="press-date">Június 16 - 2026</span>
-                        <h3>Poppy Playtime 3. Fejezet Remake elkezdve!</h3>
+                        <span class="press-date">Szeptember 6 - 2026</span>
+                        <h3>Poppy Playtime 3. Fejezet Remake elkészült!</h3>
                     </div>
                 </article>
             </div>
@@ -374,6 +385,38 @@
      );
      document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
        .forEach(el => obs.observe(el));
+
+     // Halloween hangulat: halk, loopolt ambience és egyértelmű, kézi kapcsoló.
+     const halloweenAmbience = document.getElementById('halloweenAmbience');
+     const soundToggle = document.getElementById('soundToggle');
+
+     if (halloweenAmbience && soundToggle) {
+       halloweenAmbience.volume = 0.22;
+
+       const updateSoundButton = (isPlaying) => {
+         soundToggle.classList.toggle('is-playing', isPlaying);
+         soundToggle.setAttribute('aria-pressed', String(isPlaying));
+         soundToggle.setAttribute('aria-label', isPlaying ? 'Halloween háttérhang kikapcsolása' : 'Halloween háttérhang bekapcsolása');
+         soundToggle.querySelector('i').className = isPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+         soundToggle.querySelector('span').textContent = isPlaying ? 'HANG KI' : 'HANG BE';
+       };
+
+       const startAmbience = () => halloweenAmbience.play()
+         .then(() => updateSoundButton(true))
+         .catch(() => updateSoundButton(false));
+
+       soundToggle.addEventListener('click', () => {
+         if (halloweenAmbience.paused) startAmbience();
+         else {
+           halloweenAmbience.pause();
+           updateSoundButton(false);
+         }
+       });
+
+       // Ha a böngésző engedi, az ambience azonnal indul; különben az első kattintásra.
+       startAmbience();
+       window.addEventListener('pointerdown', startAmbience, { once: true });
+     }
    </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animachina Stúdió – Csapat</title>
+  <title>Animachina Stúdió – Csapat | Halloween</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/team.css">
   <link rel="stylesheet" href="styles.css">
@@ -57,7 +57,25 @@
   100% { right: 10px; transform: translateY(-50%) scale(1.2); }
 }
 </style>
-<body>
+<body class="halloween-mode team-halloween">
+<audio id="halloweenAmbience" loop preload="auto" autoplay>
+  <source src="sounds/ambience.ogg" type="audio/ogg">
+</audio>
+
+<div class="halloween-atmosphere" aria-hidden="true">
+  <span class="harvest-moon"></span>
+  <span class="mist mist-one"></span>
+  <span class="mist mist-two"></span>
+  <span class="bat bat-one">⌁</span>
+  <span class="bat bat-two">⌁</span>
+  <span class="bat bat-three">⌁</span>
+  <span class="spider-line"><i>✦</i></span>
+</div>
+
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Halloween háttérhang bekapcsolása">
+  <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+  <span>HANG BE</span>
+</button>
 <!-- NAV -->
 <nav class="navbar" id="navbar">
     <div class="nav-container">
@@ -157,8 +175,8 @@
         Az Animachina Stúdió alapítója és motorja. Modok készítése, szinkronhangként való részvétel és a stúdió egészének irányítása – mindez egyszerre.
       </p>
       <div class="leader-links">
-        <a class="link-pill" href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a>
-        <a class="link-pill" href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a>
+        <a class="link-pill" href="https://www.youtube.com/@therealkondix" target="_blank">YouTube</a>
+        <a class="link-pill" href="https://www.tiktok.com/@animachinastudio" target="_blank">TikTok</a>
         <a class="link-pill" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
       </div>
     </div>
@@ -176,6 +194,20 @@
       <p class="section-desc">A szinkron rendezéséért felelősek.</p>
     </div>
     <div class="team-grid reveal">
+
+
+      <div class="team-card">
+         <div class="card-avatar-placeholder">
+        <img src="images/szinkronok/kondix.png" alt="Kondix">
+      </div>
+        <div class="role-tag rt-voice">Rendező</div>
+        <div class="card-name">Kondix</div>
+        <div class="card-role">Szinkronhang & Rendező</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/@therealkondix" target="_blank">YouTube</a>
+          <a class="card-link" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
+        </div>
+      </div>
 
       <div class="team-card">
          <div class="card-avatar-placeholder">
@@ -641,8 +673,8 @@
         <div class="card-name">Kondix</div>
         <div class="card-role">Fordító</div>
         <div class="card-links">
-           <a class="card-link" href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a>
-          <a class="card-link" href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a>
+           <a class="card-link" href="https://www.youtube.com/@therealkondix" target="_blank">YouTube</a>
+          <a class="card-link" href="https://www.tiktok.com/@animachinastudio" target="_blank">TikTok</a>
           <a class="card-link" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
         </div>
       </div>
@@ -672,8 +704,8 @@
         <div class="card-name">Kondix</div>
         <div class="card-role">Unreal Engine + Unity + Clickteam Modoló</div>
         <div class="card-links">
-          <a class="card-link" href="https://www.youtube.com/@KondixOfficial" target="_blank">YouTube</a>
-          <a class="card-link" href="https://www.tiktok.com/@animachina_studios" target="_blank">TikTok</a>
+          <a class="card-link" href="https://www.youtube.com/@therealkondix" target="_blank">YouTube</a>
+          <a class="card-link" href="https://www.tiktok.com/@animachinastudio" target="_blank">TikTok</a>
           <a class="card-link" href="https://animachina-studios.itch.io/" target="_blank">Itch.io</a>
         </div>
       </div>
@@ -716,7 +748,7 @@
 <footer>
   <p class="footer-logo">ANIMACHINA STÚDIÓ</p>
   <div class="footer-social">
-    <a href="https://www.tiktok.com/@animachina_studios" target="_blank">TT</a>
+    <a href="https://www.tiktok.com/@animachinastudio" target="_blank">TT</a>
     <a href="https://www.youtube.com/@KondixOfficial" target="_blank">YT</a>
     <a href="https://www.youtube.com/@AnimachinaStudio" target="_blank">YT2</a>
     <a href="https://discord.com/invite/heNvujBtdt" target="_blank">DC</a>
@@ -824,9 +856,9 @@ function createCubeAnimation(canvasId, options = {}) {
 }
 
 // Init all cube canvases
-createCubeAnimation('cube-canvas',   { color: '#00ffe5', count: 22, alpha: 0.9 });
-createCubeAnimation('cube-canvas-2', { color: '#ff2cf7', count: 16, alpha: 0.7 });
-createCubeAnimation('cube-canvas-3', { color: '#00ffe5', count: 14, alpha: 0.8 });
+createCubeAnimation('cube-canvas',   { color: '#ff8a1f', count: 22, alpha: 0.9 });
+createCubeAnimation('cube-canvas-2', { color: '#b04cff', count: 16, alpha: 0.7 });
+createCubeAnimation('cube-canvas-3', { color: '#ff8a1f', count: 14, alpha: 0.8 });
 
 // ── SCROLL REVEAL ──
 const reveals = document.querySelectorAll('.reveal');
@@ -884,6 +916,28 @@ document.addEventListener('mousemove', (e) => {
     canvas.style.transition = 'transform 0.5s ease';
   }
 });
+
+// Halk, loopolt Halloween ambience — a kapcsoló az autoplay tiltása esetén is indítja.
+const halloweenAmbience = document.getElementById('halloweenAmbience');
+const soundToggle = document.getElementById('soundToggle');
+
+if (halloweenAmbience && soundToggle) {
+  halloweenAmbience.volume = 0.22;
+  const updateSoundButton = (isPlaying) => {
+    soundToggle.classList.toggle('is-playing', isPlaying);
+    soundToggle.setAttribute('aria-pressed', String(isPlaying));
+    soundToggle.setAttribute('aria-label', isPlaying ? 'Halloween háttérhang kikapcsolása' : 'Halloween háttérhang bekapcsolása');
+    soundToggle.querySelector('i').className = isPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    soundToggle.querySelector('span').textContent = isPlaying ? 'HANG KI' : 'HANG BE';
+  };
+  const startAmbience = () => halloweenAmbience.play().then(() => updateSoundButton(true)).catch(() => updateSoundButton(false));
+  soundToggle.addEventListener('click', () => {
+    if (halloweenAmbience.paused) startAmbience();
+    else { halloweenAmbience.pause(); updateSoundButton(false); }
+  });
+  startAmbience();
+  window.addEventListener('pointerdown', startAmbience, { once: true });
+}
 </script>
 <script src="script.js"></script>
 </body>
