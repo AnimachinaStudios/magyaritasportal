@@ -10,6 +10,91 @@
 </head>
 
 <body class="translations-page halloween-mode">
+
+<!-- Halloween: saját SVG-tökök, külső képfájl nélkül. -->
+    <svg class="halloween-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+            <radialGradient id="pumpkinSkin" cx="38%" cy="28%" r="78%">
+                <stop offset="0" stop-color="#ffbb47"/>
+                <stop offset="0.48" stop-color="#f77715"/>
+                <stop offset="1" stop-color="#8b230c"/>
+            </radialGradient>
+            <linearGradient id="pumpkinFire" x2="0" y2="1">
+                <stop stop-color="#fff8b5"/><stop offset="1" stop-color="#ffae28"/>
+            </linearGradient>
+            <symbol id="halloweenPumpkin" viewBox="0 0 160 160">
+                <path d="M76 40 Q66 17 85 9 L94 16 Q80 24 87 42" fill="#6d7638" stroke="#343d20" stroke-width="3"/>
+                <path d="M91 31 Q119 16 118 34 Q115 44 103 35" fill="none" stroke="#8d9a45" stroke-width="3" stroke-linecap="round"/>
+                <path d="M80 41 C45 19 9 45 12 90 C10 132 45 147 80 135 C115 147 150 132 148 90 C151 45 115 19 80 41Z" fill="url(#pumpkinSkin)" stroke="#63210f" stroke-width="3"/>
+                <g fill="none" stroke="#a84012" stroke-width="2.5" opacity="0.6">
+                    <path d="M64 39 C37 53 31 112 60 136"/><path d="M96 39 C123 53 129 112 100 136"/>
+                    <path d="M80 42 C67 64 65 112 80 136"/><path d="M84 42 C96 70 98 110 84 136"/>
+                </g>
+                <g class="pumpkin-face" fill="url(#pumpkinFire)" stroke="#86310e" stroke-width="2" stroke-linejoin="round">
+                    <path d="M32 77 L57 62 L65 86Z"/><path d="M95 86 L103 62 L128 77Z"/>
+                    <path d="M80 82 L70 99 L90 99Z"/>
+                    <path d="M31 99 L48 108 L57 101 L67 114 L81 108 L95 115 L105 101 L114 108 L130 97 Q116 133 81 130 Q47 134 31 99Z"/>
+                </g>
+                <path d="M24 64 Q30 45 47 43" fill="none" stroke="#ffda81" stroke-width="4" opacity="0.45" stroke-linecap="round"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="pumpkin-preloader" id="pumpkinPreloader" role="status" aria-live="polite" hidden>
+        <div class="pumpkin-preloader-content">
+            <span class="preloader-eyebrow">ANIMACHINA STÚDIÓ</span>
+            <div class="preloader-pumpkin-wrap">
+                <span class="pumpkin-aura" aria-hidden="true"></span>
+                <svg class="preloader-pumpkin" aria-hidden="true" focusable="false" viewBox="0 0 160 160"><use href="#halloweenPumpkin"/></svg>
+                <span class="pumpkin-shadow" aria-hidden="true"></span>
+            </div>
+            <p class="preloader-title">Ébredezik a sötétség…</p>
+            <p class="preloader-caption">Egy pillanat, és beléphetsz.</p>
+            <span class="preloader-track" aria-hidden="true"><span></span></span>
+        </div>
+    </div>
+    <script>
+    (() => {
+        const loader = document.getElementById('pumpkinPreloader');
+        const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const started = performance.now();
+        let finished = false;
+        let revealTimer;
+        const dismiss = () => {
+            if (finished) return;
+            finished = true;
+            clearTimeout(fallbackTimer);
+            clearTimeout(revealTimer);
+            loader.classList.add('is-finished');
+            window.setTimeout(() => { loader.hidden = true; }, motion.matches ? 0 : 650);
+        };
+        loader.hidden = false;
+        const fallbackTimer = window.setTimeout(dismiss, 4000);
+        window.addEventListener('load', () => {
+            revealTimer = window.setTimeout(dismiss, Math.max(0, (motion.matches ? 0 : 1100) - (performance.now() - started)));
+        }, { once: true });
+        window.addEventListener('pagehide', dismiss, { once: true });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') dismiss();
+        });
+    })();
+    </script>
+
+    <div class="floating-pumpkins" aria-hidden="true">
+        <span class="floating-pumpkin pumpkin-1"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+        <span class="floating-pumpkin pumpkin-2"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+        <span class="floating-pumpkin pumpkin-3"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+        <span class="floating-pumpkin pumpkin-4"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+        <span class="floating-pumpkin pumpkin-5"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+        <span class="floating-pumpkin pumpkin-6"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
+    </div>
+    <div class="halloween-lightning" id="halloweenLightning" aria-hidden="true">
+        <svg class="lightning-bolt" viewBox="0 0 180 500" preserveAspectRatio="none" focusable="false">
+            <path d="M106 -10 L65 123 L102 111 L45 258 L78 248 L22 443 L123 225 L87 234 L143 85 L105 97 L146 -10 M71 185 L143 244 L125 292 L176 358"/>
+        </svg>
+    </div>
+    <button class="effects-toggle" id="effectsToggle" type="button" aria-pressed="true">EFFEKTEK KI</button>
+
     <audio id="halloweenAmbience" loop preload="auto" autoplay>
         <source src="sounds/ambience.ogg" type="audio/ogg">
     </audio>
@@ -258,6 +343,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="halloween.js"></script>
 
 <script>
      const obs = new IntersectionObserver(
