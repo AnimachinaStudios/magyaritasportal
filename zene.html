@@ -4,527 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Animachina Stúdió - Zene Lejátszó</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=VT323&family=Orbitron:wght@400;700&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #1a0a00;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'VT323', monospace;
-    overflow-x: hidden;
-    padding: 16px 8px;
-    background-image:
-      radial-gradient(ellipse at 50% 0%, #3d1a00 0%, transparent 60%),
-      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-  }
-
-  .room {
-    position: relative;
-    width: 100%;
-    max-width: 860px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  .tv-wrap {
-    position: relative;
-    width: min(520px, 94vw);
-    z-index: 2;
-  }
-
-  .tv-body {
-    background: linear-gradient(160deg, #2c2c2c 0%, #1a1a1a 60%, #111 100%);
-    border-radius: clamp(12px,4vw,24px) clamp(12px,4vw,24px) clamp(8px,3vw,18px) clamp(8px,3vw,18px);
-    padding: clamp(10px,3vw,18px) clamp(10px,3vw,18px) clamp(18px,5vw,32px);
-    border: 3px solid #3a3a3a;
-    box-shadow: 0 0 0 2px #111, 0 8px 40px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.06);
-    position: relative;
-  }
-
-  .tv-screen-bezel {
-    background: #0a0a0a;
-    border-radius: 12px;
-    padding: clamp(5px,2vw,10px);
-    border: 3px solid #222;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 0 1px #333;
-  }
-
-  .tv-screen {
-    width: 100%;
-    aspect-ratio: 4/3;
-    background: #050810;
-    border-radius: 6px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .screen-scanlines {
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.18) 3px, rgba(0,0,0,0.18) 4px);
-    pointer-events: none; z-index: 10;
-  }
-
-  .screen-glow {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(0,80,255,0.04) 0%, transparent 70%);
-    pointer-events: none; z-index: 9;
-  }
-
-  .screen-idle {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-    color: #1a2a1a; opacity: 0.5; text-align: center; padding: 10px;
-  }
-
-  .screen-idle .no-signal {
-    font-family: 'VT323', monospace;
-    font-size: clamp(20px,5vw,32px);
-    color: #399739;
-    letter-spacing: 4px;
-    text-shadow: 0 0 10px #0f0;
-  }
-
-  .screen-idle .hint {
-    font-size: clamp(9px,2.2vw,14px);
-    color: #11b111;
-    letter-spacing: 2px;
-  }
-
-  .screen-playing {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%; height: 100%;
-    padding: 10px;
-    background: radial-gradient(ellipse at 50% 40%, #0a0a1e 0%, #020308 100%);
-    position: relative;
-  }
-
-  .cover-bg {
-    position: absolute; inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: opacity 1s ease;
-    z-index: 0;
-    filter: blur(2px) brightness(0.35) saturate(1.4);
-  }
-  .cover-bg.visible { opacity: 1; }
-
-  .screen-playing .vinyl-wrap,
-  .screen-playing .song-info { position: relative; z-index: 2; }
-
-  .screen-playing.active { display: flex; }
-
-  .vinyl-wrap {
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 8px;
-  }
-
-  .vinyl {
-    width: clamp(56px,15vw,100px);
-    height: clamp(56px,15vw,100px);
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 50%, #222 0%, #111 20%, transparent 21%),
-      conic-gradient(#1a1a1a 0deg,#2a2a2a 30deg,#1a1a1a 60deg,#333 90deg,#1a1a1a 120deg,#2a2a2a 150deg,#1a1a1a 180deg,#333 210deg,#1a1a1a 240deg,#2a2a2a 270deg,#1a1a1a 300deg,#333 330deg,#1a1a1a 360deg);
-    border: 3px solid #333;
-    box-shadow: 0 0 30px rgba(100,100,255,0.3), 0 0 60px rgba(50,50,200,0.15);
-    position: relative;
-  }
-
-  .vinyl.spinning { animation: spin 2s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .vinyl-center {
-    position: absolute;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    overflow: hidden;
-    border: 2px solid rgba(255,255,255,0.2);
-  }
-
-  .vinyl-center-placeholder { width:100%; height:100%; background:#c00; border-radius:50%; }
-
-  .song-info { text-align: center; z-index: 5; width: 100%; }
-
-  .song-title {
-    font-family: 'VT323', monospace;
-    font-size: clamp(13px,3.8vw,20px);
-    color: #00ff88;
-    text-shadow: 0 0 12px #00ff88, 0 0 24px rgba(0,255,136,0.4);
-    letter-spacing: 2px;
-    max-width: 90%; margin: 0 auto;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    animation: textFlicker 4s infinite;
-  }
-
-  .song-artist {
-    font-family: 'VT323', monospace;
-    font-size: clamp(10px,3vw,15px);
-    color: #0088ff;
-    text-shadow: 0 0 8px #0088ff;
-    letter-spacing: 1px; margin-top: 2px;
-  }
-
-  .progress-bar-wrap {
-    width: 80%; margin: 6px auto 0;
-    height: 4px; background: #0a1a0a;
-    border-radius: 2px; border: 1px solid #0f3; overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00ff88, #00ffcc);
-    width: 0%; transition: width 0.5s linear;
-    box-shadow: 0 0 6px #00ff88;
-  }
-
-  @keyframes textFlicker {
-    0%,95%,100% { opacity:1; } 96% { opacity:0.7; } 97% { opacity:1; } 98% { opacity:0.6; }
-  }
-
-  .tv-bottom {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 16px 0;
-  }
-
-  .tv-brand {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(7px,1.5vw,11px); color: #555; letter-spacing: 3px;
-  }
-
-  .tv-indicator {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #0f0; box-shadow: 0 0 8px #0f0;
-    animation: blink 2s ease-in-out infinite;
-  }
-
-  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-
-  .tv-knobs { display:flex; gap:8px; }
-
-  .tv-knob {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #555, #222);
-    border: 1px solid #444;
-  }
-
-  .tv-legs {
-    display: flex; justify-content: center;
-    gap: clamp(80px,28vw,200px); margin-top: -2px;
-  }
-
-  .tv-leg {
-    width: 16px; height: 22px;
-    background: linear-gradient(180deg, #2a2a2a, #111);
-    border-radius: 0 0 6px 6px;
-    border: 1px solid #333; border-top: none;
-  }
-
-  /* VCR */
-  .vcr-wrap { width: min(480px,90vw); z-index: 3; }
-
-  .vcr-body {
-    background: linear-gradient(160deg, #252525 0%, #181818 100%);
-    border-radius: 8px;
-    padding: clamp(10px,3vw,14px) clamp(12px,4vw,20px);
-    border: 2px solid #333;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.7), inset 0 1px 3px rgba(255,255,255,0.04);
-    position: relative;
-  }
-
-  .vcr-top {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 10px; gap: 10px;
-  }
-
-  .vcr-slot {
-    flex: 1; height: 28px;
-    background: #0a0a0a; border-radius: 4px;
-    border: 2px solid #111;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.9);
-    position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .vcr-slot-label { font-size:10px; color:#222; letter-spacing:2px; user-select:none; }
-
-  .vhs-in-slot {
-    position: absolute; inset: 2px; border-radius: 2px;
-    display: none; align-items: center; justify-content: center;
-    font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 1px;
-  }
-  .vhs-in-slot.visible { display:flex; }
-
-  .vcr-display {
-    background: #000e00; border: 1px solid #0f0; border-radius: 3px;
-    padding: 4px 10px;
-    font-family: 'VT323', monospace;
-    font-size: clamp(14px,4vw,18px); color: #00ff44;
-    text-shadow: 0 0 8px #00ff44;
-    min-width: 68px; text-align: center; letter-spacing: 2px;
-    box-shadow: 0 0 10px rgba(0,255,68,0.15); white-space: nowrap;
-  }
-
-  .vcr-controls {
-    display: flex; align-items: center;
-    gap: clamp(4px,2vw,10px); flex-wrap: wrap;
-  }
-
-  .vcr-btn {
-    background: linear-gradient(160deg, #333 0%, #1a1a1a 100%);
-    border: 1px solid #444; border-radius: 5px; color: #aaa;
-    font-family: 'VT323', monospace;
-    font-size: clamp(12px,3.2vw,18px);
-    padding: clamp(2px,1vw,4px) clamp(7px,2vw,14px);
-    cursor: pointer; transition: all 0.15s; letter-spacing: 1px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05);
-    user-select: none; white-space: nowrap;
-    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
-  }
-
-  .vcr-btn:hover { background: linear-gradient(160deg,#444 0%,#222 100%); color:#fff; border-color:#555; }
-  .vcr-btn:active { transform: scale(0.95) translateY(1px); }
-  .vcr-btn.active { color:#00ff88; border-color:#00ff88; box-shadow:0 0 8px rgba(0,255,136,0.3); }
-  .vcr-btn.eject-btn { background:linear-gradient(160deg,#2a2020 0%,#150f0f 100%); border-color:#554; color:#886; }
-  .vcr-btn.eject-btn:hover { color:#ffcc00; border-color:#ffcc00; }
-
-  .vcr-brand {
-    font-family:'Orbitron',sans-serif; font-size:8px; color:#444; letter-spacing:4px;
-    position:absolute; right:14px; bottom:8px;
-  }
-
-  /* TABLE */
-  .table-surface {
-    width: min(780px, 98vw);
-    background: linear-gradient(180deg, #3d2008 0%, #2a1505 100%);
-    border-radius: 6px 6px 0 0;
-    padding: clamp(12px,3vw,20px) clamp(6px,3vw,40px) clamp(14px,4vw,24px);
-    border: 2px solid #5a3010; border-bottom: none;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,180,80,0.1);
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    gap: clamp(4px,2.5vw,20px);
-    position: relative; z-index: 1;
-    min-height: clamp(80px,20vw,120px);
-    flex-wrap: nowrap;
-  }
-
-  .table-edge {
-    width: min(780px,98vw); height: 14px;
-    background: linear-gradient(180deg,#5a3010,#2a1505);
-    border-radius: 0 0 8px 8px;
-    border: 2px solid #5a3010; border-top: none;
-  }
-
-  /* VHS TAPES */
-  .vhs-tape {
-    position: relative;
-    width: clamp(44px,11vw,80px);
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s;
-    transform-origin: bottom center;
-    user-select: none; flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
-  }
-
-  @media (hover:hover) {
-    .vhs-tape:hover { transform: translateY(-8px) scale(1.05); filter: brightness(1.2); }
-    .vhs-tape:hover .vhs-tooltip { opacity: 1; }
-  }
-
-  .vhs-tape.inserting { animation: insertTape 1.2s cubic-bezier(0.4,0,0.2,1) forwards; }
-  .vhs-tape.ejecting  { animation: ejectTape  1.2s cubic-bezier(0.4,0,0.2,1) forwards; }
-  .vhs-tape.hidden    { opacity:0; pointer-events:none; }
-
-  @keyframes insertTape {
-    0%   { transform:translateY(0) scale(1); opacity:1; }
-    40%  { transform:translateY(-50px) scale(1.08); opacity:1; }
-    100% { transform:translateY(-280px) translateX(var(--tx,0px)) scale(0.4); opacity:0; }
-  }
-  @keyframes ejectTape {
-    0%   { transform:translateY(-280px) translateX(var(--tx,0px)) scale(0.4); opacity:0; }
-    60%  { transform:translateY(-50px) scale(1.08); opacity:1; }
-    100% { transform:translateY(0) scale(1); opacity:1; }
-  }
-
-  .vhs-body {
-    width: 100%; aspect-ratio: 80/110;
-    border-radius: 4px 4px 2px 2px;
-    position: relative;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
-    overflow: hidden;
-  }
-
-  .vhs-label {
-    position: absolute;
-    top:7%; left:7%; right:7%; height:40%;
-    background: rgba(255,255,255,0.9);
-    border-radius: 2px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding: 2px 3px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
-
-  .vhs-label-title {
-    font-family:'VT323',monospace;
-    font-size: clamp(6px,1.6vw,10px);
-    color:#111; text-align:center; line-height:1.1;
-    max-width:100%; overflow:hidden; word-break:break-word;
-  }
-
-  .vhs-label-line { width:80%; height:1px; margin:2px 0; }
-
-  .vhs-window {
-    position:absolute; bottom:16%; left:12%; right:12%; height:20%;
-    background:rgba(0,0,0,0.7); border-radius:3px;
-    border:1px solid rgba(255,255,255,0.1);
-    display:flex; align-items:center; justify-content:space-around; padding:0 4px;
-  }
-
-  .vhs-reel {
-    width: clamp(8px,2.5vw,16px); height: clamp(8px,2.5vw,16px);
-    border-radius:50%;
-    background:radial-gradient(circle at 40% 40%,#555,#111);
-    border:1px solid #333; position:relative;
-  }
-
-  .vhs-reel::after {
-    content:''; position:absolute; inset:3px;
-    border-radius:50%; background:#0a0a0a;
-  }
-
-  .vhs-bottom-bar {
-    position:absolute; bottom:0; left:0; right:0; height:13%;
-    background:rgba(0,0,0,0.4);
-    border-top:1px solid rgba(255,255,255,0.05);
-    display:flex; align-items:center; justify-content:center;
-  }
-
-  .vhs-tape-num {
-    font-family:'VT323',monospace;
-    font-size:clamp(5px,1.3vw,9px);
-    color:rgba(255,255,255,0.3); letter-spacing:1px;
-  }
-
-  .vhs-shadow {
-    width:80%; height:8px;
-    background:radial-gradient(ellipse,rgba(0,0,0,0.5),transparent);
-    margin:2px auto 0;
-  }
-
-  .vhs-tooltip {
-    position:absolute; bottom:110%; left:50%; transform:translateX(-50%);
-    background:rgba(0,0,0,0.85); color:#0f0;
-    font-family:'VT323',monospace; font-size:13px;
-    padding:4px 10px; border-radius:4px; border:1px solid #0f0;
-    white-space:nowrap; pointer-events:none; opacity:0; transition:opacity 0.2s; z-index:20;
-  }
-
-  /* Colors */
-  .vhs-red    .vhs-body { background:linear-gradient(160deg,#cc1111 0%,#880808 100%); }
-  .vhs-red    .vhs-label-line { background:#cc1111; }
-  .vhs-blue   .vhs-body { background:linear-gradient(160deg,#1155cc 0%,#083088 100%); }
-  .vhs-blue   .vhs-label-line { background:#1155cc; }
-  .vhs-green  .vhs-body { background:linear-gradient(160deg,#118844 0%,#085528 100%); }
-  .vhs-green  .vhs-label-line { background:#118844; }
-  .vhs-yellow .vhs-body { background:linear-gradient(160deg,#ccaa00 0%,#886600 100%); }
-  .vhs-yellow .vhs-label-line { background:#ccaa00; }
-  .vhs-purple .vhs-body { background:linear-gradient(160deg,#882299 0%,#4a1166 100%); }
-  .vhs-purple .vhs-label-line { background:#882299; }
-
-  .slot-red    { background:#cc1111; }
-  .slot-blue   { background:#1155cc; }
-  .slot-green  { background:#118844; }
-  .slot-yellow { background:#ccaa00; }
-  .slot-purple { background:#882299; }
-
-  .rewinding .vinyl { animation:spin 0.3s linear infinite reverse !important; }
-
-  .screen-fade {
-    position:absolute; inset:0; background:#000; opacity:0;
-    pointer-events:none; z-index:8; transition:opacity 0.4s;
-  }
-  .screen-fade.on { opacity:1; }
-
-  /* Volume slider */
-  .vcr-volume {
-    display: flex; align-items: center; gap: 6px;
-    margin-top: 8px;
-  }
-  .vcr-volume-label {
-    font-family: 'VT323', monospace;
-    font-size: clamp(11px,3vw,15px); color: #888; letter-spacing: 1px;
-    white-space: nowrap;
-  }
-  .vcr-volume-icon { font-size: 14px; }
-  .volume-slider {
-    -webkit-appearance: none; appearance: none;
-    flex: 1; height: 4px;
-    background: linear-gradient(90deg, #00ff88 var(--vol, 80%), #1a2a1a var(--vol, 80%));
-    border-radius: 2px; outline: none; cursor: pointer;
-    border: 1px solid #0f3;
-  }
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #00ff88, #007744);
-    border: 1px solid #00ff88;
-    box-shadow: 0 0 6px rgba(0,255,136,0.5);
-    cursor: pointer;
-  }
-  .volume-slider::-moz-range-thumb {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #00ff88, #007744);
-    border: 1px solid #00ff88;
-    box-shadow: 0 0 6px rgba(0,255,136,0.5);
-    cursor: pointer;
-  }
-  .volume-value {
-    font-family: 'VT323', monospace;
-    font-size: clamp(11px,3vw,14px); color: #00ff88;
-    min-width: 32px; text-align: right;
-    text-shadow: 0 0 6px #00ff88;
-  }
-
-  audio { display:none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    body { justify-content:flex-start; padding-top:16px; }
-    .tv-wrap  { width:96vw; }
-    .vcr-wrap { width:92vw; }
-    .vcr-brand { display:none; }
-    .vcr-controls { gap:5px; }
-    .vcr-btn { letter-spacing:0; }
-    .tv-legs { gap:52%; }
-    .table-surface { width:98vw; }
-    .table-edge    { width:98vw; }
-  }
-
-  @media (max-width: 380px) {
-    .vcr-display { min-width:52px; padding:3px 5px; }
-    .vcr-btn { padding:2px 5px; }
-    .table-surface { gap:3px; padding-left:3px; padding-right:3px; }
-  }
-</style>
+<link rel="stylesheet" href="zene.css">
 </head>
 <body>
 <div class="room">
@@ -648,7 +128,6 @@
       </div>
       <div class="vhs-shadow"></div>
     </div>
-  </div>
   <div class="table-edge"></div>
 </div>
 
@@ -665,7 +144,62 @@ const songs = [
   { title:"Kábulok",     artist:"Zazaa", color:"slot-green",  labelColor:"#118844", cover:"zene/3.png" },
   { title:"Angyal",      artist:"Zazaa", color:"slot-yellow", labelColor:"#ccaa00", cover:"zene/4.png" },
   { title:"Kék és Piros",artist:"Zazaa", color:"slot-purple", labelColor:"#882299", cover:"zene/5.png" },
+  { title:"Oly Rég",     artist:"Zazaa", audio:"zene/track1.2.mp3", color:"slot-red",    labelColor:"#87433d" },
+  { title:"Eretnek",     artist:"Zazaa", audio:"zene/track3.1.mp3", cover:"zene/3.1.png", color:"slot-blue", labelColor:"#486477" },
+  { title:"Ördög",       artist:"Zazaa", audio:"zene/track4.1.mp3", color:"slot-purple", labelColor:"#765b7d" },
+  // Új kazettához másold ezt a mintát, tedd a hangfájlt a zene/ mappába,
+  // és állítsd be az audio útvonalát. Borítókép opcionális.
+  // { title:"Új szám", artist:"Előadó", audio:"zene/track6.mp3", cover:"zene/6.png", color:"slot-blue", labelColor:"#486477" },
 ];
+
+// A lejátszó az öt alap kazettán túl is automatikusan felépíti a kazettákat.
+const tapePalette = ["red", "blue", "green", "yellow", "purple"];
+const extraTapeShelf = document.getElementById('tableTop');
+const makePart = (tag, className, parent, text) => {
+  const part = document.createElement(tag);
+  if (className) part.className = className;
+  if (text !== undefined) part.textContent = text;
+  parent.appendChild(part);
+  return part;
+};
+
+songs.forEach((song, index) => {
+  const audio = document.getElementById('audio' + index) || new Audio();
+  audio.id = 'audio' + index;
+  audio.src = song.audio || audio.getAttribute('src') || `zene/track${index + 1}.mp3`;
+  audio.preload = 'none';
+  if (!audio.isConnected) document.body.appendChild(audio);
+
+  if (index < 5) return;
+
+  const palette = tapePalette[index % tapePalette.length];
+  song.color = song.color || `slot-${palette}`;
+  song.labelColor = song.labelColor || '#486477';
+  const tape = makePart('div', `vhs-tape vhs-${palette}`, extraTapeShelf);
+  tape.id = 'tape' + index;
+  tape.tabIndex = 0;
+  tape.setAttribute('role', 'button');
+  tape.setAttribute('aria-label', `Kazetta lejátszása: ${song.title} – ${song.artist}`);
+  tape.addEventListener('click', () => insertTape(index));
+  tape.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      insertTape(index);
+    }
+  });
+  makePart('div', 'vhs-tooltip', tape, `Betölt: ${song.title}`);
+  const body = makePart('div', 'vhs-body', tape);
+  const label = makePart('div', 'vhs-label', body);
+  const title = makePart('div', 'vhs-label-title', label, `${song.title}\n${song.artist}`);
+  title.id = 'label' + index;
+  makePart('div', 'vhs-label-line', label);
+  const window = makePart('div', 'vhs-window', body);
+  makePart('div', 'vhs-reel', window);
+  makePart('div', 'vhs-reel', window);
+  const bottom = makePart('div', 'vhs-bottom-bar', body);
+  makePart('div', 'vhs-tape-num', bottom, `VOL.${index + 1}`);
+  makePart('div', 'vhs-shadow', tape);
+});
 
 // Volume
 const volumeSlider = document.getElementById('volumeSlider');
@@ -719,24 +253,11 @@ function insertTape(index){
   if(currentTape===index) return;
 
   busy=true;
-
   startPlayback(index);
-
-  const tapeEl=document.getElementById('tape'+index);
-  const tapeRect=tapeEl.getBoundingClientRect();
-  const vcrRect=document.querySelector('.vcr-body').getBoundingClientRect();
-  const tx=vcrRect.left+vcrRect.width*0.3-(tapeRect.left+tapeRect.width/2);
-  tapeEl.style.setProperty('--tx',tx+'px');
-  tapeEl.classList.add('inserting');
-
-  setTimeout(()=>{
-    tapeEl.classList.add('hidden');
-    tapeEl.classList.remove('inserting');
-    currentTape=index;
-    slotInd.className='vhs-in-slot visible '+songs[index].color;
-    slotInd.textContent=songs[index].title.substring(0,12);
-    busy=false;
-  },1200);
+  currentTape=index;
+  slotInd.className='vhs-in-slot visible '+songs[index].color;
+  slotInd.textContent=songs[index].title.substring(0,12);
+  busy=false;
 }
 
 function ejectAndInsert(newIndex){
@@ -747,19 +268,11 @@ function ejectAndInsert(newIndex){
 function doEject(cb){
   if(currentTape===null){if(cb)cb();return;}
   busy=true;
-  const idx=currentTape;
   currentTape=null;
   slotInd.className='vhs-in-slot';
   slotInd.textContent='';
   fadeScreen(true,()=>{ screenPlay.classList.remove('active'); screenIdle.style.display=''; coverBg.classList.remove('visible'); fadeScreen(false); });
-  const tapeEl=document.getElementById('tape'+idx);
-  const tapeRect=tapeEl.getBoundingClientRect();
-  const vcrRect=document.querySelector('.vcr-body').getBoundingClientRect();
-  const tx=vcrRect.left+vcrRect.width*0.3-(tapeRect.left+tapeRect.width/2);
-  tapeEl.style.setProperty('--tx',tx+'px');
-  tapeEl.classList.remove('hidden');
-  tapeEl.classList.add('ejecting');
-  setTimeout(()=>{ tapeEl.classList.remove('ejecting'); busy=false; if(cb)cb(); },1200);
+  setTimeout(()=>{ busy=false; if(cb)cb(); },420);
 }
 
 function startPlayback(index){
