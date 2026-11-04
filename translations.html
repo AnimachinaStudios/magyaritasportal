@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animachina Stúdió – Magyarosításaink | Halloween</title>
+    <title>Animachina Stúdió – Magyarosításaink | Karácsony</title>
+    <link rel="preload" as="image" href="images/christmas-preloader.webp">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="images/icon.jpg">
 <style>
 /* This page's factory experience; shared styles and other pages stay independent. */
-html:has(.translations-page.halloween-mode.factory-page) { scroll-padding-top: 150px; }
-body.translations-page.halloween-mode.factory-page { overflow-x: clip; background: #08060d; }
-.translations-page.halloween-mode.factory-page .navbar { width: 100%; }
-.translations-page.halloween-mode.factory-page .nav-link[href="translations.html"] { color: #ffb569; }
+html:has(.translations-page.christmas-mode.factory-page) { scroll-padding-top: 150px; }
+body.translations-page.christmas-mode.factory-page { overflow-x: clip; background: #08060d; }
+.translations-page.christmas-mode.factory-page .navbar { width: 100%; }
+.translations-page.christmas-mode.factory-page .nav-link[href="translations.html"] { color: #ffb569; }
 .factory-intro { position: relative; height: 100svh; min-height: 650px; background: #08060d; }
 .factory-ready .factory-intro { height: 290svh; min-height: 1500px; }
 .factory-stage { position: sticky; top: 0; height: 100svh; min-height: 650px; overflow: hidden; isolation: isolate; background: #08060d; }
@@ -37,63 +38,57 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
 .factory-track span { display: block; height: 2px; width: 100%; background: #ffaf64; transform: scaleX(var(--factory-progress, 0)); transform-origin: left; }
 .factory-fog { position: absolute; inset: 35% -35% -30%; pointer-events: none; background: radial-gradient(ellipse at 30% 60%, #ab948c38, transparent 45%), radial-gradient(ellipse at 70% 40%, #634d7238, transparent 45%); filter: blur(28px); animation: factoryFog 20s ease-in-out infinite alternate; }
 .factory-fog-two { opacity: .6; animation-delay: -11s; animation-direction: alternate-reverse; }
-.translations-page.halloween-mode.factory-page .harvest-moon { opacity: .22; width: 75px; top: 120px; }
-.translations-page.halloween-mode.factory-page .floating-pumpkins { z-index: 5; }
-.translations-page.halloween-mode.factory-page .floating-pumpkin { opacity: .5; }
-.translations-page.halloween-mode.factory-page .pumpkin-2 { right: 1%; }
-.translations-page.halloween-mode.factory-page .pumpkin-5, .translations-page.halloween-mode.factory-page .pumpkin-6 { opacity: .22; }
-.translations-page.halloween-mode.factory-page .halloween-atmosphere { z-index: 1; }
 .chapter-index { position: sticky; top: 82px; z-index: 30; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 3vw, 44px); padding: 14px 24px; min-height: 60px; border-top: 1px solid #ffae4c20; border-bottom: 1px solid #ffae4c20; background: #0e0a12f5; backdrop-filter: blur(16px); }
 .chapter-index-label { margin-right: auto; color: #a796a5; font-size: 10px; font-weight: 600; letter-spacing: .16em; }
 .chapter-index a { color: #a899a9; font: 15px var(--font-heading); letter-spacing: .12em; min-width: 32px; padding: 4px; text-align: center; }
 .chapter-index a:last-child { margin-right: 3vw; }
 .chapter-index a:hover, .chapter-index a[aria-current="location"] { color: #ffb569; text-shadow: 0 0 20px #ff680066; }
-.translations-page.halloween-mode.factory-page .chapter-section { --chapter-color: #f8ad68; min-height: 88svh; padding: clamp(90px, 10vw, 145px) 5vw; display: flex; align-items: center; scroll-margin-top: 140px; background: radial-gradient(ellipse at 12% 55%, #48244426, transparent 60%), #08060d; border-top: 0; }
-.translations-page.halloween-mode.factory-page #chapter1 { --chapter-color: #83b6c8; }
-.translations-page.halloween-mode.factory-page #chapter2 { --chapter-color: #e68bb0; }
-.translations-page.halloween-mode.factory-page #chapter3 { --chapter-color: #b28ee0; }
-.translations-page.halloween-mode.factory-page #chapter4 { --chapter-color: #f0a167; }
-.translations-page.halloween-mode.factory-page #chapter5 { --chapter-color: #e06d67; }
-.translations-page.halloween-mode.factory-page .chapter-section.alt { background: radial-gradient(ellipse at 88% 55%, #57233522, transparent 60%), #0d0911; }
-.translations-page.halloween-mode.factory-page .chapter-section::before { top: 25px; right: 5vw; font-size: clamp(100px, 17vw, 250px); color: #ffb56907; }
-.translations-page.halloween-mode.factory-page .translation-card { width: 100%; max-width: 1480px; display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 5vw, 90px); padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; }
-.translations-page.halloween-mode.factory-page .translation-card:hover { box-shadow: none; border-color: transparent; transform: none; }
-.translations-page.halloween-mode.factory-page .chapter-image { position: relative; overflow: visible; border-radius: 3px; box-shadow: 0 22px 70px #0006; }
-.translations-page.halloween-mode.factory-page .chapter-image::before { content: 'CHAPTER / ' attr(data-number); position: absolute; top: -35px; left: 0; font: 11px monospace; letter-spacing: .2em; color: var(--chapter-color); }
-.translations-page.halloween-mode.factory-page .chapter-image::after { content: ''; position: absolute; width: 45px; height: 3px; background: var(--chapter-color); bottom: -2px; left: 0; box-shadow: 0 0 20px var(--chapter-color); }
-.translations-page.halloween-mode.factory-page .chapter-image img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: contain; border: 1px solid #ffffff16; border-radius: 3px; filter: saturate(.86) contrast(1.04); }
-.translations-page.halloween-mode.factory-page .translation-card:hover .chapter-image img { transform: none; filter: saturate(1) contrast(1.04); }
-.translations-page.halloween-mode.factory-page .chapter-content { min-width: 0; }
-.translations-page.halloween-mode.factory-page .chapter-content .label { padding: 0; border: 0; background: none; border-radius: 0; font: 600 10px var(--font-body); letter-spacing: .25em; color: var(--chapter-color); margin-bottom: 20px; }
-.translations-page.halloween-mode.factory-page .chapter-content h2 { font-size: clamp(32px, 3.4vw, 54px); line-height: 1.08; color: #f4e8dc; letter-spacing: .02em; text-wrap: balance; margin-bottom: 23px; }
-.translations-page.halloween-mode.factory-page .chapter-content p { color: #b6aab8; font-size: 15px; line-height: 1.85; }
-.translations-page.halloween-mode.factory-page .status.completed, .translations-page.halloween-mode.factory-page .status.progress { font-size: 11px; padding: 7px 12px; border: 1px solid #ffb5692b; background: #f8ad6809; box-shadow: none; border-radius: 3px; }
-.translations-page.halloween-mode.factory-page .chapter-content .btn { font-size: 15px; min-width: 154px; justify-content: space-between; border-radius: 2px; padding: 13px 21px; box-shadow: none; }
-.translations-page.halloween-mode.factory-page .chapter-section.alt .chapter-image { order: 2; }
-.translations-page.halloween-mode.factory-page .chapter-section.alt .chapter-content { order: 1; }
-.translations-page.halloween-mode.factory-page .chapter-section.alt .translation-card { grid-template-columns: 1fr 1.25fr; }
-.translations-page.halloween-mode.factory-page .reveal { opacity: 1; transform: none; }
-.translations-page.halloween-mode.factory-page.factory-ready .reveal:not(.visible) { opacity: 0; transform: translateY(30px); }
-.translations-page.halloween-mode.factory-page .escape-image::before { content: 'PLAYTIME HAJSZA'; }
-.translations-page.halloween-mode.factory-page .escape-image img { aspect-ratio: 460 / 215; }
+.translations-page.christmas-mode.factory-page .chapter-section { --chapter-color: #f8ad68; min-height: 88svh; padding: clamp(90px, 10vw, 145px) 5vw; display: flex; align-items: center; scroll-margin-top: 140px; background: radial-gradient(ellipse at 12% 55%, #48244426, transparent 60%), #08060d; border-top: 0; }
+.translations-page.christmas-mode.factory-page #chapter1 { --chapter-color: #83b6c8; }
+.translations-page.christmas-mode.factory-page #chapter2 { --chapter-color: #e68bb0; }
+.translations-page.christmas-mode.factory-page #chapter3 { --chapter-color: #b28ee0; }
+.translations-page.christmas-mode.factory-page #chapter4 { --chapter-color: #f0a167; }
+.translations-page.christmas-mode.factory-page #chapter5 { --chapter-color: #e06d67; }
+.translations-page.christmas-mode.factory-page .chapter-section.alt { background: radial-gradient(ellipse at 88% 55%, #57233522, transparent 60%), #0d0911; }
+.translations-page.christmas-mode.factory-page .chapter-section::before { top: 25px; right: 5vw; font-size: clamp(100px, 17vw, 250px); color: #ffb56907; }
+.translations-page.christmas-mode.factory-page .translation-card { width: 100%; max-width: 1480px; display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 5vw, 90px); padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; }
+.translations-page.christmas-mode.factory-page .translation-card:hover { box-shadow: none; border-color: transparent; transform: none; }
+.translations-page.christmas-mode.factory-page .chapter-image { position: relative; overflow: visible; border-radius: 3px; box-shadow: 0 22px 70px #0006; }
+.translations-page.christmas-mode.factory-page .chapter-image::before { content: 'CHAPTER / ' attr(data-number); position: absolute; top: -35px; left: 0; font: 11px monospace; letter-spacing: .2em; color: var(--chapter-color); }
+.translations-page.christmas-mode.factory-page .chapter-image::after { content: ''; position: absolute; width: 45px; height: 3px; background: var(--chapter-color); bottom: -2px; left: 0; box-shadow: 0 0 20px var(--chapter-color); }
+.translations-page.christmas-mode.factory-page .chapter-image img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: contain; border: 1px solid #ffffff16; border-radius: 3px; filter: saturate(.86) contrast(1.04); }
+.translations-page.christmas-mode.factory-page .translation-card:hover .chapter-image img { transform: none; filter: saturate(1) contrast(1.04); }
+.translations-page.christmas-mode.factory-page .chapter-content { min-width: 0; }
+.translations-page.christmas-mode.factory-page .chapter-content .label { padding: 0; border: 0; background: none; border-radius: 0; font: 600 10px var(--font-body); letter-spacing: .25em; color: var(--chapter-color); margin-bottom: 20px; }
+.translations-page.christmas-mode.factory-page .chapter-content h2 { font-size: clamp(32px, 3.4vw, 54px); line-height: 1.08; color: #f4e8dc; letter-spacing: .02em; text-wrap: balance; margin-bottom: 23px; }
+.translations-page.christmas-mode.factory-page .chapter-content p { color: #b6aab8; font-size: 15px; line-height: 1.85; }
+.translations-page.christmas-mode.factory-page .status.completed, .translations-page.christmas-mode.factory-page .status.progress { font-size: 11px; padding: 7px 12px; border: 1px solid #ffb5692b; background: #f8ad6809; box-shadow: none; border-radius: 3px; }
+.translations-page.christmas-mode.factory-page .chapter-content .btn { font-size: 15px; min-width: 154px; justify-content: space-between; border-radius: 2px; padding: 13px 21px; box-shadow: none; }
+.translations-page.christmas-mode.factory-page .chapter-section.alt .chapter-image { order: 2; }
+.translations-page.christmas-mode.factory-page .chapter-section.alt .chapter-content { order: 1; }
+.translations-page.christmas-mode.factory-page .chapter-section.alt .translation-card { grid-template-columns: 1fr 1.25fr; }
+.translations-page.christmas-mode.factory-page .reveal { opacity: 1; transform: none; }
+.translations-page.christmas-mode.factory-page.factory-ready .reveal:not(.visible) { opacity: 0; transform: translateY(30px); }
+.translations-page.christmas-mode.factory-page .escape-image::before { content: 'PLAYTIME HAJSZA'; }
+.translations-page.christmas-mode.factory-page .escape-image img { aspect-ratio: 460 / 215; }
 .escape-poster { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(0deg, #100c13aa, transparent); }
 .escape-poster > span:first-child { font: 9px monospace; letter-spacing: .3em; color: #e1b384; }
 .escape-poster strong { font: clamp(48px, 7vw, 110px)/1 var(--font-heading); letter-spacing: .08em; color: #f7e6d1; margin-top: 10px; }
 .escape-poster em { font: normal 14px var(--font-heading); letter-spacing: .42em; color: #dfcdb9; }
 .escape-exit { margin-top: 20px; padding: 4px 10px; border: 1px solid #ffb56966; color: #ffb569; font: 10px monospace; letter-spacing: .15em; }
-.translations-page.halloween-mode.factory-page .footer { position: relative; z-index: 3; padding-bottom: 100px; }
-.translations-page.halloween-mode.factory-page.halloween-effects-paused .factory-fog, .translations-page.halloween-mode.factory-page.halloween-effects-paused .scroll-mouse::after { animation-play-state: paused; }
-.translations-page.halloween-mode.factory-page.halloween-effects-paused .factory-photo { transform: none; }
-.translations-page.halloween-mode.factory-page.halloween-effects-paused .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-.translations-page.halloween-mode.factory-page a:focus-visible { outline: 2px solid #ffc36a; outline-offset: 6px; }
+.translations-page.christmas-mode.factory-page .footer { position: relative; z-index: 3; padding-bottom: 100px; }
+.translations-page.christmas-mode.factory-page.christmas-effects-paused .factory-fog, .translations-page.christmas-mode.factory-page.christmas-effects-paused .scroll-mouse::after { animation-play-state: paused; }
+.translations-page.christmas-mode.factory-page.christmas-effects-paused .factory-photo { transform: none; }
+.translations-page.christmas-mode.factory-page.christmas-effects-paused .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+.translations-page.christmas-mode.factory-page a:focus-visible { outline: 2px solid #ffc36a; outline-offset: 6px; }
 @keyframes factoryFog { from { transform: translateX(-8%); } to { transform: translateX(8%); } }
 @keyframes factoryScroll { 0%, 100% { opacity: .35; transform: translateY(0); } 60% { opacity: 1; transform: translateY(8px); } }
 @media (max-width: 1024px) {
-    .translations-page.halloween-mode.factory-page .translation-card, .translations-page.halloween-mode.factory-page .chapter-section.alt .translation-card { display: grid; grid-template-columns: 1fr; gap: 35px; max-width: 760px; }
-    .translations-page.halloween-mode.factory-page .chapter-section .chapter-image, .translations-page.halloween-mode.factory-page .chapter-section.alt .chapter-image { order: 0; }
-    .translations-page.halloween-mode.factory-page .chapter-section .chapter-content, .translations-page.halloween-mode.factory-page .chapter-section.alt .chapter-content { order: 1; }
-    .translations-page.halloween-mode.factory-page .chapter-section { min-height: auto; padding: 90px 6vw; }
-    .translations-page.halloween-mode.factory-page .chapter-content h2 { font-size: clamp(32px, 5vw, 48px); }
+    .translations-page.christmas-mode.factory-page .translation-card, .translations-page.christmas-mode.factory-page .chapter-section.alt .translation-card { display: grid; grid-template-columns: 1fr; gap: 35px; max-width: 760px; }
+    .translations-page.christmas-mode.factory-page .chapter-section .chapter-image, .translations-page.christmas-mode.factory-page .chapter-section.alt .chapter-image { order: 0; }
+    .translations-page.christmas-mode.factory-page .chapter-section .chapter-content, .translations-page.christmas-mode.factory-page .chapter-section.alt .chapter-content { order: 1; }
+    .translations-page.christmas-mode.factory-page .chapter-section { min-height: auto; padding: 90px 6vw; }
+    .translations-page.christmas-mode.factory-page .chapter-content h2 { font-size: clamp(32px, 5vw, 48px); }
     .chapter-index-label { display: none; }
     .chapter-index a:last-child { margin: 0; }
 }
@@ -111,130 +106,49 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
     .factory-hud { bottom: 115px; gap: 12px; font-size: 8px; }
     .chapter-index { gap: 8px; padding: 12px; top: 82px; min-height: 54px; }
     .chapter-index a { font-size: 14px; }
-    .translations-page.halloween-mode.factory-page .chapter-section { padding: 85px 22px; }
-    .translations-page.halloween-mode.factory-page .floating-pumpkin { opacity: .32; }
-    .translations-page.halloween-mode.factory-page .chapter-content p { font-size: 14px; }
+    .translations-page.christmas-mode.factory-page .chapter-section { padding: 85px 22px; }
+    .translations-page.christmas-mode.factory-page .chapter-content p { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .factory-ready .factory-intro { height: 100svh; min-height: 650px; }
-    .translations-page.halloween-mode.factory-page *, .translations-page.halloween-mode.factory-page *::before, .translations-page.halloween-mode.factory-page *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-    .translations-page.halloween-mode.factory-page.factory-ready .reveal:not(.visible) { opacity: 1; transform: none; }
+    .translations-page.christmas-mode.factory-page *, .translations-page.christmas-mode.factory-page *::before, .translations-page.christmas-mode.factory-page *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    .translations-page.christmas-mode.factory-page.factory-ready .reveal:not(.visible) { opacity: 1; transform: none; }
     .factory-photo { transform: none; will-change: auto; }
     .factory-heading, .factory-invitation { opacity: 1; transform: none; }
     .factory-blackout { opacity: 0; }
 }
 
+/* Winter palette for the chapter experience */
+body.translations-page.christmas-mode.factory-page { background: radial-gradient(ellipse at 18% 12%, #12543d35, transparent 42rem), #07121b; }
+.translations-page.christmas-mode.factory-page .nav-link[href="translations.html"] { color: #f2cb78; }
+.translations-page.christmas-mode.factory-page .chapter-section { --chapter-color: #bfe8d2; background: radial-gradient(ellipse at 12% 55%, #1a604329, transparent 60%), #08151e; }
+.translations-page.christmas-mode.factory-page #chapter1 { --chapter-color: #9dd9e8; }
+.translations-page.christmas-mode.factory-page #chapter2 { --chapter-color: #e58d9a; }
+.translations-page.christmas-mode.factory-page #chapter3 { --chapter-color: #b1d9cc; }
+.translations-page.christmas-mode.factory-page #chapter4 { --chapter-color: #f2cb78; }
+.translations-page.christmas-mode.factory-page #chapter5 { --chapter-color: #d96870; }
+.translations-page.christmas-mode.factory-page .chapter-section.alt { background: radial-gradient(ellipse at 88% 55%, #14554233, transparent 60%), #0a1b23; }
+.translations-page.christmas-mode.factory-page .chapter-section::before { color: #f2cb7809; }
+.translations-page.christmas-mode.factory-page a:focus-visible { outline-color: #f2cb78; }
 </style>
 </head>
 
-<body class="translations-page halloween-mode factory-page">
+<body class="christmas-mode translations-page factory-page">
+<div class="christmas-preloader" id="christmasPreloader" role="status" aria-live="polite">
+  <div class="christmas-preloader-card">
+    <span class="christmas-preloader-kicker">ANIMACHINA STÚDIÓ</span>
+    <span class="christmas-preloader-star" aria-hidden="true">✦</span>
+    <h1>Ünnepi varázslat</h1>
+    <p>Mindjárt kezdünk…</p>
+    <span class="christmas-preloader-track" aria-hidden="true"><span></span></span>
+  </div>
+</div>
 
-<!-- Halloween: saját SVG-tökök, külső képfájl nélkül. -->
-    <svg class="halloween-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <defs>
-            <radialGradient id="pumpkinSkin" cx="38%" cy="28%" r="78%">
-                <stop offset="0" stop-color="#ffbb47"/>
-                <stop offset="0.48" stop-color="#f77715"/>
-                <stop offset="1" stop-color="#8b230c"/>
-            </radialGradient>
-            <linearGradient id="pumpkinFire" x2="0" y2="1">
-                <stop stop-color="#fff8b5"/><stop offset="1" stop-color="#ffae28"/>
-            </linearGradient>
-            <symbol id="halloweenPumpkin" viewBox="0 0 160 160">
-                <path d="M76 40 Q66 17 85 9 L94 16 Q80 24 87 42" fill="#6d7638" stroke="#343d20" stroke-width="3"/>
-                <path d="M91 31 Q119 16 118 34 Q115 44 103 35" fill="none" stroke="#8d9a45" stroke-width="3" stroke-linecap="round"/>
-                <path d="M80 41 C45 19 9 45 12 90 C10 132 45 147 80 135 C115 147 150 132 148 90 C151 45 115 19 80 41Z" fill="url(#pumpkinSkin)" stroke="#63210f" stroke-width="3"/>
-                <g fill="none" stroke="#a84012" stroke-width="2.5" opacity="0.6">
-                    <path d="M64 39 C37 53 31 112 60 136"/><path d="M96 39 C123 53 129 112 100 136"/>
-                    <path d="M80 42 C67 64 65 112 80 136"/><path d="M84 42 C96 70 98 110 84 136"/>
-                </g>
-                <g class="pumpkin-face" fill="url(#pumpkinFire)" stroke="#86310e" stroke-width="2" stroke-linejoin="round">
-                    <path d="M32 77 L57 62 L65 86Z"/><path d="M95 86 L103 62 L128 77Z"/>
-                    <path d="M80 82 L70 99 L90 99Z"/>
-                    <path d="M31 99 L48 108 L57 101 L67 114 L81 108 L95 115 L105 101 L114 108 L130 97 Q116 133 81 130 Q47 134 31 99Z"/>
-                </g>
-                <path d="M24 64 Q30 45 47 43" fill="none" stroke="#ffda81" stroke-width="4" opacity="0.45" stroke-linecap="round"/>
-            </symbol>
-        </defs>
-    </svg>
+<div class="christmas-atmosphere" aria-hidden="true"><div class="christmas-lights"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="snowfall" id="snowfall"></div><div class="winter-sparkles"><span>✦</span><span>❄</span><span>✧</span><span>❄</span><span>✦</span></div></div>
+<button class="effects-toggle" id="effectsToggle" type="button" aria-pressed="true" aria-label="Karácsonyi effektek kikapcsolása">EFFEKTEK KI</button>
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Karácsonyi ambient bekapcsolása"><i class="fa-solid fa-volume-xmark" aria-hidden="true"></i><span>HANG BE</span></button>
+<audio id="christmasAmbience" src="sounds/snow.mp3" preload="none" loop></audio>
 
-    <div class="pumpkin-preloader" id="pumpkinPreloader" role="status" aria-live="polite" hidden>
-        <div class="pumpkin-preloader-content">
-            <span class="preloader-eyebrow">ANIMACHINA STÚDIÓ</span>
-            <div class="preloader-pumpkin-wrap">
-                <span class="pumpkin-aura" aria-hidden="true"></span>
-                <svg class="preloader-pumpkin" aria-hidden="true" focusable="false" viewBox="0 0 160 160"><use href="#halloweenPumpkin"/></svg>
-                <span class="pumpkin-shadow" aria-hidden="true"></span>
-            </div>
-            <p class="preloader-title">Ébredezik a sötétség…</p>
-            <p class="preloader-caption">Egy pillanat, és beléphetsz.</p>
-            <span class="preloader-track" aria-hidden="true"><span></span></span>
-        </div>
-    </div>
-    <script>
-    (() => {
-        const loader = document.getElementById('pumpkinPreloader');
-        const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const started = performance.now();
-        let finished = false;
-        let revealTimer;
-        const dismiss = () => {
-            if (finished) return;
-            finished = true;
-            clearTimeout(fallbackTimer);
-            clearTimeout(revealTimer);
-            loader.classList.add('is-finished');
-            window.setTimeout(() => { loader.hidden = true; }, motion.matches ? 0 : 650);
-        };
-        loader.hidden = false;
-        const fallbackTimer = window.setTimeout(dismiss, 4000);
-        window.addEventListener('load', () => {
-            revealTimer = window.setTimeout(dismiss, Math.max(0, (motion.matches ? 0 : 1100) - (performance.now() - started)));
-        }, { once: true });
-        window.addEventListener('pagehide', dismiss, { once: true });
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape') dismiss();
-        });
-    })();
-    </script>
-
-    <div class="floating-pumpkins" aria-hidden="true">
-        <span class="floating-pumpkin pumpkin-1"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-        <span class="floating-pumpkin pumpkin-2"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-        <span class="floating-pumpkin pumpkin-3"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-        <span class="floating-pumpkin pumpkin-4"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-        <span class="floating-pumpkin pumpkin-5"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-        <span class="floating-pumpkin pumpkin-6"><svg viewBox="0 0 160 160" focusable="false"><use href="#halloweenPumpkin"/></svg></span>
-    </div>
-    <div class="halloween-lightning" id="halloweenLightning" aria-hidden="true">
-        <svg class="lightning-bolt" viewBox="0 0 180 500" preserveAspectRatio="none" focusable="false">
-            <path d="M106 -10 L65 123 L102 111 L45 258 L78 248 L22 443 L123 225 L87 234 L143 85 L105 97 L146 -10 M71 185 L143 244 L125 292 L176 358"/>
-        </svg>
-    </div>
-    <button class="effects-toggle" id="effectsToggle" type="button" aria-pressed="true">EFFEKTEK KI</button>
-
-    <audio id="halloweenAmbience" loop preload="auto" autoplay>
-        <source src="sounds/ambience.ogg" type="audio/ogg">
-    </audio>
-
-    <div class="halloween-atmosphere" aria-hidden="true">
-        <span class="harvest-moon"></span>
-        <span class="mist mist-one"></span>
-        <span class="mist mist-two"></span>
-        <span class="bat bat-one">⌁</span>
-        <span class="bat bat-two">⌁</span>
-        <span class="bat bat-three">⌁</span>
-        <span class="spider-line"><i>✦</i></span>
-    </div>
-
-    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Halloween háttérhang bekapcsolása">
-        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
-        <span>HANG BE</span>
-    </button>
-
-<!-- =========================
-     NAVBAR
-========================= -->
 <nav class="navbar" id="navbar">
     <div class="nav-container">
         <div class="nav-logo">
@@ -310,8 +224,7 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
             <span class="label">POPPY PLAYTIME</span>
             <h2>1. FEJEZET – SZORULT HELYZET</h2>
             <p>
-                A teljes első fejezet magyar fordítása.
-                Minden párbeszéd, felirat és menü lokalizálva.
+                A teljes első fejezet magyar fordítása, szinkronnal és feliratokkal.
             </p>
 
             <div class="chapter-meta">
@@ -335,8 +248,7 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
             <span class="label">POPPY PLAYTIME</span>
             <h2>2. FEJEZET – LÉGY A HÁLÓBAN</h2>
             <p>
-                A második fejezet teljes magyarosítása,
-                újrafordított és javított dialógusokkal.
+                A teljes második fejezet magyar fordítása, szinkronnal és feliratokkal.
             </p>
 
             <div class="chapter-meta">
@@ -368,8 +280,7 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
             <span class="label">POPPY PLAYTIME</span>
             <h2>3. FEJEZET – MÉLY ÁLOM</h2>
             <p>
-                Fejlesztés alatt álló magyar fordítás.
-                Finomhangolás és hangulati igazítás folyamatban.
+                A teljes harmadik fejezet magyar fordítása, szinkronnal és feliratokkal.
             </p>
 
             <div class="chapter-meta">
@@ -393,7 +304,7 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
             <span class="label">POPPY PLAYTIME</span>
             <h2>4. FEJEZET – BIZTONSÁGOS MENEDÉK</h2>
             <p>
-                Szinkronizálás és fordítás előkészítés alatt.
+                A teljes negyedik fejezet magyar fordítása, szinkronnal és feliratokkal.
             </p>
 
             <div class="chapter-meta">
@@ -425,16 +336,16 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
             <span class="label">POPPY PLAYTIME</span>
             <h2>5. FEJEZET – Darabokban</h2>
             <p>
-                Fejlesztés alatt álló magyar fordítás.
-                Finomhangolás és hangulati igazítás előkészületben.
+                A teljes ötödik fejezet magyar fordítása, szinkronnal és feliratokkal.
             </p>
 
             <div class="chapter-meta">
-                <span class="status progress">⏳ Előkészület</span>
+                <span class="status completed">✔ Teljesen kész</span>
             </div><br>
 
             <a href="https://animachina-studios.itch.io/ppch5-magyar" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                Hamarosan
+                Letöltés
+                <span class="arrow-right">→</span>
             </a>
         </div>
 
@@ -487,41 +398,9 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
     </div>
 </footer>
 
-<script src="script.js"></script>
-<script src="halloween.js"></script>
 
-<script>
-     const halloweenAmbience = document.getElementById('halloweenAmbience');
-     const soundToggle = document.getElementById('soundToggle');
 
-     if (halloweenAmbience && soundToggle) {
-       halloweenAmbience.volume = 0.22;
-
-       const updateSoundButton = (isPlaying) => {
-         soundToggle.classList.toggle('is-playing', isPlaying);
-         soundToggle.setAttribute('aria-pressed', String(isPlaying));
-         soundToggle.setAttribute('aria-label', isPlaying ? 'Halloween háttérhang kikapcsolása' : 'Halloween háttérhang bekapcsolása');
-         soundToggle.querySelector('i').className = isPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-         soundToggle.querySelector('span').textContent = isPlaying ? 'HANG KI' : 'HANG BE';
-       };
-
-       const startAmbience = () => halloweenAmbience.play()
-         .then(() => updateSoundButton(true))
-         .catch(() => updateSoundButton(false));
-
-       soundToggle.addEventListener('click', () => {
-         if (halloweenAmbience.paused) startAmbience();
-         else {
-           halloweenAmbience.pause();
-           updateSoundButton(false);
-         }
-       });
-
-       startAmbience();
-       window.addEventListener('pointerdown', startAmbience, { once: true });
-     }
-   </script>
-
+<script src="christmas.js"></script>
 <script>
 (() => {
     'use strict';
@@ -564,7 +443,7 @@ body.translations-page.halloween-mode.factory-page { overflow-x: clip; backgroun
         pending = false;
         const rect = intro.getBoundingClientRect();
         const progress = motion.matches ? 0 : clamp(-rect.top / Math.max(1, intro.offsetHeight - stage.offsetHeight));
-        const paused = body.classList.contains('halloween-effects-paused');
+        const paused = body.classList.contains('christmas-effects-paused');
         const ease = progress * progress * (3 - 2 * progress);
         stage.style.setProperty('--factory-scale', (1 + ease * 5.5).toFixed(4));
         stage.style.setProperty('--factory-dark', paused ? '0' : clamp((progress - .57) / .4).toFixed(3));
