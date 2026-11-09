@@ -302,6 +302,29 @@
 
       <div class="team-card">
         <div class="card-avatar-placeholder">
+        <img src="ujhangok/linduuus.jpg" alt="Lindus">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Lindux</div>
+        <div class="card-role">Szinkronhang</div>
+        <div class="card-links">
+          <a class="card-link" href="https://www.twitch.tv/lakatlindus" target="_blank">Twtich</a>
+          <a class="card-link" href="https://www.youtube.com/@lakatlindusGames" target="_blank">Gaming YouTube</a>
+          <a class="card-link" href="https://www.youtube.com/@lakatlindus" target="_blank">Cover/Zenei YouTube</a>
+        </div>
+      </div>
+
+      <div class="team-card">
+         <div class="card-avatar-placeholder">
+        <img src="ujhangok/patrik.png" alt="Auth Patrik">
+      </div>
+        <div class="role-tag rt-voice">Szinkronhang</div>
+        <div class="card-name">Auth Patrik</div>
+        <div class="card-role">Szinkronhang</div>
+      </div>
+
+      <div class="team-card">
+        <div class="card-avatar-placeholder">
         <img src="plusz/akky.jpg" alt="Akky">
       </div>
         <div class="role-tag rt-voice">Szinkronhang</div>
@@ -397,18 +420,42 @@
         <div class="card-role">Szinkronhang</div>
       </div>
 
-      <div class="team-card">
-        <div class="card-avatar-placeholder">
-        <img src="images/szinkronok/izumi.png" alt="Izumi">
-      </div>
-        <div class="role-tag rt-voice">Szinkronhang</div>
-        <div class="card-name">Izumi</div>
-        <div class="card-role">Szinkronhang</div>
-        <div class="card-links">
-          <a class="card-link" href="https://www.tiktok.com/@izumi_rangiku_cosplay" target="_blank">TikTok</a>
-          <a class="card-link" href="https://www.instagram.com/izumi_rangiku_cos" target="_blank">Instagram</a>
+      <div class="team-card" onmouseenter="playDuck(this)" onmouseleave="stopDuck(this)">
+
+          <audio class="duck-audio" src="ujhangok/woof.mp3"></audio>
+
+          <div class="card-avatar-placeholder">
+            <img src="ujhangok/Izumi_Borito.png" alt="Izumi">
+          </div>
+
+          <div class="role-tag rt-voice">Szinkronhang</div>
+          <div class="card-name">Izumi</div>
+          <div class="card-role">Szinkronhang</div>
+
+          <div class="card-links">
+             <a class="card-link" href="https://www.tiktok.com/@izumi_rangiku_cosplay" target="_blank">TikTok</a>
+            <a class="card-link" href="https://www.instagram.com/izumi_rangiku_cos" target="_blank">Instagram</a>
+            <a class="card-link" href="https://www.twitch.tv/izumi_rangiku" target="_blank">Twitch</a>
+          </div>
         </div>
-      </div>
+
+        <script>
+          function playDuck(card) {
+            const audio = card.querySelector(".duck-audio");
+            if (audio) {
+              audio.currentTime = 0;
+              audio.play();
+            }
+          }
+
+          function stopDuck(card) {
+            const audio = card.querySelector(".duck-audio");
+            if (audio) {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+          }
+          </script>
 
       <div class="team-card">
         <div class="card-avatar-placeholder">
