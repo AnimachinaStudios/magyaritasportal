@@ -254,6 +254,77 @@
             }
         }
 
+        /* ── COMPLETED PROJECTS ── */
+        .completed-projects { padding: 0 0 7rem; }
+        .completed-projects .section-heading { margin-bottom: 2rem; }
+        .completed-projects .section-heading .label {
+            display: inline-block;
+            color: var(--accent-purple);
+            font-family: var(--font-heading);
+            font-size: .8rem;
+            letter-spacing: 3px;
+            margin-bottom: .5rem;
+        }
+        .completed-projects .section-heading h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            letter-spacing: 3px;
+            color: var(--text-light);
+            margin-bottom: .5rem;
+        }
+        .completed-projects .section-heading p { color: var(--text-gray); line-height: 1.7; }
+        .completed-projects__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+        .completed-project-card {
+            position: relative;
+            min-height: 230px;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: var(--secondary-bg);
+            color: inherit;
+            text-decoration: none;
+            isolation: isolate;
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+        .completed-project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(123,44,191,.22); }
+        .completed-project-card img {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        .completed-project-card:hover img { transform: scale(1.05); }
+        .completed-project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(180deg, rgba(10,5,20,.05) 10%, rgba(10,5,20,.9) 100%);
+        }
+        .completed-project-card__content { position: absolute; inset: auto 1rem 1rem; }
+        .completed-project-card__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            margin-bottom: .65rem;
+            padding: .35rem .7rem;
+            border-radius: 20px;
+            background: rgba(24,115,60,.9);
+            font-family: var(--font-heading);
+            font-size: .68rem;
+            letter-spacing: 1px;
+        }
+        .completed-project-card h3 { font-family: var(--font-heading); font-size: 1rem; letter-spacing: 1px; line-height: 1.4; }
+        .completed-project-card__link { display: inline-block; margin-top: .5rem; color: #d8b4fe; font-size: .82rem; }
+        .completed-project-card:focus-visible { outline: 3px solid var(--accent-cyan); outline-offset: 4px; }
+
         /* ── MINI GRID SECTION ── */
         .mini-grid-section {
             padding: 0 0 7rem;
@@ -485,17 +556,17 @@
             <!-- ══ CARD: Poppy Playtime Chapter 5 ══ -->
             <div class="wip-card" data-aos>
                 <div class="wip-card__image">
-                    <img src="keszulo/poppy.png" alt="Poppy Playtime 5. Fejezet">
+                    <img src="keszulo/bendy1.jpg" alt="Poppy Playtime 5. Fejezet">
                     <span class="wip-card__badge">KÉSZ</span>
                 </div>
                 <div class="wip-card__body">
                     <div>
                         <h2 class="wip-card__title">
-                            <span>POPPY PLAYTIME</span>
-                            5. FEJEZET: DARABOKBAN
+                            <span>BENDY AND THE INK MACHINE</span>
+                            Magyar Szinkron
                         </h2>
                         <p class="wip-card__desc">
-                            A Poppy Playtime ötödik fejezetének teljes magyar szinkronjain és szövegmagyarosításán dolgozunk. Kövesd az alábbi lépések előrehaladását, és csatlakozz Discord szerverünkre a legfrissebb hírekért!
+                            A Bendy és a Tintagép teljes magyar szinkronjain és szövegmagyarosításán dolgozunk. Kövesd az alábbi lépések előrehaladását, és csatlakozz Discord szerverünkre a legfrissebb hírekért!
                         </p>
                     </div>
 
@@ -512,30 +583,30 @@
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="100" data-state="active">
+                             data-target="10" data-state="active">
                             <span class="progress-step__label">Szövegkönyv</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct now">100%</span>
+                            <span class="progress-step__pct now">10%</span>
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="100" data-state="active">
+                             data-target="1" data-state="active">
                             <span class="progress-step__label">Hangok</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">100%</span>
+                            <span class="progress-step__pct">1%</span>
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="100" data-state="active">
+                             data-target="1" data-state="active">
                             <span class="progress-step__label">Modolás</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">100%</span>
+                            <span class="progress-step__pct">1%</span>
                         </div>
 
                     </div>
@@ -544,9 +615,9 @@
                     <div class="wip-card__overall">
                         <span class="wip-card__overall-label">ÖSSZESÍTETT HALADÁS</span>
                         <div class="wip-card__overall-bar-wrap">
-                            <div class="wip-card__overall-bar" data-target="100"></div>
+                            <div class="wip-card__overall-bar" data-target="5"></div>
                         </div>
-                        <span class="wip-card__overall-pct">100%</span>
+                        <span class="wip-card__overall-pct">5%</span>
                     </div>
                 </div>
             </div>
@@ -582,28 +653,28 @@
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="70" data-state="active">
+                             data-target="100" data-state="active">
                             <span class="progress-step__label">Szövegkönyv</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct now">70%</span>
+                            <span class="progress-step__pct now">100%</span>
                         </div>
 
-                        <div class="progress-step"
-                             data-target="0" data-state="pending">
+                        <div class="progress-step is-active"
+                             data-target="50" data-state="active">
                             <span class="progress-step__label">Hangok</span>
                             <div class="progress-step__bar-wrap">
-                                <div class="progress-step__bar bar--pending"></div>
+                                <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">0%</span>
+                            <span class="progress-step__pct">50%</span>
                         </div>
 
-                        <div class="progress-step"
-                             data-target="0" data-state="pending">
+                        <div class="progress-step is-active"
+                             data-target="0" data-state="active">
                             <span class="progress-step__label">Modolás</span>
                             <div class="progress-step__bar-wrap">
-                                <div class="progress-step__bar bar--pending"></div>
+                                <div class="progress-step__bar bar--active"></div>
                             </div>
                             <span class="progress-step__pct">5%</span>
                         </div>
@@ -625,7 +696,7 @@
             <!-- ══ CARD: Escape ══ -->
             <div class="wip-card" data-aos>
                 <div class="wip-card__image">
-                    <img src="https://img.itch.zone/aW1hZ2UvNTExMDA5Mi8zMDU5MjYzNC5wbmc=/original/oFGuwP.png" alt="EFP">
+                    <img src="keszulo/efp.png" alt="EFP">
                     <span class="wip-card__badge">FOLYAMATBAN</span>
                 </div>
                 <div class="wip-card__body">
@@ -652,30 +723,30 @@
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="90" data-state="active">
+                             data-target="100" data-state="active">
                             <span class="progress-step__label">Szövegkönyv</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct now">90%</span>
+                            <span class="progress-step__pct now">100%</span>
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="10" data-state="active">
+                             data-target="40" data-state="active">
                             <span class="progress-step__label">Hangok</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">10%</span>
+                            <span class="progress-step__pct">40%</span>
                         </div>
 
                         <div class="progress-step is-active"
-                             data-target="15" data-state="active">
+                             data-target="35" data-state="active">
                             <span class="progress-step__label">Modolás</span>
                             <div class="progress-step__bar-wrap">
                                 <div class="progress-step__bar bar--active"></div>
                             </div>
-                            <span class="progress-step__pct">15%</span>
+                            <span class="progress-step__pct">35%</span>
                         </div>
 
                     </div>
@@ -684,9 +755,9 @@
                     <div class="wip-card__overall">
                         <span class="wip-card__overall-label">ÖSSZESÍTETT HALADÁS</span>
                         <div class="wip-card__overall-bar-wrap">
-                            <div class="wip-card__overall-bar" data-target="55"></div>
+                            <div class="wip-card__overall-bar" data-target="65"></div>
                         </div>
-                        <span class="wip-card__overall-pct">55%</span>
+                        <span class="wip-card__overall-pct">65%</span>
                     </div>
                 </div>
             </div>
@@ -807,7 +878,7 @@
                     </div>
                 </div>
 
-                <!-- Bendy and the Ink Machine -->
+                <!-- Bendy and the Ink Machine 
                 <div class="mini-card">
                     <img src="keszulo/bendy1.jpg" alt="Bendy and the Ink Machine">
                     <div class="mini-card__overlay">
@@ -840,7 +911,7 @@
                             <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="0"></div></div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="mini-card">
                     <img src="keszulo/reanimal.png" alt="Reanimal">
@@ -981,7 +1052,7 @@
                     </div>
                 </div>
 
-                <!-- Granny -->
+                <!-- Granny 
                 <div class="mini-card">
                     <img src="keszulo/granny.jpg" alt="Granny">
                     <div class="mini-card__overlay">
@@ -1014,7 +1085,7 @@
                             <div class="mini-overall-bar-wrap"><div class="mini-overall-bar" data-target="85"></div></div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <!-- At Dead Of Night -->
                 <div class="mini-card">
@@ -1157,6 +1228,39 @@
                 </div>
 
             </div><!-- /mini-grid -->   
+        </div>
+    </section>
+
+    <!-- ═══════════════ COMPLETED PROJECTS ═══════════════ -->
+    <section class="completed-projects" id="kesz-projektek">
+        <div class="container">
+            <div class="section-heading">
+                <span class="label">ELKÉSZÜLT MAGYAROSÍTÁSOK</span>
+                <h2>KÉSZ PROJEKTEK</h2>
+                <p>Korábbi munkáink, amelyek már elérhetők a játékosok számára.</p>
+            </div>
+            <div class="completed-projects__grid">
+                <a class="completed-project-card" href="translations.html#chapter1">
+                    <img src="images/chapter1.png" alt="Poppy Playtime 1. fejezet borítóképe" loading="lazy">
+                    <div class="completed-project-card__content"><span class="completed-project-card__badge"><i class="fa-solid fa-check" aria-hidden="true"></i> KÉSZ</span><h3>Poppy Playtime – 1. fejezet: Szorult helyzet</h3><span class="completed-project-card__link">Magyarosítás megtekintése →</span></div>
+                </a>
+                <a class="completed-project-card" href="translations.html#chapter2">
+                    <img src="images/chapter2.png" alt="Poppy Playtime 2. fejezet borítóképe" loading="lazy">
+                    <div class="completed-project-card__content"><span class="completed-project-card__badge"><i class="fa-solid fa-check" aria-hidden="true"></i> KÉSZ</span><h3>Poppy Playtime – 2. fejezet: Légy a hálóban</h3><span class="completed-project-card__link">Magyarosítás megtekintése →</span></div>
+                </a>
+                <a class="completed-project-card" href="translations.html#chapter3">
+                    <img src="images/chapter3.png" alt="Poppy Playtime 3. fejezet borítóképe" loading="lazy">
+                    <div class="completed-project-card__content"><span class="completed-project-card__badge"><i class="fa-solid fa-check" aria-hidden="true"></i> KÉSZ</span><h3>Poppy Playtime – 3. fejezet: Mély álom</h3><span class="completed-project-card__link">Magyarosítás megtekintése →</span></div>
+                </a>
+                <a class="completed-project-card" href="translations.html#chapter4">
+                    <img src="images/chapter4.png" alt="Poppy Playtime 4. fejezet borítóképe" loading="lazy">
+                    <div class="completed-project-card__content"><span class="completed-project-card__badge"><i class="fa-solid fa-check" aria-hidden="true"></i> KÉSZ</span><h3>Poppy Playtime – 4. fejezet: Biztonságos menedék</h3><span class="completed-project-card__link">Magyarosítás megtekintése →</span></div>
+                </a>
+                <a class="completed-project-card" href="translations.html#chapter5">
+                    <img src="images/chapter5.png" alt="Poppy Playtime 5. fejezet borítóképe" loading="lazy">
+                    <div class="completed-project-card__content"><span class="completed-project-card__badge"><i class="fa-solid fa-check" aria-hidden="true"></i> KÉSZ</span><h3>Poppy Playtime – 5. fejezet: Darabokban</h3><span class="completed-project-card__link">Magyarosítás megtekintése →</span></div>
+                </a>
+            </div>
         </div>
     </section>
 
